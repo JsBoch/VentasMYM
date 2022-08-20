@@ -15,15 +15,29 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
 
     if ($result !== false) {
         if ($result->num_rows > 0) {
-            $return_arr['departamentos'] = array();
+            
+            /*$return_arr['departamentos'] = array();
             while ($row = $result->fetch_array()) {
                 array_push($return_arr['departamentos'], array(
                     'iddepartamento' => $row['iddepartamento'],                    
                     'nombre' => $row['nombre'],
                     'codigo_postal' => $row['codigo_postal']                    
                 ));
+            }*/
+
+            $return_arr['departamentos'] = array();
+            $indice = 0;
+            while ($row = $result->fetch_array()) {
+                $return_arr[$indice] =  array(
+                    'iddepartamento' => $row['iddepartamento'],                    
+                    'nombre' => $row['nombre'],
+                    'codigo_postal' => $row['codigo_postal']                    
+                );
+
+                $indice++;
             }
 
+            header('Content-Type: application/json');
             echo json_encode($return_arr);
             $result->close();
         } else {
@@ -55,12 +69,20 @@ if ($codigoRespuesta !== 1) {
                 break;
             }
     }
-    $return_arr['departamentos'] = array();
+    /*$return_arr['departamentos'] = array();
     array_push($return_arr['departamentos'], array(        
         'iddepartamento' => $codigoRespuesta,
         'nombre' => $mensajeRespuesta,
         'codigo_postal' => '0'        
-    ));
+    ));*/
 
+    $return_arr = array();
+    $return_arr = array(        
+        'iddepartamento' => $codigoRespuesta,
+        'nombre' => $mensajeRespuesta,
+        'codigo_postal' => '0'        
+    );
+
+    header('Content-Type: application/json');
     echo json_encode($return_arr);
 }
