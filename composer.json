@@ -1,0 +1,17 @@
+{
+    "name": "joseb/ventas-mym",
+    "description": "Proyecto para equipo de vents",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Joseb\\VentasMym\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Jose Boch",
+            "email": "jboch.99@gmail.com"
+        }
+    ],
+    "require": {}
+}
