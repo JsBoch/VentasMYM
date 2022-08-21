@@ -5,28 +5,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/mainStyles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <title>Form</title>
 </head>
 <body>
-    <form action="" id="customer_registration">
-        <h2>Registro de clientes</h2>
-        <input placeholder="Ingrese NIT" type="text">
-        <input placeholder="Ingrese DPI" type="text">
-        <input placeholder="Ingrese Nombre" type="text">
-        <input placeholder="Ingrese Razón Social" type="text">
-        <select name="SD" id="departamentos" form="customer_registration">
-        <option value="idRandom">ID Departamento</option>
-        </select>
-        <select name="SM" id="municipio" form="customer_registration">
+    <form action="" id="customer_registration" class="form_box">
+        <h2 class="main_title">Registro De Clientes</h2>
+        <div class="sub_container">
+        <input class="info_boxes" placeholder="Ingrese NIT" onblur="findValue()" type="text">
+        <input class="info_boxes" placeholder="Ingrese DPI" type="text">
+        <input class="info_boxes" placeholder="Ingrese Nombre" type="text">
+        <input class="info_boxes" placeholder="Ingrese Razón Social" type="text">
+        <select class="selectors" name="SD" id="depa" onchange="findValue()"></select>
+        <select class="selectors" name="SM" id="municipio" form="customer_registration">
         <option value="idRandom">Municipio</option>
         </select>
-        <input placeholder="Ingrese Dirección" type="text">
-        <input placeholder="Ingrese Teléfono" type="number">
-        <input placeholder="Ingrese@email.com" type="email">
-        <input placeholder="Ingrese Region" type="text">
-        <textarea  rows="5" cols="33">Escribe alguna observación... </textarea>
-        <input placeholder="Ingrese Transporte" type="text">
-        <button type="submit">Enviar</button>
+        <input class="info_boxes" placeholder="Ingrese Dirección" type="text">
+        <input class="info_boxes" placeholder="Ingrese Teléfono" type="number">
+        <input class="info_boxes" placeholder="Ingrese@email.com" type="email">
+        <input class="info_boxes" placeholder="Ingrese Region" type="text">
+        <textarea class="comments" rows="10" cols="8">Escribe alguna observación... </textarea>
+        <input style="width: auto;" class="info_boxes" placeholder="Ingrese Transporte" type="text">
+        <!-- <button class="send" type="submit">Enviar</button> -->
+        <a href="#" class="send btn-neon">
+        <span id="span1"></span>
+        <span id="span2"></span>
+        <span id="span3"></span>
+        <span id="span4"></span>
+        Enviar
+     </a>
+        </div>
     </form>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/departamentos.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 </body>
 </html>
