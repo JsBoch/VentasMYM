@@ -1,4 +1,5 @@
 var datos;
+var id;
 var $select = $('#depa');
 
 $.ajax({
@@ -19,7 +20,7 @@ function funcionCualquiera(datos) {
 
 
 function findValue() {
-    var id = $('#depa').val(); //#addLocationIdReq es el identificador
+    id = $('#depa').val(); //#addLocationIdReq es el identificador
     // de tu elemento
     console.log(id);
 };
