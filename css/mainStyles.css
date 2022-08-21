@@ -82,6 +82,11 @@ body {
     outline: none;
 }
 
+select option {
+    background-color: black;
+    color: white;
+}
+
 .comments {
     background-color: var(--balck);
     margin-bottom: 24px;

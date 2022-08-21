@@ -20,7 +20,6 @@
         <input class="info_boxes" placeholder="Ingrese Razón Social" type="text">
         <select class="selectors" name="SD" id="depa" onchange="findValue()"></select>
         <select class="selectors" name="SM" id="municipio" form="customer_registration">
-        <option value="idRandom">Municipio</option>
         </select>
         <input class="info_boxes" placeholder="Ingrese Dirección" type="text">
         <input class="info_boxes" placeholder="Ingrese Teléfono" type="number">
@@ -28,6 +27,7 @@
         <input class="info_boxes" placeholder="Ingrese Region" type="text">
         <textarea class="comments" rows="10" cols="8">Escribe alguna observación... </textarea>
         <input style="width: auto;" class="info_boxes" placeholder="Ingrese Transporte" type="text">
+        <input type="hidden" value="1" name="idEmpleado">
         <!-- <button class="send" type="submit">Enviar</button> -->
         <a href="#" class="send btn-neon">
         <span id="span1"></span>
