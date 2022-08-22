@@ -107,8 +107,7 @@ select option {
     border: 3px var(--celese) solid;
 }
 
-
-/* .send {
+.send {
     background-color: var(--dGreen);
     color: white;
     width: auto;
@@ -118,12 +117,13 @@ select option {
     font-size: 20px;
     outline: none;
     cursor: pointer;
-} */
+}
 
 
 /* boton */
 
-.btn-neon {
+
+/* .btn-neon {
     position: relative;
     display: inline-block;
     padding: 10px 30px;
@@ -233,7 +233,7 @@ select option {
     bottom: 100%;
     transition: 1s;
     transition-delay: 0.75s;
-}
+} */
 
 @media (max-width: 1214px) {
     .form_box {

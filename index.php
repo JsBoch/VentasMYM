@@ -11,31 +11,31 @@
     <title>Form</title>
 </head>
 <body>
-    <form action="" id="customer_registration" class="form_box">
+    <form action="data/registro_cliente.php" id="customer_registration" class="form_box">
         <h2 class="main_title">Registro De Clientes</h2>
         <div class="sub_container">
-        <input class="info_boxes" placeholder="Ingrese NIT" onblur="findValue()" type="text">
-        <input class="info_boxes" placeholder="Ingrese DPI" type="text">
-        <input class="info_boxes" placeholder="Ingrese Nombre" type="text">
-        <input class="info_boxes" placeholder="Ingrese Razón Social" type="text">
+        <input class="info_boxes" placeholder="Ingrese NIT" onblur="findValue()" name="nit" type="text">
+        <input class="info_boxes" placeholder="Ingrese DPI" name="dpi" type="text">
+        <input class="info_boxes" placeholder="Ingrese Nombre" name="nombre" type="text">
+        <input class="info_boxes" placeholder="Ingrese Razón Social" name="razonsocial" type="text">
         <select class="selectors" name="SD" id="depa" onchange="findValue()"></select>
         <select class="selectors" name="SM" id="municipio" form="customer_registration">
         </select>
-        <input class="info_boxes" placeholder="Ingrese Dirección" type="text">
-        <input class="info_boxes" placeholder="Ingrese Teléfono" type="number">
-        <input class="info_boxes" placeholder="Ingrese@email.com" type="email">
-        <input class="info_boxes" placeholder="Ingrese Region" type="text">
-        <textarea class="comments" rows="10" cols="8">Escribe alguna observación... </textarea>
-        <input style="width: auto;" class="info_boxes" placeholder="Ingrese Transporte" type="text">
-        <input type="hidden" value="1" name="idEmpleado">
-        <!-- <button class="send" type="submit">Enviar</button> -->
-        <a href="#" class="send btn-neon">
+        <input class="info_boxes" placeholder="Ingrese Dirección" name="direccion" type="text">
+        <input class="info_boxes" placeholder="Ingrese Teléfono" name="telefono" type="number">
+        <input class="info_boxes" placeholder="Ingrese@email.com" name="correo" type="email">
+        <input class="info_boxes" placeholder="Ingrese Region" name="region" type="text">
+        <textarea class="comments" rows="10" cols="8" name="comentario">Escribe alguna observación... </textarea>
+        <input style="width: auto;" class="info_boxes" placeholder="Ingrese Transporte" name="transportexx" type="text">
+        <input type="hidden" value="1" name="empleado">
+        <button class="send" type="submit">Enviar</button>
+        <!-- <a href="#" class="send btn-neon">
         <span id="span1"></span>
         <span id="span2"></span>
         <span id="span3"></span>
         <span id="span4"></span>
         Enviar
-     </a>
+     </a> -->
         </div>
     </form>
     <script src="js/jquery-3.6.0.min.js"></script>
