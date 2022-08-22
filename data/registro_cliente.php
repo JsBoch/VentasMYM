@@ -38,73 +38,73 @@ $idtipocliente = 1;
 $transporte = $_POST['transporte'];
 $idempresa = 1; //se establece 1 como distribuidora, para todas las sucursales 1 es Distribuidora
 $cui = $_POST['dpi'];
-$codigo_postal = 0;
+$codigo_postal = '';
 switch ($iddepartamento) {
     case 1:
-        $codigo_postal = 16000;
+        $codigo_postal = '16000';
         break;
     case 2:
-        $codigo_postal = 15000;
+        $codigo_postal = '15000';
         break;
     case 3:
-        $codigo_postal = 04000;
+        $codigo_postal = '04000';
         break;
     case 4:
-        $codigo_postal = 20000;
+        $codigo_postal = '20000';
         break;
     case 5:
-        $codigo_postal = 02000;
+        $codigo_postal = '02000';
         break;
     case 6:
-        $codigo_postal = 05000;
+        $codigo_postal = '05000';
         break;
     case 7:
-        $codigo_postal = 01001;
+        $codigo_postal = '01001';
         break;
     case 8:
-        $codigo_postal = 13000;
+        $codigo_postal = '13000';
         break;
     case 9:
-        $codigo_postal = 18000;
+        $codigo_postal = '18000';
         break;
     case 10:
-        $codigo_postal = 21000;
+        $codigo_postal = '21000';
         break;
     case 11:
-        $codigo_postal = 22000;
+        $codigo_postal = '22000';
         break;
     case 12:
-        $codigo_postal = 17000;
+        $codigo_postal = '17000';
         break;
     case 13:
-        $codigo_postal = 09000;
+        $codigo_postal = '09000';
         break;
     case 14:
-        $codigo_postal = 14000;
+        $codigo_postal = '14000';
         break;
     case 15:
-        $codigo_postal = 11000;
+        $codigo_postal = '11000';
         break;
     case 16:
-        $codigo_postal = 03000;
+        $codigo_postal = '03000';
         break;
     case 17:
-        $codigo_postal = 12000;
+        $codigo_postal = '12000';
         break;
     case 18:
-        $codigo_postal = 06000;
+        $codigo_postal = '06000';
         break;
     case 19:
-        $codigo_postal = 07000;
+        $codigo_postal = '07000';
         break;
     case 20:
-        $codigo_postal = 10000;
+        $codigo_postal = '10000';
         break;
     case 21:
-        $codigo_postal = 08001;
+        $codigo_postal = '08001';
         break;
     case 22:
-        $codigo_postal = 19000;
+        $codigo_postal = '19000';
         break;
 
     default:
