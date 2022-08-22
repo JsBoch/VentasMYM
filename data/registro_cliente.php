@@ -142,7 +142,7 @@ if ($mysqli != null && $mysqli->connect_errno === 0) {
                 "replicado,operacion,id_municipio,region,idtipocliente,transporte,idempresa,codigo_postal,cui) " .
                 " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
             if (!$stmt = $mysqli->prepare($queryInsert)) {
-                $codigoRespuesta = -5; //Fallo al preparar la consulta de registro
+                $codigoRespuesta = -5; //Fallo al preparar la consulta de registro                
             } else {
                 if (!$stmt->bind_param(
                     "isssssissiisiissssdidiiisisiss",
