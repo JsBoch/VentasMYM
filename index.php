@@ -11,7 +11,7 @@
     <title>Form</title>
 </head>
 <body>
-    <form action="data/registro_cliente.php" id="customer_registration" class="form_box">
+    <form action="data/registro_cliente.php" method="POST" id="customer_registration" class="form_box">
         <h2 class="main_title">Registro De Clientes</h2>
         <div class="sub_container">
         <input class="info_boxes" placeholder="Ingrese NIT" onblur="findValue()" name="nit" type="text">
@@ -26,7 +26,7 @@
         <input class="info_boxes" placeholder="Ingrese@email.com" name="correo" type="email">
         <input class="info_boxes" placeholder="Ingrese Region" name="region" type="text">
         <textarea class="comments" rows="10" cols="8" name="comentario">Escribe alguna observación... </textarea>
-        <input style="width: auto;" class="info_boxes" placeholder="Ingrese Transporte" name="transportexx" type="text">
+        <input style="width: auto;" class="info_boxes" placeholder="Ingrese Transporte" name="transporte" type="text">
         <input type="hidden" value="1" name="empleado">
         <button class="send" type="submit">Enviar</button>
         <!-- <a href="#" class="send btn-neon">
