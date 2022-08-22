@@ -138,11 +138,12 @@ if ($mysqli != null && $mysqli->connect_errno === 0) {
             $queryInsert = "INSERT INTO clientes ( " .
                 "idcliente,nit,primer_nombre,direccion,telefono,email,visitas,comentario," .
                 "fecharegistro,estado,ventas,codigo,id_sucursal,iddepartamento,razonsocial," .
-                "segundo_nombre,primer_apellido,segundo_apellido,monto_credito,id_e mpleado,dias_credito," .
+                "segundo_nombre,primer_apellido,segundo_apellido,monto_credito,id_empleado,dias_credito," .
                 "replicado,operacion,id_municipio,region,idtipocliente,transporte,idempresa,codigo_postal,cui) " .
                 " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
             if (!$stmt = $mysqli->prepare($queryInsert)) {
-                $codigoRespuesta = -5; //Fallo al preparar la consulta de registro                
+                $codigoRespuesta = -5; //Fallo al preparar la consulta de registro
+                echo $mysqli->errno . ' '. $mysqli->error;                
             } else {
                 if (!$stmt->bind_param(
                     "isssssissiisiissssdidiiisisiss",
