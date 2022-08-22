@@ -1,11 +1,18 @@
 :root {
-    --balck: rgba(0, 0, 0, 0.501);
+    --balck: rgba(0, 0, 0, 0.394);
     --dark: #172026;
     --turquoise: #04BF9D;
     --celeseTra: #22bfd47f;
     --celese: #22C0D4;
     --dGreen: #027373;
-    --white: #ffff;
+    --white: rgba(255, 255, 255, 0.403);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
 }
 
 body {
@@ -13,3 +20,262 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.form_box {
+    background-color: var(--dark);
+    width: 70%;
+    height: 90vh;
+    margin: auto;
+    margin-top: 4vh;
+    border-radius: 20px;
+}
+
+.main_title {
+    color: var(--turquoise);
+    text-align: center;
+    padding-top: 5%;
+    font-size: 30px;
+    font-weight: lighter;
+}
+
+.sub_container {
+    width: 80%;
+    height: 65%;
+    margin: auto;
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.selectors,
+.comments {
+    color: var(--white);
+    font-weight: lighter;
+}
+
+.info_boxes {
+    background-color: var(--balck);
+    color: white;
+    width: 180px;
+    height: 12%;
+    margin-bottom: 20px;
+    padding-left: 5px;
+    border: 3px var(--celeseTra) solid;
+    outline: none;
+}
+
+.selectors {
+    background-color: var(--balck);
+    width: 200px;
+    height: 12%;
+    margin-bottom: 20px;
+    padding-left: 5px;
+    border: 3px var(--celeseTra) solid;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url('../imgs/flecha.png');
+    background-repeat: no-repeat, repeat;
+    background-position: right .7em top 50%, 0 0;
+    background-size: 1.50em auto, 100%;
+    outline: none;
+}
+
+select option {
+    background-color: black;
+    color: white;
+}
+
+.comments {
+    background-color: var(--balck);
+    margin-bottom: 24px;
+    padding-left: 5px;
+    border: 3px var(--celeseTra) solid;
+    outline: none;
+}
+
+.info_boxes:focus {
+    border: 3px var(--celese) solid;
+}
+
+.comments:focus {
+    border: 3px var(--celese) solid;
+}
+
+.selectors:focus {
+    border: 3px var(--celese) solid;
+}
+
+.send {
+    background-color: var(--dGreen);
+    color: white;
+    width: auto;
+    height: 15%;
+    margin-top: 3%;
+    border: 4px var(--celese) dashed;
+    font-size: 20px;
+    outline: none;
+    cursor: pointer;
+}
+
+
+/* boton */
+
+
+/* .btn-neon {
+    position: relative;
+    display: inline-block;
+    padding: 10px 30px;
+    color: #fff;
+    letter-spacing: 2px;
+    text-decoration: none;
+    text-align: center;
+    font-size: 20px;
+    overflow: hidden;
+    transition: 0.2s;
+    margin-top: 3%;
+    border: 4px var(--celese) dashed;
+    outline: none;
+    height: 15%;
+}
+
+.btn-neon:hover {
+    background: var(--celese);
+    box-shadow: 0 0 10px var(--celese), 0 0 40px var(--celese), 0 0 80px var(--celese);
+    transition-delay: 1s;
+}
+
+.btn-neon:focus {
+    background: var(--celese);
+    box-shadow: 0 0 10px var(--celese), 0 0 40px var(--celese), 0 0 80px var(--celese);
+    transition-delay: 1s;
+}
+
+.btn-neon span {
+    position: absolute;
+    display: block;
+}
+
+#span1 {
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--celese));
+}
+
+.btn-neon:hover #span1 {
+    left: 100%;
+    transition: 1s;
+}
+
+.btn-neon:focus #span1 {
+    left: 100%;
+    transition: 1s;
+}
+
+#span3 {
+    bottom: 0;
+    right: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(270deg, transparent, var(--celese));
+}
+
+.btn-neon:hover #span3 {
+    right: 100%;
+    transition: 1s;
+    transition-delay: 0.5s;
+}
+
+.btn-neon:focus #span3 {
+    right: 100%;
+    transition: 1s;
+    transition-delay: 0.5s;
+}
+
+#span2 {
+    top: -100%;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, var(--celese));
+}
+
+.btn-neon:hover #span2 {
+    top: 100%;
+    transition: 1s;
+    transition-delay: 0.25s;
+}
+
+.btn-neon:focus #span2 {
+    top: 100%;
+    transition: 1s;
+    transition-delay: 0.25s;
+}
+
+#span4 {
+    bottom: -100%;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(360deg, transparent, var(--celese));
+}
+
+.btn-neon:hover #span4 {
+    bottom: 100%;
+    transition: 1s;
+    transition-delay: 0.75s;
+}
+
+.btn-neon:focus #span4 {
+    bottom: 100%;
+    transition: 1s;
+    transition-delay: 0.75s;
+} */
+
+@media (max-width: 1214px) {
+    .form_box {
+        width: 100%;
+        height: 100%;
+        margin-top: 0;
+        border-radius: 0;
+    }
+    .sub_container {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+    .info_boxes,
+    .comments,
+    .selectors,
+    .send {
+        width: 100%;
+    }
+    .info_boxes,
+    .selectors,
+    .send {
+        height: 10vh;
+    }
+}
+
+
+/* @media (max-width: 850px) {
+    .sub_container {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+    .info_boxes,
+    .comments,
+    .selectors,
+    .send {
+        width: 100%;
+    }
+    .info_boxes,
+    .selectors,
+    .send {
+        height: 10vh;
+    }
+} */
