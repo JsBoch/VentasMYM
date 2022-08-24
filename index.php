@@ -16,7 +16,8 @@ session_start();
 <body>
     <h1>MENU</h1>
     <ol>
-        <li><a href="view/registro_cliente.view.php">Registro de clientes</a></li>        
+        <li><a href="view/registro_cliente.view.php">Registro de clientes</a></li>
+        <li><a href="view/registro_pedido.view.php">Registro de pedidos</a></li>        
         <li><a href="login.php">Salir</a></li>        
     </ol>       
 </body>

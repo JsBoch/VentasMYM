@@ -1,4 +1,6 @@
 <?php
+
+$departamentoId = $_POST['iddepartamento'];
 require_once 'connection.php';
 
 //$cliente = $_GET["cliente"];
@@ -6,14 +8,14 @@ require_once 'connection.php';
 $codigoRespuesta = 1;
 
 if ($mysqli !== null && $mysqli->connect_errno === 0) {
-    $stmt = "SELECT c.codigo," .
+    $stmt = "SELECT c.idcliente,c.codigo," .
         "c.primer_nombre as nombre," .
         "c.iddepartamento," .
         "c.id_municipio " .
         "FROM clientes c " .
         "WHERE c.estado = 1 " .
-       // "AND c.primer_nombre like '%$cliente%' ".
-        "ORDER BY c.primer_nombre;";
+        "AND c.iddepartamento = $departamentoId ".
+        " ORDER BY c.primer_nombre;";
 
     $result = $mysqli->query($stmt);
 
