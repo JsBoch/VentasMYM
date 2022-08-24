@@ -78,19 +78,17 @@ function listaPrecios() {
  * Carga el código del producto cuando se selecciona el nombre
  */
 function getCodigo() {
-    //let producto = document.getElementById('codigo').selectedOptions[0].getAttribute("data-valuep")
-    let producto = document.getElementById("producto").value;//$('#producto').val();        
-    let datos = { "producto": producto }
-    console.log("ENVIADO: " + producto); 
+    //let producto = document.getElementById('codigo').selectedOptions[0].getAttribute("data-valuep")    
+    let codigoIngresado = document.getElementById("codigo").value.trim();    
+    let producto = document.getElementById("producto").value.trim();//$('#producto').val();        
+    let datos = { "producto": producto }    
     $.ajax({
         url: 'http://192.168.0.8/ventasmym/data/obtener_codigo.php',
         dataType: 'json',
         type: 'post',
         data: datos,
         success: function (object) {
-            var $inputPrecio = $('#codigo');
-            $inputPrecio.value = object[0].codigo;
-            console.log("RECIBIDO: " + object[0].codigo);      
+            document.getElementById("codigo").value = object[0].codigo;                       
         }
     });
 }
@@ -163,6 +161,7 @@ function codigoProducto(datos) {
         const setValue = event.target.innerText;
         autocomplete.value = setValue;
         this.innerHTML = "";
+        autocomplete.focus();
     };
 }
 
@@ -207,7 +206,9 @@ function nombreProducto(datos) {
 
     resultsHTMLProducto.onclick = function (event) {
         const setValue = event.target.innerText;
-        autocompleteProducto.value = setValue;        
+        autocompleteProducto.value = setValue;                    
         this.innerHTML = "";
+        //document.getElementById('codigo').value = '';
+        autocompleteProducto.focus();
     };
 }

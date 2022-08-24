@@ -20,14 +20,14 @@
     </form>
     <form action="" method="post">
         <input type='text' name="codigo" id="codigo" placeholder="ingrese código" onblur="listaPrecios(),getNombreProducto()"></select>        
-        <input type="text" name="producto" id="producto" placeholder="ingreso nombre" onblur="getCodigo()">        
+        <input type="text" name="producto" id="producto" placeholder="ingreso nombre" size="100" onblur="getCodigo(),listaPrecios()">        
         <ul id="results"></ul>
         <ul id="resultsProducto"></ul>
-        <input type="number" name="cantidad" id="cantidad">
+        <input type="number" name="cantidad" id="cantidad" placeholder="CANTIDAD">
         <select name="tipo_precio" id="tipo_precio"></select>
-        <input type="text" name="precio" id="precio">
-        <input type="text" name="subtotal" id="subtotal">
-        <input type="text" name="observaciones_producto" id="observaciones_producto">
+        <input type="text" name="precio" id="precio" placeholder="PRECIO">
+        <input type="text" name="subtotal" id="subtotal" placeholder="SUBTOTAL">
+        <input type="text" name="observaciones_producto" id="observaciones_producto" placeholder="OBSERVACIONES">
         <div>            
     </div>
         <input type="button" value="AGREGAR">

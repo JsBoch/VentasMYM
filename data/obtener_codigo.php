@@ -11,7 +11,7 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
         "p.codigormym " .        
         "FROM adm_producto p " .        
         "WHERE p.estado = 1 " .
-        "AND (p.nombre = '$producto';";         
+        "AND p.nombre = '$producto';";         
 
     $result = $mysqli->query($stmt);
 
