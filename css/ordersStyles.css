@@ -1,0 +1,345 @@
+:root {
+    --balck: rgba(0, 0, 0, 0.394);
+    --dark: #172026;
+    --turquoise: #04BF9D;
+    --celeseTra: #22bfd47f;
+    --celese: #22C0D4;
+    --dGreen: #027373;
+    --white: rgba(255, 255, 255, 0.403);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background-image: url("../imgs/fondo.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.customer_frame {
+    background-color: var(--dark);
+    width: 70%;
+    height: 40vh;
+    margin: auto;
+    margin-top: 4vh;
+    border-radius: 20px;
+}
+
+.main_title {
+    color: var(--celese);
+    text-align: center;
+    padding-top: 3%;
+    font-size: 30px;
+    font-weight: lighter;
+}
+
+.sub_container {
+    width: 90%;
+    height: 65%;
+    margin: auto;
+    margin-top: 1%;
+}
+
+#departamento {
+    width: 30%;
+    height: 20%;
+    float: left;
+}
+
+#cliente {
+    width: 67%;
+    height: 20%;
+    margin-left: 3%;
+    float: left;
+}
+
+.selectors {
+    background-color: var(--balck);
+    margin-bottom: 20px;
+    padding-left: 5px;
+    border: 3px var(--celeseTra) solid;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url('../imgs/flecha.png');
+    background-repeat: no-repeat, repeat;
+    background-position: right .7em top 50%, 0 0;
+    background-size: 1.50em auto, 100%;
+    outline: none;
+}
+
+.comments {
+    background-color: var(--balck);
+    margin-bottom: 24px;
+    padding-left: 5px;
+    border: 3px var(--celeseTra) solid;
+    outline: none;
+    color: var(--white);
+    font-weight: lighter;
+}
+
+.above_all {
+    position: absolute;
+    width: 10%;
+    margin-top: 2%;
+    margin-left: 2%;
+}
+
+.above_all a {
+    text-decoration: none;
+    color: var(--dGreen);
+    outline: none;
+}
+
+.above_all a:hover {
+    color: var(--white);
+}
+
+.above_all a h3,
+i {
+    float: left;
+}
+
+.above_all a i {
+    font-size: 25px;
+    padding-left: 3%;
+}
+
+
+/* segundo cuadro */
+
+.box_products {
+    background-color: var(--dark);
+    width: 70%;
+    height: 70vh;
+    margin: auto;
+    margin-top: 4vh;
+    border-radius: 20px;
+}
+
+.second_sub_container {
+    width: 80%;
+    height: 65%;
+    margin: auto;
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.info_boxes {
+    background-color: var(--balck);
+    color: white;
+    width: 180px;
+    height: 14%;
+    margin-bottom: 20px;
+    padding-left: 5px;
+    border: 3px var(--celeseTra) solid;
+    outline: none;
+}
+
+#cantidad {
+    margin-bottom: 100px;
+}
+
+.selector {
+    background-color: var(--balck);
+    width: 200px;
+    height: 15%;
+    margin-bottom: 20px;
+    padding-left: 5px;
+    border: 3px var(--celeseTra) solid;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url('../imgs/flecha.png');
+    background-repeat: no-repeat, repeat;
+    background-position: right .7em top 50%, 0 0;
+    background-size: 1.50em auto, 100%;
+    outline: none;
+}
+
+.comments {
+    background-color: var(--balck);
+    margin-bottom: 24px;
+    padding-left: 5px;
+    border: 3px var(--celeseTra) solid;
+    outline: none;
+}
+
+.add {
+    background-color: var(--dGreen);
+    color: white;
+    width: 30%;
+    height: 20%;
+    position: relative;
+    right: 63%;
+    margin-top: 0%;
+    border: 4px var(--celese) dashed;
+    font-size: 20px;
+    outline: none;
+    cursor: pointer;
+}
+
+.see {
+    display: none;
+    background-color: var(--dGreen);
+    color: white;
+    width: 100%;
+    height: 10vh;
+    margin-bottom: 10vh;
+    border: 4px var(--celese) dashed;
+    font-size: 20px;
+    outline: none;
+    cursor: pointer;
+}
+
+
+/* tabla */
+
+.orders_table {
+    margin: auto;
+    margin-bottom: 20vh;
+}
+
+#main-container {
+    margin: 100px auto;
+    width: 70%;
+}
+
+table {
+    background-color: white;
+    text-align: left;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th,
+td {
+    padding: 20px;
+}
+
+th {
+    background-color: #246355;
+    border-bottom: solid 5px #0F362D;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #ddd;
+}
+
+tr:hover td {
+    background-color: #369681;
+    color: white;
+}
+
+.save {
+    background-color: var(--dGreen);
+    color: white;
+    width: 15%;
+    height: 10vh;
+    position: absolute;
+    top: 82rem;
+    left: 69vw;
+    border: 4px var(--celese) dashed;
+    font-size: 20px;
+    outline: none;
+    cursor: pointer;
+}
+
+.add_more {
+    display: none;
+    background-color: var(--dGreen);
+    color: white;
+    width: 100%;
+    height: 10vh;
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+    border: 4px var(--celese) dashed;
+    font-size: 20px;
+    outline: none;
+    cursor: pointer;
+}
+
+
+/* responsive */
+
+@media (max-width: 1280px) {
+    .customer_frame {
+        width: 100%;
+        height: 100%;
+        margin-top: 0;
+        border-radius: 0;
+    }
+    .sub_container {
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+    #departamento {
+        width: 100%;
+        height: 10vh;
+    }
+    #cliente {
+        width: 100%;
+        height: 10vh;
+        margin-left: 0;
+    }
+    .box_products {
+        width: 100%;
+        height: 100%;
+        margin: auto;
+        margin-top: 0;
+        border-radius: 0;
+    }
+    .second_sub_container {
+        display: flex;
+        flex-direction: column;
+    }
+    .info_boxes {
+        width: 100%;
+        height: 10vh;
+    }
+    .above_all a h3 {
+        display: none;
+    }
+    .selector {
+        width: 100%;
+        height: 10vh;
+    }
+    #cantidad {
+        margin-bottom: 3vh;
+    }
+    .add {
+        width: 100%;
+        height: 10vh;
+        position: none;
+        right: 0%;
+        margin-top: 5%;
+        margin-bottom: 5vh;
+    }
+    .see {
+        display: block;
+    }
+    #main-container {
+        display: none;
+    }
+    .save {
+        display: none;
+        width: 100%;
+        height: 10vh;
+        position: static;
+        top: 0;
+        left: 0;
+        right: 0%;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+}

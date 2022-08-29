@@ -1,11 +1,11 @@
 // Agregar JSON a el select de Departamento
 function listaDepartamentos() {
     $.ajax({
-        url: 'http://192.168.0.8/ventasmym/data/departamentos.php',
+        url: 'http://192.168.0.5/ventasmym/data/departamentos.php',
         dataType: 'json',
-        success: function (object) {
+        success: function(object) {
             var $select = $('#departamento');
-            $.each(object, function (i, departamento) {
+            $.each(object, function(i, departamento) {
                 $select.append('<option value=' + departamento.iddepartamento + '>' + departamento.nombre + '</option>');
             });
 
@@ -21,14 +21,14 @@ function listaClientes() {
     let departamentoId = $('#departamento').val();
     let datos = { "iddepartamento": departamentoId }
     $.ajax({
-        url: 'http://192.168.0.8/ventasmym/data/lista_clientes.php',
+        url: 'http://192.168.0.5/ventasmym/data/lista_clientes.php',
         dataType: 'json',
         type: 'post',
         data: datos,
-        success: function (object) {
+        success: function(object) {
             var $selectCliente = $('#cliente');
             $selectCliente.empty();
-            $.each(object, function (i, cliente) {
+            $.each(object, function(i, cliente) {
                 $selectCliente.append('<option value=' + cliente.idcliente + '>' + cliente.nombre + '</option>');
             });
         }
@@ -40,9 +40,9 @@ function listaClientes() {
  */
 function listaProductos() {
     $.ajax({
-        url: 'http://192.168.0.8/ventasmym/data/lista_productos.php',
+        url: 'http://192.168.0.5/ventasmym/data/lista_productos.php',
         dataType: 'json',
-        success: function (object) {
+        success: function(object) {
             codigoProducto(object);
             nombreProducto(object);
         }
@@ -58,11 +58,11 @@ function listaPrecios() {
     let codigo = $('#codigo').val();
     let datos = { "codigo": codigo }
     $.ajax({
-        url: 'http://192.168.0.8/ventasmym/data/lista_precios.php',
+        url: 'http://192.168.0.5/ventasmym/data/lista_precios.php',
         dataType: 'json',
         type: 'post',
         data: datos,
-        success: function (object) {
+        success: function(object) {
             var $selectPrecio = $('#tipo_precio');
             $selectPrecio.empty();
 
@@ -79,16 +79,16 @@ function listaPrecios() {
  */
 function getCodigo() {
     //let producto = document.getElementById('codigo').selectedOptions[0].getAttribute("data-valuep")    
-    let codigoIngresado = document.getElementById("codigo").value.trim();    
-    let producto = document.getElementById("producto").value.trim();//$('#producto').val();        
-    let datos = { "producto": producto }    
+    let codigoIngresado = document.getElementById("codigo").value.trim();
+    let producto = document.getElementById("producto").value.trim(); //$('#producto').val();        
+    let datos = { "producto": producto }
     $.ajax({
-        url: 'http://192.168.0.8/ventasmym/data/obtener_codigo.php',
+        url: 'http://192.168.0.5/ventasmym/data/obtener_codigo.php',
         dataType: 'json',
         type: 'post',
         data: datos,
-        success: function (object) {
-            document.getElementById("codigo").value = object[0].codigo;                       
+        success: function(object) {
+            document.getElementById("codigo").value = object[0].codigo;
         }
     });
 }
@@ -98,23 +98,23 @@ function getCodigo() {
  */
 function getNombreProducto() {
     //let producto = document.getElementById('codigo').selectedOptions[0].getAttribute("data-valuep")
-    let codigo = document.getElementById("codigo").value;//$('#producto').val();      
+    let codigo = document.getElementById("codigo").value; //$('#producto').val();      
     let datos = { "codigo": codigo }
 
     $.ajax({
-        url: 'http://192.168.0.8/ventasmym/data/obtener_producto.php',
+        url: 'http://192.168.0.5/ventasmym/data/obtener_producto.php',
         dataType: 'json',
         type: 'post',
         data: datos,
-        success: function (object) {
+        success: function(object) {
             var $inputProducto = $('#producto');
             //$inputProducto.value = object[0].nombre;
-            document.getElementById("producto").value = object[0].nombre;            
+            document.getElementById("producto").value = object[0].nombre;
         },
-        error: function (jqXHR, textStatus, errorThrown) { 
-            console.log("Status: " + textStatus); 
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log("Status: " + textStatus);
             console.log("Error: " + errorThrown);
-         }
+        }
     });
 }
 
@@ -126,7 +126,7 @@ function codigoProducto(datos) {
 
     const data = [];
 
-    $.each(datos, function (i, producto) {
+    $.each(datos, function(i, producto) {
         data.push(producto.codigo);
     });
 
@@ -134,7 +134,7 @@ function codigoProducto(datos) {
     const autocomplete = document.getElementById("codigo");
     const resultsHTML = document.getElementById("results");
 
-    autocomplete.oninput = function () {
+    autocomplete.oninput = function() {
         let results = [];
         const userInput = this.value;
         resultsHTML.innerHTML = "";
@@ -157,7 +157,7 @@ function codigoProducto(datos) {
         return results;
     }
 
-    resultsHTML.onclick = function (event) {
+    resultsHTML.onclick = function(event) {
         const setValue = event.target.innerText;
         autocomplete.value = setValue;
         this.innerHTML = "";
@@ -173,7 +173,7 @@ function nombreProducto(datos) {
 
     const data = [];
 
-    $.each(datos, function (i, producto) {
+    $.each(datos, function(i, producto) {
         data.push(producto.nombre);
     });
 
@@ -181,7 +181,7 @@ function nombreProducto(datos) {
     const autocompleteProducto = document.getElementById("producto");
     const resultsHTMLProducto = document.getElementById("resultsProducto");
 
-    autocompleteProducto.oninput = function () {
+    autocompleteProducto.oninput = function() {
         let results = [];
         const userInput = this.value;
         resultsHTMLProducto.innerHTML = "";
@@ -204,9 +204,9 @@ function nombreProducto(datos) {
         return results;
     }
 
-    resultsHTMLProducto.onclick = function (event) {
+    resultsHTMLProducto.onclick = function(event) {
         const setValue = event.target.innerText;
-        autocompleteProducto.value = setValue;                    
+        autocompleteProducto.value = setValue;
         this.innerHTML = "";
         //document.getElementById('codigo').value = '';
         autocompleteProducto.focus();

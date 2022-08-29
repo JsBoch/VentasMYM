@@ -15,10 +15,19 @@ session_start();
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <title>Form</title>
 </head>
 <body>
     <form action="data/registro_cliente.php" method="POST" id="customer_registration" class="form_box">
+        <!-- Boton para regresar al menu -->
+        <div class="above_all">
+        <a href="../index.php">
+            <h3>Ir al menu</h3>
+            <i class='bx bx-log-out'></i>
+         </a>
+        </div>     
+         <!-- formulario -->
         <h2 class="main_title">Registro De Clientes</h2>
         <div class="sub_container">
         <input class="info_boxes" placeholder="Ingrese NIT" onblur="findValue()" name="nit" type="text">
@@ -45,7 +54,7 @@ session_start();
      </a> -->
         </div>
     </form>
-    <a href="../index.php">VOLVER</a>
+   
     <script src="../js/jquery-3.6.0.min.js"></script>
     <script src="../js/departamentos.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
