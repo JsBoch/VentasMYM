@@ -60,6 +60,7 @@ body {
 
 .selectors {
     background-color: var(--balck);
+    color: white;
     margin-bottom: 20px;
     padding-left: 5px;
     border: 3px var(--celeseTra) solid;
@@ -127,6 +128,7 @@ i {
     height: 65%;
     margin: auto;
     margin-top: 5%;
+    position: relative;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -149,6 +151,7 @@ i {
 
 .selector {
     background-color: var(--balck);
+    color: white;
     width: 200px;
     height: 15%;
     margin-bottom: 20px;
@@ -244,9 +247,8 @@ tr:hover td {
     color: white;
     width: 15%;
     height: 10vh;
-    position: absolute;
-    top: 82rem;
-    left: 69vw;
+    margin-left: 70%;
+    margin-bottom: 10vh;
     border: 4px var(--celese) dashed;
     font-size: 20px;
     outline: none;
@@ -259,12 +261,33 @@ tr:hover td {
     color: white;
     width: 100%;
     height: 10vh;
-    margin-top: 10vh;
-    margin-bottom: 10vh;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
     border: 4px var(--celese) dashed;
     font-size: 20px;
     outline: none;
     cursor: pointer;
+}
+
+.autocomplete_list {
+    background-color: black;
+    position: absolute;
+    top: 16vh;
+    left: 0;
+    z-index: 1000;
+    text-align-last: auto;
+    padding: 0%;
+    cursor: pointer;
+}
+
+.autocomplete_list li {
+    list-style: none;
+    color: white;
+}
+
+.autocomplete_list li:hover {
+    background-color: rgb(24, 24, 24);
+    color: rgba(255, 255, 255, 0.862);
 }
 
 
@@ -336,10 +359,10 @@ tr:hover td {
         width: 100%;
         height: 10vh;
         position: static;
-        top: 0;
-        left: 0;
-        right: 0%;
-        margin-top: 0;
-        margin-bottom: 0;
+        margin-left: 0;
+    }
+    .autocomplete_list {
+        width: 100%;
+        top: 23vh;
     }
 }
