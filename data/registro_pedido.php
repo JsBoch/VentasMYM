@@ -93,7 +93,7 @@ if ($mysqli !== null) {
                     "precio," .
                     "subtotal," .
                     "observaciones," .
-                    "estado," .
+                    "estado," .     
                     "id_empresa) " .
                     " VALUES (?,?,?,?,?,?,?,?,?,?);")) {
                     $codigoRespuesta = -4; //fallo al preparar la consulta de detalle

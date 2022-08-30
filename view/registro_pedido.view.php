@@ -46,12 +46,13 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 <ul id="results"></ul>
                 <ul id="resultsProducto"></ul>
                 <input type="number" name="cantidad" class="info_boxes" id="cantidad" placeholder="CANTIDAD">
-                <select name="tipo_precio" class="selector" id="tipo_precio"></select>
+                <select name="tipo_precio" class="selector" id="tipo_precio" onblur="colocarPrecio()"></select>
                 <input type="text" name="precio" class="info_boxes" id="precio" placeholder="PRECIO">
                 <input type="text" name="subtotal" class="info_boxes" id="subtotal" placeholder="SUBTOTAL">
                 <textarea name="observaciones_producto" class="comments" id="observaciones_producto" cols="30" rows="10"></textarea>
                 <button class="add" onclick="putData()" type="button">Agregar</button>
                 <button class="see" onclick="seeOrder()" type="button">Ver Pedido</button>
+                <input type="button" value="GUARDAR REGISTRO" onclick="cargarDetalle()">
             </div>
         </div>
     </form>
@@ -68,11 +69,12 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
 		</table>
 	</div>
     <button class="add_more" onclick="backToOrders()" type="button" id="shopping_cart">Agregar Más</button>
-    <button class="save" type="submit" id="send_order">Guardar</button>
+    <button class="save" type="submit" id="send_order" >Guardar</button>
 
     <script src="../js/table.js"></script>
     <script src="../js/jquery-3.6.0.min.js"></script>
     <script src="../js/listas_pedido.js"></script>
+    <script src="../js/registro_pedido.js"></script>
 </body>
 
 </html>

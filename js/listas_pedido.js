@@ -1,7 +1,7 @@
 // Agregar JSON a el select de Departamento
 function listaDepartamentos() {
     $.ajax({
-        url: 'http://192.168.0.5/ventasmym/data/departamentos.php',
+        url: 'http://192.168.0.6/ventasmym/data/departamentos.php',
         dataType: 'json',
         success: function(object) {
             var $select = $('#departamento');
@@ -21,7 +21,7 @@ function listaClientes() {
     let departamentoId = $('#departamento').val();
     let datos = { "iddepartamento": departamentoId }
     $.ajax({
-        url: 'http://192.168.0.5/ventasmym/data/lista_clientes.php',
+        url: 'http://192.168.0.6/ventasmym/data/lista_clientes.php',
         dataType: 'json',
         type: 'post',
         data: datos,
@@ -40,7 +40,7 @@ function listaClientes() {
  */
 function listaProductos() {
     $.ajax({
-        url: 'http://192.168.0.5/ventasmym/data/lista_productos.php',
+        url: 'http://192.168.0.6/ventasmym/data/lista_productos.php',
         dataType: 'json',
         success: function(object) {
             codigoProducto(object);
@@ -58,7 +58,7 @@ function listaPrecios() {
     let codigo = $('#codigo').val();
     let datos = { "codigo": codigo }
     $.ajax({
-        url: 'http://192.168.0.5/ventasmym/data/lista_precios.php',
+        url: 'http://192.168.0.6/ventasmym/data/lista_precios.php',
         dataType: 'json',
         type: 'post',
         data: datos,
@@ -71,7 +71,7 @@ function listaPrecios() {
             $selectPrecio.append('<option value=' + object[0].dos + '> DOS - ' + object[0].dos + '</option>');
             $selectPrecio.append('<option value=' + object[0].tres + '> TRES - ' + object[0].tres + '</option>');
         }
-    });
+    });    
 }
 
 /**
@@ -83,7 +83,7 @@ function getCodigo() {
     let producto = document.getElementById("producto").value.trim(); //$('#producto').val();        
     let datos = { "producto": producto }
     $.ajax({
-        url: 'http://192.168.0.5/ventasmym/data/obtener_codigo.php',
+        url: 'http://192.168.0.6/ventasmym/data/obtener_codigo.php',
         dataType: 'json',
         type: 'post',
         data: datos,
@@ -102,7 +102,7 @@ function getNombreProducto() {
     let datos = { "codigo": codigo }
 
     $.ajax({
-        url: 'http://192.168.0.5/ventasmym/data/obtener_producto.php',
+        url: 'http://192.168.0.6/ventasmym/data/obtener_producto.php',
         dataType: 'json',
         type: 'post',
         data: datos,
@@ -212,3 +212,13 @@ function nombreProducto(datos) {
         autocompleteProducto.focus();
     };
 }
+
+/**
+ * Según el tipo de precio, se colocal el precio en el input
+ * correspondiente.
+ */
+
+ function colocarPrecio()
+ {
+     document.getElementById('precio').value = document.getElementById('tipo_precio').value;    
+ }
