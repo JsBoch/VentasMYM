@@ -1,4 +1,5 @@
 function putData() {
+    let cuerpoTabla = document.getElementById("cuerpo");
     // obtener inputs
     var codigo = document.getElementById("codigo");
     var producto = document.getElementById("producto");
@@ -8,33 +9,36 @@ function putData() {
     var subTotal = document.getElementById("subtotal");
     var obsProducto = document.getElementById("observaciones_producto");
 
-    // obtener filas de tabla 
-    var fila = document.createElement('tr');
-    var colCode = document.createElement('td');
-    var colNdp = document.createElement('td');
-    var colCan = document.createElement('td');
-    var colTdv = document.createElement('td');
-    var colPre = document.createElement('td');
-    var colSub = document.createElement('td');
-    var colObs = document.createElement('td');
-    colCode.innerHTML = codigo.value;
-    colNdp.innerHTML = producto.value;
-    colCan.innerHTML = cantidad.value;
-    colTdv.innerHTML = tipoPrecio.value;
-    colPre.innerHTML = precio.value;
-    colSub.innerHTML = subTotal.value;
-    colObs.innerHTML = obsProducto.value;
-    fila.appendChild(colCode);
-    fila.appendChild(colNdp);
-    fila.appendChild(colCan);
-    fila.appendChild(colTdv);
-    fila.appendChild(colPre);
-    fila.appendChild(colSub);
-    fila.appendChild(colObs);
-
-    document.getElementById("cuerpo").appendChild(file);
+    // llenar tabla
+    let fila = document.createElement('tr');
+    let cod = document.createElement('td');
+    cod.innerHTML = codigo.value;
+    let pro = document.createElement('td');
+    pro.innerHTML = producto.value;
+    let can = document.createElement('td');
+    can.innerHTML = cantidad.value;
+    let tPre = document.createElement('td');
+    tPre.innerHTML = tipoPrecio.value;
+    let pre = document.createElement('td');
+    pre.innerHTML = precio.value;
+    let sTo = document.createElement('td');
+    sTo.innerHTML = subTotal.value;
+    let obP = document.createElement('td');
+    obP.innerHTML = obsProducto.value;
 
 
+
+
+    fila.appendChild(cod);
+    fila.appendChild(pro);
+    fila.appendChild(can);
+    fila.appendChild(tPre);
+    fila.appendChild(pre);
+    fila.appendChild(sTo);
+    fila.appendChild(obP);
+    cuerpoTabla.appendChild(fila);
+
+    // limpiar inputs
     codigo.value = "";
     producto.value = "";
     cantidad.value = "";
@@ -54,13 +58,12 @@ function seeOrder() {
 
     formulario.style.display = "none";
     contenderoTabal.style.display = "block";
+    agregarAlPedido.style.display = "block";
+    enviarPedido.style.display = "block";
     contenderoTabal.style.width = "100%";
     contenderoTabal.style.margin = "0";
     altura.style.height = "100vh"
     altura.style.marginBottom = "0";
-    agregarAlPedido.style.display = "block";
-    enviarPedido.style.display = "block";
-
 }
 
 function backToOrders() {

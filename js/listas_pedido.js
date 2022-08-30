@@ -145,6 +145,7 @@ function codigoProducto(datos) {
                 resultsHTML.innerHTML += "<li>" + results[i] + "</li>";
             }
         }
+        results.style.padding = "1%";
     };
 
     function getResults(input) {
