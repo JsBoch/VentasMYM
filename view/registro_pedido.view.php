@@ -45,7 +45,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 <input type="text" name="producto" class="info_boxes" id="producto" placeholder="ingreso nombre" size="100" onblur="getCodigo(),listaPrecios()">
                 <ul class="autocomplete_list" id="results">
                 </ul>
-                <ul id="resultsProducto"></ul>
+                <ul id="resultsProducto" class="autocomplete_list"></ul>
                 <input type="number" name="cantidad" class="info_boxes" id="cantidad" placeholder="CANTIDAD">
                 <select name="tipo_precio" class="selector" id="tipo_precio" onblur="colocarPrecio()"></select>
                 <input type="text" name="precio" class="info_boxes" id="precio" placeholder="PRECIO">

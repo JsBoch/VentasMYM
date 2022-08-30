@@ -12,7 +12,7 @@ function cargarDetalle() {
         "observaciones": "Primera prueba"
     };
 
-   var detalle = {
+   var detalle = [{
         "codigo_producto": "MF-315-K",
         "nombre_producto": "PRODUCTO DE PRUEBA MF",
         "cantidad": 2,
@@ -20,8 +20,8 @@ function cargarDetalle() {
         "precio": 23.30,
         "subtotal": 46.60,
         "observaciones": "primer registro de prueba"
-    };
-    /*detalle.push({
+    },
+    {
         "codigo_producto": "MF-135-K",
         "nombre_producto": "PRODUCTO DOS MF",
         "cantidad": 3,
@@ -29,15 +29,15 @@ function cargarDetalle() {
         "precio": 50.00,
         "subtotal": 150.00,
         "observaciones": "segundo registro de prueba"
-    });*/
+    }];
     
     /**
  * Se carga el listado de clientes
  */           
 var data1 = JSON.stringify(principal);
 var data2 = JSON.stringify(detalle);
-    //console.log();
-    //console.log();
+    //console.log(data1);
+    //console.log(data2);
 
    $.ajax({
         url: 'http://192.168.0.6/ventasmym/data/registro_pedido.php',

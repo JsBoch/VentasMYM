@@ -109,8 +109,8 @@ if ($mysqli !== null) {
 
                     $almacenado = true;
 
-                    foreach ($jsonDetalle as $item) {
-                        foreach ($item as $arr) {
+                    //foreach ($jsonDetalle as $item) {
+                        foreach ($jsonDetalle as $arr) {
                             //$cadenaCompleta = $cadenaCompleta . $arr["nombre"];
                             $codigoProducto = $arr["codigo_producto"];
                             $nombreProducto = $arr["nombre_producto"];
@@ -123,10 +123,10 @@ if ($mysqli !== null) {
                             if (!$stmtd->execute()) {
                                 $codigoRespuesta = -6; //fallo al ejecutar la consulta detalle
                                 $almacenado = false;
-                                break 2;
+                                break 1;
                             }
                         }
-                    }
+                    //}
 
                     if ($almacenado) {
                         //se confirma la transacción
