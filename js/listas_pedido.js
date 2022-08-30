@@ -145,7 +145,7 @@ function codigoProducto(datos) {
                 resultsHTML.innerHTML += "<li>" + results[i] + "</li>";
             }
         }
-        results.style.padding = "1%";
+        resultsHTML.style.padding = "1%";
     };
 
     function getResults(input) {
@@ -162,6 +162,7 @@ function codigoProducto(datos) {
         const setValue = event.target.innerText;
         autocomplete.value = setValue;
         this.innerHTML = "";
+        resultsHTML.style.padding = "0";
         autocomplete.focus();
     };
 }
@@ -193,6 +194,7 @@ function nombreProducto(datos) {
                 resultsHTMLProducto.innerHTML += "<li>" + results[i] + "</li>";
             }
         }
+        resultsHTMLProducto.style.padding = "1%";
     };
 
     function getResults(input) {
@@ -209,6 +211,7 @@ function nombreProducto(datos) {
         const setValue = event.target.innerText;
         autocompleteProducto.value = setValue;
         this.innerHTML = "";
+        resultsHTMLProducto.style.padding = "0";
         //document.getElementById('codigo').value = '';
         autocompleteProducto.focus();
     };
