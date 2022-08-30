@@ -290,6 +290,27 @@ tr:hover td {
     color: rgba(255, 255, 255, 0.862);
 }
 
+.autocomplete_listCod {
+    background-color: black;
+    position: absolute;
+    top: 6vh;
+    left: 0;
+    z-index: 1000;
+    text-align-last: auto;
+    padding: 0%;
+    cursor: pointer;
+}
+
+.autocomplete_listCod li {
+    list-style: none;
+    color: white;
+}
+
+.autocomplete_listCod li:hover {
+    background-color: rgb(24, 24, 24);
+    color: rgba(255, 255, 255, 0.862);
+}
+
 
 /* responsive */
 
@@ -364,5 +385,9 @@ tr:hover td {
     .autocomplete_list {
         width: 100%;
         top: 23vh;
+    }
+    .autocomplete_listCod {
+        width: 100%;
+        top: 10vh;
     }
 }
