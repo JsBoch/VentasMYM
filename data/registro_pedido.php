@@ -1,5 +1,6 @@
 <?php
-
+session_start();
+$solicitudId = $_POST["id_solicitud"];
 $registroMain = $_POST["registro_principal"];
 $detalleRegistro = $_POST["detalle_registro"];
 
@@ -11,25 +12,36 @@ $codigoRespuesta = 0;
 /**
  * Se obtiene el registro principal del registro de pedido como objeto
  */
-$jsonMain = json_decode($registroMain, false);
-
-$clienteID = $jsonMain->id_cliente;
-$departamentoID = 0;//$jsonMain->id_departamento;
-$municipioID = 0;//$jsonMain->id_municipio;
-$empleadoID = $jsonMain->id_empleado;
-$codigoCliente = '';//$jsonMain->codigo_cliente;
-$nombreCliente = ''; //$jsonMain->nombre_cliente;
-$observacionesRegistro = $jsonMain->observaciones;
-$estadoRegistro = 1;
-
+$jsonMain = json_decode($registroMain, true);
+foreach ($jsonMain as $item) {
+    $clienteID = $item["id_cliente"]; //$jsonMain->id_cliente;
+    $departamentoID = $item["id_departamento"]; //$jsonMain->id_departamento;
+    $municipioID = 0; //$jsonMain->id_municipio;
+    $empleadoID = $_SESSION["usuarioId"]; //$jsonMain->id_empleado;
+    $codigoCliente = ''; //$jsonMain->codigo_cliente;
+    $nombreCliente = ''; //$jsonMain->nombre_cliente;
+    $observacionesRegistro = $item["observaciones"]; //$jsonMain->observaciones;
+    $estadoRegistro = 1;
+}
 /**
  * Se almacena en la base de datos
  */
 require_once 'connection.php';
 
-if ($mysqli !== null) {   
+if ($mysqli !== null) {
     //inicio de transacciones
     $mysqli->autocommit(false);
+    /**
+     * Sí el id de solicitud es mayor a cero, entonces se elimina el registro original
+     * del pedido.
+     */
+    if ($solicitudId > 0) {
+
+        $query = "update vnt_detalle_solicitud_producto SET estado = 0 WHERE id_solicitud = $solicitudId;";
+        $mysqli->query($query);
+        $query = "update vnt_solicitud_producto set estado = 0 WHERE id_solicitud = $solicitudId;";
+        $mysqli->query($query);
+    }
     //IDs
     $query = "select " .
         "if(max(id_solicitud) is null,1,max(id_solicitud) + 1) as id_solicitud, " .
@@ -48,20 +60,21 @@ if ($mysqli !== null) {
             "id_solicitud," .
             "nosolicitud," .
             "id_departamento," .
-            "id_municipio,".
+            "id_municipio," .
             "id_empleado," .
             "codigo_cliente," .
             "nombre_cliente," .
             "fecha_registro," .
             "observaciones," .
-            "estado) " .
-            " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);")) {
+            "estado," .
+            "id_cliente) " .
+            " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?);")) {
             //echo "fallo No." . $mysqli->errno . " " . $mysqli->error;
             $codigoRespuesta = -1;
 
         } else
-        if (!$stmt->bind_param("iiiiissssi", $envioID, $solicitudID, $departamentoID,$municipioID, $empleadoID,
-            $codigoCliente, $nombreCliente, $fechaHoraRegistro, $observacionesRegistro, $estadoRegistro)) {
+        if (!$stmt->bind_param("iiiiissssii", $envioID, $solicitudID, $departamentoID, $municipioID, $empleadoID,
+            $codigoCliente, $nombreCliente, $fechaHoraRegistro, $observacionesRegistro, $estadoRegistro, $clienteID)) {
             //echo "fallo la vinculacion: " . $mysqli->errno . " " . $mysqli->error;
             $codigoRespuesta = -2;
         } else if (
@@ -93,7 +106,7 @@ if ($mysqli !== null) {
                     "precio," .
                     "subtotal," .
                     "observaciones," .
-                    "estado," .     
+                    "estado," .
                     "id_empresa) " .
                     " VALUES (?,?,?,?,?,?,?,?,?,?);")) {
                     $codigoRespuesta = -4; //fallo al preparar la consulta de detalle
@@ -110,22 +123,22 @@ if ($mysqli !== null) {
                     $almacenado = true;
 
                     //foreach ($jsonDetalle as $item) {
-                        foreach ($jsonDetalle as $arr) {
-                            //$cadenaCompleta = $cadenaCompleta . $arr["nombre"];
-                            $codigoProducto = $arr["codigo_producto"];
-                            $nombreProducto = $arr["nombre_producto"];
-                            $cantidad = $arr["cantidad"];
-                            $tipoPrecio = $arr["tipoprecio"];
-                            $precio = $arr["precio"];
-                            $subtotal = $arr["subtotal"];
-                            $observacionesProducto = $arr["observaciones"];
+                    foreach ($jsonDetalle as $arr) {
+                        //$cadenaCompleta = $cadenaCompleta . $arr["nombre"];
+                        $codigoProducto = $arr["codigo_producto"];
+                        $nombreProducto = $arr["nombre_producto"];
+                        $cantidad = $arr["cantidad"];
+                        $tipoPrecio = $arr["tipoprecio"];
+                        $precio = $arr["precio"];
+                        $subtotal = $arr["subtotal"];
+                        $observacionesProducto = $arr["observaciones"];
 
-                            if (!$stmtd->execute()) {
-                                $codigoRespuesta = -6; //fallo al ejecutar la consulta detalle
-                                $almacenado = false;
-                                break 1;
-                            }
+                        if (!$stmtd->execute()) {
+                            $codigoRespuesta = -6; //fallo al ejecutar la consulta detalle
+                            $almacenado = false;
+                            break 1;
                         }
+                    }
                     //}
 
                     if ($almacenado) {

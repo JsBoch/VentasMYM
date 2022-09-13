@@ -1,6 +1,6 @@
 <?php
 
-$departamentoId = $_POST['iddepartamento'];
+$solicitudId = $_POST['id_solicitud'];
 require_once 'connection.php';
 
 //$cliente = $_GET["cliente"];
@@ -8,14 +8,17 @@ require_once 'connection.php';
 $codigoRespuesta = 1;
 
 if ($mysqli !== null && $mysqli->connect_errno === 0) {
-    $stmt = "SELECT c.idcliente,c.codigo," .
-        "c.primer_nombre as nombre," .
-        "c.iddepartamento," .
-        "c.id_municipio " .
-        "FROM clientes c " .
-        "WHERE c.estado = 1 " .
-        "AND c.iddepartamento = $departamentoId ".
-        " ORDER BY c.primer_nombre;";
+    $stmt = "select ".
+    "d.codigo_producto,".
+    "d.nombre_producto,".
+    "d.cantidad,".
+    "d.tipo_precio,".
+    "d.precio,".
+    "d.subtotal,".
+    "d.observaciones ".
+    "from vnt_detalle_solicitud_producto d ". 
+    "where d.estado = 1 ".
+    "and d.id_solicitud = $solicitudId;";
 
     $result = $mysqli->query($stmt);
 
@@ -25,11 +28,13 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
             $indice = 0;
             while ($row = $result->fetch_array()) {
                 $return_arr[$indice] = array(
-                    'idcliente' => $row['idcliente'],
-                    'codigo' => $row['codigo'],
-                    'nombre' => $row['nombre'],
-                    'iddepartamento' => $row['iddepartamento'],
-                    'idmunicipio' => $row['id_municipio']
+                    'codigo_producto' => $row['codigo_producto'],
+                    'nombre_producto' => $row['nombre_producto'],
+                    'cantidad' => $row['cantidad'],
+                    'tipo_precio' => $row['tipo_precio'],
+                    'precio' => $row['precio'],
+                    'subtotal' => $row['subtotal'],
+                    'observaciones' => $row['observaciones'],
                 );
                 $indice++;
             }
@@ -68,11 +73,13 @@ if ($codigoRespuesta != 1) {
     $return_arr = array();
     $Indice = 0;
     $return_arr[$Indice] = array(
-        'idcliente' => 0,
-        'codigo' => $codigoRespuesta,
-        'nombre' => $mensajeRespuesta,
-        'iddepartamento' => 0,
-        'idmunicipio' => 0
+        'codigo_producto' => 0,
+        'nombre_producto' => '',
+        'cantidad' => 0,
+        'tipo_precio' => '',
+        'precio' => 0,
+        'subtotal' => 0,
+        'observaciones' => ''
     );
 
     echo json_encode($return_arr);

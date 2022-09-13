@@ -1,6 +1,6 @@
 <?php
 
-$departamentoId = $_POST['iddepartamento'];
+$solicitudId = $_POST['id_solicitud'];
 require_once 'connection.php';
 
 //$cliente = $_GET["cliente"];
@@ -8,14 +8,18 @@ require_once 'connection.php';
 $codigoRespuesta = 1;
 
 if ($mysqli !== null && $mysqli->connect_errno === 0) {
-    $stmt = "SELECT c.idcliente,c.codigo," .
-        "c.primer_nombre as nombre," .
-        "c.iddepartamento," .
-        "c.id_municipio " .
-        "FROM clientes c " .
-        "WHERE c.estado = 1 " .
-        "AND c.iddepartamento = $departamentoId ".
-        " ORDER BY c.primer_nombre;";
+    $stmt = "select ".
+    "s.id_solicitud,".
+    "d.nombre as departamento,".
+    "c.primer_nombre as cliente,".
+    "s.observaciones," .
+    "s.id_departamento," .
+    "s.id_cliente " .
+    "from vnt_solicitud_producto s ". 
+    "join clientes c on s.id_cliente = c.idcliente ". 
+    "join adm_departamentopais d on c.iddepartamento = d.iddepartamento ".
+    "where s.estado > 0 ".
+    "and s.id_solicitud = $solicitudId;";
 
     $result = $mysqli->query($stmt);
 
@@ -25,11 +29,12 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
             $indice = 0;
             while ($row = $result->fetch_array()) {
                 $return_arr[$indice] = array(
-                    'idcliente' => $row['idcliente'],
-                    'codigo' => $row['codigo'],
-                    'nombre' => $row['nombre'],
-                    'iddepartamento' => $row['iddepartamento'],
-                    'idmunicipio' => $row['id_municipio']
+                    'id_solicitud' => $row['id_solicitud'],
+                    'departamento' => $row['departamento'],
+                    'cliente' => $row['cliente'],
+                    'observaciones' => $row['observaciones'],
+                    'id_departamento' => $row['id_departamento'],
+                    'id_cliente' => $row['id_cliente']                
                 );
                 $indice++;
             }
@@ -68,11 +73,12 @@ if ($codigoRespuesta != 1) {
     $return_arr = array();
     $Indice = 0;
     $return_arr[$Indice] = array(
-        'idcliente' => 0,
-        'codigo' => $codigoRespuesta,
-        'nombre' => $mensajeRespuesta,
-        'iddepartamento' => 0,
-        'idmunicipio' => 0
+        'id_solicitud' => 0,
+        'departamento' => '',
+        'cliente' => '',        
+        'observaciones' => '',
+        'id_departamento' => 0,
+        'id_cliente' => 0 
     );
 
     echo json_encode($return_arr);

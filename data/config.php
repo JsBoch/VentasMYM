@@ -10,7 +10,7 @@
  * ?>
  * 
  */
-/*return (object) array(
+return (object) array(
     'host' => '18.117.25.54',
     'username' => 'usr_mym',
     'pass' => 'Mym*20#*81@_)',
@@ -20,10 +20,10 @@
         'appName'=>"DISTRIBUIDORAMYM",
         'appURL'=> "http://yourURL/#/"
     )
-);*/
+);
 
-return (object) array(
-    'host' => '192.168.0.6',
+/*return (object) array(
+    'host' => '10.18.46.249',
     'username' => 'root',
     'pass' => 'My$qL2039*#@',
     'database' => 'db_rmym',
@@ -32,6 +32,6 @@ return (object) array(
         'appName'=>"DISTRIBUIDORAMYM",
         'appURL'=> "http://yourURL/#/"
     )
-);
+);*/
 
 ?>

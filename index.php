@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
-  header("Location: login.php");
+  header("Location: acceso.php");
 }
 ?>
 
@@ -46,7 +46,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                </a>
                <ul class="serv-show">
                   <li><a href="view/registro_pedido.view.php">Registrar</a></li>
-                  <li><a href="#">Editar</a></li>
+                  <li><a href="view/consulta_pedido.view.php">Consultar</a></li>
                </ul>
             </li>
          </ul>

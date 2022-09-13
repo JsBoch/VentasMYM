@@ -19,7 +19,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     <title>REGISTRO DE PEDIDOS</title>
 </head>
 
-<body onload="listaDepartamentos(),listaProductos()">
+<body onload="listaDepartamentos(),listaProductos(),GetDate()">
     <form action="" method="post" id="order_form">
         <div class="customer_frame">
             <!-- Boton para regresar al menu -->
@@ -29,12 +29,27 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                     <i class='bx bx-log-out'></i>
                 </a>
             </div>
+            <div class="sub_container">
+                <label for="fechaInicio">Fecha Inicio</label>
+                <input type="date" name="fechaInicio" id="fechaInicio">
+                <label for="fechaFinal">Fecha Final</label>
+                <input type="date" name="fechaFinal" id="fechaFinal">
+                <button type="button" id="bttnConsultar" name="bttnConsultar" onclick="ConsultarPedidos()">Consultar</button>
+                <label for="listaPedidos">Pedidos</label>
+                <select name="listaPedidos" id="listaPedidos" class="selectors" ondblclick="ConsultaProductos()"></select>
+                <label for="listaProductos">Productos</label>
+                <select name="listaProductos" id="listaProductos" class="selectors"></select>
+                <button type="button" id="bttnEditar" name="bttnEditar" onclick="CargaPedidoEdit()">Editar</button>
+                <button type="button" id="bttnEliminar" name="bttnEliminar" onclick="EliminarPedidoEdit()">Eliminar</button>
+            </div>
             <!-- cliente -->
             <h2 class="main_title">Cliente</h2>
             <div class="sub_container">
-                <select name="departamento" class="selectors" id="departamento" onchange="listaClientes()"></select>
+                <select name="departamento" class="selectors" id="departamento" onblur="AsignarCliente()"></select>
                 <select name="cliente" class="selectors" id="cliente"></select>
                 <textarea name="observaciones" class="comments" id="observaciones" cols="119" rows="5"></textarea>
+                <input type="hidden" name="hdndepartamentoid" id="hdndepartamentoid">
+                <input type="hidden" name="hdnclienteid" id="hdnclienteid">
             </div>
         </div>
         <!-- Pedido -->
@@ -55,7 +70,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 <input type="text" name="precio" class="info_boxes" id="precio" placeholder="PRECIO" onblur="CalculoSubtotal()">
                 <input type="text" name="subtotal" class="info_boxes" id="subtotal" placeholder="SUBTOTAL">
                 <textarea name="observaciones_producto" class="comments" id="observaciones_producto" cols="30" rows="10"></textarea>
-                <button class="add" onclick="cargarDetalle()" type="button">Agregar</button>
+                <button class="add" onclick="cargarDetalleEdit()" type="button">Agregar</button>
                 <button class="see" onclick="seeOrder()" type="button">Ver Pedido</button>
             </div>
         </div>
@@ -63,16 +78,17 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
 
     <div id="main-container">
         <select name="listado" id="listado" class="selectors"></select>
-        <button type="button" id="quitarRegistro" name="quitarRegistro" onclick="QuitarItemDeLista()">Quitar Registro</button>
+        <button type="button" id="quitarRegistro" name="quitarRegistro" onclick="QuitarItemDeListaEdit()">Quitar Registro</button>
     </div>
     <button class="add_more" onclick="backToOrders()" type="button" id="shopping_cart">Agregar Más</button>
-    <button class="save" type="button" id="send_order" onclick="GuardarRegistro()">Guardar</button>
+    <button class="save" type="button" id="send_order" onclick="GuardarNuevoRegistro()">Guardar</button>
 
     <script src="../js/table.js"></script>
     <script src="../js/jquery-3.6.0.min.js"></script>
     <script src="../js/listas_pedido.js"></script>
     <script src="../js/registro_pedido.js"></script>
     <script src="../js/funciones.js"></script>
+    <script src="../js/consulta_pedido.js"></script>
 </body>
 
 </html>

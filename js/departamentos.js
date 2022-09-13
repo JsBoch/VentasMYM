@@ -4,8 +4,9 @@ var $select = $('#depa');
 var $selectMuni = $('#municipio');
 
 // Agregar JSON a el select de Departamento
+//url: 'http://10.18.46.249/ventasmym/data/departamentos.php',
 $.ajax({
-    url: 'http://192.168.0.6/ventasmym/data/departamentos.php',
+    url: '../data/departamentos.php',
     dataType: 'json',
     success: function(object) {
         // datos = object;
@@ -25,7 +26,7 @@ function funcionCualquiera(datos) {
 
 function findValue() {
     id = $('#depa').val(); //#addLocationIdReq es el identificador
-    var url = "http://192.168.0.6/ventasmym/data/municipios.php"; // URL a la cua enviar los datos
+    var url = "../data/municipios.php"; // URL a la cua enviar los datos
     var datos = {
         "departamentoId": id
     }

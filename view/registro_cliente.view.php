@@ -1,7 +1,7 @@
 <?php 
 session_start();
     if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
-        header("Location: login.html");
+        header("Location: acceso.php");
     }
 ?>
 

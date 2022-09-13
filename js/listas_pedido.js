@@ -1,7 +1,7 @@
 // Agregar JSON a el select de Departamento
 function listaDepartamentos() {
     $.ajax({
-        url: 'http://192.168.0.6/ventasmym/data/departamentos.php',
+        url: '../data/departamentos.php',
         dataType: 'json',
         success: function(object) {
             var $select = $('#departamento');
@@ -21,7 +21,7 @@ function listaClientes() {
     let departamentoId = $('#departamento').val();
     let datos = { "iddepartamento": departamentoId }
     $.ajax({
-        url: 'http://192.168.0.6/ventasmym/data/lista_clientes.php',
+        url: '../data/lista_clientes.php',
         dataType: 'json',
         type: 'post',
         data: datos,
@@ -32,7 +32,7 @@ function listaClientes() {
                 $selectCliente.append('<option value=' + cliente.idcliente + '>' + cliente.nombre + '</option>');
             });
         }
-    });
+    });           
 }
 
 /**
@@ -40,7 +40,7 @@ function listaClientes() {
  */
 function listaProductos() {
     $.ajax({
-        url: 'http://192.168.0.6/ventasmym/data/lista_productos.php',
+        url: '../data/lista_productos.php',
         dataType: 'json',
         success: function(object) {
             codigoProducto(object);
@@ -58,7 +58,7 @@ function listaPrecios() {
     let codigo = $('#codigo').val();
     let datos = { "codigo": codigo }
     $.ajax({
-        url: 'http://192.168.0.6/ventasmym/data/lista_precios.php',
+        url: '../data/lista_precios.php',
         dataType: 'json',
         type: 'post',
         data: datos,
@@ -83,7 +83,7 @@ function getCodigo() {
     let producto = document.getElementById("producto").value.trim(); //$('#producto').val();        
     let datos = { "producto": producto }
     $.ajax({
-        url: 'http://192.168.0.6/ventasmym/data/obtener_codigo.php',
+        url: '../data/obtener_codigo.php',
         dataType: 'json',
         type: 'post',
         data: datos,
@@ -102,7 +102,7 @@ function getNombreProducto() {
     let datos = { "codigo": codigo }
 
     $.ajax({
-        url: 'http://192.168.0.6/ventasmym/data/obtener_producto.php',
+        url: '../data/obtener_producto.php',
         dataType: 'json',
         type: 'post',
         data: datos,
