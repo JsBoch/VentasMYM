@@ -29,7 +29,7 @@ function cargarDetalle() {
     let item = codigo + " - Cnt. " + cantidad + ' - Prc.' + precio + ' - Sbt.' + subtotal + ' - ' + producto;
     var $select = $('#listado');
     $select.append('<option value=' + codigo + '>' + item + '</option>');
-   // console.log(item);
+    console.log(listaDetalle);
 
     /*var detalle = [{
          "codigo_producto": "MF-315-K",
