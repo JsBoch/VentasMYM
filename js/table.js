@@ -55,7 +55,9 @@ function seeOrder() {
     var altura = document.getElementById("tableHeight");
     var agregarAlPedido = document.getElementById("shopping_cart");
     var enviarPedido = document.getElementById("send_order");
+    var fechas = document.getElementById("subContainerDates");
 
+    fechas.style.display = "none";
     formulario.style.display = "none";
     contenderoTabal.style.display = "block";
     agregarAlPedido.style.display = "block";
@@ -72,7 +74,9 @@ function backToOrders() {
     var altura = document.getElementById("tableHeight");
     var agregarAlPedido = document.getElementById("shopping_cart");
     var enviarPedido = document.getElementById("send_order");
+    var fechas = document.getElementById("subContainerDates");
 
+    fechas.style.display = "block";
     formulario.style.display = "block";
     contenderoTabal.style.display = "none";
     agregarAlPedido.style.display = "none";

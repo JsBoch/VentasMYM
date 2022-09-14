@@ -1,4 +1,4 @@
-:root {
+ :root {
     --balck: rgba(0, 0, 0, 0.394);
     --dark: #172026;
     --turquoise: #04BF9D;
@@ -43,6 +43,16 @@ body {
     height: 65%;
     margin: auto;
     margin-top: 1%;
+}
+
+.sub_container-dates {
+    background-color: var(--dark);
+    width: 70%;
+    height: 80vh;
+    margin: auto;
+    margin-top: 4vh;
+    border-radius: 20px;
+    padding-top: 1%;
 }
 
 #departamento {
@@ -110,8 +120,6 @@ i {
     font-size: 25px;
     padding-left: 3%;
 }
-
-
 /* segundo cuadro */
 
 .box_products {
@@ -202,44 +210,18 @@ i {
     cursor: pointer;
 }
 
-
-/* tabla */
-
-.orders_table {
-    margin: auto;
-    margin-bottom: 20vh;
-}
-
-#main-container {
-    margin: 100px auto;
-    width: 70%;
-}
-
-table {
-    background-color: white;
-    text-align: left;
-    border-collapse: collapse;
+.add_more {
+    display: none;
+    background-color: var(--dGreen);
+    color: white;
     width: 100%;
-}
-
-th,
-td {
-    padding: 20px;
-}
-
-th {
-    background-color: #246355;
-    border-bottom: solid 5px #0F362D;
-    color: white;
-}
-
-tr:nth-child(even) {
-    background-color: #ddd;
-}
-
-tr:hover td {
-    background-color: #369681;
-    color: white;
+    height: 10vh;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+    border: 4px var(--celese) dashed;
+    font-size: 20px;
+    outline: none;
+    cursor: pointer;
 }
 
 .save {
@@ -255,66 +237,175 @@ tr:hover td {
     cursor: pointer;
 }
 
-.add_more {
-    display: none;
-    background-color: var(--dGreen);
+#main-container {
+    margin: 100px auto;
+    width: 70%;
+    height: 50px;
+}
+
+.product_selector {
+    background-color: var(--balck);
     color: white;
-    width: 100%;
-    height: 10vh;
-    margin-top: 3vh;
-    margin-bottom: 3vh;
-    border: 4px var(--celese) dashed;
+    width: 80%;
+    height: 100%;
+    padding-left: 5px;
+    border: 3px var(--celeseTra) solid;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url('../imgs/flecha.png');
+    background-repeat: no-repeat, repeat;
+    background-position: right .7em top 50%, 0 0;
+    background-size: 1.50em auto, 100%;
+    outline: none;
+    float: left;
+    cursor: pointer;
+}
+
+.button_removeRegistry {
+    background-color: rgb(191, 40, 40);
+    color: white;
+    width: 20%;
+    height: 100%;
+    border: 2px white solid;
     font-size: 20px;
     outline: none;
     cursor: pointer;
+    float: left;
+    transition: .3s;
 }
 
-.autocomplete_list {
-    background-color: black;
-    position: absolute;
-    top: 16vh;
-    left: 0;
-    z-index: 1000;
-    text-align-last: auto;
-    padding: 0%;
+.button_removeRegistry:hover {
+    background-color: rgb(170, 42, 42);
+    color: rgba(255, 255, 255, 0.863);
+}
+/* fechas */
+
+.query_date {
+    width: 90%;
+    height: 10%;
+    margin: auto;
+    margin-top: 10%;
+}
+
+.start_date {
+    width: 40%;
+    height: 100%;
+    float: left;
+}
+
+.start_date label,
+.last_date label {
+    color: white;
+    width: 40%;
+    height: 100%;
+}
+
+#fechaInicio,
+#fechaFinal {
+    background-color: var(--balck);
+    color: white;
+    width: 50%;
+    height: 100%;
+    margin-left: 5%;
+    border: 3px var(--celeseTra) solid;
+    outline: none;
+    padding-left: 2%;
+}
+
+.last_date {
+    width: 40%;
+    height: 100%;
+    float: left;
+}
+
+#bttnConsultar {
+    background-color: rgb(40, 191, 40);
+    color: white;
+    width: 20%;
+    height: 100%;
+    border: 2px white solid;
+    font-size: 20px;
+    outline: none;
     cursor: pointer;
+    float: left;
 }
 
-.autocomplete_list li {
-    list-style: none;
+
+.orders-product {
+    width: 90%;
+    height: 35%;
+    text-align: center;
+    margin: auto;
+    margin-top: 2%;
+}
+
+.orders {
+    width: 100%;
+    height: 40%;
+}
+
+.products {
+    width: 100%;
+    height: 40%;
+    margin-top: 1%;
+}
+
+.orders label,
+.products label {
     color: white;
 }
 
-.autocomplete_list li:hover {
-    background-color: rgb(24, 24, 24);
-    color: rgba(255, 255, 255, 0.862);
+.orders #listaPedidos {
+    width: 85%;
+    height: 100%;
+    margin-left: 5%;
 }
 
-.autocomplete_listCod {
-    background-color: black;
-    position: absolute;
-    top: 6vh;
-    left: 0;
-    z-index: 1000;
-    text-align-last: auto;
-    padding: 0%;
-    cursor: pointer;
+.products #listaProductos {
+    width: 85%;
+    height: 100%;
+    margin-left: 3%;
 }
 
-.autocomplete_listCod li {
-    list-style: none;
+.buttons_forDate {
+    width: 40%;
+    height: 10%;
+    margin: auto;
+    margin-top: 2%;
+}
+
+#bttnEditar {
+    background-color: rgb(40, 191, 126);
     color: white;
+    width: 45%;
+    height: 100%;
+    border: 2px white solid;
+    font-size: 20px;
+    outline: none;
+    cursor: pointer;
+    float: left;
 }
 
-.autocomplete_listCod li:hover {
-    background-color: rgb(24, 24, 24);
-    color: rgba(255, 255, 255, 0.862);
+#bttnEliminar {
+    background-color: rgb(191, 40, 40);
+    color: white;
+    width: 45%;
+    height: 100%;
+    margin-left: 10%;
+    border: 2px white solid;
+    font-size: 20px;
+    outline: none;
+    cursor: pointer;
+    float: left;
 }
-
-
 /* responsive */
 
 @media (max-width: 1280px) {
+    #fechaInicio,
+#fechaFinal {
+    width: 82%;
+}
     .customer_frame {
         width: 100%;
         height: 100%;
@@ -389,5 +480,65 @@ tr:hover td {
     .autocomplete_listCod {
         width: 100%;
         top: 10vh;
+    }
+    .sub_container-dates {
+        width: 100%;
+        height: 95vh;
+        margin-top: 0;
+        border-radius: 0;
+        padding-top: 1%;
+    }
+    .query_date,
+    .orders-product,
+    .buttons_forDate {
+        width: 80%;
+        height: 10%;
+    }
+    .query_date {
+        height: 35%;
+        text-align: center;
+    }
+    .orders-product {
+        height: 40%;
+    }
+    .start_date,
+    .last_date {
+        width: 100%;
+        height: 30%;
+        margin-top: 2%;
+    }
+    #bttnConsultar {
+        width: 50%;
+        height: 20%;
+        float: none;
+        margin-top: 2%;
+    }
+}
+
+@media (max-width: 815px) {
+    .start_date label,
+    .last_date label,
+    .orders label,
+    .products label {
+        display: none;
+    }
+    .products #listaProductos,
+    .orders #listaPedidos {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 750px) {
+    .button_removeRegistry {
+        background-color: rgb(191, 40, 40);
+        color: white;
+        width: 20%;
+        height: 100%;
+        border: 2px white solid;
+        font-size: 15px;
+        outline: none;
+        cursor: pointer;
+        float: left;
+        transition: .3s;
     }
 }

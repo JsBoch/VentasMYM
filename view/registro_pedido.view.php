@@ -62,8 +62,8 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     </form>
 
     <div id="main-container">
-        <select name="listado" id="listado" class="selectors"></select>
-        <button type="button" id="quitarRegistro" name="quitarRegistro" onclick="QuitarItemDeLista()">Quitar Registro</button>
+        <select name="listado" id="listado" class="product_selector"></select>
+        <button type="button" id="quitarRegistro" class="button_removeRegistry" name="quitarRegistro" onclick="QuitarItemDeLista()">Quitar Registro</button>
     </div>
     <button class="add_more" onclick="backToOrders()" type="button" id="shopping_cart">Agregar Más</button>
     <button class="save" type="button" id="send_order" onclick="GuardarRegistro()">Guardar</button>
