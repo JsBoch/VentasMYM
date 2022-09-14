@@ -84,6 +84,49 @@ body {
     outline: none;
 }
 
+.autocomplete_list {
+    background-color: rgb(18, 17, 17);
+    color: white;
+    width: 180px;
+    max-height: 40%;
+    top: 7vh; 
+    position: absolute;
+    list-style: none;
+    overflow:scroll;
+    overflow-x:hidden;
+    z-index: 1000;
+}
+
+.autocomplete_list li {
+    cursor: pointer;
+   z-index: 2000;
+}
+
+.autocomplete_list li:hover {
+    background-color: rgb(36, 36, 36) ;
+}
+
+.autocomplete_listPro{
+    background-color: rgb(18, 17, 17);
+    color: white;
+    width: 180px;
+    max-height: 40%;
+    top: 16vh; 
+    position: absolute;
+    list-style: none;
+    overflow:scroll;
+    overflow-x:hidden;
+    z-index: 1000;
+}
+.autocomplete_listPro li {
+    cursor: pointer;
+   z-index: 2000;
+}
+
+.autocomplete_listPro li:hover {
+    background-color: rgb(36, 36, 36) ;
+}
+
 .comments {
     background-color: var(--balck);
     margin-bottom: 24px;
@@ -475,11 +518,11 @@ i {
     }
     .autocomplete_list {
         width: 100%;
-        top: 23vh;
+        top: 10vh; 
     }
-    .autocomplete_listCod {
+    .autocomplete_listPro {
         width: 100%;
-        top: 10vh;
+        top: 23vh;
     }
     .sub_container-dates {
         width: 100%;

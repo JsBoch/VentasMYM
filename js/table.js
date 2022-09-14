@@ -52,20 +52,17 @@ function putData() {
 function seeOrder() {
     var formulario = document.getElementById('order_form');
     var contenderoTabal = document.getElementById('main-container');
-    var altura = document.getElementById("tableHeight");
     var agregarAlPedido = document.getElementById("shopping_cart");
     var enviarPedido = document.getElementById("send_order");
     var fechas = document.getElementById("subContainerDates");
 
-    fechas.style.display = "none";
     formulario.style.display = "none";
     contenderoTabal.style.display = "block";
     agregarAlPedido.style.display = "block";
     enviarPedido.style.display = "block";
     contenderoTabal.style.width = "100%";
     contenderoTabal.style.margin = "0";
-    altura.style.height = "100vh"
-    altura.style.marginBottom = "0";
+    fechas.style.display = "none";
 }
 
 function backToOrders() {
