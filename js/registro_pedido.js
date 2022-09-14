@@ -14,6 +14,7 @@ function cargarDetalle() {
     let subtotal = document.getElementById("subtotal").value;
     let observacionesProducto = document.getElementById("observaciones_producto").value;
 
+
     var jsonString = {
         "codigo_producto": codigo,
         "nombre_producto": producto,
@@ -53,6 +54,13 @@ function cargarDetalle() {
     /**
  * Se carga el listado de clientes
  */
+   document.getElementById("codigo").value = "";
+   document.getElementById("producto").value = "";
+   document.getElementById("cantidad").value = "";
+   document.getElementById("tipo_precio").value = "";
+   document.getElementById("precio").value = "";
+   document.getElementById("subtotal").value = "";
+   document.getElementById("observaciones_producto").value = "";
 
 }
 
