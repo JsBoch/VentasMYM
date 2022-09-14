@@ -76,7 +76,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
 
                 <ul class="autocomplete_list" id="results">
                 </ul>
-                <ul id="resultsProducto" class="autocomplete_list"></ul>
+                <ul id="resultsProducto" class="autocomplete_listPro"></ul>
 
                 <ul class="autocomplete_listCod" id="results"></ul>
                 <ul class="autocomplete_list" id="resultsProducto"></ul>
