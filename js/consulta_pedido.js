@@ -124,6 +124,7 @@ function CargaProductosEdit(idsolicitud) {
   });
 }
 
+
 function GuardarNuevoRegistro() {
   let clienteId = document.getElementById("cliente").value;
   let departamentoId = document.getElementById("departamento").value;
@@ -154,6 +155,7 @@ function GuardarNuevoRegistro() {
           console.log("Error: " + errorThrown);
       }
   })
+  alertify.success('Registro almacenado con exito');
 }
 
 function QuitarItemDeListaEdit()
@@ -180,10 +182,11 @@ function cargarDetalleEdit() {
   let selected = objTipoPrecio.options[objTipoPrecio.selectedIndex].text;
   let arrSplit = selected.split("-");
   let tipoPrecio = arrSplit[0];
-
   let precio = document.getElementById("precio").value;
   let subtotal = document.getElementById("subtotal").value;
   let observacionesProducto = document.getElementById("observaciones_producto").value;
+
+
 
   var jsonString = {
       "codigo_producto": codigo,
@@ -200,6 +203,14 @@ function cargarDetalleEdit() {
   let item = codigo + " - Cnt. " + cantidad + ' - Prc.' + precio + ' - Sbt.' + subtotal + ' - ' + producto;
   var $select = $('#listado');
   $select.append('<option value=' + codigo + '>' + item + '</option>');
+
+  document.getElementById("codigo").value = "";
+   document.getElementById("producto").value = "";
+   document.getElementById("cantidad").value = "";
+   document.getElementById("tipo_precio").value = "";
+   document.getElementById("precio").value = "";
+   document.getElementById("subtotal").value = "";
+   document.getElementById("observaciones_producto").value = "";
 }
 
 function EliminarPedidoEdit() {

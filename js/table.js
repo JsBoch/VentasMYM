@@ -68,14 +68,13 @@ function seeOrder() {
 function backToOrders() {
     var formulario = document.getElementById('order_form');
     var contenderoTabal = document.getElementById('main-container');
-    var altura = document.getElementById("tableHeight");
     var agregarAlPedido = document.getElementById("shopping_cart");
     var enviarPedido = document.getElementById("send_order");
     var fechas = document.getElementById("subContainerDates");
 
-    fechas.style.display = "block";
     formulario.style.display = "block";
     contenderoTabal.style.display = "none";
     agregarAlPedido.style.display = "none";
     enviarPedido.style.display = "none";
+    fechas.style.display = "block";
 }

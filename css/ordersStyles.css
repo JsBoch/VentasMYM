@@ -16,7 +16,8 @@
 }
 
 body {
-    background-image: url("../imgs/fondo.jpg");
+    background: rgb(6,255,139);
+background: linear-gradient(40deg, rgba(6,255,139,1) 0%, rgba(33,235,178,1) 26%, rgba(242,242,242,1) 100%);
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -445,6 +446,9 @@ i {
 /* responsive */
 
 @media (max-width: 1280px) {
+    body{
+        height: 100vh;
+    }
     #fechaInicio,
 #fechaFinal {
     width: 82%;
