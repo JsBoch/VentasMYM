@@ -64,6 +64,9 @@ function cargarDetalle() {
 
 }
 
+
+  
+
 function GuardarRegistro() {
     let clienteId = document.getElementById("cliente").value;
     let departamentoId = document.getElementById("departamento").value;
@@ -94,6 +97,7 @@ function GuardarRegistro() {
             console.log("Error: " + errorThrown);
         }
     })
+    alertify.success('Registro almacenado con exito');
 }
 
 function QuitarItemDeLista()

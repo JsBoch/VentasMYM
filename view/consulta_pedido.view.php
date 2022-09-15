@@ -15,6 +15,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../css/alertify.min.css">
     <link rel="stylesheet" href="../css/ordersStyles.css">
     <title>REGISTRO DE PEDIDOS</title>
 </head>
@@ -106,6 +107,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     <script src="../js/registro_pedido.js"></script>
     <script src="../js/funciones.js"></script>
     <script src="../js/consulta_pedido.js"></script>
+    <script src="../js/alertify.min.js"></script>
 </body>
 
 </html>

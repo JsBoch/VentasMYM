@@ -124,6 +124,7 @@ function CargaProductosEdit(idsolicitud) {
   });
 }
 
+
 function GuardarNuevoRegistro() {
   let clienteId = document.getElementById("cliente").value;
   let departamentoId = document.getElementById("departamento").value;
@@ -154,6 +155,7 @@ function GuardarNuevoRegistro() {
           console.log("Error: " + errorThrown);
       }
   })
+  alertify.success('Registro almacenado con exito');
 }
 
 function QuitarItemDeListaEdit()
