@@ -22,6 +22,10 @@ background: linear-gradient(40deg, rgba(6,255,139,1) 0%, rgba(33,235,178,1) 26%,
     background-size: cover;
 }
 
+.link_guardar{
+    text-decoration: none;
+}
+
 .customer_frame {
     background-color: var(--dark);
     width: 70%;

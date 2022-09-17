@@ -21,7 +21,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
 </head>
 
 <body onload="listaDepartamentos(),listaProductos()">
-    <form action="" method="post" id="order_form">
+    <form id="subContainerDates" action="" method="post">
         <div class="customer_frame">
             <!-- Boton para regresar al menu -->
             <div class="above_all">
@@ -57,7 +57,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 <input type="text" name="subtotal" class="info_boxes" id="subtotal" placeholder="SUBTOTAL">
                 <textarea name="observaciones_producto" class="comments" id="observaciones_producto" cols="30" rows="10"></textarea>
                 <button class="add" onclick="cargarDetalle()" type="button">Agregar</button>
-                <button class="see" onclick="seeOrder()" type="button">Ver Pedido</button>
+                <button class="see" onclick="seeOrder('subContainerDates')" type="button">Ver Pedido</button>
             </div>
         </div>
     </form>
@@ -66,9 +66,10 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
         <select name="listado" id="listado" class="product_selector"></select>
         <button type="button" id="quitarRegistro" class="button_removeRegistry" name="quitarRegistro" onclick="QuitarItemDeLista()">Quitar Registro</button>
     </div>
-    <button class="add_more" onclick="backToOrders()" type="button" id="shopping_cart">Agregar Más</button>
-    <button class="save" type="button" id="send_order" onclick="GuardarRegistro()">Guardar</button>
-
+    <button class="add_more" onclick="backToOrders('subContainerDates')" type="button" id="shopping_cart">Agregar Más</button>
+    <a class="link_guardar" href="#subContainerDates">
+        <button class="save" type="button" id="send_order" onclick="GuardarRegistro()">Guardar</button>
+    </a>
     <script src="../js/table.js"></script>
     <script src="../js/jquery-3.6.0.min.js"></script>
     <script src="../js/listas_pedido.js"></script>
