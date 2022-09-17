@@ -87,7 +87,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 <input type="text" name="subtotal" class="info_boxes" id="subtotal" placeholder="SUBTOTAL">
                 <textarea name="observaciones_producto" class="comments" id="observaciones_producto" cols="30" rows="10"></textarea>
                 <button class="add" onclick="cargarDetalleEdit()" type="button">Agregar</button>
-                <button class="see" onclick="seeOrder()" type="button">Ver Pedido</button>
+                <button class="see" onclick="seeOrder('order_form')" type="button">Ver Pedido</button>
             </div>
         </div>
     </form>
@@ -97,9 +97,10 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
         <button type="button" id="quitarRegistro" name="quitarRegistro" class="button_removeRegistry" onclick="QuitarItemDeListaEdit()">Quitar Registro</button>
     </div>
 
-    <button class="add_more" onclick="backToOrders()" type="button" id="shopping_cart">Agregar Más</button>
+    <button class="add_more" onclick="backToOrders('order_form')" type="button" id="shopping_cart">Agregar Más</button>
+    <a class="link_guardar" href="#subContainerDates">
     <button class="save" type="button" id="send_order" onclick="GuardarNuevoRegistro()">Guardar</button>
-
+    </a>
 
     <script src="../js/table.js"></script>
     <script src="../js/jquery-3.6.0.min.js"></script>
