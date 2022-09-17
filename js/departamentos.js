@@ -57,3 +57,18 @@ function paraLlenar(municipio) {
     });
 };
 
+function limpiarFormulario() {
+   let nit = document.getElementById('nit');
+   nit.value = "";
+    document.getElementById('dpi').value = "";
+    document.getElementById('nombre').value = "";
+    document.getElementById('razonsocial').value = "";
+    document.getElementById('direccion').value = "";
+    document.getElementById('telefono').value = "";
+    document.getElementById('correo').value = "";
+    document.getElementById('region').value = "";
+    document.getElementById('comentario').value = "";
+    document.getElementById('transporte').value = "";
+
+    nit.focus();
+}

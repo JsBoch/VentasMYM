@@ -221,3 +221,4 @@ if ($mysqli != null && $mysqli->connect_errno === 0) {
 
 $jsonRegistro = array("codigo" => $codigoRespuesta);
 echo json_encode($jsonRegistro);
+header("Location: ../view/registro_cliente.view.php");

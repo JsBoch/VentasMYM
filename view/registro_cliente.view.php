@@ -18,8 +18,8 @@ session_start();
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <title>Form</title>
 </head>
-<body>
-    <form action="data/registro_cliente.php" method="POST" id="customer_registration" class="form_box">
+<body onload="limpiarFormulario()">
+    <form action="../data/registro_cliente.php" method="POST" id="customer_registration" class="form_box">
         <!-- Boton para regresar al menu -->
         <div class="above_all">
         <a href="../index.php">
@@ -30,19 +30,19 @@ session_start();
          <!-- formulario -->
         <h2 class="main_title">Registro De Clientes</h2>
         <div class="sub_container">
-        <input class="info_boxes" placeholder="Ingrese NIT" onblur="findValue()" name="nit" type="text">
-        <input class="info_boxes" placeholder="Ingrese DPI" name="dpi" type="text">
-        <input class="info_boxes" placeholder="Ingrese Nombre" name="nombre" type="text">
-        <input class="info_boxes" placeholder="Ingrese Razón Social" name="razonsocial" type="text">
+        <input class="info_boxes" placeholder="Ingrese NIT" onblur="findValue()" name="nit" id="nit"  type="text">
+        <input class="info_boxes" placeholder="Ingrese DPI" name="dpi" id="dpi" type="text">
+        <input class="info_boxes" placeholder="Ingrese Nombre" name="nombre" id="nombre" type="text">
+        <input class="info_boxes" placeholder="Ingrese Razón Social" name="razonsocial" id="razonsocial" type="text">
         <select class="selectors" name="SD" id="depa" onchange="findValue()"></select>
         <select class="selectors" name="SM" id="municipio" form="customer_registration">
         </select>
-        <input class="info_boxes" placeholder="Ingrese Dirección" name="direccion" type="text">
-        <input class="info_boxes" placeholder="Ingrese Teléfono" name="telefono" type="number">
-        <input class="info_boxes" placeholder="Ingrese@email.com" name="correo" type="email">
-        <input class="info_boxes" placeholder="Ingrese Region" name="region" type="text">
-        <textarea class="comments" rows="10" cols="8" name="comentario">Escribe alguna observación... </textarea>
-        <input style="width: auto;" class="info_boxes" placeholder="Ingrese Transporte" name="transporte" type="text">
+        <input class="info_boxes" placeholder="Ingrese Dirección" name="direccion" id="direccion" type="text">
+        <input class="info_boxes" placeholder="Ingrese Teléfono" name="telefono" id="telefono" type="number">
+        <input class="info_boxes" placeholder="Ingrese@email.com" name="correo" id="correo" type="email">
+        <input class="info_boxes" placeholder="Ingrese Region" name="region" id="region" type="text">
+        <textarea class="comments" rows="10" cols="8" name="comentario" id="comentario"></textarea>
+        <input style="width: auto;" class="info_boxes" placeholder="Ingrese Transporte" name="transporte" id="transporte" type="text">
         <input type="hidden" value="1" name="empleado">
         <button class="send" type="submit">Enviar</button>
         <!-- <a href="#" class="send btn-neon">
