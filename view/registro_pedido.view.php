@@ -51,7 +51,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
 
                 <ul class="autocomplete_listCod" id="results"></ul>
                 <ul class="autocomplete_list" id="resultsProducto"></ul>
-                <input type="number" name="cantidad" class="info_boxes" id="cantidad" placeholder="CANTIDAD">
+                <input type="number" name="cantidad" class="info_boxes" id="cantidad" placeholder="CANTIDAD" onblur="colocarPrecio(),CalculoSubtotal()">
                 <select name="tipo_precio" class="selector" id="tipo_precio" onblur="colocarPrecio()"></select>
                 <input type="text" name="precio" class="info_boxes" id="precio" placeholder="PRECIO" onblur="CalculoSubtotal()">
                 <input type="text" name="subtotal" class="info_boxes" id="subtotal" placeholder="SUBTOTAL">
