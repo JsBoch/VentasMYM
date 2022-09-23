@@ -15,6 +15,14 @@ function cargarDetalle() {
     "observaciones_producto"
   ).value;
 
+ if (precio.toString().length == 0 || precio == 0 || cantidad.toString().length || cantidad == 0) {
+    colocarPrecio();
+    CalculoSubtotal();
+ }
+
+ precio = document.getElementById("precio").value;
+ subtotal = document.getElementById("subtotal").value;
+
   var jsonString = {
     codigo_producto: codigo,
     nombre_producto: producto,

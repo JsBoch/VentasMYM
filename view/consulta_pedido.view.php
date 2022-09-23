@@ -43,7 +43,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
         <div class="orders-product">
             <div class="orders">
                 <label for="listaPedidos">Pedidos</label>
-                <select name="listaPedidos" id="listaPedidos" class="selectors" ondblclick="ConsultaProductos()"></select>
+                <select name="listaPedidos" id="listaPedidos" class="selectors" onblur="ConsultaProductos()"></select>
             </div>
             <div class="products">
                 <label for="listaProductos">Productos</label>
