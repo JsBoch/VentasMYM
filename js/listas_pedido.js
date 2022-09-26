@@ -36,6 +36,23 @@ function listaClientes() {
     });           
 }
 
+function listaClientesConsulta() {
+    let departamentoId = $('#departamento').val();
+    let datos = { "iddepartamento": departamentoId }
+    $.ajax({
+        url: '../data/lista_clientes.php',
+        dataType: 'json',
+        type: 'post',
+        data: datos,
+        success: function(object) {
+           var $selectCliente = $('#cliente');
+            $selectCliente.empty();
+            $.each(object, function(i, cliente) {
+                $selectCliente.append('<option value=' + cliente.idcliente + '>' + cliente.nombre + '</option>');
+            });            
+        }
+    });           
+}
 /**
  * Cargar el código de los productos
  */

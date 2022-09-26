@@ -107,7 +107,7 @@ function CargaPedidoEdit() {
       observaciones = object[0].observaciones;
       $("#observaciones").val(observaciones);
       $("#departamento").val(departamentoId);
-      listaClientes();
+      listaClientesConsulta();
       CargaProductosEdit(solicitudId);
     },
   });
