@@ -20,7 +20,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     <title>REGISTRO DE PEDIDOS</title>
 </head>
 
-<body onload="listaDepartamentos(),listaProductos()">
+<body onload="listaDepartamentos(),listaProductos(),listaClientes()">
     <form id="subContainerDates" action="" method="post">
         <div class="customer_frame">
             <!-- Boton para regresar al menu -->
@@ -34,7 +34,11 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
             <h2 class="main_title">Cliente</h2>
             <div class="sub_container">
                 <select name="departamento" class="selectors" id="departamento" onchange="listaClientes()"></select>
-                <select name="cliente" class="selectors" id="cliente"></select>
+                <!--<select name="cliente" class="selectors" id="cliente"></select>-->                
+
+                <!-- ASIGNAR FORMATO RESPONSIVE a cliente y ulclienteresult-->
+                <input type="text" name="cliente" id="cliente" class="info_boxes" placeholder="Nombre de cliente" data-id="0" onblur="obtenerIdCliente()">
+                <ul id="ulclienteresult"></ul>
                 <textarea name="observaciones" class="comments" id="observaciones" cols="119" rows="5"></textarea>
             </div>
         </div>
@@ -42,15 +46,15 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
         <div class="box_products">
             <h2 class="main_title">Registro de Pedidos</h2>
             <div class="second_sub_container">
-                <input type='text' name="codigo" class="info_boxes" id="codigo" placeholder="ingrese código" onblur="listaPrecios(),getNombreProducto()"></select>
+                <input type='text' name="codigo" class="info_boxes" id="codigo" placeholder="ingrese código" onblur="listaPrecios(),getNombreProducto()">
                 <input type="text" name="producto" class="info_boxes" id="producto" placeholder="ingreso nombre" size="100" onblur="getCodigo(),listaPrecios()">
 
-                <ul class="autocomplete_list" id="results">
-                </ul>
+                <ul class="autocomplete_list" id="results"></ul>
                 <ul id="resultsProducto" class="autocomplete_listPro"></ul>
 
-                <ul class="autocomplete_listCod" id="results"></ul>
-                <ul class="autocomplete_list" id="resultsProducto"></ul>
+                <!--<ul class="autocomplete_listCod" id="results"></ul>
+                <ul class="autocomplete_list" id="resultsProducto"></ul>-->
+
                 <input type="number" name="cantidad" class="info_boxes" id="cantidad" placeholder="CANTIDAD" onblur="colocarPrecio(),CalculoSubtotal()">
                 <select name="tipo_precio" class="selector" id="tipo_precio" onblur="colocarPrecio()"></select>
                 <input type="text" name="precio" class="info_boxes" id="precio" placeholder="PRECIO" onblur="CalculoSubtotal()">

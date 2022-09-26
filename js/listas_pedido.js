@@ -26,11 +26,12 @@ function listaClientes() {
         type: 'post',
         data: datos,
         success: function(object) {
-            var $selectCliente = $('#cliente');
+           /* var $selectCliente = $('#cliente');
             $selectCliente.empty();
             $.each(object, function(i, cliente) {
                 $selectCliente.append('<option value=' + cliente.idcliente + '>' + cliente.nombre + '</option>');
-            });
+            });*/            
+            ClientesMatch(object);
         }
     });           
 }
@@ -226,3 +227,64 @@ function nombreProducto(datos) {
  {
      document.getElementById('precio').value = document.getElementById('tipo_precio').value;    
  }
+
+
+
+ /**
+  * 
+  * @param {array - Json} listado de clientes obtenidos desde la db
+  * filtra la lista de un campo autocompletar para clientes
+  */
+ function ClientesMatch(datos) {    
+    const data = [];
+
+    $.each(datos, function(i, item) {
+        data.push(item.nombre + "&" + item.idcliente);
+    });
+
+    //console.log(data);
+    const autocompleteCliente = document.getElementById("cliente");
+    const resultsClienteHTML = document.getElementById("ulclienteresult");
+
+    autocompleteCliente.oninput = function() {
+        let results = [];
+        const userInput = this.value;
+        resultsClienteHTML.innerHTML = "";
+        if (userInput.length > 0) {
+            results = getResultsClientes(userInput);
+            resultsClienteHTML.style.display = "block";
+            for (i = 0; i < results.length; i++) {
+                resultsClienteHTML.innerHTML += "<li>" + results[i] + "</li>";
+            }
+        }
+        resultsClienteHTML.style.padding = "1%";
+    };
+
+    function getResultsClientes(input) {
+        const results = [];
+        for (i = 0; i < data.length; i++) {
+            if (input === data[i].slice(0, input.length)) {
+                results.push(data[i]);
+            }
+        }
+        return results;
+    }
+
+    resultsClienteHTML.onclick = function(event) {
+        const setValue = event.target.innerText;
+        let valoresCliente = setValue.toString().split("&");
+
+        autocompleteCliente.value = valoresCliente[0];//setValue;
+        autocompleteCliente.dataset.id = valoresCliente[1];
+
+        this.innerHTML = "";
+        resultsClienteHTML.style.padding = "0";
+        autocompleteCliente.focus();
+    };
+}
+
+function obtenerIdCliente()
+{
+    let cliente = document.getElementById("cliente");
+    //console.log(cliente.dataset.id);
+}

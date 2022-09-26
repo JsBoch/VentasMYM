@@ -73,7 +73,15 @@ function cargarDetalle() {
 }
 
 function GuardarRegistro() {
-  let clienteId = document.getElementById("cliente").value;
+  let clienteSelect = document.getElementById("cliente");
+  let clienteId = clienteSelect.dataset.id;
+
+  if(clienteId == 0)
+  {
+    alert("Debe ingresar cliente.");
+    clienteSelect.focus();
+    return;
+  }
   let departamentoId = document.getElementById("departamento").value;
   let observaciones = document.getElementById("observaciones").value;
   var contenderoTabal = document.getElementById("main-container");
@@ -110,6 +118,9 @@ function GuardarRegistro() {
       console.log("Error: " + errorThrown);
     },
   });
+  let clienteRegistro = document.getElementById("cliente");
+  clienteRegistro.value = "";
+  clienteRegistro.dataset.id = 0;
   document.getElementById("observaciones").value = "";
   document.getElementById("codigo").value = "";
   document.getElementById("producto").value = "";

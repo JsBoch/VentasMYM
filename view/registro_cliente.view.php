@@ -32,15 +32,18 @@ session_start();
         <div class="sub_container">
         <input class="info_boxes" placeholder="Ingrese NIT" onblur="findValue()" name="nit" id="nit"  type="text">
         <input class="info_boxes" placeholder="Ingrese DPI" name="dpi" id="dpi" type="text">
-        <input class="info_boxes" placeholder="Ingrese Nombre" name="nombre" id="nombre" type="text">
+        <input class="info_boxes" placeholder="Ingrese Nombre" name="nombre" id="nombre" type="text" onblur="EstablecerRazonSocial()">
         <input class="info_boxes" placeholder="Ingrese Razón Social" name="razonsocial" id="razonsocial" type="text">
+        <label for="depa">DEPARTAMENTO</label>
         <select class="selectors" name="SD" id="depa" onchange="findValue()"></select>
+        <label for="municipio">MUNICIPIO</label>
         <select class="selectors" name="SM" id="municipio" form="customer_registration">
         </select>
         <input class="info_boxes" placeholder="Ingrese Dirección" name="direccion" id="direccion" type="text">
         <input class="info_boxes" placeholder="Ingrese Teléfono" name="telefono" id="telefono" type="number">
         <input class="info_boxes" placeholder="Ingrese@email.com" name="correo" id="correo" type="email">
         <input class="info_boxes" placeholder="Ingrese Region" name="region" id="region" type="text">
+        <label for="comentario">OBSERVACIONES</label>
         <textarea class="comments" rows="10" cols="8" name="comentario" id="comentario"></textarea>
         <input style="width: auto;" class="info_boxes" placeholder="Ingrese Transporte" name="transporte" id="transporte" type="text">
         <input type="hidden" value="1" name="empleado">
@@ -57,6 +60,7 @@ session_start();
    
     <script src="../js/jquery-3.6.0.min.js"></script>
     <script src="../js/departamentos.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="../js/clientesln.js"></script>
+    <!--<script src="http://    ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>-->
 </body>
 </html>
