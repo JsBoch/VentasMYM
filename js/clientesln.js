@@ -37,28 +37,28 @@ function ValidarFichaCliente(evento) {
     let transporte = document.getElementById("transporte");
 
     if (nit.value.toString().length == 0 && dpi.value.toString().length == 0) {
-        alert("Debe ingresar nit o dpi,");
+        alertify.error("Debe ingresar nit o dpi.");
         nit.focus();
         return;
     } else if (nombre.value.toString().length == 0) {
-        alert("Debe ingresar el nombre del cliente.");
+        alertify.error("Debe ingresar el nombre del cliente.");
         nombre.focus();
         return;
     } else if (razonsocial.value.toString().length == 0) {
-        alert("Debe ingresar la razón social.");
+        alertify.error("Debe ingresar la razón social.");
         nombre.focus();
         return;
     }
     else if (direccion.value.toString().length == 0) {
-        alert("Debe ingresar la dirección.");
+        alertify.error("Debe ingresar la dirección.");
         direccion.focus();
         return;
     } else if (telefono.value.toString().length == 0) {
-        alert("Debe ingresar teléfono.");
+        alertify.error("Debe ingresar teléfono.");
         telefono.focus();
         return;
     } else if (transporte.value.toString().length == 0) {
-        alert("Debe ingresar transporte.");
+        alertify.error("Debe ingresar transporte.");
         transporte.focus();
         return;
     }

@@ -132,6 +132,30 @@ background: linear-gradient(40deg, rgba(6,255,139,1) 0%, rgba(33,235,178,1) 26%,
     background-color: rgb(36, 36, 36) ;
 }
 
+
+.autocomplete_listClient{
+    background-color: rgb(18, 17, 17);
+    color: white;
+    width: 566px;
+    max-height: 40%;
+    top: 21vh; 
+    left: 39vw;
+    position: absolute;
+    list-style: none;
+    overflow:scroll;
+    overflow-x:hidden;
+    z-index: 1000;
+}
+
+.autocomplete_listClient li {
+    cursor: pointer;
+   z-index: 2000;
+}
+
+.autocomplete_listClient li:hover {
+    background-color: rgb(36, 36, 36) ;
+}
+
 .comments {
     background-color: var(--balck);
     margin-bottom: 24px;
@@ -564,6 +588,11 @@ i {
         float: none;
         margin-top: 2%;
     }
+    .autocomplete_listClient{
+        width: 80%;
+        top: 36vh;
+        left: auto;
+    }
 }
 
 @media (max-width: 815px) {
@@ -577,6 +606,7 @@ i {
     .orders #listaPedidos {
         margin-left: 0;
     }
+   
 }
 
 @media (max-width: 750px) {
@@ -591,5 +621,8 @@ i {
         cursor: pointer;
         float: left;
         transition: .3s;
+    }
+    .autocomplete_listClient{
+        top: 34vh;
     }
 }

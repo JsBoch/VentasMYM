@@ -16,6 +16,7 @@ session_start();
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../css/alertify.min.css">
     <title>Form</title>
 </head>
 <body onload="limpiarFormulario()">
@@ -34,16 +35,22 @@ session_start();
         <input class="info_boxes" placeholder="Ingrese DPI" name="dpi" id="dpi" type="text">
         <input class="info_boxes" placeholder="Ingrese Nombre" name="nombre" id="nombre" type="text" onblur="EstablecerRazonSocial()">
         <input class="info_boxes" placeholder="Ingrese Razón Social" name="razonsocial" id="razonsocial" type="text">
+        <div class="label_depa">
         <label for="depa">DEPARTAMENTO</label>
+        </div>   
         <select class="selectors" name="SD" id="depa" onchange="findValue()"></select>
+        <div class="label_muni">
         <label for="municipio">MUNICIPIO</label>
+        </div>   
         <select class="selectors" name="SM" id="municipio" form="customer_registration">
         </select>
         <input class="info_boxes" placeholder="Ingrese Dirección" name="direccion" id="direccion" type="text">
         <input class="info_boxes" placeholder="Ingrese Teléfono" name="telefono" id="telefono" type="number">
         <input class="info_boxes" placeholder="Ingrese@email.com" name="correo" id="correo" type="email">
         <input class="info_boxes" placeholder="Ingrese Region" name="region" id="region" type="text">
+        <div class="label_com">
         <label for="comentario">OBSERVACIONES</label>
+        </div>   
         <textarea class="comments" rows="10" cols="8" name="comentario" id="comentario"></textarea>
         <input style="width: auto;" class="info_boxes" placeholder="Ingrese Transporte" name="transporte" id="transporte" type="text">
         <input type="hidden" value="1" name="empleado">
@@ -61,6 +68,7 @@ session_start();
     <script src="../js/jquery-3.6.0.min.js"></script>
     <script src="../js/departamentos.js"></script>
     <script src="../js/clientesln.js"></script>
+    <script src="../js/alertify.min.js"></script>
     <!--<script src="http://    ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>-->
 </body>
 </html>

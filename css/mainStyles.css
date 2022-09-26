@@ -146,6 +146,47 @@ i {
     padding-left: 3%;
 }
 
+.label_depa{
+    background-color: var(--dark);
+    color: white;
+    width: 110px;
+    height: 4vh;
+    padding: 5px;
+    font-size: 12px;
+    position: absolute;
+    top: 65%;
+    border: 2px solid var(--turquoise);
+    border-radius: 2%;
+}
+
+.label_muni{
+    background-color: var(--dark);
+    color: white;
+    width: 80px;
+    height: 4vh;
+    padding: 5px;
+    font-size: 12px;
+    position: absolute;
+    top: 24vh;
+    left: 41.5vw;
+    border: 2px solid var(--turquoise);
+    border-radius: 2%;
+}
+
+.label_com{
+    background-color: var(--dark);
+    color: white;
+    width: 110px;
+    height: 4vh;
+    padding: 5px;
+    font-size: 12px;
+    position: absolute;
+    top: 24vh;
+    left: 61vw;
+    border: 2px solid var(--turquoise);
+    border-radius: 2%;
+}
+
 
 /* boton */
 
@@ -288,8 +329,93 @@ i {
     .above_all a h3 {
         display: none;
     }
+    .label_depa{
+        height: 5vh;
+        top: 83vh;
+    }
+    
+    .label_muni{
+        height: 5vh;
+        top: 96vh;
+        left: auto;
+    }
+    
+    .label_com{
+        height: 5vh;
+        top: 165vh;
+        left: auto;
+    }
 }
 
+@media (max-width: 1118px) {
+    .label_depa{
+        top: 80vh;
+    }
+    
+    .label_muni{
+        top: 93vh;
+    }
+    
+    .label_com{
+        top: 162vh;
+    }
+}
+
+@media (max-width: 984px) {
+    .label_depa{
+        top: 77vh;
+    }
+    
+    .label_muni{
+        top: 90vh;
+    }
+    
+    .label_com{
+        top: 160vh;
+    }
+}
+
+@media (max-width: 774px) {
+    .label_depa{
+        top: 74vh;
+    }
+    
+    .label_muni{
+        top: 87vh;
+    }
+    
+    .label_com{
+        top: 155vh;
+    }
+}
+
+@media (max-width: 615px) {
+    .label_depa{
+        top: 68vh;
+    }
+    
+    .label_muni{
+        top: 83vh;
+    }
+    
+    .label_com{
+        top: 151vh;
+    }
+}
+
+@media (max-width: 425px) {
+    .label_depa{
+        top: 64vh;
+    }
+    
+    .label_muni{
+        top: 79vh;
+    }
+    
+    .label_com{
+        top: 148vh;
+    }
+}
 
 /* @media (max-width: 850px) {
     .sub_container {
