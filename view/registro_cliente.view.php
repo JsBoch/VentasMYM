@@ -35,22 +35,22 @@ session_start();
         <input class="info_boxes" placeholder="Ingrese DPI" name="dpi" id="dpi" type="text">
         <input class="info_boxes" placeholder="Ingrese Nombre" name="nombre" id="nombre" type="text" onblur="EstablecerRazonSocial()">
         <input class="info_boxes" placeholder="Ingrese Razón Social" name="razonsocial" id="razonsocial" type="text">
-        <div class="label_depa">
+        <!-- <div class="label_depa">
         <label for="depa">DEPARTAMENTO</label>
-        </div>   
+        </div>    -->
         <select class="selectors" name="SD" id="depa" onchange="findValue()"></select>
-        <div class="label_muni">
+        <!-- <div class="label_muni">
         <label for="municipio">MUNICIPIO</label>
-        </div>   
+        </div>    -->
         <select class="selectors" name="SM" id="municipio" form="customer_registration">
         </select>
         <input class="info_boxes" placeholder="Ingrese Dirección" name="direccion" id="direccion" type="text">
         <input class="info_boxes" placeholder="Ingrese Teléfono" name="telefono" id="telefono" type="number">
         <input class="info_boxes" placeholder="Ingrese@email.com" name="correo" id="correo" type="email">
         <input class="info_boxes" placeholder="Ingrese Region" name="region" id="region" type="text">
-        <div class="label_com">
+        <!-- <div class="label_com">
         <label for="comentario">OBSERVACIONES</label>
-        </div>   
+        </div>    -->
         <textarea class="comments" rows="10" cols="8" name="comentario" id="comentario"></textarea>
         <input style="width: auto;" class="info_boxes" placeholder="Ingrese Transporte" name="transporte" id="transporte" type="text">
         <input type="hidden" value="1" name="empleado">

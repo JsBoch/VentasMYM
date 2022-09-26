@@ -329,7 +329,7 @@ i {
     .above_all a h3 {
         display: none;
     }
-    .label_depa{
+    /* .label_depa{
         height: 5vh;
         top: 83vh;
     }
@@ -344,10 +344,10 @@ i {
         height: 5vh;
         top: 165vh;
         left: auto;
-    }
+    } */
 }
 
-@media (max-width: 1118px) {
+/* @media (max-width: 1118px) {
     .label_depa{
         top: 80vh;
     }
@@ -415,7 +415,7 @@ i {
     .label_com{
         top: 148vh;
     }
-}
+} */
 
 /* @media (max-width: 850px) {
     .sub_container {
