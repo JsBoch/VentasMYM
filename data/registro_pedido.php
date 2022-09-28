@@ -22,6 +22,8 @@ foreach ($jsonMain as $item) {
     $nombreCliente = ''; //$jsonMain->nombre_cliente;
     $observacionesRegistro = $item["observaciones"]; //$jsonMain->observaciones;
     $estadoRegistro = 1;
+    $prioridad = $item["prioridad"];
+    $noSolicitud = $item["nosolicitud"];
 }
 /**
  * Se almacena en la base de datos
@@ -43,16 +45,33 @@ if ($mysqli !== null) {
         $mysqli->query($query);
     }
     //IDs
-    $query = "select " .
+    if ($solicitudId > 0) {
+        $query = "select " .
+        "if(max(id_solicitud) is null,1,max(id_solicitud) + 1) as id_solicitud " .        
+        "from vnt_solicitud_producto;";
+    }
+    else 
+    {
+        $query = "select " .
         "if(max(id_solicitud) is null,1,max(id_solicitud) + 1) as id_solicitud, " .
         "if(max(nosolicitud) is null,1,max(nosolicitud) + 1) as nosolicitud " .
         "from vnt_solicitud_producto;";
+    }
 
     $resultado = $mysqli->query($query);
     $fila = $resultado->fetch_assoc();
 
     $envioID = intval($fila["id_solicitud"]);
-    $solicitudID = intval($fila["nosolicitud"]);
+
+    if($solicitudId > 0)
+    {
+        $solicitudID = $noSolicitud;
+    }
+    else 
+    {
+        $solicitudID = intval($fila["nosolicitud"]);
+    }
+    
 
     try {
         if (!$stmt = $mysqli->prepare(
@@ -67,14 +86,15 @@ if ($mysqli !== null) {
             "fecha_registro," .
             "observaciones," .
             "estado," .
-            "id_cliente) " .
-            " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?);")) {
+            "id_cliente," .
+            "prioridad) " .
+            " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?);")) {
             //echo "fallo No." . $mysqli->errno . " " . $mysqli->error;
             $codigoRespuesta = -1;
 
         } else
-        if (!$stmt->bind_param("iiiiissssii", $envioID, $solicitudID, $departamentoID, $municipioID, $empleadoID,
-            $codigoCliente, $nombreCliente, $fechaHoraRegistro, $observacionesRegistro, $estadoRegistro, $clienteID)) {
+        if (!$stmt->bind_param("iiiiissssiis", $envioID, $solicitudID, $departamentoID, $municipioID, $empleadoID,
+            $codigoCliente, $nombreCliente, $fechaHoraRegistro, $observacionesRegistro, $estadoRegistro, $clienteID,$prioridad)) {
             //echo "fallo la vinculacion: " . $mysqli->errno . " " . $mysqli->error;
             $codigoRespuesta = -2;
         } else if (

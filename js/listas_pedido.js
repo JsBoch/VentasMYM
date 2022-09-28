@@ -305,3 +305,10 @@ function obtenerIdCliente()
     let cliente = document.getElementById("cliente");
     //console.log(cliente.dataset.id);
 }
+
+function listaPrioridad()
+{
+    var $sltPrioridad = $('#sltPrioridad');    
+    $sltPrioridad.append('<option value="NORMAL">NORMAL</option>');
+    $sltPrioridad.append('<option value="URGENTE">URGENTE</option>');
+}

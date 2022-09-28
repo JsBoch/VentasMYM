@@ -94,6 +94,8 @@ function CargaPedidoEdit() {
   let departamento;
   let observaciones;
   var departamentoId;
+  let prioridad;
+  let noSolicitud;
 
   solicitudId = $("#listaPedidos").val();
   $.ajax({
@@ -105,8 +107,13 @@ function CargaPedidoEdit() {
       departamentoId = object[0].id_departamento;
       clienteIdSeleccion = object[0].id_cliente;
       observaciones = object[0].observaciones;
+      prioridad = object[0].prioridad;
+      noSolicitud = object[0].nosolicitud;
+
       $("#observaciones").val(observaciones);
       $("#departamento").val(departamentoId);
+      $("#sltPrioridad").val(prioridad);
+      $("#hdnNoSolicitud").val(noSolicitud);
       listaClientesConsulta();
       CargaProductosEdit(solicitudId);
     },
@@ -166,6 +173,8 @@ function GuardarNuevoRegistro() {
   let clienteId = document.getElementById("cliente").value;
   let departamentoId = document.getElementById("departamento").value;
   let observaciones = document.getElementById("observaciones").value;
+  let prioridad = document.getElementById("sltPrioridad").value;
+  let noSolicitud = document.getElementById("hdnNoSolicitud").value;
   var formulario = document.getElementById("order_form");
   var contenderoTabal = document.getElementById("main-container");
   var agregarAlPedido = document.getElementById("shopping_cart");
@@ -179,6 +188,8 @@ function GuardarNuevoRegistro() {
     id_cliente: clienteId,
     id_departamento: departamentoId,
     observaciones: observaciones,
+    prioridad: prioridad,
+    nosolicitud: noSolicitud
   });
 
   var data1 = JSON.stringify(principal);
@@ -194,7 +205,7 @@ function GuardarNuevoRegistro() {
       id_solicitud: solicitudId,
     },
     success: function (object) {
-      console.log(object);
+      //console.log(object);
     },
     error: function (jqXHR, textStatus, errorThrown) {
       console.log("Status: " + textStatus);
@@ -206,6 +217,8 @@ function GuardarNuevoRegistro() {
   let $selectLProducto = $("listaProductos");
   $selectLProducto.empty();
   document.getElementById("observaciones").value = "";
+  document.getElementById("sltPrioridad").value = "NORMAL";
+  document.getElementById("hdnNoSolicitud").value = 0;
   document.getElementById("codigo").value = "";
   document.getElementById("producto").value = "";
   document.getElementById("cantidad").value = "";
@@ -213,6 +226,7 @@ function GuardarNuevoRegistro() {
   document.getElementById("precio").value = "";
   document.getElementById("subtotal").value = "";
   document.getElementById("observaciones_producto").value = "";
+
   let $selectListado = $("#listado");
   $selectListado.empty();
   listaDetalle = new Array();

@@ -10,11 +10,13 @@ $codigoRespuesta = 1;
 if ($mysqli !== null && $mysqli->connect_errno === 0) {
     $stmt = "select ".
     "s.id_solicitud,".
+    "s.nosolicitud,".
     "d.nombre as departamento,".
     "c.primer_nombre as cliente,".
     "s.observaciones," .
     "s.id_departamento," .
-    "s.id_cliente " .
+    "s.id_cliente," .
+    "s.prioridad " .
     "from vnt_solicitud_producto s ". 
     "join clientes c on s.id_cliente = c.idcliente ". 
     "join adm_departamentopais d on c.iddepartamento = d.iddepartamento ".
@@ -30,11 +32,13 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
             while ($row = $result->fetch_array()) {
                 $return_arr[$indice] = array(
                     'id_solicitud' => $row['id_solicitud'],
+                    'nosolicitud' => $row['nosolicitud'],
                     'departamento' => $row['departamento'],
                     'cliente' => $row['cliente'],
                     'observaciones' => $row['observaciones'],
                     'id_departamento' => $row['id_departamento'],
-                    'id_cliente' => $row['id_cliente']                
+                    'id_cliente' => $row['id_cliente'],
+                    'prioridad' => $row['prioridad']                
                 );
                 $indice++;
             }
@@ -74,11 +78,13 @@ if ($codigoRespuesta != 1) {
     $Indice = 0;
     $return_arr[$Indice] = array(
         'id_solicitud' => 0,
+        "nosolicitud" => 0,
         'departamento' => '',
         'cliente' => '',        
         'observaciones' => '',
         'id_departamento' => 0,
-        'id_cliente' => 0 
+        'id_cliente' => 0,
+        'prioridad' => 'NORMAL'
     );
 
     echo json_encode($return_arr);

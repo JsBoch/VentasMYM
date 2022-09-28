@@ -20,7 +20,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     <title>REGISTRO DE PEDIDOS</title>
 </head>
 
-<body onload="listaDepartamentos(),listaProductos(),GetDate()">
+<body onload="listaDepartamentos(),listaProductos(),GetDate(),listaPrioridad()">
     <div id="subContainerDates" class="sub_container-dates">
         <!-- Boton para regresar al menu -->
         <div class="above_all">
@@ -63,7 +63,9 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
             <div class="sub_container">
                 <select name="departamento" class="selectors" id="departamento" onblur="AsignarCliente()"></select>
                 <select name="cliente" class="selectors" id="cliente"></select>
+                <select name="sltPrioridad" id="sltPrioridad"></select>
                 <textarea name="observaciones" class="comments" id="observaciones" cols="119" rows="5"></textarea>
+                <input type="hidden" name="hdnNoSolicitud" id="hdnNoSolicitud">
                 <input type="hidden" name="hdndepartamentoid" id="hdndepartamentoid">
                 <input type="hidden" name="hdnclienteid" id="hdnclienteid">
             </div>
@@ -83,7 +85,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 <ul class="autocomplete_list" id="resultsProducto"></ul>
                 <input type="number" name="cantidad" class="info_boxes" id="cantidad" placeholder="CANTIDAD" onblur="colocarPrecio(),CalculoSubtotal()">
                 <select name="tipo_precio" class="selector" id="tipo_precio" onblur="colocarPrecio()"></select>
-                <input type="text" name="precio" class="info_boxes" id="precio" placeholder="PRECIO" onblur="CalculoSubtotal()">
+                <input type="hidden" name="precio" class="info_boxes" id="precio" placeholder="PRECIO" onblur="CalculoSubtotal()">
                 <input type="text" name="subtotal" class="info_boxes" id="subtotal" placeholder="SUBTOTAL">
                 <textarea name="observaciones_producto" class="comments" id="observaciones_producto" cols="30" rows="10"></textarea>
                 <button class="add" onclick="cargarDetalleEdit()" type="button">Agregar</button>

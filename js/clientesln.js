@@ -62,5 +62,27 @@ function ValidarFichaCliente(evento) {
         transporte.focus();
         return;
     }
+
     this.submit();
+}
+
+function ObtenerUbicacion() {
+    /**
+     * CÓDIGO PARA GEOLOCALIZACIÓN
+     */
+    if (navigator.geolocation) {
+        var success = function (position) {
+            var latitud = position.coords.latitude,
+                longitud = position.coords.longitude;
+            
+                document.getElementById("txtLatitud").value = latitud;
+                document.getElementById("txtLongitud").value = longitud;
+        }
+        navigator.geolocation.getCurrentPosition(success, function (msg) {
+            console.error(msg);
+        });
+
+
+    }
+    /*================================ */
 }

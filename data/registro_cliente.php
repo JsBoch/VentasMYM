@@ -27,9 +27,9 @@ $razonsocial = $_POST['razonsocial'];
 $segundo_nombre = "";
 $primer_apellido = "";
 $segundo_apellido = "";
-$monto_credito = 0;
+$monto_credito = 3000;
 $id_empleado = $_POST['empleado'];
-$dias_credito = 0;
+$dias_credito = 30;
 $replicado = 0;
 $operacion = 1;
 $id_municipio = $_POST['SM'];
@@ -39,6 +39,9 @@ $transporte = $_POST['transporte'];
 $idempresa = 1; //se establece 1 como distribuidora, para todas las sucursales 1 es Distribuidora
 $cui = $_POST['dpi'];
 $codigo_postal = '';
+$latitud = $_POST["txtLatitud"];
+$longitud = $_POST["txtLongitud"];
+
 switch ($iddepartamento) {
     case 1:
         $codigo_postal = '16000';
@@ -139,14 +142,14 @@ if ($mysqli != null && $mysqli->connect_errno === 0) {
                 "idcliente,nit,primer_nombre,direccion,telefono,email,visitas,comentario," .
                 "fecharegistro,estado,ventas,codigo,id_sucursal,iddepartamento,razonsocial," .
                 "segundo_nombre,primer_apellido,segundo_apellido,monto_credito,id_empleado,dias_credito," .
-                "replicado,operacion,id_municipio,region,idtipocliente,transporte,idempresa,codigo_postal,cui) " .
-                " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+                "replicado,operacion,id_municipio,region,idtipocliente,transporte,idempresa,codigo_postal,cui,latitud,longitud) " .
+                " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
             if (!$stmt = $mysqli->prepare($queryInsert)) {
                 $codigoRespuesta = -5; //Fallo al preparar la consulta de registro
                 echo $mysqli->errno . ' '. $mysqli->error;                
             } else {
                 if (!$stmt->bind_param(
-                    "isssssissiisiissssdidiiisisiss",
+                    "isssssissiisiissssdidiiisisissss",
                     $clienteID,
                     $nit,
                     $nombre,
@@ -176,7 +179,9 @@ if ($mysqli != null && $mysqli->connect_errno === 0) {
                     $transporte,
                     $idempresa,
                     $codigo_postal,
-                    $cui
+                    $cui,
+                    $latitud,
+                    $longitud
                 )) {
                     $codigoRespuesta = -6; //fallo al vincular parametros de registro
                     $mysqli->rollback();

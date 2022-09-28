@@ -84,10 +84,11 @@ function GuardarRegistro() {
   }
   let departamentoId = document.getElementById("departamento").value;
   let observaciones = document.getElementById("observaciones").value;
+  let prioridad = document.getElementById("sltPrioridad").value;
   var contenderoTabal = document.getElementById("main-container");
   var agregarAlPedido = document.getElementById("shopping_cart");
   var enviarPedido = document.getElementById("send_order");
-  var fechas = document.getElementById("subContainerDates");
+  var fechas = document.getElementById("subContainerDates");  
 
   var principal = new Array();
   //var detalle = [];
@@ -96,7 +97,9 @@ function GuardarRegistro() {
     id_cliente: clienteId,
     id_departamento: departamentoId,
     observaciones: observaciones,
-  });
+    prioridad:prioridad,
+    nosolicitud: 0
+  });  
 
   var data1 = JSON.stringify(principal);
   var data2 = JSON.stringify(listaDetalle);
@@ -111,7 +114,7 @@ function GuardarRegistro() {
       id_solicitud: 0,
     },
     success: function (object) {
-      // console.log(object);
+      //console.log(object);
     },
     error: function (jqXHR, textStatus, errorThrown) {
       console.log("Status: " + textStatus);
@@ -122,6 +125,7 @@ function GuardarRegistro() {
   clienteRegistro.value = "";
   clienteRegistro.dataset.id = 0;
   document.getElementById("observaciones").value = "";
+  document.getElementById("sltPrioridad").value = "NORMAL";
   document.getElementById("codigo").value = "";
   document.getElementById("producto").value = "";
   document.getElementById("cantidad").value = "";

@@ -33,7 +33,7 @@ session_start();
         <div class="sub_container">
         <input class="info_boxes" placeholder="Ingrese NIT" onblur="findValue()" name="nit" id="nit"  type="text">
         <input class="info_boxes" placeholder="Ingrese DPI" name="dpi" id="dpi" type="text">
-        <input class="info_boxes" placeholder="Ingrese Nombre" name="nombre" id="nombre" type="text" onblur="EstablecerRazonSocial()">
+        <input class="info_boxes" placeholder="Ingrese Nombre" name="nombre" id="nombre" type="text" onblur="EstablecerRazonSocial(),ObtenerUbicacion()">
         <input class="info_boxes" placeholder="Ingrese Razón Social" name="razonsocial" id="razonsocial" type="text">
         <!-- <div class="label_depa">
         <label for="depa">DEPARTAMENTO</label>
@@ -53,6 +53,8 @@ session_start();
         </div>    -->
         <textarea class="comments" rows="10" cols="8" name="comentario" id="comentario"></textarea>
         <input style="width: auto;" class="info_boxes" placeholder="Ingrese Transporte" name="transporte" id="transporte" type="text">
+        <input type="text" name="txtLatitud" id="txtLatitud" placeholder="latitud">
+        <input type="text" name="txtLongitud" id="txtLongitud" placeholder="longitud">
         <input type="hidden" value="1" name="empleado">
         <button class="send" type="submit">Enviar</button>
         <!-- <a href="#" class="send btn-neon">
