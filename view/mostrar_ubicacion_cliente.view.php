@@ -89,8 +89,7 @@
     <script src="../js/listas_pedido.js"></script>    
     <script src="../js/alertify.min.js"></script>
     <script src="../js/departamentos.js"></script>
-    <script src="../js/clientesln.js"></script>
-    <!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBI41UKw4Lg8sdA4q_1YZ4oQrs93V6o1bE&callback=initMap"></script>-->
+    <script src="../js/clientesln.js"></script>    
     <script src="../js/mapa_cliente.js"></script>        
 </body>
 
