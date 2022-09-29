@@ -10,7 +10,7 @@ date_default_timezone_set('America/Guatemala');
 $fechaRegistro = date("Y-m-d");
 
 //$jsonCliente = json_decode($registroCliente, false);
-$clienteID = 0; //se asigna con la consulta a la db
+$clienteID = $_POST["clienteId"]; //se asigna con la consulta a la db
 $nit = $_POST['nit'];
 $nombre = $_POST['nombre'];
 $direccion = $_POST['direccion'];
@@ -20,7 +20,8 @@ $visitas = 0;
 $comentario = $_POST['comentario'];
 $estado = 1;
 $ventas = 0;
-$codigo = ""; //se asigna con la consulta de correlativo
+$codigo = 0; //se asigna con la consulta de correlativo
+$codigoCliente = $_POST["txtCodigo"];
 $id_sucursal = 1; //se establece la sucursal central para todas las sucursales 1 representa la sucursal
 $iddepartamento = $_POST['SD'];
 $razonsocial = $_POST['razonsocial'];
@@ -115,6 +116,11 @@ switch ($iddepartamento) {
         break;
 }
 
+$modificar = false;
+if ($clienteID > 0) {
+    $modificar = true;
+}
+
 if ($mysqli != null && $mysqli->connect_errno === 0) {
     //Se trabaja con transacción
     $mysqli->autocommit(false);
@@ -124,7 +130,10 @@ if ($mysqli != null && $mysqli->connect_errno === 0) {
     $resultado = $mysqli->query($queryCliente);
     if ($resultado !== false) {
         $fila = $resultado->fetch_assoc();
-        $clienteID = intval($fila["idcliente"]);
+        if ($clienteID == 0) {
+            $clienteID = intval($fila["idcliente"]);
+        }
+
         $resultado->close();
         //obtener correlativo para el código de cliente
         $queryCodigo = "select correlativo + 1 as correlativo " .
@@ -134,80 +143,141 @@ if ($mysqli != null && $mysqli->connect_errno === 0) {
         if ($resultado !== false) {
             $fila = $resultado->fetch_assoc();
             $codigo = $fila['correlativo'];
-            $codigoCliente = "GT" . str_pad($fila['correlativo'], 6, "0", STR_PAD_LEFT);
+            if (strlen($codigoCliente) == 0) {
+                $codigoCliente = "GT" . str_pad($fila['correlativo'], 6, "0", STR_PAD_LEFT);
+            }
             $resultado->close();
 
             //SE INICIA EL REGISTRO
-            $queryInsert = "INSERT INTO clientes ( " .
-                "idcliente,nit,primer_nombre,direccion,telefono,email,visitas,comentario," .
-                "fecharegistro,estado,ventas,codigo,id_sucursal,iddepartamento,razonsocial," .
-                "segundo_nombre,primer_apellido,segundo_apellido,monto_credito,id_empleado,dias_credito," .
-                "replicado,operacion,id_municipio,region,idtipocliente,transporte,idempresa,codigo_postal,cui,latitud,longitud) " .
-                " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+            if ($modificar == false) {
+                $queryInsert = "INSERT INTO clientes ( " .
+                    "idcliente,nit,primer_nombre,direccion,telefono,email,visitas,comentario," .
+                    "fecharegistro,estado,ventas,codigo,id_sucursal,iddepartamento,razonsocial," .
+                    "segundo_nombre,primer_apellido,segundo_apellido,monto_credito,id_empleado,dias_credito," .
+                    "replicado,operacion,id_municipio,region,idtipocliente,transporte,idempresa,codigo_postal,cui,latitud,longitud) " .
+                    " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+            } else { // -1
+                $queryInsert = "UPDATE clientes SET " .
+                    "nit = ?," .
+                    "primer_nombre = ?," .
+                    "direccion = ?," .
+                    "telefono = ?," .
+                    "email = ?," .
+                    "comentario = ?," .
+                    "razonsocial = ?," .
+                    "id_municipio = ?," .
+                    "region = ?," .
+                    "transporte = ?," .
+                    "cui = ?," .
+                    "latitud = ?," .
+                    "longitud = ? " .
+                    "where idcliente = ?;";
+            }
             if (!$stmt = $mysqli->prepare($queryInsert)) {
                 $codigoRespuesta = -5; //Fallo al preparar la consulta de registro
-                echo $mysqli->errno . ' '. $mysqli->error;                
+                echo $mysqli->errno . ' ' . $mysqli->error;
             } else {
-                if (!$stmt->bind_param(
-                    "isssssissiisiissssdidiiisisissss",
-                    $clienteID,
-                    $nit,
-                    $nombre,
-                    $direccion,
-                    $telefono,
-                    $email,
-                    $visitas,
-                    $comentario,
-                    $fechaRegistro,
-                    $estado,
-                    $ventas,
-                    $codigoCliente,
-                    $id_sucursal,
-                    $iddepartamento,
-                    $razonsocial,
-                    $segundo_nombre,
-                    $primer_apellido,
-                    $segundo_apellido,
-                    $monto_credito,
-                    $id_empleado,
-                    $dias_credito,
-                    $replicado,
-                    $operacion,
-                    $id_municipio,
-                    $region,
-                    $idtipocliente,
-                    $transporte,
-                    $idempresa,
-                    $codigo_postal,
-                    $cui,
-                    $latitud,
-                    $longitud
-                )) {
-                    $codigoRespuesta = -6; //fallo al vincular parametros de registro
-                    $mysqli->rollback();
-                    $stmt->close();
-                } else if (!$stmt->execute()) {
-                    $codigoRespuesta = -7; //fallo la ejecución de la consulta
-                    $mysqli->rollback();
-                    $stmt->close();
-                } else {
-                    $filasAfectas = $mysqli->affected_rows;
-                    if ($filasAfectas === 0) {
-                        $codigoRespuesta = -7; //no se realizó el insert
-                    } else if ($filasAfectas === -1) {
-                        $codigoRespuesta = -8; //fallo al realizar el insert
-                    } else {
-                        $codigoRespuesta = 1; //registro con éxito
-                    }
-                    $stmt->close();
-
-                    $queryCodigo = "UPDATE cor_correlativo SET correlativo = $codigo WHERE tabla = 'codigocliente';";
-                    $resultado = $mysqli->query($queryCodigo);
-                    if ($resultado !== false) {
-                        $mysqli->commit();
-                    } else {
-                        $codigoRespuesta = -9; //fallo al actualizar el codigo en cor_correlativo
+                if ($modificar == false) {
+                    if (!$stmt->bind_param(
+                        "isssssissiisiissssdidiiisisissss",
+                        $clienteID,
+                        $nit,
+                        $nombre,
+                        $direccion,
+                        $telefono,
+                        $email,
+                        $visitas,
+                        $comentario,
+                        $fechaRegistro,
+                        $estado,
+                        $ventas,
+                        $codigoCliente,
+                        $id_sucursal,
+                        $iddepartamento,
+                        $razonsocial,
+                        $segundo_nombre,
+                        $primer_apellido,
+                        $segundo_apellido,
+                        $monto_credito,
+                        $id_empleado,
+                        $dias_credito,
+                        $replicado,
+                        $operacion,
+                        $id_municipio,
+                        $region,
+                        $idtipocliente,
+                        $transporte,
+                        $idempresa,
+                        $codigo_postal,
+                        $cui,
+                        $latitud,
+                        $longitud
+                    )) {
+                        $codigoRespuesta = -6; //fallo al vincular parametros de registro
                         $mysqli->rollback();
+                        $stmt->close();
+                    } else if (!$stmt->execute()) {
+                        $codigoRespuesta = -7; //fallo la ejecución de la consulta
+                        $mysqli->rollback();
+                        $stmt->close();
+                    } else {
+                        $filasAfectas = $mysqli->affected_rows;
+                        if ($filasAfectas === 0) {
+                            $codigoRespuesta = -7; //no se realizó el insert
+                        } else if ($filasAfectas === -1) {
+                            $codigoRespuesta = -8; //fallo al realizar el insert
+                        } else {
+                            $codigoRespuesta = 1; //registro con éxito
+                        }
+                        $stmt->close();
+
+                        $queryCodigo = "UPDATE cor_correlativo SET correlativo = $codigo WHERE tabla = 'codigocliente';";
+                        $resultado = $mysqli->query($queryCodigo);
+                        if ($resultado !== false) {
+                            $mysqli->commit();
+                        } else {
+                            $codigoRespuesta = -9; //fallo al actualizar el codigo en cor_correlativo
+                            $mysqli->rollback();
+                        }
+                    }
+                } else {
+                    //MODIFICACIÓN
+                    if (!$stmt->bind_param(
+                        "sssssssisssssi",
+                        $nit,
+                        $nombre,
+                        $direccion,
+                        $telefono,
+                        $email,
+                        $comentario,
+                        $razonsocial,
+                        $id_municipio,
+                        $region,
+                        $transporte,
+                        $cui,
+                        $latitud,
+                        $longitud,
+                        $clienteID
+                    )) {
+                        $codigoRespuesta = -6; //fallo al vincular parametros de registro
+                        $mysqli->rollback();
+                        $stmt->close();
+                    } else if (!$stmt->execute()) {                        
+                        $codigoRespuesta = -7; //fallo la ejecución de la consulta
+                        $mysqli->rollback();
+                        $stmt->close();
+                    } else {                        
+                        $filasAfectas = $mysqli->affected_rows;
+                        if ($filasAfectas === 0) {
+                            $codigoRespuesta = -8; //no se realizó el insert
+                        } else if ($filasAfectas === -1) {
+                            $codigoRespuesta = -9; //fallo al realizar el insert
+                        } else {
+                            $codigoRespuesta = 1; //registro con éxito
+                        }
+                        $stmt->close();
+
+                        $mysqli->commit();
                     }
                 }
             }
@@ -226,4 +296,8 @@ if ($mysqli != null && $mysqli->connect_errno === 0) {
 
 $jsonRegistro = array("codigo" => $codigoRespuesta);
 echo json_encode($jsonRegistro);
-header("Location: ../view/registro_cliente.view.php");
+if ($modificar == false) {
+    header("Location: ../view/registro_cliente.view.php");
+} else {
+    header("Location: ../view/mostrar_ubicacion_cliente.view.php");
+}

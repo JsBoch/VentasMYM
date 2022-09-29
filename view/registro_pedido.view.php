@@ -39,7 +39,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 <!-- ASIGNAR FORMATO RESPONSIVE a cliente y ulclienteresult-->
                 <input type="text" name="cliente" id="cliente" class="info_boxes" placeholder="Nombre de cliente" data-id="0" onblur="obtenerIdCliente()">
                 <ul id="ulclienteresult"  class="autocomplete_listClient"></ul>
-                <select name="sltPrioridad" id="sltPrioridad"></select>
+                <select name="sltPrioridad" id="sltPrioridad" class="selectors"></select>
                 <textarea name="observaciones" class="comments" id="observaciones" cols="119" rows="5"></textarea>                
             </div>
         </div>

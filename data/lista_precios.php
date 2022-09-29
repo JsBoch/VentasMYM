@@ -17,7 +17,7 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
         "FROM adm_producto p " .
         "JOIN precio_producto pp ON p.idproducto = pp.idproducto " .
         "WHERE p.estado = 1 " .
-         "AND p.codigormym = '$codigo' ";        
+         "AND p.codigormym = '$codigo' or p.nombre = '$codigo';";        
 
     $result = $mysqli->query($stmt);
 

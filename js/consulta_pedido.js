@@ -26,7 +26,7 @@ function ConsultarPedidos() {
     dataType: "json",
     type: "post",
     data: datos,
-    success: function (object) {
+    success: function (object) {      
       let registro = "";
       var $selectPedidos = $("#listaPedidos");
       $selectPedidos.empty();

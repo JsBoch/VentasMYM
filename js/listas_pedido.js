@@ -13,7 +13,37 @@ function listaDepartamentos() {
         }
     });
 }
+// Agregar JSON a el select de Departamento
+function listaDepartamentosConsulta() {
+    $.ajax({
+        url: '../data/departamentos.php',
+        dataType: 'json',
+        success: function(object) {
+            var $select = $('#depa');
+            $.each(object, function(i, departamento) {
+                $select.append('<option value=' + departamento.iddepartamento + '>' + departamento.nombre + '</option>');
+            });
 
+            listaClientesConsulta();
+        }
+    });
+}
+
+// Agregar JSON a el select de Departamento
+function listaDepartamentosConsultaPedido() {
+    $.ajax({
+        url: '../data/departamentos.php',
+        dataType: 'json',
+        success: function(object) {
+            var $select = $('#departamento');
+            $.each(object, function(i, departamento) {
+                $select.append('<option value=' + departamento.iddepartamento + '>' + departamento.nombre + '</option>');
+            });
+
+            listaClientesConsultaPedido();
+        }
+    });
+}
 /**
  * Se carga el listado de clientes
  */
@@ -36,7 +66,44 @@ function listaClientes() {
     });           
 }
 
+function listaClientesConsultaRegistro() {
+    let departamentoId = $('#depa').val();
+    let datos = { "iddepartamento": departamentoId }
+    $.ajax({
+        url: '../data/lista_clientes.php',
+        dataType: 'json',
+        type: 'post',
+        data: datos,
+        success: function(object) {
+           /* var $selectCliente = $('#cliente');
+            $selectCliente.empty();
+            $.each(object, function(i, cliente) {
+                $selectCliente.append('<option value=' + cliente.idcliente + '>' + cliente.nombre + '</option>');
+            });*/            
+            ClientesMatch(object);
+        }
+    });           
+}
+
 function listaClientesConsulta() {
+    let departamentoId = $('#depa').val();
+    let datos = { "iddepartamento": departamentoId }
+    $.ajax({
+        url: '../data/lista_clientes.php',
+        dataType: 'json',
+        type: 'post',
+        data: datos,
+        success: function(object) {
+           var $selectCliente = $('#cliente');
+            $selectCliente.empty();
+            $.each(object, function(i, cliente) {
+                $selectCliente.append('<option value=' + cliente.idcliente + '>' + cliente.nombre + '</option>');
+            });            
+        }
+    });           
+}
+
+function listaClientesConsultaPedido() {
     let departamentoId = $('#departamento').val();
     let datos = { "iddepartamento": departamentoId }
     $.ajax({
@@ -73,7 +140,7 @@ function listaProductos() {
 function listaPrecios() {
     //let producto = document.getElementById('codigo').selectedOptions[0].getAttribute("data-valuep")
     //console.log(producto);
-    let codigo = $('#codigo').val();
+    let codigo = $('#codigo').val();    
     let datos = { "codigo": codigo }
     $.ajax({
         url: '../data/lista_precios.php',
@@ -97,8 +164,8 @@ function listaPrecios() {
  */
 function getCodigo() {
     //let producto = document.getElementById('codigo').selectedOptions[0].getAttribute("data-valuep")    
-    let codigoIngresado = document.getElementById("codigo").value.trim();
-    let producto = document.getElementById("producto").value.trim(); //$('#producto').val();        
+    let codigoIngresado = document.getElementById("codigo");    
+    let producto = document.getElementById("producto").value.trim(); //$('#producto').val();            
     let datos = { "producto": producto }
     $.ajax({
         url: '../data/obtener_codigo.php',
@@ -106,9 +173,10 @@ function getCodigo() {
         type: 'post',
         data: datos,
         success: function(object) {
-            document.getElementById("codigo").value = object[0].codigo;
+            codigoIngresado.value = object[0].codigo;    
+            listaPrecios();        
         }
-    });
+    });        
 }
 
 /**

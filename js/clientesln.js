@@ -19,6 +19,20 @@ function EstablecerRazonSocial() {
     if (nombreCliente.value.toString().length > 0) {
         razonSocial.value = nombreCliente.value;
     }
+
+    let txtClienteId = document.getElementById("clienteId");
+    let txtCodigo = document.getElementById("txtCodigo");
+    txtClienteId.value = 0;
+    txtCodigo.value = '';
+}
+
+function EstablecerRazonSocialConsulta() {
+    let nombreCliente = document.getElementById("nombre");
+    let razonSocial = document.getElementById("razonsocial");
+
+    if (nombreCliente.value.toString().length > 0) {
+        razonSocial.value = nombreCliente.value;
+    }
 }
 /**
  * Esta función se utiliza para validar que la ficha de cliente
@@ -62,7 +76,8 @@ function ValidarFichaCliente(evento) {
         transporte.focus();
         return;
     }
-
+    
+    
     this.submit();
 }
 
@@ -70,7 +85,7 @@ function ObtenerUbicacion() {
     /**
      * CÓDIGO PARA GEOLOCALIZACIÓN
      */
-    if (navigator.geolocation) {
+    /*if (navigator.geolocation) {
         var success = function (position) {
             var latitud = position.coords.latitude,
                 longitud = position.coords.longitude;
@@ -82,7 +97,44 @@ function ObtenerUbicacion() {
             console.error(msg);
         });
 
-
-    }
+    }*/
     /*================================ */
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(muestraPosicion, errorPosicion);
+    }        
+}
+function muestraPosicion(position){
+    //alert('Te encuentras en las siguientes coordenadas: (' + position.coords.latitude + ', ' + position.coords.longitude + ')' );
+    document.getElementById("txtLatitud").value = position.coords.latitude;
+                document.getElementById("txtLongitud").value = position.coords.longitude        ;
+  }
+  
+  function errorPosicion(err) {
+      switch(err.code) {
+          case err.PERMISSION_DENIED:
+              alert("Debe permitir el acceso a su posición para que la aplicación pueda funcionar");
+              break;
+          case err.POSITION_UNAVAILABLE:
+              alert("La información sobre su posición actual no está disponible");
+              break;
+          case err.TIMEOUT:
+              alert("No se ha podido obtener su posición en un tiempo razonable");
+              break;
+          default:
+              alert("Se ha producido un error desconocido al intentar obtener la posición actual");
+              break;
+      }
+  }
+/**
+ * Esta función carga el listado por defecto de las regiones 
+ * asociadas a la ubicación de un cliente. Es para los formularios de registro
+ * y consulta de clientes.
+ */
+function listaRegiones()
+{
+    var $sltRegion = $('#region');    
+    $sltRegion.append('<option value="REGION 1">REGION 1</option>');
+    $sltRegion.append('<option value="REGION 2">REGION 2</option>');
+    $sltRegion.append('<option value="REGION 3">REGION 3</option>');
+    $sltRegion.append('<option value="REGION 4">REGION 4</option>');
 }

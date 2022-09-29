@@ -20,7 +20,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     <title>REGISTRO DE PEDIDOS</title>
 </head>
 
-<body onload="listaDepartamentos(),listaProductos(),GetDate(),listaPrioridad()">
+<body onload="listaDepartamentosConsultaPedido(),listaProductos(),GetDate(),listaPrioridad()">
     <div id="subContainerDates" class="sub_container-dates">
         <!-- Boton para regresar al menu -->
         <div class="above_all">
