@@ -30,6 +30,15 @@ body {
     border-radius: 20px;
 }
 
+.customer_query{
+    background-color: var(--dark);
+    width: 70%;
+    height: 40vh;
+    margin: auto;
+    margin-top: 4vh;
+    border-radius: 20px;
+}
+
 .main_title {
     color: var(--turquoise);
     text-align: center;
@@ -48,7 +57,7 @@ body {
     flex-wrap: wrap;
 }
 
-.selectors,
+.selectors,.department_selector,
 .comments {
     color: var(--white);
     font-weight: lighter;
@@ -59,6 +68,18 @@ body {
     color: white;
     width: 180px;
     height: 12%;
+    margin-bottom: 20px;
+    padding-left: 5px;
+    border: 3px var(--celeseTra) solid;
+    outline: none;
+}
+
+.customer_name_box{
+    background-color: var(--balck);
+    color: white;
+    width: 30%;
+    height: 15%;
+    margin-top: 8%;
     margin-bottom: 20px;
     padding-left: 5px;
     border: 3px var(--celeseTra) solid;
@@ -82,6 +103,26 @@ body {
     outline: none;
 }
 
+.department_selector{
+    background-color: var(--balck);
+    width: 40%;
+    height: 15%;
+    margin-top: 8%;
+    margin-right: 5%;
+    margin-left: 10%;
+    padding-left: 1%;
+    border: 3px var(--celeseTra) solid;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url('../imgs/flecha.png');
+    background-repeat: no-repeat, repeat;
+    background-position: right .7em top 50%, 0 0;
+    background-size: 1.50em auto, 100%;
+    outline: none;
+    float: left;
+}
+
 select option {
     background-color: black;
     color: white;
@@ -95,17 +136,10 @@ select option {
     outline: none;
 }
 
-.info_boxes:focus {
+.info_boxes:focus, .comments:focus, .selectors:focus, .department_selector:focus {
     border: 3px var(--celese) solid;
 }
 
-.comments:focus {
-    border: 3px var(--celese) solid;
-}
-
-.selectors:focus {
-    border: 3px var(--celese) solid;
-}
 
 .send {
     background-color: var(--dGreen);
@@ -303,6 +337,169 @@ i {
     transition-delay: 0.75s;
 } */
 
+.map{
+    background-color: #080d10ba;
+    width: 14%;
+    height: 60vh;
+    /* border-radius: 20px; */
+    padding: 1%;
+    position: absolute;
+    top: 4vh;
+    left: 0;
+    margin: 5px;
+}
+
+.button_location{
+    background-color: var(--celeseTra);
+    color: white;
+    width: 100%;
+    height: 10%;
+    margin: auto;
+    margin-top: 5%;
+    cursor: pointer;
+    border: none;
+}
+
+.spaces_location {
+    background-color: var(--balck);
+    color: white;
+    width: 100%;
+    height: 10%;
+    margin: auto;
+    margin-top: 2%;
+    padding-left: 5px;
+    border: 3px var(--celeseTra) solid;
+    outline: none;
+}
+
+.spaces_location::-moz-selection {
+    background-color: transparent;
+}
+
+.spaces_location::selection {
+    background-color: transparent;
+}
+
+.titles_location{
+    color: white;
+    margin-top: 20%;
+    text-align: center;
+    font-size: 15px;
+    font-weight: lighter;
+}
+
+.autocomplete_listClient{
+    background-color: rgb(18, 17, 17);
+    color: white;
+    width: 27%;
+    max-height: 40%;
+    padding-left: 10px;
+    top: 13vh; 
+    left: 53vw;
+    position: absolute;
+    list-style: none;
+    overflow:scroll;
+    overflow-x:hidden;
+    z-index: 1000;
+}
+
+.autocomplete_listClient li {
+    cursor: pointer;
+   z-index: 2000;
+}
+
+.autocomplete_listClient li:hover {
+    background-color: rgb(36, 36, 36) ;
+}
+
+.show_informationButton{
+    background-color: var(--celeseTra);
+    color: white;
+    width: 30%;
+    height: 14%;
+    margin-top: 2%;
+    margin-left: 10%;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+
+input[type=checkbox] {
+	visibility: hidden;
+}
+.checkbox-JASoft {
+	display: inline-block;
+	position: relative;
+    width: 70px;
+	height: 30px;
+    margin-left: 10%;
+	background: #555;
+	border-radius: 15px;
+	box-shadow: inset 0px 1px 1px rgba(0,0,0,0.6), 0px 1px 0px rgba(255,255,255,0.3);   
+}
+.checkbox-JASoft label {
+
+    /* aspecto */
+    display: block;
+    width: 34px;
+	height: 20px;
+	border-radius: 17px;
+	box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.35);
+	background: #fcfff4;
+	background: linear-gradient(to top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+    cursor: pointer;
+    
+    /* Posicionamiento */
+    position: absolute;
+    top: 5px;
+	left: 5px;
+    z-index: 1;
+    
+	/* Comportamiento */
+    transition: all .4s ease;
+    
+    /* ocultar el posible texto que tenga */
+    overflow: hidden;
+    text-indent: 35px;  
+    transition: text-indent 0s;
+}
+.checkbox-JASoft {
+	display: inline-block;
+	position: relative;
+    width: 70px;
+	height: 30px;
+	background: #555;
+	border-radius: 15px;
+	box-shadow: inset 0px 1px 1px rgba(0,0,0,0.6), 0px 1px 0px rgba(255,255,255,0.3);   
+}
+.checkbox-JASoft input[type=checkbox]:checked + label {
+	left: auto;
+    right: 5px;
+}
+
+.checkbox-JASoft:after {
+	content: 'NO';
+	font: 12px/30px Arial, sans-serif;
+	color: #AAA;
+	position: absolute;
+	right: 10px;
+    z-index: 0;
+	font-weight: bold;
+	text-shadow: 1px 1px 0px rgba(255,255,255,.20);
+}
+
+.checkbox-JASoft:before {
+	content: 'SÍ';
+	font: 12px/30px Arial, sans-serif;
+	color: lime;
+	position: absolute;
+	left: 10px;
+	z-index: 0;
+	font-weight: bold;
+}
+
+
 @media (max-width: 1214px) {
     .form_box {
         width: 100%;
@@ -329,109 +526,51 @@ i {
     .above_all a h3 {
         display: none;
     }
-    /* .label_depa{
-        height: 5vh;
-        top: 83vh;
-    }
-    
-    .label_muni{
-        height: 5vh;
-        top: 96vh;
-        left: auto;
-    }
-    
-    .label_com{
-        height: 5vh;
-        top: 165vh;
-        left: auto;
-    } */
-}
-
-/* @media (max-width: 1118px) {
-    .label_depa{
-        top: 80vh;
-    }
-    
-    .label_muni{
-        top: 93vh;
-    }
-    
-    .label_com{
-        top: 162vh;
-    }
-}
-
-@media (max-width: 984px) {
-    .label_depa{
-        top: 77vh;
-    }
-    
-    .label_muni{
-        top: 90vh;
-    }
-    
-    .label_com{
-        top: 160vh;
-    }
-}
-
-@media (max-width: 774px) {
-    .label_depa{
-        top: 74vh;
-    }
-    
-    .label_muni{
-        top: 87vh;
-    }
-    
-    .label_com{
-        top: 155vh;
-    }
-}
-
-@media (max-width: 615px) {
-    .label_depa{
-        top: 68vh;
-    }
-    
-    .label_muni{
-        top: 83vh;
-    }
-    
-    .label_com{
-        top: 151vh;
-    }
-}
-
-@media (max-width: 425px) {
-    .label_depa{
-        top: 64vh;
-    }
-    
-    .label_muni{
-        top: 79vh;
-    }
-    
-    .label_com{
-        top: 148vh;
-    }
-} */
-
-/* @media (max-width: 850px) {
-    .sub_container {
-        display: flex;
-        flex-direction: column;
-        flex-wrap: nowrap;
-    }
-    .info_boxes,
-    .comments,
-    .selectors,
-    .send {
+    .map{
+        background-color: transparent;
         width: 100%;
-    }
-    .info_boxes,
-    .selectors,
-    .send {
-        height: 10vh;
-    }
-} */
+        height: 50vh;
+        /* border-radius: 20px; */
+        padding: 1%;
+        position: relative;
+        top: 4vh;
+        left: 0;
+        margin: 0;
+    }    
+     
+.button_location{
+    margin-top: 0;
+}
+
+.titles_location{
+    margin-top: 2%;
+}
+
+.spaces_location {
+    height: 17%;
+}
+
+.customer_query{
+    width: 100%;
+    height: 50vh;
+    margin-top: 0;
+    border-radius: 0;
+}
+.department_selector{
+    width: 80%;
+    height: 10vh;
+}
+.customer_name_box {
+    width: 80%;
+    height: 10vh;
+    /* margin: auto; */
+    margin-top: 2%;
+    margin-left: 10%;
+}
+
+.show_informationButton {
+    width: 58%;
+    margin-top: 5vh;
+    margin-bottom: 10vh
+}
+}

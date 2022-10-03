@@ -54,9 +54,14 @@ session_start();
         </div>    -->
         <textarea class="comments" rows="10" cols="8" name="comentario" id="comentario"></textarea>
         <input style="width: auto;" class="info_boxes" placeholder="Ingrese Transporte" name="transporte" id="transporte" type="text">
-        <button type="button" name="bttnUbicacion" id="bttnUbicacion" onclick="ObtenerUbicacion()">UBICACIÓN</button>
-        <input type="text" name="txtLatitud" id="txtLatitud" placeholder="latitud" class="info_boxes">
-        <input type="text" name="txtLongitud" id="txtLongitud" placeholder="longitud" class="info_boxes">
+        <div class="map">
+    <button type="button" name="bttnUbicacion" id="bttnUbicacion" class="button_location" onclick="ObtenerUbicacion()">UBICACIÓN</button>
+        <h3 class="titles_location">Latitud</h3>
+        <input type="text" name="txtLatitud" id="txtLatitud" placeholder="latitud" class="spaces_location">
+        <h3 class="titles_location">Longitud</h3>
+        <input type="text" name="txtLongitud" id="txtLongitud" placeholder="longitud" class="spaces_location">
+    </div>
+   
         <input type="hidden" value="1" name="empleado">
         <input type="hidden" name="clienteId" id="clienteId">
         <input type="hidden" name="txtCodigo" id="txtCodigo">
@@ -70,11 +75,12 @@ session_start();
      </a> -->
         </div>
     </form>
-   
+  
     <script src="../js/jquery-3.6.0.min.js"></script>
     <script src="../js/departamentos.js"></script>
     <script src="../js/clientesln.js"></script>
     <script src="../js/alertify.min.js"></script>
+    <!-- <script src="../js/validations.js"></script> -->
     <!--<script src="http://    ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>-->
 </body>
 </html>
