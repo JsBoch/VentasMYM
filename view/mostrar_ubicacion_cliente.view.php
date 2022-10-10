@@ -80,9 +80,9 @@
             <div class="map">
                 <button type="button" name="bttnUbicacion" id="bttnUbicacion" class="button_location" onclick="ObtenerUbicacion()">UBICACIÓN</button>
                 <h3 class="titles_location">Latitud</h3>
-                <input type="text" name="txtLatitud" id="txtLatitud" placeholder="latitud" class="spaces_location">
+                <input type="text" name="txtLatitud" id="txtLatitud" placeholder="latitud" class="spaces_location" readonly>
                 <h3 class="titles_location">Longitud</h3>
-                <input type="text" name="txtLongitud" id="txtLongitud" placeholder="longitud" class="spaces_location">
+                <input type="text" name="txtLongitud" id="txtLongitud" placeholder="longitud" class="spaces_location" readonly>
                 <h3 class="titles_location">Ubicación completa</h3>
                 <input type="text" name="ubcacion" id="ubicacion" placeholder="ubicacion" class="spaces_location">
             </div>
@@ -106,7 +106,7 @@
     <script src="../js/departamentos.js"></script>
     <script src="../js/clientesln.js"></script>
     <script src="../js/mapa_cliente.js"></script>
-    <script src="../js/validations.js"></script>
+    <!-- <script src="../js/validations.js"></script> -->
 </body>
 
 </html>
