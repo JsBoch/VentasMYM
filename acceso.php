@@ -12,7 +12,8 @@ session_start();
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/loginStyles.css">
-    <title>ACCESO</title>
+    <link rel="icon" href="imgs/logo.png">
+    <title>Acceso</title>
 </head>
 <body>
     <form action="login.php" method="post" class="login_form">

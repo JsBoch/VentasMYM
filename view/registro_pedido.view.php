@@ -17,7 +17,8 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../css/alertify.min.css">
     <link rel="stylesheet" href="../css/ordersStyles.css">
-    <title>REGISTRO DE PEDIDOS</title>
+    <link rel="icon" href="../imgs/logo.png">
+    <title>Registro de pedidos</title>
 </head>
 
 <body onload="listaDepartamentos(),listaProductos(),listaClientes(),listaPrioridad()">

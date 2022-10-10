@@ -19,7 +19,8 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
   <link rel="stylesheet" href="css/menuStyles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
   <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-  <title>MENU</title>
+  <link rel="icon" href="imgs/logo.png">
+    <title>Menu</title>
 </head>
 
 <body>

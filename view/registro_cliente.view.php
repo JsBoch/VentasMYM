@@ -17,7 +17,8 @@ session_start();
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../css/alertify.min.css">
-    <title>Form</title>
+    <link rel="icon" href="../imgs/logo.png">
+    <title>Registro de clientes</title>
 </head>
 <body onload="listaDepartamentos(),limpiarFormulario(),listaRegiones()">
     <form action="../data/registro_cliente.php" method="POST" id="customer_registration" class="form_box">

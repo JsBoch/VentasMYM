@@ -11,7 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../css/alertify.min.css">
-    <title>Document</title>
+    <link rel="icon" href="../imgs/logo.png">
+    <title>Consulta de clientes</title>
 
 </head>
 
@@ -75,7 +76,7 @@
             <select name="region" id="region" class="selectors"></select>
             <!-- <div class="label_com">
         <label for="comentario">OBSERVACIONES</label>
-        </div>    -->
+        </div>    -->   
             <input type="text" name="txtCodigoPostal" id="txtCodigoPostal" placeholder="código postal" class="info_boxes">
             <textarea class="comments" rows="10" cols="8" name="comentario" id="comentario"></textarea>
             <input style="width: auto;" class="info_boxes" placeholder="Ingrese Transporte" name="transporte" id="transporte" type="text">
