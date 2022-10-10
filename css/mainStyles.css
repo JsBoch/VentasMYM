@@ -338,7 +338,6 @@ i {
 } */
 
 .map{
-    display: none;
     background-color: #080d10ba;
     width: 14%;
     height: 60vh;
@@ -423,6 +422,7 @@ i {
     border: none;
     cursor: pointer;
     font-size: 15px;
+    float: left;
 }
 
 
@@ -434,7 +434,8 @@ input[type=checkbox] {
 	position: relative;
     width: 70px;
 	height: 30px;
-    margin-left: 30%;
+    margin-top: 3%;
+    margin-left: 8%;
 	background: #555;
 	border-radius: 15px;
 	box-shadow: inset 0px 1px 1px rgba(0,0,0,0.6), 0px 1px 0px rgba(255,255,255,0.3);   
@@ -491,6 +492,23 @@ input[type=checkbox] {
 	font-weight: bold;
 }
 
+.text_edit{
+    width: 100px;
+    margin-top: 3%;
+    margin-left: 15%;
+    float: left;    
+}   
+
+.edit{
+    color: white;
+    position: relative;
+    top: 2px;
+    left: 50%;
+    display: flex;
+    justify-content: right;
+    font-size: 20px;
+    font-weight: lighter;
+}
 
 @media (max-width: 1214px) {
     .form_box {
@@ -503,6 +521,9 @@ input[type=checkbox] {
         display: flex;
         flex-direction: column;
         flex-wrap: nowrap;
+    }
+    .send{
+        margin-bottom: 5vh;
     }
     .info_boxes,
     .comments,
@@ -528,7 +549,11 @@ input[type=checkbox] {
         top: 4vh;
         left: 0;
         margin: 0;
+        margin-bottom: 5vh;
     }    
+    .main_title {
+        padding-top: 10%;
+    }
      
 .button_location{
     margin-top: 0;
@@ -561,7 +586,7 @@ input[type=checkbox] {
 }
 
 .show_informationButton {
-    width: 48%;
+    width: 80%;
     margin-top: 5vh;
 }
 
@@ -569,7 +594,20 @@ input[type=checkbox] {
     margin-left: 10%; 
 }
 
-.edit{
-    color: white;
+.text_edit{
+    margin-left: 30%;
+
+}   
+
 }
+
+
+@media (max-width: 580px) {
+    .text_edit{
+        margin-left: 15%;
+    }   
+    .edit{
+       left: 10%;
+    }
+    
 }

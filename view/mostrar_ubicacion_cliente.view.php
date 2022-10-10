@@ -30,6 +30,9 @@
         <button name="btnCliente" id="btnCliente" class="show_informationButton" onclick="findValue(),CargarDatosCliente()">Mostrar Información</button>
         <!-- <label class="text_checkbox">Editar Registro</label>
         <input type="checkbox" name="chkEditar" id="chkEditar"  onclick="HabilitarEdicionFichaCliente()"> -->
+        <div class="text_edit">
+            <h3 class="edit">Editar</h3>
+        </div>
         <div class="checkbox-JASoft">
             <input type="checkbox" id="checkAvanzado" onclick="HabilitarEdicionFichaCliente()">
             <label for="checkAvanzado">TEXTO QUE NO DEBERÍA VERSE</label>
