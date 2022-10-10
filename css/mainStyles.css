@@ -338,6 +338,7 @@ i {
 } */
 
 .map{
+    display: none;
     background-color: #080d10ba;
     width: 14%;
     height: 60vh;
