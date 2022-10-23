@@ -150,11 +150,36 @@ function listaPrecios() {
         success: function(object) {
             var $selectPrecio = $('#tipo_precio');
             $selectPrecio.empty();
+            let precioVenta = object[0].venta;
+            let precioUno = object[0].uno;
+            let precioDos = object[0].dos;
+            let precioTres = object[0].tres;
+            let precioMasBajo;
+            let inputPrecioMasBajo = document.getElementById("precioMasBajo");
 
-            $selectPrecio.append('<option value=' + object[0].venta + '> VENTA - ' + object[0].venta + '</option>');
-            $selectPrecio.append('<option value=' + object[0].uno + '> UNO - ' + object[0].uno + '</option>');
-            $selectPrecio.append('<option value=' + object[0].dos + '> DOS - ' + object[0].dos + '</option>');
-            $selectPrecio.append('<option value=' + object[0].tres + '> TRES - ' + object[0].tres + '</option>');
+            let precioAuxiliar;
+            precioAuxiliar = precioVenta;
+            
+            if(precioUno > 0 && precioUno < precioAuxiliar)
+            {
+                precioAuxiliar = precioUno;
+            }
+            if(precioDos > 0 && precioDos < precioAuxiliar)
+            {
+                precioAuxiliar = precioDos;
+            }
+            if(precioTres > 0 && precioTres < precioAuxiliar)
+            {
+                precioAuxiliar = precioTres;                
+            }
+                    
+            precioMasBajo = precioAuxiliar;
+            inputPrecioMasBajo.value = precioMasBajo;            
+
+            $selectPrecio.append('<option value=' + precioVenta + '> VENTA - ' + precioVenta + '</option>');
+            $selectPrecio.append('<option value=' + precioUno + '> UNO - ' + precioUno + '</option>');
+            $selectPrecio.append('<option value=' + precioDos + '> DOS - ' + precioDos + '</option>');
+            $selectPrecio.append('<option value=' + precioTres + '> TRES - ' + precioTres + '</option>');
         }
     });    
 }
@@ -379,4 +404,27 @@ function listaPrioridad()
     var $sltPrioridad = $('#sltPrioridad');    
     $sltPrioridad.append('<option value="NORMAL">NORMAL</option>');
     $sltPrioridad.append('<option value="URGENTE">URGENTE</option>');
+}
+
+/**
+ * Buscar la existencia para un producto indicado
+ * tanto en sa como en mym
+ */
+function CargarExistencia() {
+    //let producto = document.getElementById('codigo').selectedOptions[0].getAttribute("data-valuep")
+    //console.log(producto);
+    let codigo = $('#codigo').val();        
+    let datos = { "codigo": codigo }
+    $.ajax({
+        url: '../data/cargar_existencia.php',
+        dataType: 'json',
+        type: 'post',
+        data: datos,
+        success: function(object) {
+            
+            let existencia = object[0].existencia;            
+            let inputExistencia = document.getElementById("existencia");           
+            inputExistencia.value = existencia;
+        }
+    });    
 }

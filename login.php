@@ -1,12 +1,11 @@
 <?php
 session_start();
-
-if (isset($_POST["user_name"]) && isset($_POST["user_password"])) {
+if (isset($_POST["user_name"]) && isset($_POST["user_password"])) {    
     $userName = $_POST["user_name"];
     $userPassword = $_POST["user_password"];
-
+        
     require_once 'data/connection.php';
-
+    
     if ($mysqli !== null && $mysqli->connect_errno === 0) {
 
         $codigoRespuesta;

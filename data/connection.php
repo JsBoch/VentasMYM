@@ -18,7 +18,8 @@
         } 
         else
         {
-            //return $mysqli->connect_errno;              
+            //return $mysqli->connect_errno;  
+           // echo "ok connection";            
             return $mysqli;
         }
 ?>

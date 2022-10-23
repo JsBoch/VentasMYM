@@ -40,6 +40,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 <!-- ASIGNAR FORMATO RESPONSIVE a cliente y ulclienteresult-->
                 <input type="text" name="cliente" id="cliente" class="info_boxes" placeholder="Nombre de cliente" data-id="0" onblur="obtenerIdCliente()">
                 <ul id="ulclienteresult"  class="autocomplete_listClient"></ul>
+                <label for="sltPrioridad">PRIORIDAD</label>
                 <select name="sltPrioridad" id="sltPrioridad" class="selectors"></select>
                 <textarea name="observaciones" class="comments" id="observaciones" cols="119" rows="5"></textarea>                
             </div>
@@ -55,12 +56,19 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 <ul id="resultsProducto" class="autocomplete_listPro"></ul>
 
                 <!--<ul class="autocomplete_listCod" id="results"></ul>
-                <ul class="autocomplete_list" id="resultsProducto"></ul>-->
-
-                <input type="number" name="cantidad" class="info_boxes" id="cantidad" placeholder="CANTIDAD" onblur="colocarPrecio(),CalculoSubtotal()">
+                <ul class="autocomplete_list" id="resultsProducto"></ul>-->      
+                <label for="existencia">EXISTENCIA</label>          
+                <input type="text" name="existencia" id="existencia" placeholder="EXISTENCIA" readonly>
+                <!--Agrego un hidden para almacenar el precio mas bajo de la lista-->
+                <input type="hidden" name="precioMasBajo" id="precioMasBajo">                
+                <input type="number" name="cantidad" class="info_boxes" id="cantidad" placeholder="CANTIDAD" onblur="colocarPrecio(),CalculoSubtotal()" onfocus="CargarExistencia()">
+                <label for="tipo_precio">TIPO PRECIO</label>
                 <select name="tipo_precio" class="selector" id="tipo_precio" onblur="colocarPrecio()"></select>
-                <input type="hidden" name="precio" class="info_boxes" id="precio" placeholder="PRECIO" onblur="CalculoSubtotal()">
+                <label for="precio">PRECIO</label>
+                <input type="text" name="precio" class="info_boxes" id="precio" placeholder="PRECIO" onblur="CalculoSubtotal()">                
+                <label for="subtotal">SUBTOTAL</label>
                 <input type="text" name="subtotal" class="info_boxes" id="subtotal" placeholder="SUBTOTAL">
+                <label for="observaciones_producto">OBSERVACIONES</label>
                 <textarea name="observaciones_producto" class="comments" id="observaciones_producto" cols="30" rows="10"></textarea>
                 <button class="add" onclick="cargarDetalle()" type="button">Agregar</button>
                 <button class="see" onclick="seeOrder('subContainerDates')" type="button">Ver Pedido</button>
