@@ -29,7 +29,7 @@ background: linear-gradient(40deg, rgba(6,255,139,1) 0%, rgba(33,235,178,1) 26%,
 .customer_frame {
     background-color: var(--dark);
     width: 70%;
-    height: 40vh;
+    height: 45vh;
     margin: auto;
     margin-top: 4vh;
     border-radius: 20px;
@@ -158,6 +158,7 @@ background: linear-gradient(40deg, rgba(6,255,139,1) 0%, rgba(33,235,178,1) 26%,
 
 .comments {
     background-color: var(--balck);
+    width: 100%;
     margin-bottom: 24px;
     padding-left: 5px;
     border: 3px var(--celeseTra) solid;
@@ -244,14 +245,6 @@ i {
     background-repeat: no-repeat, repeat;
     background-position: right .7em top 50%, 0 0;
     background-size: 1.50em auto, 100%;
-    outline: none;
-}
-
-.comments {
-    background-color: var(--balck);
-    margin-bottom: 24px;
-    padding-left: 5px;
-    border: 3px var(--celeseTra) solid;
     outline: none;
 }
 
@@ -471,6 +464,12 @@ i {
     cursor: pointer;
     float: left;
 }
+
+.subtitle_input{
+    color: var(--celese);
+    font-size: 18px;
+}
+
 /* responsive */
 
 @media (max-width: 1280px) {
