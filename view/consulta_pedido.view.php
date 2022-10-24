@@ -64,7 +64,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
             <div class="sub_container">
                 <select name="departamento" class="selectors" id="departamento" onblur="AsignarCliente()"></select>
                 <select name="cliente" class="selectors" id="cliente"></select>
-                <select name="sltPrioridad" id="sltPrioridad"></select>
+                <select name="sltPrioridad" id="sltPrioridad"  class="selectors"></select>
                 <textarea name="observaciones" class="comments" id="observaciones" cols="119" rows="5"></textarea>
                 <input type="hidden" name="hdnNoSolicitud" id="hdnNoSolicitud">
                 <input type="hidden" name="hdndepartamentoid" id="hdndepartamentoid">
