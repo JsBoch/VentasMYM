@@ -51,7 +51,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
             <h2 class="main_title">Registro de Pedidos</h2>
             <div class="second_sub_container">
                 <input type='text' name="codigo" class="info_boxes" id="codigo" placeholder="ingrese código" onblur="getNombreProducto()" onchange="limpiarNombre()">
-                <input type="text" name="producto" class="info_boxes" id="producto" placeholder="ingreso nombre" size="100" onblur="getCodigo()"  onchange="limpiarCodigo()">
+                <input type="text" name="producto" class="info_boxes" id="producto" placeholder="ingreso nombre" size="100"  onchange="limpiarCodigo(),getCodigo()">
 
                 <ul class="autocomplete_list" id="results"></ul>
                 <ul id="resultsProducto" class="autocomplete_listPro"></ul>
