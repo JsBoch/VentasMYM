@@ -51,7 +51,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
             <h2 class="main_title">Registro de Pedidos</h2>
             <div class="second_sub_container">
                 <input type='text' name="codigo" class="info_boxes" id="codigo" placeholder="ingrese código" onblur="getNombreProducto()" onchange="limpiarNombre()">
-                <input type="text" name="producto" class="info_boxes" id="producto" placeholder="ingreso nombre" size="100"  onchange="limpiarCodigo(),getCodigo()">
+                <input type="text" name="producto" class="info_boxes" id="producto" placeholder="ingreso nombre" size="100"  onchange="limpiarCodigo(),getCodigo(),listaPrecios()">
 
                 <ul class="autocomplete_list" id="results"></ul>
                 <ul id="resultsProducto" class="autocomplete_listPro"></ul>
@@ -63,7 +63,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 <!--Agrego un hidden para almacenar el precio mas bajo de la lista-->
                 <input type="hidden" name="precioMasBajo" id="precioMasBajo">
                 <label for="cantidad" class="subtitle_input">CANTIDAD</label>
-                <input type="number" name="cantidad" class="info_boxes" id="cantidad" placeholder="CANTIDAD" onblur="colocarPrecio(),CalculoSubtotal()" onfocus="CargarExistencia(),listaPrecios()">
+                <input type="number" name="cantidad" class="info_boxes" id="cantidad" placeholder="CANTIDAD" onblur="colocarPrecio(),CalculoSubtotal()" onfocus="getCodigo(),CargarExistencia(),listaPrecios()">
                 <label for="tipo_precio" class="subtitle_input">TIPO PRECIO</label>
                 <select name="tipo_precio" class="selector" id="tipo_precio" onblur="colocarPrecio()"></select>
                 <label for="precio" class="subtitle_input">PRECIO</label>

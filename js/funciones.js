@@ -5,10 +5,10 @@ function CalculoSubtotal() {
 
     if (precio.length == 0 || parseFloat(precio) == 0) {
         document.getElementById("subtotal").value = "";
-        alertify.error("Debe ingresar un precio válido");
+        //alertify.error("Debe ingresar un precio válido");
     } else if (cantidad.length == 0 || parseFloat(cantidad) == 0) {
         document.getElementById("subtotal").value = "";
-        alertify.error("Debe ingresar una cantidad válida");
+        //alertify.error("Debe ingresar una cantidad válida");
     }
     else {
         if (parseFloat(precio.toString()) > parseFloat(precioMasBajo.toString())) {

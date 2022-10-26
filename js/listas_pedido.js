@@ -345,8 +345,6 @@ function colocarPrecio() {
     let precio = document.getElementById('tipo_precio').value;
     if (parseFloat(precio) > 0) {
         document.getElementById('precio').value = precio;
-    }else{
-        alertify.error("Debe ingresar un precio válido");
     }
 }
 
