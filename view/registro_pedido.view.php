@@ -35,7 +35,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
             <h2 class="main_title">Cliente</h2>
             <div class="sub_container">
                 <select name="departamento" class="selectors" id="departamento" onchange="listaClientes()"></select>
-                <!--<select name="cliente" class="selectors" id="cliente"></select>-->                
+                <!--<select name="cliente" class="selectors" id="cliente"></select>-->
 
                 <!-- ASIGNAR FORMATO RESPONSIVE a cliente y ulclienteresult-->
                 <input type="text" name="cliente" id="cliente" class="info_boxes" placeholder="Nombre de cliente" data-id="0" onblur="obtenerIdCliente()">
@@ -43,31 +43,31 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 <label for="sltPrioridad" class="subtitle_input">PRIORIDAD</label>
                 <select name="sltPrioridad" id="sltPrioridad" class="selectors"></select>
                 <label for="observaciones_producto" class="subtitle_input">OBSERVACIONES</label>
-                <textarea name="observaciones" class="comments" id="observaciones" cols="119" rows="5"></textarea>                
+                <textarea name="observaciones" class="comments" id="observaciones" cols="119" rows="5"></textarea>
             </div>
         </div>
         <!-- Pedido -->
         <div class="box_products">
             <h2 class="main_title">Registro de Pedidos</h2>
             <div class="second_sub_container">
-                <input type='text' name="codigo" class="info_boxes" id="codigo" placeholder="ingrese código" onblur="listaPrecios(),getNombreProducto()">
-                <input type="text" name="producto" class="info_boxes" id="producto" placeholder="ingreso nombre" size="100" onblur="getCodigo(),listaPrecios()">
+                <input type='text' name="codigo" class="info_boxes" id="codigo" placeholder="ingrese código" onblur="getNombreProducto()" onchange="limpiarNombre()">
+                <input type="text" name="producto" class="info_boxes" id="producto" placeholder="ingreso nombre" size="100" onblur="getCodigo()"  onchange="limpiarCodigo()">
 
                 <ul class="autocomplete_list" id="results"></ul>
                 <ul id="resultsProducto" class="autocomplete_listPro"></ul>
 
                 <!--<ul class="autocomplete_listCod" id="results"></ul>
-                <ul class="autocomplete_list" id="resultsProducto"></ul>-->      
-                <label for="existencia" class="subtitle_input">EXISTENCIA</label>          
+                <ul class="autocomplete_list" id="resultsProducto"></ul>-->
+                <label for="existencia" class="subtitle_input">EXISTENCIA</label>
                 <input type="text" class="info_boxes" name="existencia" id="existencia" placeholder="EXISTENCIA" readonly>
                 <!--Agrego un hidden para almacenar el precio mas bajo de la lista-->
-                <input type="hidden" name="precioMasBajo" id="precioMasBajo">    
-                <label for="cantidad" class="subtitle_input">CANTIDAD</label>               
-                <input type="number" name="cantidad" class="info_boxes" id="cantidad" placeholder="CANTIDAD" onblur="colocarPrecio(),CalculoSubtotal()" onfocus="CargarExistencia()">
+                <input type="hidden" name="precioMasBajo" id="precioMasBajo">
+                <label for="cantidad" class="subtitle_input">CANTIDAD</label>
+                <input type="number" name="cantidad" class="info_boxes" id="cantidad" placeholder="CANTIDAD" onblur="colocarPrecio(),CalculoSubtotal()" onfocus="CargarExistencia(),listaPrecios()">
                 <label for="tipo_precio" class="subtitle_input">TIPO PRECIO</label>
                 <select name="tipo_precio" class="selector" id="tipo_precio" onblur="colocarPrecio()"></select>
                 <label for="precio" class="subtitle_input">PRECIO</label>
-                <input type="text" name="precio" class="info_boxes" id="precio" placeholder="PRECIO" onblur="CalculoSubtotal()">                
+                <input type="text" name="precio" class="info_boxes" id="precio" placeholder="PRECIO" onblur="CalculoSubtotal()">
                 <label for="subtotal" class="subtitle_input">SUBTOTAL</label>
                 <input type="text" name="subtotal" class="info_boxes" id="subtotal" placeholder="SUBTOTAL">
                 <label for="observaciones_producto" class="subtitle_input">OBSERVACIONES</label>

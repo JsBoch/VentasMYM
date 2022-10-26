@@ -9,7 +9,7 @@ $codigoRespuesta = 1;
 
 if ($mysqli !== null && $mysqli->connect_errno === 0) {
 
-    $stmt = "select codigormym,sum(existencia) as existencia ".
+   /* $stmt = "select codigormym,sum(existencia) as existencia ".
     "from (".
     "select p.codigormym,if(e.cantidad is null,0,e.cantidad) as existencia ".
     "from adm_producto p ". 
@@ -21,7 +21,18 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
     "from `db_mymsa`.`adm_producto` p ".
     "join `db_mymsa`.`existencia` e on p.idproducto = e.idproducto and p.idbodega = e.idbodega and e.estado = 1 ".
     "where p.codigormym = '$codigo' ".
-    "and p.estado = 1) c group by codigormym;";        
+    "and p.estado = 1) c group by codigormym;";   */
+    $stmt = "select if(e.cantidad is null,0,e.cantidad) as existencia ".
+    "from adm_producto p  ".
+    "join existencia e on p.idproducto = e.idproducto and p.idbodega = e.idbodega and e.estado = 1 ".
+    "where p.codigormym = '$codigo' ".
+    "and p.estado = 1 ".
+    "union all ".
+    "select if(e.cantidad is null,0,e.cantidad) as existencia ".
+    "from `db_mymsa`.`adm_producto` p ".
+    "join `db_mymsa`.`existencia` e on p.idproducto = e.idproducto and p.idbodega = e.idbodega and e.estado = 1 ".
+    "where p.codigormym = '$codigo' ".
+    "and p.estado = 1;";     
 
     $result = $mysqli->query($stmt);
 
@@ -30,8 +41,7 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
         if ($result->num_rows > 0) {
             $return_arr = array();
             while ($row = $result->fetch_array()) {
-                $return_arr[$indice] = array(                   
-                    'codigormym' => $row['codigormym'],
+                $return_arr[$indice] = array(                                       
                     'existencia' => $row['existencia']                    
                 );
 
@@ -71,8 +81,7 @@ if ($codigoRespuesta !== 1) {
     }
     $return_arr = array();
     $indice = 0;
-    $return_arr[$indice] = array(       
-        'codigormym' => "",
+    $return_arr[$indice] = array(               
         'existencia' => 0.00        
     ); 
     echo json_encode($return_arr);

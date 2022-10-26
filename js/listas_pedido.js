@@ -1,11 +1,13 @@
+var busquedaXCodigo = false;
+var busquedaXNombre = false;
 // Agregar JSON a el select de Departamento
 function listaDepartamentos() {
     $.ajax({
         url: '../data/departamentos.php',
         dataType: 'json',
-        success: function(object) {
+        success: function (object) {
             var $select = $('#departamento');
-            $.each(object, function(i, departamento) {
+            $.each(object, function (i, departamento) {
                 $select.append('<option value=' + departamento.iddepartamento + '>' + departamento.nombre + '</option>');
             });
 
@@ -18,9 +20,9 @@ function listaDepartamentosConsulta() {
     $.ajax({
         url: '../data/departamentos.php',
         dataType: 'json',
-        success: function(object) {
+        success: function (object) {
             var $select = $('#depa');
-            $.each(object, function(i, departamento) {
+            $.each(object, function (i, departamento) {
                 $select.append('<option value=' + departamento.iddepartamento + '>' + departamento.nombre + '</option>');
             });
 
@@ -34,9 +36,9 @@ function listaDepartamentosConsultaPedido() {
     $.ajax({
         url: '../data/departamentos.php',
         dataType: 'json',
-        success: function(object) {
+        success: function (object) {
             var $select = $('#departamento');
-            $.each(object, function(i, departamento) {
+            $.each(object, function (i, departamento) {
                 $select.append('<option value=' + departamento.iddepartamento + '>' + departamento.nombre + '</option>');
             });
 
@@ -55,15 +57,15 @@ function listaClientes() {
         dataType: 'json',
         type: 'post',
         data: datos,
-        success: function(object) {
-           /* var $selectCliente = $('#cliente');
-            $selectCliente.empty();
-            $.each(object, function(i, cliente) {
-                $selectCliente.append('<option value=' + cliente.idcliente + '>' + cliente.nombre + '</option>');
-            });*/            
+        success: function (object) {
+            /* var $selectCliente = $('#cliente');
+             $selectCliente.empty();
+             $.each(object, function(i, cliente) {
+                 $selectCliente.append('<option value=' + cliente.idcliente + '>' + cliente.nombre + '</option>');
+             });*/
             ClientesMatch(object);
         }
-    });           
+    });
 }
 
 function listaClientesConsultaRegistro() {
@@ -74,15 +76,15 @@ function listaClientesConsultaRegistro() {
         dataType: 'json',
         type: 'post',
         data: datos,
-        success: function(object) {
-           /* var $selectCliente = $('#cliente');
-            $selectCliente.empty();
-            $.each(object, function(i, cliente) {
-                $selectCliente.append('<option value=' + cliente.idcliente + '>' + cliente.nombre + '</option>');
-            });*/            
+        success: function (object) {
+            /* var $selectCliente = $('#cliente');
+             $selectCliente.empty();
+             $.each(object, function(i, cliente) {
+                 $selectCliente.append('<option value=' + cliente.idcliente + '>' + cliente.nombre + '</option>');
+             });*/
             ClientesMatch(object);
         }
-    });           
+    });
 }
 
 function listaClientesConsulta() {
@@ -93,14 +95,14 @@ function listaClientesConsulta() {
         dataType: 'json',
         type: 'post',
         data: datos,
-        success: function(object) {
-           var $selectCliente = $('#cliente');
+        success: function (object) {
+            var $selectCliente = $('#cliente');
             $selectCliente.empty();
-            $.each(object, function(i, cliente) {
+            $.each(object, function (i, cliente) {
                 $selectCliente.append('<option value=' + cliente.idcliente + '>' + cliente.nombre + '</option>');
-            });            
+            });
         }
-    });           
+    });
 }
 
 function listaClientesConsultaPedido() {
@@ -111,14 +113,14 @@ function listaClientesConsultaPedido() {
         dataType: 'json',
         type: 'post',
         data: datos,
-        success: function(object) {
-           var $selectCliente = $('#cliente');
+        success: function (object) {
+            var $selectCliente = $('#cliente');
             $selectCliente.empty();
-            $.each(object, function(i, cliente) {
+            $.each(object, function (i, cliente) {
                 $selectCliente.append('<option value=' + cliente.idcliente + '>' + cliente.nombre + '</option>');
-            });            
+            });
         }
-    });           
+    });
 }
 /**
  * Cargar el código de los productos
@@ -127,7 +129,7 @@ function listaProductos() {
     $.ajax({
         url: '../data/lista_productos.php',
         dataType: 'json',
-        success: function(object) {
+        success: function (object) {
             codigoProducto(object);
             nombreProducto(object);
         }
@@ -140,14 +142,14 @@ function listaProductos() {
 function listaPrecios() {
     //let producto = document.getElementById('codigo').selectedOptions[0].getAttribute("data-valuep")
     //console.log(producto);
-    let codigo = $('#codigo').val();    
+    let codigo = $('#codigo').val();
     let datos = { "codigo": codigo }
     $.ajax({
         url: '../data/lista_precios.php',
         dataType: 'json',
         type: 'post',
         data: datos,
-        success: function(object) {
+        success: function (object) {
             var $selectPrecio = $('#tipo_precio');
             $selectPrecio.empty();
             let precioVenta = object[0].venta;
@@ -157,51 +159,49 @@ function listaPrecios() {
             let precioMasBajo;
             let inputPrecioMasBajo = document.getElementById("precioMasBajo");
 
-            let precioAuxiliar;
-            precioAuxiliar = precioVenta;
-            
-            if(precioUno > 0 && precioUno < precioAuxiliar)
-            {
-                precioAuxiliar = precioUno;
+            precioMasBajo = precioVenta;
+
+            if (precioUno > 0 && precioUno < precioMasBajo) {
+                precioMasBajo = precioUno;
             }
-            if(precioDos > 0 && precioDos < precioAuxiliar)
-            {
-                precioAuxiliar = precioDos;
+            if (precioDos > 0 && precioDos < precioMasBajo) {
+                precioMasBajo = precioDos;
             }
-            if(precioTres > 0 && precioTres < precioAuxiliar)
-            {
-                precioAuxiliar = precioTres;                
+            if (precioTres > 0 && precioTres < precioMasBajo) {
+                precioMasBajo = precioTres;
             }
-                    
-            precioMasBajo = precioAuxiliar;
-            inputPrecioMasBajo.value = precioMasBajo;            
+
+            inputPrecioMasBajo.value = precioMasBajo;
 
             $selectPrecio.append('<option value=' + precioVenta + '> VENTA - ' + precioVenta + '</option>');
             $selectPrecio.append('<option value=' + precioUno + '> UNO - ' + precioUno + '</option>');
             $selectPrecio.append('<option value=' + precioDos + '> DOS - ' + precioDos + '</option>');
             $selectPrecio.append('<option value=' + precioTres + '> TRES - ' + precioTres + '</option>');
         }
-    });    
+    });
 }
 
 /**
  * Carga el código del producto cuando se selecciona el nombre
  */
 function getCodigo() {
-    //let producto = document.getElementById('codigo').selectedOptions[0].getAttribute("data-valuep")    
-    let codigoIngresado = document.getElementById("codigo");    
-    let producto = document.getElementById("producto").value.trim(); //$('#producto').val();            
-    let datos = { "producto": producto }
-    $.ajax({
-        url: '../data/obtener_codigo.php',
-        dataType: 'json',
-        type: 'post',
-        data: datos,
-        success: function(object) {
-            codigoIngresado.value = object[0].codigo;    
-            listaPrecios();        
-        }
-    });        
+    //let producto = document.getElementById('codigo').selectedOptions[0].getAttribute("data-valuep")  
+
+    let codigoIngresado = document.getElementById("codigo");
+    let producto = document.getElementById("producto").value.trim(); //$('#producto').val();    
+
+    if (producto.length > 0) {
+        let datos = { "producto": producto }
+        $.ajax({
+            url: '../data/obtener_codigo.php',
+            dataType: 'json',
+            type: 'post',
+            data: datos,
+            success: function (object) {
+                codigoIngresado.value = object[0].codigo;
+            }
+        });
+    }
 }
 
 /**
@@ -209,24 +209,32 @@ function getCodigo() {
  */
 function getNombreProducto() {
     //let producto = document.getElementById('codigo').selectedOptions[0].getAttribute("data-valuep")
-    let codigo = document.getElementById("codigo").value; //$('#producto').val();      
+
+    let inputCodigo = document.getElementById("codigo");
+    let codigo = inputCodigo.value; //$('#producto').val();      
     let datos = { "codigo": codigo }
 
-    $.ajax({
-        url: '../data/obtener_producto.php',
-        dataType: 'json',
-        type: 'post',
-        data: datos,
-        success: function(object) {
-            var $inputProducto = $('#producto');
-            //$inputProducto.value = object[0].nombre;
-            document.getElementById("producto").value = object[0].nombre;
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.log("Status: " + textStatus);
-            console.log("Error: " + errorThrown);
-        }
-    });
+    if (codigo.length > 0 && codigo != "-3") {
+
+        $.ajax({
+            url: '../data/obtener_producto.php',
+            dataType: 'json',
+            type: 'post',
+            data: datos,
+            success: function (object) {
+                var $inputProducto = $('#producto');
+                //$inputProducto.value = object[0].nombre;
+                document.getElementById("producto").value = object[0].nombre;
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("Status: " + textStatus);
+                console.log("Error: " + errorThrown);
+            }
+        });
+    }
+    else {
+        alertify.error('Debe ingresar un código válido.');
+    }
 }
 
 /**
@@ -237,7 +245,7 @@ function codigoProducto(datos) {
 
     const data = [];
 
-    $.each(datos, function(i, producto) {
+    $.each(datos, function (i, producto) {
         data.push(producto.codigo);
     });
 
@@ -245,7 +253,7 @@ function codigoProducto(datos) {
     const autocomplete = document.getElementById("codigo");
     const resultsHTML = document.getElementById("results");
 
-    autocomplete.oninput = function() {
+    autocomplete.oninput = function () {
         let results = [];
         const userInput = this.value;
         resultsHTML.innerHTML = "";
@@ -269,7 +277,7 @@ function codigoProducto(datos) {
         return results;
     }
 
-    resultsHTML.onclick = function(event) {
+    resultsHTML.onclick = function (event) {
         const setValue = event.target.innerText;
         autocomplete.value = setValue;
         this.innerHTML = "";
@@ -286,7 +294,7 @@ function nombreProducto(datos) {
 
     const data = [];
 
-    $.each(datos, function(i, producto) {
+    $.each(datos, function (i, producto) {
         data.push(producto.nombre);
     });
 
@@ -294,7 +302,7 @@ function nombreProducto(datos) {
     const autocompleteProducto = document.getElementById("producto");
     const resultsHTMLProducto = document.getElementById("resultsProducto");
 
-    autocompleteProducto.oninput = function() {
+    autocompleteProducto.oninput = function () {
         let results = [];
         const userInput = this.value;
         resultsHTMLProducto.innerHTML = "";
@@ -318,7 +326,7 @@ function nombreProducto(datos) {
         return results;
     }
 
-    resultsHTMLProducto.onclick = function(event) {
+    resultsHTMLProducto.onclick = function (event) {
         const setValue = event.target.innerText;
         autocompleteProducto.value = setValue;
         this.innerHTML = "";
@@ -333,22 +341,26 @@ function nombreProducto(datos) {
  * correspondiente.
  */
 
- function colocarPrecio()
- {
-     document.getElementById('precio').value = document.getElementById('tipo_precio').value;    
- }
+function colocarPrecio() {
+    let precio = document.getElementById('tipo_precio').value;
+    if (parseFloat(precio) > 0) {
+        document.getElementById('precio').value = precio;
+    }else{
+        alertify.error("Debe ingresar un precio válido");
+    }
+}
 
 
 
- /**
-  * 
-  * @param {array - Json} listado de clientes obtenidos desde la db
-  * filtra la lista de un campo autocompletar para clientes
-  */
- function ClientesMatch(datos) {    
+/**
+ * 
+ * @param {array - Json} listado de clientes obtenidos desde la db
+ * filtra la lista de un campo autocompletar para clientes
+ */
+function ClientesMatch(datos) {
     const data = [];
 
-    $.each(datos, function(i, item) {
+    $.each(datos, function (i, item) {
         data.push(item.nombre + "&" + item.idcliente);
     });
 
@@ -356,7 +368,7 @@ function nombreProducto(datos) {
     const autocompleteCliente = document.getElementById("cliente");
     const resultsClienteHTML = document.getElementById("ulclienteresult");
 
-    autocompleteCliente.oninput = function() {
+    autocompleteCliente.oninput = function () {
         let results = [];
         const userInput = this.value;
         resultsClienteHTML.innerHTML = "";
@@ -380,7 +392,7 @@ function nombreProducto(datos) {
         return results;
     }
 
-    resultsClienteHTML.onclick = function(event) {
+    resultsClienteHTML.onclick = function (event) {
         const setValue = event.target.innerText;
         let valoresCliente = setValue.toString().split("&");
 
@@ -393,15 +405,13 @@ function nombreProducto(datos) {
     };
 }
 
-function obtenerIdCliente()
-{
+function obtenerIdCliente() {
     let cliente = document.getElementById("cliente");
     //console.log(cliente.dataset.id);
 }
 
-function listaPrioridad()
-{
-    var $sltPrioridad = $('#sltPrioridad');    
+function listaPrioridad() {
+    var $sltPrioridad = $('#sltPrioridad');
     $sltPrioridad.append('<option value="NORMAL">NORMAL</option>');
     $sltPrioridad.append('<option value="URGENTE">URGENTE</option>');
 }
@@ -413,18 +423,34 @@ function listaPrioridad()
 function CargarExistencia() {
     //let producto = document.getElementById('codigo').selectedOptions[0].getAttribute("data-valuep")
     //console.log(producto);
-    let codigo = $('#codigo').val();        
+    let codigo = $('#codigo').val();
     let datos = { "codigo": codigo }
     $.ajax({
         url: '../data/cargar_existencia.php',
         dataType: 'json',
         type: 'post',
         data: datos,
-        success: function(object) {
-            
-            let existencia = object[0].existencia;            
-            let inputExistencia = document.getElementById("existencia");           
+        success: function (object) {
+            let existencia = 0;
+            let inputExistencia = document.getElementById("existencia");
+            /**
+             * se recorren los dos resultados que devuelve la consulta 
+             * y se suman esas existencias para colocarlas en el control para que la vea 
+             * el usuario.
+             */
+            $.each(object, function (i, resultado) {
+                existencia += parseInt(resultado.existencia);
+            });
+
             inputExistencia.value = existencia;
         }
-    });    
+    });
+}
+
+function limpiarNombre() {
+    document.getElementById("producto").value = "";
+}
+
+function limpiarCodigo() {
+    document.getElementById("codigo").value = "";
 }
