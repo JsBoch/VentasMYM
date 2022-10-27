@@ -1,4 +1,4 @@
-function CalculoSubtotal() {
+function CalculoSubtotal() {    
     let precio = document.getElementById("precio").value;
     let cantidad = document.getElementById("cantidad").value;
     let precioMasBajo = document.getElementById("precioMasBajo").value;

@@ -1,5 +1,5 @@
 <?php
-$producto = $_POST["producto"];
+$producto = trim($_POST["producto"]);
 
 require_once 'connection.php';
 
@@ -11,7 +11,7 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
         "p.codigormym " .        
         "FROM adm_producto p " .        
         "WHERE p.estado = 1 " .
-        "AND p.nombre = '$producto';";         
+        "AND trim(p.nombre) = '$producto';";         
 
     $result = $mysqli->query($stmt);
 

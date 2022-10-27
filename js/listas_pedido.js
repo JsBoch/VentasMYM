@@ -139,10 +139,10 @@ function listaProductos() {
 /**
  * Carga de los precios según el producto seleccionado
  */
-function listaPrecios() {
+function listaPrecios(codigo) {
     //let producto = document.getElementById('codigo').selectedOptions[0].getAttribute("data-valuep")
     //console.log(producto);
-    let codigo = $('#codigo').val();
+    //let codigo = $('#codigo').val();
     let datos = { "codigo": codigo }
     $.ajax({
         url: '../data/lista_precios.php',
@@ -177,6 +177,8 @@ function listaPrecios() {
             $selectPrecio.append('<option value=' + precioUno + '> UNO - ' + precioUno + '</option>');
             $selectPrecio.append('<option value=' + precioDos + '> DOS - ' + precioDos + '</option>');
             $selectPrecio.append('<option value=' + precioTres + '> TRES - ' + precioTres + '</option>');
+
+            colocarPrecio();
         }
     });
 }
@@ -184,21 +186,23 @@ function listaPrecios() {
 /**
  * Carga el código del producto cuando se selecciona el nombre
  */
-function getCodigo() {
+function getCodigo(producto) {
     //let producto = document.getElementById('codigo').selectedOptions[0].getAttribute("data-valuep")  
 
     let codigoIngresado = document.getElementById("codigo");
-    let producto = document.getElementById("producto").value.trim(); //$('#producto').val();    
-
+    //let producto = document.getElementById("producto").value.trim(); //$('#producto').val();                
+    
     if (producto.length > 0) {
-        let datos = { "producto": producto }
+        let datos = { "producto": producto.trim() }
         $.ajax({
             url: '../data/obtener_codigo.php',
             dataType: 'json',
             type: 'post',
             data: datos,
             success: function (object) {
-                codigoIngresado.value = object[0].codigo;
+                codigoIngresado.value = object[0].codigo;     
+                listaPrecios(object[0].codigo);    
+                CargarExistencia(object[0].codigo);                   
             }
         });
     }
@@ -207,11 +211,11 @@ function getCodigo() {
 /**
  * Carga el nombre del producto cuando se selecciona el código
  */
-function getNombreProducto() {
+function getNombreProducto(codigo) {
     //let producto = document.getElementById('codigo').selectedOptions[0].getAttribute("data-valuep")
 
-    let inputCodigo = document.getElementById("codigo");
-    let codigo = inputCodigo.value; //$('#producto').val();      
+    //let inputCodigo = document.getElementById("codigo");
+    //let codigo = inputCodigo.value; //$('#producto').val();      
     let datos = { "codigo": codigo }
 
     if (codigo.length > 0 && codigo != "-3") {
@@ -282,7 +286,9 @@ function codigoProducto(datos) {
         autocomplete.value = setValue;
         this.innerHTML = "";
         resultsHTML.style.padding = "0";
-        autocomplete.focus();
+        getNombreProducto(autocomplete.value);
+        listaPrecios(autocomplete.value);
+        CargarExistencia(autocomplete.value);        
     };
 }
 
@@ -327,12 +333,13 @@ function nombreProducto(datos) {
     }
 
     resultsHTMLProducto.onclick = function (event) {
-        const setValue = event.target.innerText;
-        autocompleteProducto.value = setValue;
+        const setValue = event.target.innerText;            
+        autocompleteProducto.value = setValue;        
         this.innerHTML = "";
         resultsHTMLProducto.style.padding = "0";
         //document.getElementById('codigo').value = '';
-        autocompleteProducto.focus();
+        //autocompleteProducto.focus();
+        getCodigo(autocompleteProducto.value);
     };
 }
 
@@ -342,7 +349,7 @@ function nombreProducto(datos) {
  */
 
 function colocarPrecio() {
-    let precio = document.getElementById('tipo_precio').value;
+    let precio = document.getElementById('tipo_precio').value;    
     if (parseFloat(precio) > 0) {
         document.getElementById('precio').value = precio;
     }
@@ -418,10 +425,10 @@ function listaPrioridad() {
  * Buscar la existencia para un producto indicado
  * tanto en sa como en mym
  */
-function CargarExistencia() {
+function CargarExistencia(codigo) {
     //let producto = document.getElementById('codigo').selectedOptions[0].getAttribute("data-valuep")
     //console.log(producto);
-    let codigo = $('#codigo').val();
+    //let codigo = $('#codigo').val();
     let datos = { "codigo": codigo }
     $.ajax({
         url: '../data/cargar_existencia.php',
