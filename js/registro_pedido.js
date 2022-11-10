@@ -157,6 +157,7 @@ function GuardarRegistro() {
   let clienteRegistro = document.getElementById("cliente");
   clienteRegistro.value = "";
   clienteRegistro.dataset.id = 0;
+  document.getElementById("transporte").value = "";
   document.getElementById("observaciones").value = "";
   document.getElementById("sltPrioridad").value = "NORMAL";
   document.getElementById("codigo").value = "";
