@@ -38,20 +38,22 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 <!--<select name="cliente" class="selectors" id="cliente"></select>-->
 
                 <!-- ASIGNAR FORMATO RESPONSIVE a cliente y ulclienteresult-->
-                <input type="text" name="cliente" id="cliente" class="info_boxes" placeholder="Nombre de cliente" data-id="0" onblur="obtenerIdCliente()">
+                <input type="text" name="cliente" id="cliente" class="info_boxes" placeholder="Nombre de cliente" data-id="0" onblur="obtenerIdCliente()" autocomplete="off">
                 <ul id="ulclienteresult"  class="autocomplete_listClient"></ul>
                 <label for="sltPrioridad" class="subtitle_input">PRIORIDAD</label>
                 <select name="sltPrioridad" id="sltPrioridad" class="selectors"></select>
                 <label for="observaciones_producto" class="subtitle_input">OBSERVACIONES</label>
                 <textarea name="observaciones" class="comments" id="observaciones" cols="119" rows="5"></textarea>
+                <label for="transporte" class="subtitle_input">TRANSPORTE</label>
+                <input type="text" name="transporte" id="transporte" class="info_boxes" placeholder="Ingrese transporte" autocomplete="off">
             </div>
         </div>
         <!-- Pedido -->
         <div class="box_products">
             <h2 class="main_title">Registro de Pedidos</h2>
             <div class="second_sub_container">
-                <input type='text' name="codigo" class="info_boxes" id="codigo" placeholder="ingrese código" onchange="limpiarNombre()">
-                <input type="text" name="producto" class="info_boxes" id="producto" placeholder="ingreso nombre" size="100"  onchange="limpiarCodigo()">
+                <input type='text' name="codigo" class="info_boxes" id="codigo" placeholder="ingrese código" onchange="limpiarNombre()" autocomplete="off">
+                <input type="text" name="producto" class="info_boxes" id="producto" placeholder="ingreso nombre" size="100"  onchange="limpiarCodigo()" autocomplete="off">
 
                 <ul class="autocomplete_list" id="results"></ul>
                 <ul id="resultsProducto" class="autocomplete_listPro"></ul>
@@ -59,17 +61,17 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 <!--<ul class="autocomplete_listCod" id="results"></ul>
                 <ul class="autocomplete_list" id="resultsProducto"></ul>-->
                 <label for="existencia" class="subtitle_input">EXISTENCIA</label>
-                <input type="text" class="info_boxes" name="existencia" id="existencia" placeholder="EXISTENCIA" readonly>
+                <input type="text" class="info_boxes" name="existencia" id="existencia" placeholder="EXISTENCIA" readonly autocomplete="off">
                 <!--Agrego un hidden para almacenar el precio mas bajo de la lista-->
-                <input type="hidden" name="precioMasBajo" id="precioMasBajo">
+                <input type="hidden" name="precioMasBajo" id="precioMasBajo" autocomplete="off">
                 <label for="cantidad" class="subtitle_input">CANTIDAD</label>
-                <input type="number" name="cantidad" class="info_boxes" id="cantidad" placeholder="CANTIDAD" onkeyup="CalculoSubtotal()">
+                <input type="number" name="cantidad" class="info_boxes" id="cantidad" placeholder="CANTIDAD" onchange="CalculoSubtotal()" autocomplete="off">
                 <label for="tipo_precio" class="subtitle_input">TIPO PRECIO</label>
                 <select name="tipo_precio" class="selector" id="tipo_precio" onchange="colocarPrecio()"></select>
                 <label for="precio" class="subtitle_input">PRECIO</label>
-                <input type="text" name="precio" class="info_boxes" id="precio" placeholder="PRECIO" onchange="CalculoSubtotal()">
+                <input type="text" name="precio" class="info_boxes" id="precio" placeholder="PRECIO" onchange="CalculoSubtotal()" autocomplete="off">
                 <label for="subtotal" class="subtitle_input">SUBTOTAL</label>
-                <input type="text" name="subtotal" class="info_boxes" id="subtotal" placeholder="SUBTOTAL">
+                <input type="text" name="subtotal" class="info_boxes" id="subtotal" placeholder="SUBTOTAL" autocomplete="off">
                 <label for="observaciones_producto" class="subtitle_input">OBSERVACIONES</label>
                 <textarea name="observaciones_producto" class="comments" id="observaciones_producto" cols="30" rows="10"></textarea>
                 <button class="add" onclick="cargarDetalle()" type="button">Agregar</button>

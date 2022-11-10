@@ -21,7 +21,7 @@ session_start();
     <title>Registro de clientes</title>
 </head>
 <body onload="listaDepartamentos(),limpiarFormulario(),listaRegiones()">
-    <form action="../data/registro_cliente.php" method="POST" id="customer_registration" class="form_box">
+    <form action="../data/registro_cliente.php" method="POST" id="customer_registration" class="form_box" autocomplete="off">
         <!-- Boton para regresar al menu -->
         <div class="above_all">
         <a href="../index.php">
