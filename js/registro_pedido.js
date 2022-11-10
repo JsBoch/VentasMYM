@@ -118,6 +118,7 @@ function GuardarRegistro() {
   let departamentoId = document.getElementById("departamento").value;
   let observaciones = document.getElementById("observaciones").value;
   let prioridad = document.getElementById("sltPrioridad").value;
+  let transporte = document.getElementById("transporte").value;
   var contenderoTabal = document.getElementById("main-container");
   var agregarAlPedido = document.getElementById("shopping_cart");
   var enviarPedido = document.getElementById("send_order");
@@ -131,7 +132,8 @@ function GuardarRegistro() {
     id_departamento: departamentoId,
     observaciones: observaciones,
     prioridad: prioridad,
-    nosolicitud: 0
+    nosolicitud: 0,
+    transporte: transporte
   });
 
   var data1 = JSON.stringify(principal);
