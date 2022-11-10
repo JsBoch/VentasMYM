@@ -435,19 +435,24 @@ function CargarExistencia(codigo) {
         dataType: 'json',
         type: 'post',
         data: datos,
-        success: function (object) {
+        success: function (object) {            
             let existencia = 0;
             let inputExistencia = document.getElementById("existencia");
+           
             /**
              * se recorren los dos resultados que devuelve la consulta 
              * y se suman esas existencias para colocarlas en el control para que la vea 
              * el usuario.
              */
             $.each(object, function (i, resultado) {
-                existencia += parseInt(resultado.existencia);
+                existencia += parseFloat(resultado.existencia);
             });
-
             inputExistencia.value = existencia;
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log("Otro: " + jqXHR);
+            console.log("Status: " + textStatus);
+            console.log("Error: " + errorThrown);
         }
     });
 }

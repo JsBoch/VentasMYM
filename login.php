@@ -13,7 +13,8 @@ if (isset($_POST["user_name"]) && isset($_POST["user_password"])) {
 
         if (!$stmt = $mysqli->prepare("SELECT " .
             "u.idadm_usuario as id," .
-            "concat(u.nombres,' ',u.apellidos) as nombre " .
+            "concat(u.nombres,' ',u.apellidos) as nombre," .
+            "u.id_sucursal " .
             "FROM adm_usuario u " .
             "WHERE " .
             "u.usuario = ? " .
@@ -35,8 +36,10 @@ if (isset($_POST["user_name"]) && isset($_POST["user_password"])) {
                 $fila = $result->fetch_assoc();
                 $codigoRespuesta = $fila["id"]; //usuario válido
                 $mensajeRespuesta = $fila["nombre"];
+                $sucursal = $fila["id_sucursal"];
                 $_SESSION['usuarioId'] = $fila['id'];
                 $_SESSION['usuarioNombre'] = $fila['nombre'];
+                $_SESSION['sucursal'] = $sucursal;
                 $_SESSION['estado'] = 'conectado';
 
                 header("Location: index.php");
@@ -61,6 +64,7 @@ if (isset($_POST["user_name"]) && isset($_POST["user_password"])) {
         $_SESSION['usuarioId'] = 0;
                 $_SESSION['usuarioNombre'] = '';
                 $_SESSION['estado'] = 'desconectado';
+                $_SESSION['sucursal'] = '1';
         header("Location: acceso.php");
     }
 //RESPUESTA
@@ -74,6 +78,7 @@ if (isset($_POST["user_name"]) && isset($_POST["user_password"])) {
     $_SESSION['usuarioId'] = 0;
                 $_SESSION['usuarioNombre'] = '';
                 $_SESSION['estado'] = 'desconectado';
+                $_SESSION['sucursal'] = '1';
     echo $codigoRespuesta . ' ' . $mensajeRespuesta;
     header("Location: acceso.php");
     
