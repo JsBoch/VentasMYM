@@ -45,7 +45,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 <label for="observaciones_producto" class="subtitle_input">OBSERVACIONES</label>
                 <textarea name="observaciones" class="comments" id="observaciones" cols="119" rows="5"></textarea>
                 <label for="transporte" class="subtitle_input">TRANSPORTE</label>
-                <input type="text" name="transporte" id="transporte" class="info_boxes" placeholder="Ingrese transporte" autocomplete="off">
+                <input type="text" name="transporte" id="transporte" class="info_boxes" placeholder="Ingrese transporte">
             </div>
         </div>
         <!-- Pedido -->
@@ -67,7 +67,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 <label for="cantidad" class="subtitle_input">CANTIDAD</label>
                 <input type="number" name="cantidad" class="info_boxes" id="cantidad" placeholder="CANTIDAD" onchange="CalculoSubtotal()" autocomplete="off">
                 <label for="tipo_precio" class="subtitle_input">TIPO PRECIO</label>
-                <select name="tipo_precio" class="selector" id="tipo_precio" onchange="colocarPrecio()"></select>
+                <select name="tipo_precio" class="selector" id="tipo_precio" onchange="colocarPrecio(),CalculoSubtotal()"></select>
                 <label for="precio" class="subtitle_input">PRECIO</label>
                 <input type="text" name="precio" class="info_boxes" id="precio" placeholder="PRECIO" onchange="CalculoSubtotal()" autocomplete="off">
                 <label for="subtotal" class="subtitle_input">SUBTOTAL</label>

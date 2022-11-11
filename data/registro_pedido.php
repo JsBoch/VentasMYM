@@ -24,6 +24,7 @@ foreach ($jsonMain as $item) {
     $estadoRegistro = 1;
     $prioridad = $item["prioridad"];
     $noSolicitud = $item["nosolicitud"];
+    $transporte = $item["transporte"];
 }
 /**
  * Se almacena en la base de datos
@@ -87,14 +88,15 @@ if ($mysqli !== null) {
             "observaciones," .
             "estado," .
             "id_cliente," .
-            "prioridad) " .
-            " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?);")) {
+            "prioridad," .
+            "transporte) " .
+            " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?);")) {
             //echo "fallo No." . $mysqli->errno . " " . $mysqli->error;
             $codigoRespuesta = -1;
 
         } else
-        if (!$stmt->bind_param("iiiiissssiis", $envioID, $solicitudID, $departamentoID, $municipioID, $empleadoID,
-            $codigoCliente, $nombreCliente, $fechaHoraRegistro, $observacionesRegistro, $estadoRegistro, $clienteID,$prioridad)) {
+        if (!$stmt->bind_param("iiiiissssiiss", $envioID, $solicitudID, $departamentoID, $municipioID, $empleadoID,
+            $codigoCliente, $nombreCliente, $fechaHoraRegistro, $observacionesRegistro, $estadoRegistro, $clienteID,$prioridad,$transporte)) {
             //echo "fallo la vinculacion: " . $mysqli->errno . " " . $mysqli->error;
             $codigoRespuesta = -2;
         } else if (
