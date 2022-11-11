@@ -41,7 +41,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 <input type="text" name="cliente" id="cliente" class="info_boxes" placeholder="Nombre de cliente" data-id="0" onblur="obtenerIdCliente()" autocomplete="off">
                 <ul id="ulclienteresult"  class="autocomplete_listClient"></ul>
                 <label for="sltPrioridad" class="subtitle_input">PRIORIDAD</label>
-                <select name="sltPrioridad" id="sltPrioridad" class="selectors"></select>
+                <select name="sltPrioridad" id="sltPrioridad" class="selector"></select>
                 <label for="observaciones_producto" class="subtitle_input">OBSERVACIONES</label>
                 <textarea name="observaciones" class="comments" id="observaciones" cols="119" rows="5"></textarea>
                 <label for="transporte" class="subtitle_input">TRANSPORTE</label>
@@ -73,7 +73,9 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 <label for="subtotal" class="subtitle_input">SUBTOTAL</label>
                 <input type="text" name="subtotal" class="info_boxes" id="subtotal" placeholder="SUBTOTAL" autocomplete="off">
                 <label for="observaciones_producto" class="subtitle_input">OBSERVACIONES</label>
+                <div class="comentario">
                 <textarea name="observaciones_producto" class="comments" id="observaciones_producto" cols="30" rows="10"></textarea>
+                </div>
                 <button class="add" onclick="cargarDetalle()" type="button">Agregar</button>
                 <button class="see" onclick="seeOrder('subContainerDates')" type="button">Ver Pedido</button>
             </div>
