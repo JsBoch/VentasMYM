@@ -1,6 +1,6 @@
 var listaDetalle = new Array();
 
-function cargarDetalle() {
+function cargarDetalle() {  
   let codigo = document.getElementById("codigo").value;
   let producto = document.getElementById("producto").value;
   let cantidad = document.getElementById("cantidad").value;
@@ -138,6 +138,7 @@ function GuardarRegistro() {
 
   var data1 = JSON.stringify(principal);
   var data2 = JSON.stringify(listaDetalle);
+
 
   $.ajax({
     url: "../data/registro_pedido.php",
