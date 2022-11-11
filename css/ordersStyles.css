@@ -44,10 +44,10 @@ background: linear-gradient(40deg, rgba(6,255,139,1) 0%, rgba(33,235,178,1) 26%,
 }
 
 .sub_container {
-    width: 90%;
+    width: 70%;
     height: 65%;
     margin: auto;
-    margin-top: 1%;
+    margin-top: 4%;
 }
 
 .sub_container-dates {
@@ -60,22 +60,36 @@ background: linear-gradient(40deg, rgba(6,255,139,1) 0%, rgba(33,235,178,1) 26%,
     padding-top: 1%;
 }
 
+
+.first_half{
+ width: 50%;
+ height: 100%;
+ float: left; 
+ display: flex;
+ flex-direction: column;
+}
+
+.second_half{
+    width: 50%;
+    height: 100%;
+    float: left; 
+    float: left; 
+    display: flex;
+    flex-direction: column;
+}
+
 #departamento {
-    width: 30%;
-    height: 20%;
+    width: 50%;
+    height: 15%;
     float: left;
 }
 
-#cliente {
-    width: 67%;
-    height: 20%;
-    margin-left: 3%;
-    float: left;
-}
 
 .selectors {
     background-color: var(--balck);
     color: white;
+    width: 80%;
+    height: 15%;
     margin-bottom: 20px;
     padding-left: 5px;
     border: 3px var(--celeseTra) solid;
@@ -94,7 +108,7 @@ background: linear-gradient(40deg, rgba(6,255,139,1) 0%, rgba(33,235,178,1) 26%,
     color: white;
     width: 180px;
     max-height: 40%;
-    top: 7vh; 
+    top: 10vh; 
     position: absolute;
     list-style: none;
     overflow:scroll;
@@ -224,22 +238,19 @@ i {
     color: white;
     width: 180px;
     height: 14%;
-    margin-bottom: 20px;
+    margin-bottom: 55px;
     padding-left: 5px;
     border: 3px var(--celeseTra) solid;
     outline: none;
 }
 
-#cantidad {
-    margin-bottom: 100px;
-}
 
 .selector {
     background-color: var(--balck);
     color: white;
     width: 200px;
     height: 15%;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
     padding-left: 5px;
     border: 3px var(--celeseTra) solid;
     -moz-appearance: none;
@@ -255,9 +266,11 @@ i {
 .add {
     background-color: var(--dGreen);
     color: white;
-    width: 30%;
-    height: 20%;
-    right: 63%;
+    width: 20%;
+    height: 15%;
+    position: absolute;
+    right: 0;
+    bottom: 0;
     margin-top: 0%;
     border: 4px var(--celese) dashed;
     font-size: 20px;
@@ -470,12 +483,23 @@ i {
 
 .subtitle_input{
     color: var(--celese);
-    font-size: 18px;
+    font-size: 11px;
 }
+
 
 /* responsive */
 
 @media (max-width: 1280px) {
+
+    .first_half{
+        width: 100%;
+    }
+    .second_half{
+        width: 100%;
+    }
+    .comentario{
+        width: 100%;
+    }
     body{
         height: 100vh;
     }
@@ -518,6 +542,7 @@ i {
     .info_boxes {
         width: 100%;
         height: 10vh;
+        margin-bottom: 20px;
     }
     .above_all a h3 {
         display: none;
@@ -525,6 +550,7 @@ i {
     .selector {
         width: 100%;
         height: 10vh;
+        margin-bottom: 20px;
     }
     #cantidad {
         margin-bottom: 3vh;
@@ -532,7 +558,7 @@ i {
     .add {
         width: 100%;
         height: 10vh;
-        position: none;
+        position: relative;
         right: 0%;
         margin-top: 5%;
         margin-bottom: 5vh;
@@ -594,6 +620,9 @@ i {
         width: 80%;
         top: 36vh;
         left: auto;
+    }
+    .main_title {
+        margin-bottom: 10%;
     }
 }
 
