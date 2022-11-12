@@ -52,7 +52,7 @@ background: linear-gradient(40deg, rgba(6,255,139,1) 0%, rgba(33,235,178,1) 26%,
 
 .sub_container-dates {
     background-color: var(--dark);
-    width: 70%;
+    width: 90%;
     height: 80vh;
     margin: auto;
     margin-top: 4vh;

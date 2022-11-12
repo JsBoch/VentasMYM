@@ -62,20 +62,32 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
             <!-- cliente -->
             <h2 class="main_title">Cliente</h2>
             <div class="sub_container">
+            <div class="first_half">
+                <label for="departamento" class="subtitle_input">DEPARTAMENTO</label>
                 <select name="departamento" class="selectors" id="departamento" onblur="AsignarCliente()"></select>
+                <label for="cliente" class="subtitle_input">CLIENTE</label>
                 <select name="cliente" class="selectors" id="cliente"></select>
-                <select name="sltPrioridad" id="sltPrioridad"  class="selectors"></select>
+                <label for="sltPrioridad" class="subtitle_input">PRIORIDAD</label>
+                <select name="sltPrioridad" id="sltPrioridad"  class="selector"></select>
+                </div>
+                <div class="second_half">
+                <label for="observaciones_producto" class="subtitle_input">OBSERVACIONES</label>
                 <textarea name="observaciones" class="comments" id="observaciones" cols="119" rows="5"></textarea>
                 <input type="hidden" name="hdnNoSolicitud" id="hdnNoSolicitud">
                 <input type="hidden" name="hdndepartamentoid" id="hdndepartamentoid">
                 <input type="hidden" name="hdnclienteid" id="hdnclienteid">
+                <label for="transporte" class="subtitle_input">TRANSPORTE</label>
+                <input type="text" name="transporte" id="transporte" class="info_boxes" placeholder="Ingrese transporte">
+                </div>
             </div>
         </div>
         <!-- Pedido -->
         <div class="box_products">
             <h2 class="main_title">Registro de Pedidos</h2>
             <div class="second_sub_container">
+                <label for="codigo" class="subtitle_input">CODIGO</label>
                 <input type='text' name="codigo" class="info_boxes" id="codigo" placeholder="ingrese código" onblur="listaPrecios(),getNombreProducto()"></select>
+                <label for="producto" class="subtitle_input">PRODUTO</label>
                 <input type="text" name="producto" class="info_boxes" id="producto" placeholder="ingreso nombre" size="100" onblur="getCodigo(),listaPrecios()">
 
                 <ul class="autocomplete_list" id="results">
@@ -84,11 +96,19 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
 
                 <ul class="autocomplete_listCod" id="results"></ul>
                 <ul class="autocomplete_list" id="resultsProducto"></ul>
+                <label for="cantidad" class="subtitle_input">CANTIDAD</label>
                 <input type="number" name="cantidad" class="info_boxes" id="cantidad" placeholder="CANTIDAD" onblur="colocarPrecio(),CalculoSubtotal()">
+                <label for="tipo_precio" class="subtitle_input">TIPO PRECIO</label>
                 <select name="tipo_precio" class="selector" id="tipo_precio" onblur="colocarPrecio()"></select>
+                <label for="precio" class="subtitle_input">PRECIO</label>
+                <input type="text" name="precio" class="info_boxes" id="precio" placeholder="PRECIO" onchange="CalculoSubtotal()" autocomplete="off">
                 <input type="hidden" name="precio" class="info_boxes" id="precio" placeholder="PRECIO" onblur="CalculoSubtotal()">
+                <label for="subtotal" class="subtitle_input">SUBTOTAL</label>
                 <input type="text" name="subtotal" class="info_boxes" id="subtotal" placeholder="SUBTOTAL">
+                <label for="observaciones_producto" class="subtitle_input">OBSERVACIONES</label>
+                <div class="comentario"> 
                 <textarea name="observaciones_producto" class="comments" id="observaciones_producto" cols="30" rows="10"></textarea>
+                </div>
                 <button class="add" onclick="cargarDetalleEdit()" type="button">Agregar</button>
                 <button class="see" onclick="seeOrder('order_form')" type="button">Ver Pedido</button>
             </div>
