@@ -7,6 +7,12 @@ $codigoRespuesta = 1;
 
 if ($mysqli !== null && $mysqli->connect_errno === 0) {
 
+    /**
+     * Se agrega un UNION para obtener los productos de ambas empresas. 
+     * Se agrega una condicionante IF para saber si la consulta se realiza en la central
+     * o en la sucursal de Petén. 
+     * [este código se deberá optimizar para cuando se incluyan más sucursales]
+     */
     $stmt = "SELECT " .
         "p.codigormym," .
         "p.nombre," .
@@ -17,10 +23,47 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
         "FROM adm_producto p " .
         "LEFT JOIN precio_producto pp ON p.idproducto = pp.idproducto " .
         "WHERE p.estado = 1 " .
-        //"AND (p.codigormym like '%$producto%' ". 
-        //"OR p.nombre like '%$producto%') ".
-        "order by p.nombre;";
+        "and p.idempresa = 1 " .      
+        "UNION ";
 
+    $numeroSucursal = 0;
+    if(isset($_SESSION['sucursal']))
+    {
+        $numeroSucursal = $_SESSION['sucursal'];
+    }
+
+    if(intval($numeroSucursal) == 0 || intval($numeroSucursal == 1))
+    {
+        $stmt += "SELECT " .        
+        "p.codigormym," .
+        "p.nombre," .
+        "if(pp.venta is null,0,pp.venta) as venta," .
+        "if(pp.uno is null,0,pp.uno) as uno," .
+        "if(pp.dos is null,0,pp.dos) as dos," .
+        "if(pp.tres is null,0,pp.tres) as tres " .
+        "FROM `db_mymsa`.`adm_producto` p " .
+        "LEFT JOIN `db_mymsa`.`precio_producto` pp ON p.idproducto = pp.idproducto " .
+        "WHERE p.estado = 1 " .
+        "and p.idempresa = 2 " .
+        "group by codigormym " .
+        "order by nombre;";
+    }
+    else if(intval($numeroSucursal == 2))
+    {
+        $stmt += "SELECT " .        
+        "p.codigormym," .
+        "p.nombre," .
+        "if(pp.venta is null,0,pp.venta) as venta," .
+        "if(pp.uno is null,0,pp.uno) as uno," .
+        "if(pp.dos is null,0,pp.dos) as dos," .
+        "if(pp.tres is null,0,pp.tres) as tres " .
+        "FROM `db_mymsapt`.`adm_producto` p " .
+        "LEFT JOIN `db_mymsapt`.`precio_producto` pp ON p.idproducto = pp.idproducto " .
+        "WHERE p.estado = 1 " .
+        "and p.idempresa = 2 " .
+        "group by codigormym " .
+        "order by nombre;";
+    }
     $result = $mysqli->query($stmt);
 
     $indice = 0;
