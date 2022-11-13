@@ -55,10 +55,15 @@
         <!-- formulario -->
         <h2 class="main_title">Registro De Clientes</h2>
         <div class="sub_container">
+            <label for="txtCodigo" class="subtitle_input">CÓDIGO</label>
             <input type="text" name="txtCodigo" id="txtCodigo" placeholder="codigo" class="info_boxes">
+            <label for="nit" class="subtitle_input">NIT</label>       
             <input class="info_boxes" placeholder="Ingrese NIT" name="nit" id="nit" type="text">
+            <label for="dpi" class="subtitle_input">DPI</label>
             <input class="info_boxes" placeholder="Ingrese DPI" name="dpi" id="dpi" type="text">
+            <label for="nombre" class="subtitle_input">NOMBRE</label>
             <input class="info_boxes" placeholder="Ingrese Nombre" name="nombre" id="nombre" type="text" onblur="EstablecerRazonSocialConsulta()">
+            <label for="razonsocial" class="subtitle_input">RAZÓN SOCIAL</label>
             <input class="info_boxes" placeholder="Ingrese Razón Social" name="razonsocial" id="razonsocial" type="text">
             <!-- <div class="label_depa">
         <label for="depa">DEPARTAMENTO</label>
@@ -67,19 +72,27 @@
             <!-- <div class="label_muni">
         <label for="municipio">MUNICIPIO</label>
         </div>    -->
+        <label for="municipio" class="subtitle_input">MUNICIPIO</label>
             <select class="selectors" name="SM" id="municipio" form="customer_registration">
             </select>
+            <label for="direccion" class="subtitle_input">DIRECCIÓN</label>
             <input class="info_boxes" placeholder="Ingrese Dirección" name="direccion" id="direccion" type="text">
+            <label for="telefono" class="subtitle_input">TELEFONO</label>
             <input class="info_boxes" placeholder="Ingrese Teléfono" name="telefono" id="telefono" type="number">
+            <label for="correo" class="subtitle_input">CORREO</label>
             <input class="info_boxes" placeholder="Ingrese@email.com" name="correo" id="correo" type="email">
             <!--<input class="info_boxes" placeholder="Ingrese Region" name="region" id="region" type="text">-->
+            <label for="region" class="subtitle_input">REGIÓN</label>
             <select name="region" id="region" class="selectors"></select>
             <!-- <div class="label_com">
         <label for="comentario">OBSERVACIONES</label>
         </div>    -->   
-            <input type="text" name="txtCodigoPostal" id="txtCodigoPostal" placeholder="código postal" class="info_boxes">
-            <textarea class="comments" rows="10" cols="8" name="comentario" id="comentario"></textarea>
-            <input style="width: auto;" class="info_boxes" placeholder="Ingrese Transporte" name="transporte" id="transporte" type="text">
+        <label for="txtCodigoPostal" class="subtitle_input">CÓDIGO POSTAL</label>   
+        <input type="text" name="txtCodigoPostal" id="txtCodigoPostal" placeholder="código postal" class="info_boxes">
+          <label for="comentario" class="subtitle_input">OBSERVACIÓN</label>
+          <textarea class="comments" rows="10" cols="8" name="comentario" id="comentario"></textarea>
+          <label for="transporte" class="subtitle_input">TRANSPORTE</label>
+          <input style="width: auto;" class="info_boxes" placeholder="Ingrese Transporte" name="transporte" id="transporte" type="text">
 
             <div class="map">
                 <button type="button" name="bttnUbicacion" id="bttnUbicacion" class="button_location" onclick="ObtenerUbicacion()">UBICACIÓN</button>

@@ -239,6 +239,7 @@ function GuardarNuevoRegistro() {
   document.getElementById("precio").value = "";
   document.getElementById("subtotal").value = "";
   document.getElementById("observaciones_producto").value = "";
+  document.getElementById("existencia").value = "";
 
   let $selectListado = $("#listado");
   $selectListado.empty();

@@ -337,6 +337,11 @@ i {
     transition-delay: 0.75s;
 } */
 
+.subtitle_input{
+    color: var(--celese);
+    font-size: 11px;
+}
+
 .map{
     display: none;
     background-color: #080d10ba;
