@@ -16,7 +16,8 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
     "s.observaciones," .
     "s.id_departamento," .
     "s.id_cliente," .
-    "s.prioridad " .
+    "s.prioridad," .
+    "s.transporte ".
     "from vnt_solicitud_producto s ". 
     "join clientes c on s.id_cliente = c.idcliente ". 
     "join adm_departamentopais d on c.iddepartamento = d.iddepartamento ".
@@ -38,7 +39,8 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
                     'observaciones' => $row['observaciones'],
                     'id_departamento' => $row['id_departamento'],
                     'id_cliente' => $row['id_cliente'],
-                    'prioridad' => $row['prioridad']                
+                    'prioridad' => $row['prioridad'],
+                    'transporte' => $row['transporte']                
                 );
                 $indice++;
             }
@@ -84,7 +86,8 @@ if ($codigoRespuesta != 1) {
         'observaciones' => '',
         'id_departamento' => 0,
         'id_cliente' => 0,
-        'prioridad' => 'NORMAL'
+        'prioridad' => 'NORMAL',
+        'transporte' => ''
     );
 
     echo json_encode($return_arr);

@@ -88,7 +88,7 @@ function listaClientesConsultaRegistro() {
 }
 
 function listaClientesConsulta() {
-    let departamentoId = $('#depa').val();
+    let departamentoId = $('#departamento').val();    
     let datos = { "iddepartamento": departamentoId }
     $.ajax({
         url: '../data/lista_clientes.php',
@@ -101,7 +101,8 @@ function listaClientesConsulta() {
             $.each(object, function (i, cliente) {
                 $selectCliente.append('<option value=' + cliente.idcliente + '>' + cliente.nombre + '</option>');
             });
-        }
+            AsignarCliente();
+        }        
     });
 }
 
@@ -143,7 +144,7 @@ function listaPrecios(codigo) {
     //let producto = document.getElementById('codigo').selectedOptions[0].getAttribute("data-valuep")
     //console.log(producto);
     //let codigo = $('#codigo').val();
-    let datos = { "codigo": codigo }
+    let datos = { "codigo": codigo }    
     $.ajax({
         url: '../data/lista_precios.php',
         dataType: 'json',

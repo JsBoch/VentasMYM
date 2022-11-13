@@ -12,8 +12,17 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
      * Se agrega una condicionante IF para saber si la consulta se realiza en la central
      * o en la sucursal de Petén. 
      * [este código se deberá optimizar para cuando se incluyan más sucursales]
-     */
-    $stmt = "SELECT " .
+     */    
+
+    $numeroSucursal = 0;
+    if(isset($_SESSION['sucursal']))
+    {
+        $numeroSucursal = $_SESSION['sucursal'];
+    }
+
+    if(intval($numeroSucursal) == 0 || intval($numeroSucursal == 1))
+    {
+        $stmt = "SELECT " .
         "p.codigormym," .
         "p.nombre," .
         "if(pp.venta is null,0,pp.venta) as venta," .
@@ -24,17 +33,8 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
         "LEFT JOIN precio_producto pp ON p.idproducto = pp.idproducto " .
         "WHERE p.estado = 1 " .
         "and p.idempresa = 1 " .      
-        "UNION ";
-
-    $numeroSucursal = 0;
-    if(isset($_SESSION['sucursal']))
-    {
-        $numeroSucursal = $_SESSION['sucursal'];
-    }
-
-    if(intval($numeroSucursal) == 0 || intval($numeroSucursal == 1))
-    {
-        $stmt += "SELECT " .        
+        "UNION " .
+        "SELECT " .        
         "p.codigormym," .
         "p.nombre," .
         "if(pp.venta is null,0,pp.venta) as venta," .
@@ -50,7 +50,19 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
     }
     else if(intval($numeroSucursal == 2))
     {
-        $stmt += "SELECT " .        
+        $stmt = "SELECT " .
+        "p.codigormym," .
+        "p.nombre," .
+        "if(pp.venta is null,0,pp.venta) as venta," .
+        "if(pp.uno is null,0,pp.uno) as uno," .
+        "if(pp.dos is null,0,pp.dos) as dos," .
+        "if(pp.tres is null,0,pp.tres) as tres " .
+        "FROM adm_producto p " .
+        "LEFT JOIN precio_producto pp ON p.idproducto = pp.idproducto " .
+        "WHERE p.estado = 1 " .
+        "and p.idempresa = 1 " .      
+        "UNION " .
+        "SELECT " .        
         "p.codigormym," .
         "p.nombre," .
         "if(pp.venta is null,0,pp.venta) as venta," .

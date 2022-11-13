@@ -44,7 +44,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
         <div class="orders-product">
             <div class="orders">
                 <label for="listaPedidos">Pedidos</label>
-                <select name="listaPedidos" id="listaPedidos" class="selectors" onblur="ConsultaProductos()"></select>
+                <select name="listaPedidos" id="listaPedidos" class="selectors" onchange="ConsultaProductos()"></select>
             </div>
             <div class="products">
                 <label for="listaProductos">Productos</label>
@@ -64,7 +64,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
             <div class="sub_container">
             <div class="first_half">
                 <label for="departamento" class="subtitle_input">DEPARTAMENTO</label>
-                <select name="departamento" class="selectors" id="departamento" onblur="AsignarCliente()"></select>
+                <select name="departamento" class="selectors" id="departamento"></select>
                 <label for="cliente" class="subtitle_input">CLIENTE</label>
                 <select name="cliente" class="selectors" id="cliente"></select>
                 <label for="sltPrioridad" class="subtitle_input">PRIORIDAD</label>
@@ -86,14 +86,19 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
             <h2 class="main_title">Registro de Pedidos</h2>
             <div class="second_sub_container">
                 <label for="codigo" class="subtitle_input">CODIGO</label>
-                <input type='text' name="codigo" class="info_boxes" id="codigo" placeholder="ingrese código" onblur="listaPrecios(),getNombreProducto()"></select>
+                <input type='text' name="codigo" class="info_boxes" id="codigo" placeholder="ingrese código" onchange="limpiarNombre()"></select>
                 <label for="producto" class="subtitle_input">PRODUTO</label>
-                <input type="text" name="producto" class="info_boxes" id="producto" placeholder="ingreso nombre" size="100" onblur="getCodigo(),listaPrecios()">
+                <input type="text" name="producto" class="info_boxes" id="producto" placeholder="ingreso nombre" size="100" onchange="limpiarCodigo()">
 
                 <ul class="autocomplete_list" id="results">
                 </ul>
                 <ul id="resultsProducto" class="autocomplete_listPro"></ul>
 
+                <label for="existencia" class="subtitle_input">EXISTENCIA</label>
+                <input type="text" class="info_boxes" name="existencia" id="existencia" placeholder="EXISTENCIA" readonly autocomplete="off">
+                <!--Agrego un hidden para almacenar el precio mas bajo de la lista-->
+                <input type="hidden" name="precioMasBajo" id="precioMasBajo" autocomplete="off">
+                
                 <ul class="autocomplete_listCod" id="results"></ul>
                 <ul class="autocomplete_list" id="resultsProducto"></ul>
                 <label for="cantidad" class="subtitle_input">CANTIDAD</label>

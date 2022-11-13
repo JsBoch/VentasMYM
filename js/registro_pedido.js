@@ -151,10 +151,12 @@ function GuardarRegistro() {
     },
     success: function (object) {
       //console.log(object);
+      alertify.success("Registro almacenado con exito");
     },
     error: function (jqXHR, textStatus, errorThrown) {
       console.log("Status: " + textStatus);
       console.log("Error: " + errorThrown);
+      alertify.error("No se pudo almacenar el registro");
     },
   });
   let clienteRegistro = document.getElementById("cliente");
@@ -178,9 +180,7 @@ function GuardarRegistro() {
     agregarAlPedido.style.display = "none";
     enviarPedido.style.display = "none";
     fechas.style.display = "block";
-  }
-
-  alertify.success("Registro almacenado con exito");
+  }  
 }
 
 function QuitarItemDeLista() {

@@ -26,7 +26,7 @@ function ConsultarPedidos() {
     dataType: "json",
     type: "post",
     data: datos,
-    success: function (object) {      
+    success: function (object) {
       let registro = "";
       var $selectPedidos = $("#listaPedidos");
       $selectPedidos.empty();
@@ -46,6 +46,8 @@ function ConsultarPedidos() {
           "<option value=" + pedido.id_solicitud + ">" + registro + "</option>"
         );
       });
+
+      ConsultaProductos();
     },
   });
 
@@ -79,10 +81,10 @@ function ConsultaProductos() {
           producto.observaciones;
         $selectProductos.append(
           "<option value=" +
-            producto.codigo_producto +
-            ">" +
-            registro +
-            "</option>"
+          producto.codigo_producto +
+          ">" +
+          registro +
+          "</option>"
         );
       });
     },
@@ -90,12 +92,16 @@ function ConsultaProductos() {
   //console.log(solicitudId);
 }
 
+/**
+ * Carga el registro del pedido que se requiere editar
+ */
 function CargaPedidoEdit() {
   let departamento;
   let observaciones;
   var departamentoId;
   let prioridad;
   let noSolicitud;
+  let transporte;
 
   solicitudId = $("#listaPedidos").val();
   $.ajax({
@@ -104,18 +110,20 @@ function CargaPedidoEdit() {
     type: "post",
     data: { id_solicitud: solicitudId },
     success: function (object) {
-      departamentoId = object[0].id_departamento;
-      clienteIdSeleccion = object[0].id_cliente;
+      departamentoId = object[0].id_departamento;      
+      clienteIdSeleccion = object[0].id_cliente;      
       observaciones = object[0].observaciones;
       prioridad = object[0].prioridad;
       noSolicitud = object[0].nosolicitud;
+      transporte = object[0].transporte;
 
       $("#observaciones").val(observaciones);
       $("#departamento").val(departamentoId);
       $("#sltPrioridad").val(prioridad);
       $("#hdnNoSolicitud").val(noSolicitud);
-      listaClientesConsulta();
-      CargaProductosEdit(solicitudId);
+      $("#transporte").val(transporte);
+      listaClientesConsulta();      
+      CargaProductosEdit(solicitudId);      
     },
   });
 
@@ -175,6 +183,8 @@ function GuardarNuevoRegistro() {
   let observaciones = document.getElementById("observaciones").value;
   let prioridad = document.getElementById("sltPrioridad").value;
   let noSolicitud = document.getElementById("hdnNoSolicitud").value;
+  let transporte = document.getElementById("transporte").value;
+
   var formulario = document.getElementById("order_form");
   var contenderoTabal = document.getElementById("main-container");
   var agregarAlPedido = document.getElementById("shopping_cart");
@@ -189,7 +199,8 @@ function GuardarNuevoRegistro() {
     id_departamento: departamentoId,
     observaciones: observaciones,
     prioridad: prioridad,
-    nosolicitud: noSolicitud
+    nosolicitud: noSolicitud,
+    transporte: transporte
   });
 
   var data1 = JSON.stringify(principal);
@@ -206,10 +217,12 @@ function GuardarNuevoRegistro() {
     },
     success: function (object) {
       //console.log(object);
+      alertify.success("Registro almacenado con exito");
     },
     error: function (jqXHR, textStatus, errorThrown) {
       console.log("Status: " + textStatus);
       console.log("Error: " + errorThrown);
+      alertify.error("No se pudo almacenar el registro");
     },
   });
   let $selectLPedido = $("listaPedidos");
@@ -236,9 +249,7 @@ function GuardarNuevoRegistro() {
     agregarAlPedido.style.display = "none";
     enviarPedido.style.display = "none";
     fechas.style.display = "block";
-  }
-
-  alertify.success("Registro almacenado con exito");
+  }  
 }
 
 function QuitarItemDeListaEdit() {
