@@ -486,6 +486,10 @@ i {
     font-size: 11px;
 }
 
+.onlyUppercase{
+    text-transform:uppercase;
+}
+
 
 /* responsive */
 

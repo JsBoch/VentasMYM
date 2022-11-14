@@ -516,6 +516,11 @@ input[type=checkbox] {
     font-weight: lighter;
 }
 
+.onlyUppercase{
+    text-transform:uppercase;
+}
+
+
 @media (max-width: 1214px) {
     .autocomplete_listClient{
         width: 80%;
