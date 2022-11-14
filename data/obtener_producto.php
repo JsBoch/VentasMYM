@@ -4,34 +4,35 @@ $codigo = $_POST["codigo"];
 require_once 'connection.php';
 
 $codigoRespuesta = 1;
-
-if ($mysqli !== null && $mysqli->connect_errno === 0) {
-
-    $stmt = "";
+$stmt = "";
+if ($mysqli !== null && $mysqli->connect_errno === 0) {    
+    
     if (intval($_SESSION['sucursal']) == 1) {
         $stmt = "SELECT " .
             "p.nombre " .
             "FROM adm_producto p " .
             "WHERE p.estado = 1 " .
-            "AND p.codigormym = '$codigo' ";
+            "AND p.codigormym = '$codigo' " .
         "UNION " .
             "SELECT " .
             "p.nombre " .
             "FROM `db_mymsa`.`adm_producto` p " .
             "WHERE p.estado = 1 " .
-            "AND p.codigormym = '$codigo';";
+            "AND p.codigormym = '$codigo' ";
+            "GROUP BY nombre;";
     } else if (intval($_SESSION['sucursal']) == 2) {
         $stmt = "SELECT " .
             "p.nombre " .
             "FROM adm_producto p " .
             "WHERE p.estado = 1 " .
-            "AND p.codigormym = '$codigo' ";
+            "AND p.codigormym = '$codigo' " .
         "UNION " .
             "SELECT " .
             "p.nombre " .
             "FROM `db_mymsapt`.`adm_producto` p " .
             "WHERE p.estado = 1 " .
-            "AND p.codigormym = '$codigo';";
+            "AND p.codigormym = '$codigo' " .
+            "GROUP BY nombre;";
     }
 
     $result = $mysqli->query($stmt);
@@ -75,14 +76,14 @@ if ($codigoRespuesta !== 1) {
                 break;
             }
         case -3:{
-                $mensajeRespuesta = "NO SE LOCALIZARON REGISTROS";
+                $mensajeRespuesta = "NO SE LOCALIZARON REGISTROS ";
                 break;
             }
     }
     $return_arr = array();
     $indice = 0;
     $return_arr[$indice] = array(
-        'nombre' => "",
+        'nombre' => $mensajeRespuesta
     );
 
     echo json_encode($return_arr);

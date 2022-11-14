@@ -14,7 +14,7 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
             "FROM adm_producto p " .
             "WHERE p.estado = 1 " .
             "AND trim(p.nombre) = '$producto' " .
-            "UNION ";
+            "UNION " .
         "SELECT " .
             "p.codigormym " .
             "FROM `db_mymsa`.`adm_producto` p " .
@@ -27,7 +27,7 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
             "FROM adm_producto p " .
             "WHERE p.estado = 1 " .
             "AND trim(p.nombre) = '$producto' " .
-            "UNION ";
+            "UNION " .
         "SELECT " .
             "p.codigormym " .
             "FROM `db_mymsapt`.`adm_producto` p " .

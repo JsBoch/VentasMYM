@@ -218,7 +218,7 @@ function getNombreProducto(codigo) {
     //let inputCodigo = document.getElementById("codigo");
     //let codigo = inputCodigo.value; //$('#producto').val();      
     let datos = { "codigo": codigo }
-
+    
     if (codigo.length > 0 && codigo != "-3") {
 
         $.ajax({
@@ -227,6 +227,7 @@ function getNombreProducto(codigo) {
             type: 'post',
             data: datos,
             success: function (object) {
+                
                 var $inputProducto = $('#producto');
                 //$inputProducto.value = object[0].nombre;
                 document.getElementById("producto").value = object[0].nombre;

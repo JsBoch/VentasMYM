@@ -8,7 +8,9 @@ require_once 'connection.php';
 $codigoRespuesta = 1;
 
 if ($mysqli !== null && $mysqli->connect_errno === 0) {
-
+    $stmt = "";
+    if(intval($_SESSION["sucursal"]) == 1)
+    {
     $stmt = "SELECT " .        
         "if(pp.venta is null,0,pp.venta) as venta," .
         "if(pp.uno is null,0,pp.uno) as uno," .
@@ -17,7 +19,38 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
         "FROM adm_producto p " .
         "JOIN precio_producto pp ON p.idproducto = pp.idproducto " .    
         "WHERE p.estado = 1 " .
-         "AND p.codigormym = '$codigo' or p.nombre = '$codigo';";        
+         "AND p.codigormym = '$codigo' or p.nombre = '$codigo' " .
+         "union " .
+         "SELECT " .        
+        "if(pp.venta is null,0,pp.venta) as venta," .
+        "if(pp.uno is null,0,pp.uno) as uno," .
+        "if(pp.dos is null,0,pp.dos) as dos," .
+        "if(pp.tres is null,0,pp.tres) as tres " .
+        "FROM `db_mymsa`.`adm_producto` p " .
+        "JOIN precio_producto pp ON p.idproducto = pp.idproducto " .    
+        "WHERE p.estado = 1 " .
+         "AND p.codigormym = '$codigo' or p.nombre = '$codigo';";  
+    }else if(intval($_SESSION["sucursal"]) == 2)
+    {
+        "if(pp.venta is null,0,pp.venta) as venta," .
+        "if(pp.uno is null,0,pp.uno) as uno," .
+        "if(pp.dos is null,0,pp.dos) as dos," .
+        "if(pp.tres is null,0,pp.tres) as tres " .
+        "FROM adm_producto p " .
+        "JOIN precio_producto pp ON p.idproducto = pp.idproducto " .    
+        "WHERE p.estado = 1 " .
+         "AND p.codigormym = '$codigo' or p.nombre = '$codigo' " .
+         "union " .
+         "SELECT " .        
+        "if(pp.venta is null,0,pp.venta) as venta," .
+        "if(pp.uno is null,0,pp.uno) as uno," .
+        "if(pp.dos is null,0,pp.dos) as dos," .
+        "if(pp.tres is null,0,pp.tres) as tres " .
+        "FROM `db_mymsapt`.`adm_producto` p " .
+        "JOIN precio_producto pp ON p.idproducto = pp.idproducto " .    
+        "WHERE p.estado = 1 " .
+         "AND p.codigormym = '$codigo' or p.nombre = '$codigo';";  
+    }   
 
     $result = $mysqli->query($stmt);
 
