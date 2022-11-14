@@ -86,9 +86,9 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
             <h2 class="main_title">Registro de Pedidos</h2>
             <div class="second_sub_container">
                 <label for="codigo" class="subtitle_input">CODIGO</label>
-                <input type='text' name="codigo" class="info_boxes onlyUppercase" id="codigo" placeholder="ingrese código" onchange="limpiarNombre()"></select>
+                <input type='text' name="codigo" class="info_boxes" id="codigo" placeholder="ingrese código" onchange="limpiarNombre()"></select>
                 <label for="producto" class="subtitle_input">PRODUTO</label>
-                <input type="text" name="producto" class="info_boxes onlyUppercase" id="producto" placeholder="ingreso nombre" size="100" onchange="limpiarCodigo()">
+                <input type="text" name="producto" class="info_boxes" id="producto" placeholder="ingreso nombre" size="100" onchange="limpiarCodigo()">
 
                 <ul class="autocomplete_list" id="results">
                 </ul>

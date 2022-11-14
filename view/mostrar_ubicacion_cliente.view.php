@@ -26,7 +26,7 @@
             </a>
         </div>
         <select name="depa" class="department_selector" id="depa" onchange="listaClientesConsultaRegistro(),findValue()"></select>
-        <input type="text" name="cliente" id="cliente" class="customer_name_box onlyUppercase" placeholder="Nombre de cliente" data-id="0">
+        <input type="text" name="cliente" id="cliente" class="customer_name_box" placeholder="Nombre de cliente" data-id="0">
         <ul id="ulclienteresult" class="autocomplete_listClient"></ul>
         <button name="btnCliente" id="btnCliente" class="show_informationButton" onclick="findValue(),CargarDatosCliente()">Mostrar Información</button>
         <!-- <label class="text_checkbox">Editar Registro</label>
