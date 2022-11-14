@@ -516,9 +516,9 @@ input[type=checkbox] {
     font-weight: lighter;
 }
 
-.onlyUppercase{
+/* .onlyUppercase{
     text-transform:uppercase;
-}
+} */
 
 
 @media (max-width: 1214px) {
