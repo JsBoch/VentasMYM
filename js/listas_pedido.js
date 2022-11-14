@@ -269,7 +269,7 @@ function codigoProducto(datos) {
                 resultsHTML.innerHTML += "<li>" + results[i] + "</li>";
             }
         }
-        resultsHTML.style.padding = "1%";
+        resultsHTML.style.padding = "5px";
     };
 
     function getResults(input) {
@@ -320,7 +320,7 @@ function nombreProducto(datos) {
                 resultsHTMLProducto.innerHTML += "<li>" + results[i] + "</li>";
             }
         }
-        resultsHTMLProducto.style.padding = "1%";
+        resultsHTMLProducto.style.padding = "5px";
     };
 
     function getResults(input) {
@@ -385,7 +385,7 @@ function ClientesMatch(datos) {
                 resultsClienteHTML.innerHTML += "<li>" + results[i] + "</li>";
             }
         }
-        resultsClienteHTML.style.padding = "1%";
+        resultsClienteHTML.style.padding = "5px";
     };
 
     function getResultsClientes(input) {
