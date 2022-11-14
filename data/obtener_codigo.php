@@ -7,11 +7,34 @@ $codigoRespuesta = 1;
 
 if ($mysqli !== null && $mysqli->connect_errno === 0) {
 
-    $stmt = "SELECT " .
-        "p.codigormym " .        
-        "FROM adm_producto p " .        
-        "WHERE p.estado = 1 " .
-        "AND trim(p.nombre) = '$producto';";         
+    $stmt = "";
+    if (intval($_SESSION["sucursal"]) == 1) {
+        $stmt = "SELECT " .
+            "p.codigormym " .
+            "FROM adm_producto p " .
+            "WHERE p.estado = 1 " .
+            "AND trim(p.nombre) = '$producto' " .
+            "UNION ";
+        "SELECT " .
+            "p.codigormym " .
+            "FROM `db_mymsa`.`adm_producto` p " .
+            "WHERE p.estado = 1 " .
+            "AND trim(p.nombre) = '$producto' " .
+            "group by codigormym;";
+    } else if (intval($_SESSION["sucursal"]) == 2) {
+        "SELECT " .
+            "p.codigormym " .
+            "FROM adm_producto p " .
+            "WHERE p.estado = 1 " .
+            "AND trim(p.nombre) = '$producto' " .
+            "UNION ";
+        "SELECT " .
+            "p.codigormym " .
+            "FROM `db_mymsapt`.`adm_producto` p " .
+            "WHERE p.estado = 1 " .
+            "AND trim(p.nombre) = '$producto' " .
+            "group by codigormym;";
+    }
 
     $result = $mysqli->query($stmt);
 
@@ -21,7 +44,7 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
             $return_arr = array();
             while ($row = $result->fetch_array()) {
                 $return_arr[$indice] = array(
-                    'codigo' => $row['codigormym']                  
+                    'codigo' => $row['codigormym'],
                 );
 
                 $indice++;
@@ -61,7 +84,7 @@ if ($codigoRespuesta !== 1) {
     $return_arr = array();
     $indice = 0;
     $return_arr[$indice] = array(
-        'codigo' => $codigoRespuesta      
+        'codigo' => $codigoRespuesta,
     );
 
     echo json_encode($return_arr);

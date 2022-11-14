@@ -7,11 +7,32 @@ $codigoRespuesta = 1;
 
 if ($mysqli !== null && $mysqli->connect_errno === 0) {
 
-    $stmt = "SELECT " .
-        "p.nombre " .        
-        "FROM adm_producto p " .        
-        "WHERE p.estado = 1 " .
-        "AND p.codigormym = '$codigo';";         
+    $stmt = "";
+    if (intval($_SESSION['sucursal']) == 1) {
+        $stmt = "SELECT " .
+            "p.nombre " .
+            "FROM adm_producto p " .
+            "WHERE p.estado = 1 " .
+            "AND p.codigormym = '$codigo' ";
+        "UNION " .
+            "SELECT " .
+            "p.nombre " .
+            "FROM `db_mymsa`.`adm_producto` p " .
+            "WHERE p.estado = 1 " .
+            "AND p.codigormym = '$codigo';";
+    } else if (intval($_SESSION['sucursal']) == 2) {
+        $stmt = "SELECT " .
+            "p.nombre " .
+            "FROM adm_producto p " .
+            "WHERE p.estado = 1 " .
+            "AND p.codigormym = '$codigo' ";
+        "UNION " .
+            "SELECT " .
+            "p.nombre " .
+            "FROM `db_mymsapt`.`adm_producto` p " .
+            "WHERE p.estado = 1 " .
+            "AND p.codigormym = '$codigo';";
+    }
 
     $result = $mysqli->query($stmt);
 
@@ -21,7 +42,7 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
             $return_arr = array();
             while ($row = $result->fetch_array()) {
                 $return_arr[$indice] = array(
-                    'nombre' => $row['nombre']                  
+                    'nombre' => $row['nombre'],
                 );
 
                 $indice++;
@@ -61,7 +82,7 @@ if ($codigoRespuesta !== 1) {
     $return_arr = array();
     $indice = 0;
     $return_arr[$indice] = array(
-        'nombre' => ""     
+        'nombre' => "",
     );
 
     echo json_encode($return_arr);
