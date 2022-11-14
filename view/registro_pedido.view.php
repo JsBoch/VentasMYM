@@ -41,7 +41,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
 
                     <!-- ASIGNAR FORMATO RESPONSIVE a cliente y ulclienteresult-->
                     <label for="cliente" class="subtitle_input">CLIENTE</label>
-                    <input type="text" name="cliente" id="cliente" class="info_boxes" placeholder="Nombre de cliente" data-id="0" onblur="obtenerIdCliente()" autocomplete="off">
+                    <input type="text" name="cliente" id="cliente" class="info_boxes onlyUppercase" placeholder="Nombre de cliente" data-id="0" onblur="obtenerIdCliente()" autocomplete="off">
                     <ul id="ulclienteresult" class="autocomplete_listClient"></ul>
                     <label for="sltPrioridad" class="subtitle_input">PRIORIDAD</label>
                     <select name="sltPrioridad" id="sltPrioridad" class="selector"></select>
@@ -59,9 +59,9 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
             <h2 class="main_title">Detalle de Productos</h2>
             <div class="second_sub_container">
                 <label for="codigo" class="subtitle_input">CODIGO</label>
-                <input type='text' name="codigo" class="info_boxes" id="codigo" placeholder="ingrese código" onchange="limpiarNombre()" autocomplete="off">
+                <input type='text' name="codigo" class="info_boxes onlyUppercase" id="codigo" placeholder="ingrese código" onchange="limpiarNombre()" autocomplete="off">
                 <label for="producto" class="subtitle_input">PRODUTO</label>
-                <input type="text" name="producto" class="info_boxes" id="producto" placeholder="ingreso nombre" size="100" onchange="limpiarCodigo()" autocomplete="off">
+                <input type="text" name="producto" class="info_boxes onlyUppercase" id="producto" placeholder="ingreso nombre" size="100" onchange="limpiarCodigo()" autocomplete="off">
 
                 <ul class="autocomplete_list" id="results"></ul>
                 <ul id="resultsProducto" class="autocomplete_listPro"></ul>

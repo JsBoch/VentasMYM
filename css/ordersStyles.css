@@ -130,7 +130,7 @@ background: linear-gradient(40deg, rgba(6,255,139,1) 0%, rgba(33,235,178,1) 26%,
     color: white;
     width: 180px;
     max-height: 40%;
-    top: 16vh; 
+    top: 29vh; 
     position: absolute;
     list-style: none;
     overflow:scroll;
@@ -150,10 +150,10 @@ background: linear-gradient(40deg, rgba(6,255,139,1) 0%, rgba(33,235,178,1) 26%,
 .autocomplete_listClient{
     background-color: rgb(18, 17, 17);
     color: white;
-    width: 566px;
+    width: 180px;
     max-height: 40%;
-    top: 21vh; 
-    left: 39vw;
+    top: 47vh; 
+    left: 18.5vw;
     position: absolute;
     list-style: none;
     overflow:scroll;
@@ -486,6 +486,10 @@ i {
     font-size: 11px;
 }
 
+.onlyUppercase{
+    text-transform:uppercase;
+}
+
 
 /* responsive */
 
@@ -654,6 +658,6 @@ i {
         transition: .3s;
     }
     .autocomplete_listClient{
-        top: 34vh;
+        top: 41vh;
     }
 }
