@@ -11,7 +11,7 @@ function CalculoSubtotal() {
         //alertify.error("Debe ingresar una cantidad válida");
     }
     else {
-        if (parseFloat(precio.toString()) > parseFloat(precioMasBajo.toString())) {
+        if (parseFloat(precio.toString()) >= parseFloat(precioMasBajo.toString())) {
             let subtotal = 0;
             if (precio.length > 0 && cantidad.length > 0) {
                 subtotal = precio * cantidad;
