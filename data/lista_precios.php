@@ -32,6 +32,7 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
          "AND p.codigormym = '$codigo' or p.nombre = '$codigo';";  
     }else if(intval($_SESSION["sucursal"]) == 2)
     {
+        $stmt = "SELECT " .
         "if(pp.venta is null,0,pp.venta) as venta," .
         "if(pp.uno is null,0,pp.uno) as uno," .
         "if(pp.dos is null,0,pp.dos) as dos," .
