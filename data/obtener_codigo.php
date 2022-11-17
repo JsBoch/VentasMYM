@@ -22,7 +22,7 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
             "AND trim(p.nombre) = '$producto' " .
             "group by codigormym;";
     } else if (intval($_SESSION["sucursal"]) == 2) {
-        "SELECT " .
+        $stmt = "SELECT " .
             "p.codigormym " .
             "FROM adm_producto p " .
             "WHERE p.estado = 1 " .

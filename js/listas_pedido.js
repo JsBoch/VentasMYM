@@ -261,7 +261,7 @@ function codigoProducto(datos) {
 
     autocomplete.oninput = function () {
         let results = [];
-        const userInput = this.value;
+        const userInput = this.value.toUpperCase();
         resultsHTML.innerHTML = "";
         if (userInput.length > 0) {
             results = getResults(userInput);
@@ -312,7 +312,7 @@ function nombreProducto(datos) {
 
     autocompleteProducto.oninput = function () {
         let results = [];
-        const userInput = this.value;
+        const userInput = this.value.toUpperCase();
         resultsHTMLProducto.innerHTML = "";
         if (userInput.length > 0) {
             results = getResults(userInput);
@@ -377,7 +377,7 @@ function ClientesMatch(datos) {
 
     autocompleteCliente.oninput = function () {
         let results = [];
-        const userInput = this.value;
+        const userInput = this.value.toUpperCase();
         resultsClienteHTML.innerHTML = "";
         if (userInput.length > 0) {
             results = getResultsClientes(userInput);
