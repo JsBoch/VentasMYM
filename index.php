@@ -50,6 +50,14 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                   <li><a href="view/consulta_pedido.view.php">Consultar</a></li>
                </ul>
             </li>
+            <li>
+               <a href="#" class="third-btn">Registro de recibos
+               <span class="fas fa-caret-down third"></span>
+               </a>
+               <ul class="third-show">
+                  <li><a href="view/registro_recibo.view.php">Registrar</a></li>                  
+               </ul>
+            </li>
          </ul>
       <div class="return">
         <a href="login.php">
@@ -70,6 +78,10 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
            $('.serv-btn').click(function(){
              $('nav ul .serv-show').toggleClass("show1");
              $('nav ul .second').toggleClass("rotate");
+           });
+           $('.third-btn').click(function(){
+             $('nav ul .third-show').toggleClass("show2");
+             $('nav ul .third').toggleClass("rotate");
            });
            $('nav ul li').click(function(){
              $(this).addClass("active").siblings().removeClass("active");
