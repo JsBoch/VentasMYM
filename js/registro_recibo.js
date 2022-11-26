@@ -131,6 +131,7 @@ function cargarDetalle() {
 }
 
 function GuardarRegistro() {
+  let idRecibo = 0;
   let clienteSelect = document.getElementById("cliente");
   let clienteId = clienteSelect.dataset.id;
 
@@ -183,10 +184,10 @@ function GuardarRegistro() {
     data: {
       registro_principal: data1,
       detalle_registro: data2,
-      id_solicitud: 0,
+      id_recibo: idRecibo,
     },
     success: function (object) {
-      //console.log(object);
+      console.log(object);
       alertify.success("Registro almacenado con exito");
     },
     error: function (jqXHR, textStatus, errorThrown) {
@@ -209,8 +210,8 @@ function GuardarRegistro() {
   document.getElementById("numero_deposito").value = "";
   document.getElementById("numero_cheque").value = "";
   document.getElementById("observaciones_producto").value = "";
-  document.getElementById("total_seleccionado").checked
-  checkboxCajaRural.checked = false;
+  document.getElementById("total_seleccionado").checked;
+  document.getElementById("checkAvanzado").checked = false;
  
 
 

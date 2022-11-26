@@ -103,7 +103,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                         <h3 class="edit">Caja rural</h3>
                     </div>
                     <div class="checkbox-JASoft">
-                        <input type="checkbox" id="checkAvanzado">
+                        <input type="checkbox" id="checkAvanzado" name="checkAvanzado">
                         <label for="checkAvanzado">TEXTO QUE NO DEBERÍA VERSE</label>
                     </div>
                 </div>
