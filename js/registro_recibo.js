@@ -130,10 +130,23 @@ function cargarDetalle() {
   checkboxCajaRural.checked = false;
 }
 
-function GuardarRegistro() {
+function GuardarRegistro(consulta) {
   let idRecibo = 0;
+  if(consulta == "S")
+  {
+    idRecibo = $("#listaPedidos").val();
+  }
+  
   let clienteSelect = document.getElementById("cliente");
-  let clienteId = clienteSelect.dataset.id;
+  let clienteId = 0;
+  if(idRecibo > 0)
+  {
+    clienteId = clienteSelect.value;
+  }
+  else 
+  {
+    clienteId = clienteSelect.dataset.id;
+  }
 
   if (clienteId == 0) {
     alertify.error("Debe ingresar cliente.");
@@ -148,7 +161,16 @@ function GuardarRegistro() {
 
 
   let numeroRecibo = document.getElementById("numero_recibo").value;
-  let nombreCliente = document.getElementById("cliente").value;
+  let nombreCliente = "";
+  if(idRecibo > 0)
+  {
+    nombreCliente = clienteSelect.options[clienteSelect.selectedIndex].text;
+  }
+  else 
+  {
+    nombreCliente = document.getElementById("cliente").value;
+  }
+  
   var semanaSelect = document.getElementById("sltSemana");
   var semana = semanaSelect.options[semanaSelect.selectedIndex].text;
   let observaciones = document.getElementById("observaciones").value;
@@ -164,7 +186,7 @@ function GuardarRegistro() {
   });
   var principal = new Array();
   //var detalle = [];
-
+  console.log(clienteId);
   principal.push({
     no_recibo: numeroRecibo,
     id_cliente: clienteId,
@@ -187,7 +209,7 @@ function GuardarRegistro() {
       id_recibo: idRecibo,
     },
     success: function (object) {
-      console.log(object);
+      //console.log(object);
       alertify.success("Registro almacenado con exito");
     },
     error: function (jqXHR, textStatus, errorThrown) {
@@ -204,7 +226,7 @@ function GuardarRegistro() {
   document.getElementById("cliente").value = "";
   document.getElementById("observaciones").value = "";
   let select = document.getElementById("sltSemana");
-  select.value = "A";  
+  select.value = "SEMANA 1";  
   document.getElementById("numero_envio").value = "";
   document.getElementById("pago").value = "";
   document.getElementById("numero_deposito").value = "";

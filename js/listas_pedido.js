@@ -15,6 +15,21 @@ function listaDepartamentos() {
         }
     });
 }
+
+function listaDepartamentosRecibo() {
+    $.ajax({
+        url: '../data/departamentos.php',
+        dataType: 'json',
+        success: function (object) {
+            var $select = $('#departamento');
+            $.each(object, function (i, departamento) {
+                $select.append('<option value=' + departamento.iddepartamento + '>' + departamento.nombre + '</option>');
+            });
+
+            listaClientesConsultaPedido();
+        }
+    });
+}
 // Agregar JSON a el select de Departamento
 function listaDepartamentosConsulta() {
     $.ajax({
@@ -58,11 +73,11 @@ function listaClientes() {
         type: 'post',
         data: datos,
         success: function (object) {
-            /* var $selectCliente = $('#cliente');
-             $selectCliente.empty();
-             $.each(object, function(i, cliente) {
-                 $selectCliente.append('<option value=' + cliente.idcliente + '>' + cliente.nombre + '</option>');
-             });*/
+            // var $selectCliente = $('#cliente');
+            //  $selectCliente.empty();
+            //  $.each(object, function(i, cliente) {
+            //      $selectCliente.append('<option value=' + cliente.id_cliente + '>' + cliente.nombre + '</option>');
+            //  });
             ClientesMatch(object);
         }
     });

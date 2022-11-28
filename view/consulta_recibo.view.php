@@ -17,21 +17,48 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../css/alertify.min.css">
-    <link rel="stylesheet" href="../css/receiptStyles.css">
+    <link rel="stylesheet" href="../css/consultationReceipt.css">
     <link rel="icon" href="../imgs/logo.png">
     <title>Recibo</title>
 </head>
 
-<body onload="listaDepartamentos(),listaBancos()">
+<body onload="listaDepartamentosRecibo(),listaBancos()">
+<div id="subContainerDates" class="sub_container-dates">
+        <!-- Boton para regresar al menu -->
+        <div class="above_all">
+            <a href="../index.php">
+                <h3>Ir al menu</h3>
+                <i class='bx bx-log-out'></i>
+            </a>
+        </div>
+        <div class="query_date">
+            <div class="start_date">
+                <label for="fechaInicio">Fecha Inicio</label>
+                <input type="date" name="fechaInicio" id="fechaInicio">
+            </div>
+            <div class="last_date">
+                <label for="fechaFinal">Fecha Final</label>
+                <input type="date" name="fechaFinal" id="fechaFinal">
+            </div>
+            <button type="button" id="bttnConsultar" name="bttnConsultar" onclick="ConsultarRecibos()">Consultar</button>
+        </div>
+        <div class="orders-product">
+            <div class="orders">
+                <label for="listaPedidos">Recibos</label>
+                <select name="listaPedidos" id="listaPedidos" class="selectors" onchange="ConsultaProductos()"></select>
+            </div>
+            <div class="products">
+                <label for="listaProductos">Envios</label>
+                <select name="listaProductos" id="listaProductos" class="selectors"></select>
+            </div>
+        </div>
+        <div class="buttons_forDate">
+            <button type="button" id="bttnEditar" name="bttnEditar" onclick="CargaPedidoEdit()">Editar</button>
+            <button type="button" id="bttnEliminar" name="bttnEliminar" onclick="EliminarPedidoEdit()">Eliminar</button>
+        </div>
+    </div>
     <form id="subContainerDates" action="" method="post">
         <div class="customer_frame">
-            <!-- Boton para regresar al menu -->
-            <div class="above_all">
-                <a href="../index.php">
-                    <h3>Ir al menu</h3>
-                    <i class='bx bx-log-out'></i>
-                </a>
-            </div>
             <!-- cliente -->
             <h2 class="main_title">Datos Generales</h2>
             <div class="sub_container">
@@ -44,7 +71,8 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
 
                     <!-- ASIGNAR FORMATO RESPONSIVE a cliente y ulclienteresult-->
                     <label for="cliente" class="subtitle_input">CLIENTE</label>
-                    <input type="text" name="cliente" id="cliente" class="info_boxes" placeholder="Nombre de cliente" data-id="0" onblur="obtenerIdCliente()" autocomplete="off">
+                    <select name="cliente" class="selectors" id="cliente"></select>
+                    <!-- <input type="text" name="cliente" id="cliente" class="info_boxes" placeholder="Nombre de cliente" data-id="0" onblur="obtenerIdCliente()" autocomplete="off"> -->
                     <ul id="ulclienteresult" class="autocomplete_listClient"></ul>
         
                 </div>
@@ -124,7 +152,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     </div>
     <button class="add_more" onclick="backToOrders('subContainerDates')" type="button" id="shopping_cart">Agregar más</button>
     <a class="link_guardar" href="#subContainerDates">
-        <button class="save" type="button" id="send_order" onclick="GuardarRegistro('N')">Guardar</button>
+        <button class="save" type="button" id="send_order" onclick="GuardarRegistro('S')">Guardar</button>
     </a>
 
     <script src="../js/jquery-3.6.0.min.js"></script>
@@ -133,6 +161,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     <script src="../js/registro_recibo.js"></script>
     <script src="../js/table.js"></script>
     <script src="../js/alertify.min.js"></script>
+    <script src="../js/consulta_recibo.js"></script>
 </body>
 
 </html>
