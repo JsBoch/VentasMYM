@@ -139,6 +139,7 @@ function cargarDetalle() {
   document.getElementById("numero_cheque").value = "";
   document.getElementById("observaciones_producto").value = "";
   checkboxCajaRural.checked = false;
+  checkboxCompraContado.checked == false;
 }
 
 function GuardarRegistro(consulta) {

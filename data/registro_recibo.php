@@ -104,6 +104,7 @@ if ($mysqli !== null) {
                 $observaciones = "";
                 $banco = "";
                 $ventaID = 0;
+                $compraContado = "";
 
                 if (!$stmtd = $mysqli->prepare(
                     "INSERT INTO vnt_detalle_recibo (" .
@@ -120,12 +121,13 @@ if ($mysqli !== null) {
                     "pago_total," .
                     "observaciones," .
                     "estado," .
-                    "banco) " .
-                    " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?);")) {
+                    "banco," . 
+                    "compra_contado) " .
+                    " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);")) {
                     $codigoRespuesta = -4; //fallo al preparar la consulta de detalle
 
-                } else if (!$stmtd->bind_param("iiiisssssdssis", $detalleId, $reciboId, $ventaID, $noEnvio,
-                    $noDeposito, $cajaRural, $empresa, $noCheque, $tipoPago, $pago,$pagoTotal,$observaciones,$estado,$banco)) {
+                } else if (!$stmtd->bind_param("iiiisssssdssiss", $detalleId, $reciboId, $ventaID, $noEnvio,
+                    $noDeposito, $cajaRural, $empresa, $noCheque, $tipoPago, $pago,$pagoTotal,$observaciones,$estado,$banco,$compraContado)) {
                     $codigoRespuesta = -5; //no se pudieron vincular los parámetros a la consulta detalle
                 } else {
                     /**
@@ -148,6 +150,7 @@ if ($mysqli !== null) {
                         $pagoTotal = $arr["pago_total"];
                         $observaciones = $arr["observaciones"];
                         $banco = $arr["banco"];
+                        $compraContado = $arr["compra_contado"];
 
 
                         if (!$stmtd->execute()) {
