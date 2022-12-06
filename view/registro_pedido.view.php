@@ -43,10 +43,12 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                     <label for="cliente" class="subtitle_input">CLIENTE</label>
                     <input type="text" name="cliente" id="cliente" class="info_boxes" placeholder="Nombre de cliente" data-id="0" onblur="obtenerIdCliente()" autocomplete="off">
                     <ul id="ulclienteresult" class="autocomplete_listClient"></ul>
-                    <label for="sltPrioridad" class="subtitle_input">PRIORIDAD</label>
-                    <select name="sltPrioridad" id="sltPrioridad" class="selector"></select>
+                    <label for="direccion_cliente" class="subtitle_input">DIRECCION DE CLIENTE</label>
+                    <input type="text" name="direccion_cliente" id="direccion_cliente" class="info_boxes" placeholder="Dirección de cliente" autocomplete="off">
                 </div>
                 <div class="second_half">
+                <label for="sltPrioridad" class="subtitle_input">PRIORIDAD</label>
+                    <select name="sltPrioridad" id="sltPrioridad" class="selector"></select>
                     <label for="observaciones_producto" class="subtitle_input">OBSERVACIONES</label>
                     <textarea name="observaciones" class="comments" id="observaciones" cols="119" rows="5"></textarea>
                     <label for="transporte" class="subtitle_input">TRANSPORTE</label>
