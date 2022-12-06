@@ -420,14 +420,15 @@ function ClientesMatch(datos) {
 
     resultsClienteHTML.onclick = function (event) {
         const setValue = event.target.innerText;
-        let valoresCliente = setValue.toString().split("&");
-
+        let valoresCliente = setValue.toString().split("&");       
         autocompleteCliente.value = valoresCliente[0];//setValue;
         autocompleteCliente.dataset.id = valoresCliente[1];
+
 
         this.innerHTML = "";
         resultsClienteHTML.style.padding = "0";
         autocompleteCliente.focus();
+        obtenerDireccionCliente(valoresCliente[1]);
     };
 }
 
@@ -484,4 +485,23 @@ function limpiarNombre() {
 
 function limpiarCodigo() {
     document.getElementById("codigo").value = "";
+}
+
+
+function obtenerDireccionCliente(idCliente) {
+    let datos = { "idcliente": idCliente }
+    $.ajax({
+        url: '../data/obtener_direccion.php',
+        dataType: 'json',
+        type: 'post',
+        data: datos,
+        success: function (object) {
+            let direccionClienteInput = document.querySelector("#direccion_cliente");
+            let direccion = '';
+            $.each(object, function (i, resultado) {
+                direccion += resultado.direccion;
+            });
+            direccionClienteInput.value = direccion;
+        }
+    });
 }

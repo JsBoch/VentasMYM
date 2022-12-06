@@ -1,6 +1,6 @@
 <?php
 
-$departamentoId = $_POST['iddepartamento'];
+$clienteId = $_POST['idcliente'];
 require_once 'connection.php';
 
 //$cliente = $_GET["cliente"];
@@ -8,15 +8,11 @@ require_once 'connection.php';
 $codigoRespuesta = 1;
 
 if ($mysqli !== null && $mysqli->connect_errno === 0) {
-    $stmt = "SELECT c.idcliente,c.codigo," .
-        "c.primer_nombre as nombre," .
-        "c.iddepartamento," .
-        "c.id_municipio," .
+    $stmt = "SELECT " .
         "c.direccion " .
         "FROM clientes c " .
         "WHERE c.estado = 1 " .
-        "AND c.iddepartamento = $departamentoId ".
-        " ORDER BY c.primer_nombre;";
+        "AND c.idcliente = $clienteId;";
 
     $result = $mysqli->query($stmt);
 
@@ -26,12 +22,7 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
             $indice = 0;
             while ($row = $result->fetch_array()) {
                 $return_arr[$indice] = array(
-                    'idcliente' => $row['idcliente'],
-                    'codigo' => $row['codigo'],
-                    'nombre' => $row['nombre'],
-                    'direccion' => $row['direccion'],
-                    'iddepartamento' => $row['iddepartamento'],
-                    'idmunicipio' => $row['id_municipio']
+                    'direccion' => $row['direccion']
                 );
                 $indice++;
             }
@@ -70,12 +61,7 @@ if ($codigoRespuesta != 1) {
     $return_arr = array();
     $Indice = 0;
     $return_arr[$Indice] = array(
-        'idcliente' => 0,
-        'codigo' => $codigoRespuesta,
-        'nombre' => $mensajeRespuesta,
-        'direccion' => "",
-        'iddepartamento' => 0,
-        'idmunicipio' => 0
+        'direccion' => $codigoRespuesta
     );
 
     echo json_encode($return_arr);
