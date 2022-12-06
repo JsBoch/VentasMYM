@@ -159,6 +159,7 @@ function CargaProductosEdit(idsolicitud) {
           no_envio: producto.no_envio,
           no_deposito: producto.no_deposito,
           caja_rural: producto.caja_rural,
+          compra_contado: producto.compra_contado,
           empresa: producto.empresa,
           no_cheque: producto.no_cheque,
           tipo_pago: producto.tipo_pago,

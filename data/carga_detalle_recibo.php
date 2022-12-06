@@ -18,7 +18,8 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
     "d.pago,".
     "d.pago_total,".
     "d.observaciones,".
-    "d.banco ".
+    "d.banco,".
+    "d.compra_contado ".
     "from vnt_detalle_recibo d ".
     "where d.id_recibo = $solicitudId;";
 
@@ -39,7 +40,8 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
                     'pago' => $row['pago'],
                     'pago_total' => $row['pago_total'],
                     'observaciones' => $row['observaciones'],
-                    'banco' => $row['banco']
+                    'banco' => $row['banco'],
+                    'compra_contado' => $row['compra_contado']
                 );
                 $indice++;
             }
@@ -87,7 +89,8 @@ if ($codigoRespuesta != 1) {
         'pago' => 0,
         'pago_total' => 0,
         'observaciones' => '',
-        'banco' => ''
+        'banco' => '',
+        'compra_contado' => ''
     );
 
     echo json_encode($return_arr);
