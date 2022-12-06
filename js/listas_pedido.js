@@ -215,10 +215,14 @@ function getCodigo(producto) {
             dataType: 'json',
             type: 'post',
             data: datos,
-            success: function (object) {
+            success: function (object) {                
                 codigoIngresado.value = object[0].codigo;     
                 listaPrecios(object[0].codigo);    
                 CargarExistencia(object[0].codigo);                   
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("Status: " + textStatus);
+                console.log("Error: " + errorThrown);
             }
         });
     }
