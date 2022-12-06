@@ -55,7 +55,8 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                <span class="fas fa-caret-down third"></span>
                </a>
                <ul class="third-show">
-                  <li><a href="view/registro_recibo.view.php">Registrar</a></li>                  
+                  <li><a href="view/registro_recibo.view.php">Registrar</a></li>           
+                  <li><a href="view/consulta_recibo.view.php">Consultar</a></li>            
                </ul>
             </li>
          </ul>
