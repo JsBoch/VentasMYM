@@ -32,6 +32,16 @@ function cargarDetalle() {
   } else {
     checkboxCRValor = "N";
   }
+
+  let checkboxCompraContado = document.getElementById("checkAvanzadoDos");
+  let checkboxCCValor = "";
+  if (checkboxCompraContado.checked == true) {
+    checkboxCCValor = "S";
+  } else {
+    checkboxCCValor = "N";
+  }
+
+
   let observacionesProducto = document.getElementById("observaciones_producto").value;
 
 
@@ -75,6 +85,7 @@ function cargarDetalle() {
     no_envio: numeroEnvio,
     no_deposito: numeroDeposito,
     caja_rural: checkboxCRValor,
+    compra_contado: checkboxCCValor,
     empresa: empresa,
     no_cheque: numeroCheque,
     tipo_pago: tiopPago,
@@ -234,6 +245,7 @@ function GuardarRegistro(consulta) {
   document.getElementById("observaciones_producto").value = "";
   document.getElementById("total_seleccionado").checked;
   document.getElementById("checkAvanzado").checked = false;
+  document.getElementById("checkAvanzadoDos").checked = false;
  
 
 

@@ -23,7 +23,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
 </head>
 
 <body onload="listaDepartamentosRecibo(),listaBancos()">
-<div id="subContainerDates" class="sub_container-dates">
+    <div id="subContainerDates" class="sub_container-dates">
         <!-- Boton para regresar al menu -->
         <div class="above_all">
             <a href="../index.php">
@@ -63,8 +63,8 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
             <h2 class="main_title">Datos Generales</h2>
             <div class="sub_container">
                 <div class="first_half">
-                <label for="numero_recibo" class="subtitle_input">NUMERO DE RECIBO</label>
-                <input type='number' name="numero_recibo" class="info_boxes" id="numero_recibo" placeholder="ingrese número de recibo" autocomplete="off">
+                    <label for="numero_recibo" class="subtitle_input">NUMERO DE RECIBO</label>
+                    <input type='number' name="numero_recibo" class="info_boxes" id="numero_recibo" placeholder="ingrese número de recibo" autocomplete="off">
                     <label for="departamento" class="subtitle_input">DEPARTAMENTO</label>
                     <select name="departamento" class="selectors" id="departamento" onchange="listaClientes()"></select>
                     <!--<select name="cliente" class="selectors" id="cliente"></select>-->
@@ -74,10 +74,10 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                     <select name="cliente" class="selectors" id="cliente"></select>
                     <!-- <input type="text" name="cliente" id="cliente" class="info_boxes" placeholder="Nombre de cliente" data-id="0" onblur="obtenerIdCliente()" autocomplete="off"> -->
                     <ul id="ulclienteresult" class="autocomplete_listClient"></ul>
-        
+
                 </div>
                 <div class="second_half">
-                <label for="sltSemana" class="subtitle_input">SEMANA</label>
+                    <label for="sltSemana" class="subtitle_input">SEMANA</label>
                     <select name="sltSemana" id="sltSemana" class="selector">
                         <option value="SEMANA 1">SEMANA 1</option>
                         <option value="SEMANA 2">SEMANA 2</option>
@@ -133,6 +133,18 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                     <div class="checkbox-JASoft">
                         <input type="checkbox" id="checkAvanzado" name="checkAvanzado">
                         <label for="checkAvanzado">TEXTO QUE NO DEBERÍA VERSE</label>
+                    </div>
+                </div>
+
+
+                   <!-- segundo checkbox -->
+                   <div class="checkbox_cajaRural">
+                    <div class="text_edit">
+                        <h3 class="edit">Compra contado</h3>
+                    </div>
+                    <div class="checkbox-JASoft">
+                        <input type="checkbox" id="checkAvanzadoDos" name="checkAvanzado">
+                        <label for="checkAvanzadoDos">TEXTO QUE NO DEBERÍA VERSE</label>
                     </div>
                 </div>
 

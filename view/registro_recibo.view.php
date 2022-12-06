@@ -108,6 +108,17 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                     </div>
                 </div>
 
+                <!-- segundo checkbox -->
+                <div class="checkbox_cajaRural">
+                    <div class="text_edit">
+                        <h3 class="edit">Compra contado</h3>
+                    </div>
+                    <div class="checkbox-JASoft">
+                        <input type="checkbox" id="checkAvanzadoDos" name="checkAvanzado">
+                        <label for="checkAvanzadoDos">TEXTO QUE NO DEBERÍA VERSE</label>
+                    </div>
+                </div>
+
                 <label for="observaciones_producto" class="subtitle_input">OBSERVACIONES</label>
                 <div class="comentario">
                     <textarea name="observaciones_producto" class="comments" id="observaciones_producto" cols="30" rows="5"></textarea>
