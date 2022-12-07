@@ -57,7 +57,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
             <button type="button" id="bttnEliminar" name="bttnEliminar" onclick="EliminarPedidoEdit()">Eliminar</button>
         </div>
     </div>
-    <form id="subContainerDates" action="" method="post">
+    <form id="subContainerDatesAll" action="" method="post">
         <div class="customer_frame">
             <!-- cliente -->
             <h2 class="main_title">Datos Generales</h2>
@@ -153,7 +153,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                     <textarea name="observaciones_producto" class="comments" id="observaciones_producto" cols="30" rows="5"></textarea>
                 </div>
                 <button class="add" onclick="cargarDetalle()" type="button">Agregar</button>
-                <button class="see" onclick="seeOrder('subContainerDates')" type="button">Ver recibo</button>
+                <button class="see" onclick="seeOrder('subContainerDatesAll')" type="button">Ver recibo</button>
             </div>
         </div>
     </form>
@@ -162,8 +162,8 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
         <select name="listado" id="listado" class="product_selector"></select>
         <button type="button" id="quitarRegistro" class="button_removeRegistry" name="quitarRegistro" onclick="QuitarItemDeLista()">Quitar recibo</button>
     </div>
-    <button class="add_more" onclick="backToOrders('subContainerDates')" type="button" id="shopping_cart">Agregar más</button>
-    <a class="link_guardar" href="#subContainerDates">
+    <button class="add_more" onclick="backToOrders('subContainerDatesAll')" type="button" id="shopping_cart">Agregar más</button>
+    <a class="link_guardar" href="#subContainerDatesAll">
         <button class="save" type="button" id="send_order" onclick="GuardarRegistro('S')">Guardar</button>
     </a>
 
