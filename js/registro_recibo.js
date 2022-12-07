@@ -190,6 +190,7 @@ function GuardarRegistro(consulta) {
   var agregarAlPedido = document.getElementById("shopping_cart");
   var enviarPedido = document.getElementById("send_order");
   var fechas = document.getElementById("subContainerDates");
+  var datosGenerales = document.getElementById("subContainerDatesAll");
 
   let cobro = 0;
   listaDetalle.forEach(element => {
@@ -258,6 +259,7 @@ function GuardarRegistro(consulta) {
     agregarAlPedido.style.display = "none";
     enviarPedido.style.display = "none";
     fechas.style.display = "block";
+    datosGenerales.style.display = "block";
   }
 }
 
