@@ -16,8 +16,10 @@ if (isset($_SESSION['sucursal'])) {
         $password = $config->pass;
     } else if (intval($sucursal) == 2) {
         $database = 'db_rmympt';
-        $username = 'usr_speten';
-        $password = 'P3t3nMym22*#';
+        //$username = 'usr_speten';
+        //$password = 'P3t3nMym22*#';
+        $username = $config->username;
+        $password = $config->pass;
     }
 } else {
     $database = $config->database;
