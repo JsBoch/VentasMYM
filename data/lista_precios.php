@@ -27,7 +27,7 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
         "if(pp.dos is null,0,pp.dos) as dos," .
         "if(pp.tres is null,0,pp.tres) as tres " .
         "FROM `db_mymsa`.`adm_producto` p " .
-        "JOIN precio_producto pp ON p.idproducto = pp.idproducto " .    
+        "JOIN `db_mymsa`.`precio_producto` pp ON p.idproducto = pp.idproducto " .    
         "WHERE p.estado = 1 " .
          "AND p.codigormym = '$codigo' or p.nombre = '$codigo';";  
     }else if(intval($_SESSION["sucursal"]) == 2)
@@ -48,7 +48,7 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
         "if(pp.dos is null,0,pp.dos) as dos," .
         "if(pp.tres is null,0,pp.tres) as tres " .
         "FROM `db_mymsapt`.`adm_producto` p " .
-        "JOIN precio_producto pp ON p.idproducto = pp.idproducto " .    
+        "JOIN `db_mymsapt`.`precio_producto` pp ON p.idproducto = pp.idproducto " .    
         "WHERE p.estado = 1 " .
          "AND p.codigormym = '$codigo' or p.nombre = '$codigo';";  
     }   
