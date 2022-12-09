@@ -177,17 +177,17 @@ function listaPrecios(codigo) {
 
             precioMasBajo = precioVenta;
 
-            if (precioUno > 0 && precioUno < precioMasBajo) {
+            if (parseFloat(precioUno.toString()) > 0 && parseFloat(precioUno.toString()) < parseFloat(precioMasBajo.toString())) {
                 precioMasBajo = precioUno;
             }
-            if (precioDos > 0 && precioDos < precioMasBajo) {
+            if (parseFloat(precioDos.toString()) > 0 && parseFloat(precioDos.toString()) < parseFloat(precioMasBajo.toString())) {
                 precioMasBajo = precioDos;
             }
-            if (precioTres > 0 && precioTres < precioMasBajo) {
+            if (parseFloat(precioTres.toString()) > 0 && parseFloat(precioTres.toString()) < parseFloat(precioMasBajo.toString())) {
                 precioMasBajo = precioTres;
             }
 
-            inputPrecioMasBajo.value = precioMasBajo;
+            inputPrecioMasBajo.value = precioMasBajo;            
 
             $selectPrecio.append('<option value=' + precioVenta + '> VENTA - ' + precioVenta + '</option>');
             $selectPrecio.append('<option value=' + precioUno + '> UNO - ' + precioUno + '</option>');
