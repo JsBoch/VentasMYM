@@ -420,15 +420,17 @@ function ClientesMatch(datos) {
 
     resultsClienteHTML.onclick = function (event) {
         const setValue = event.target.innerText;
+        let clienteIdDireccion = 0;
         let valoresCliente = setValue.toString().split("&");       
         autocompleteCliente.value = valoresCliente[0];//setValue;
         autocompleteCliente.dataset.id = valoresCliente[1];
+        clienteIdDireccion = valoresCliente[1];
 
 
         this.innerHTML = "";
         resultsClienteHTML.style.padding = "0";
         autocompleteCliente.focus();
-        obtenerDireccionCliente(valoresCliente[1]);
+        obtenerDireccionCliente(clienteIdDireccion);
     };
 }
 
@@ -502,6 +504,11 @@ function obtenerDireccionCliente(idCliente) {
                 direccion += resultado.direccion;
             });
             direccionClienteInput.value = direccion;
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log("Otro: " + jqXHR);
+            console.log("Status: " + textStatus);
+            console.log("Error: " + errorThrown);
         }
     });
 }
