@@ -47,6 +47,7 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
                     'uno' => $row['uno'],
                     'dos' => $row['dos'],
                     'tres' => $row['tres'],
+                    'oferta' => $row['oferta']
                 );
 
                 $indice++;
@@ -90,6 +91,7 @@ if ($codigoRespuesta !== 1) {
         'uno' => 0.00,
         'dos' => 0.00,
         'tres' => 0.00,
+        'oferta' => 0.00
     );
 
     echo json_encode($return_arr);
