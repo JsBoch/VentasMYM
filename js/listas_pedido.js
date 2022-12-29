@@ -172,6 +172,7 @@ function listaPrecios(codigo) {
             let precioUno = object[0].uno;
             let precioDos = object[0].dos;
             let precioTres = object[0].tres;
+            let precioOferta = object[0].oferta;
             let precioMasBajo;
             let inputPrecioMasBajo = document.getElementById("precioMasBajo");
 
@@ -186,13 +187,16 @@ function listaPrecios(codigo) {
             if (parseFloat(precioTres.toString()) > 0 && parseFloat(precioTres.toString()) < parseFloat(precioMasBajo.toString())) {
                 precioMasBajo = precioTres;
             }
-
+            if (parseFloat(precioOferta.toString()) > 0 && parseFloat(precioOferta.toString()) < parseFloat(precioMasBajo.toString())) {
+                precioMasBajo = precioOferta;
+            }
             inputPrecioMasBajo.value = precioMasBajo;            
 
             $selectPrecio.append('<option value=' + precioVenta + '> VENTA - ' + precioVenta + '</option>');
             $selectPrecio.append('<option value=' + precioUno + '> UNO - ' + precioUno + '</option>');
             $selectPrecio.append('<option value=' + precioDos + '> DOS - ' + precioDos + '</option>');
             $selectPrecio.append('<option value=' + precioTres + '> TRES - ' + precioTres + '</option>');
+            $selectPrecio.append('<option value=' + precioOferta + '> OFERTA - ' + precioOferta + '</option>');
 
             colocarPrecio();
         }

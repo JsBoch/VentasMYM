@@ -11,24 +11,12 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
     if (intval($_SESSION["sucursal"]) == 1) {
         $stmt = "SELECT " .
             "p.codigormym " .
-            "FROM adm_producto p " .
-            "WHERE p.estado = 1 " .
-            "AND trim(p.nombre) = '$producto' " .
-            "UNION " .
-        "SELECT " .
-            "p.codigormym " .
             "FROM `db_mymsa`.`adm_producto` p " .
             "WHERE p.estado = 1 " .
             "AND trim(p.nombre) = '$producto' " .
             "group by codigormym;";
     } else if (intval($_SESSION["sucursal"]) == 2) {
         $stmt = "SELECT " .
-            "p.codigormym " .
-            "FROM adm_producto p " .
-            "WHERE p.estado = 1 " .
-            "AND trim(p.nombre) = '$producto' " .
-            "UNION " .
-        "SELECT " .
             "p.codigormym " .
             "FROM `db_mymsapt`.`adm_producto` p " .
             "WHERE p.estado = 1 " .

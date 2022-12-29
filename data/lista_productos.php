@@ -22,57 +22,35 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
 
     if(intval($numeroSucursal) == 0 || intval($numeroSucursal == 1))
     {
-        $stmt = "SELECT " .
+        $stmt = "SELECT " .        
         "p.codigormym," .
         "p.nombre," .
         "if(pp.venta is null,0,pp.venta) as venta," .
         "if(pp.uno is null,0,pp.uno) as uno," .
         "if(pp.dos is null,0,pp.dos) as dos," .
-        "if(pp.tres is null,0,pp.tres) as tres " .
-        "FROM adm_producto p " .
-        "LEFT JOIN precio_producto pp ON p.idproducto = pp.idproducto " .
-        "WHERE p.estado = 1 " .
-        "and p.idempresa = 1 " .      
-        "UNION " .
-        "SELECT " .        
-        "p.codigormym," .
-        "p.nombre," .
-        "if(pp.venta is null,0,pp.venta) as venta," .
-        "if(pp.uno is null,0,pp.uno) as uno," .
-        "if(pp.dos is null,0,pp.dos) as dos," .
-        "if(pp.tres is null,0,pp.tres) as tres " .
+        "if(pp.tres is null,0,pp.tres) as tres," .
+        "if(pp.oferta is null,0,pp.oferta) as oferta " .
         "FROM `db_mymsa`.`adm_producto` p " .
         "LEFT JOIN `db_mymsa`.`precio_producto` pp ON p.idproducto = pp.idproducto " .
         "WHERE p.estado = 1 " .
-        "and p.idempresa = 2 " .
+        //"and p.idempresa = 2 " .
         "group by codigormym " .
         "order by nombre;";
     }
-    else if(intval($numeroSucursal == 2))
+    else if(intval($numeroSucursal == 2)) //PETEN
     {
-        $stmt = "SELECT " .
+        $stmt = "SELECT " .        
         "p.codigormym," .
         "p.nombre," .
         "if(pp.venta is null,0,pp.venta) as venta," .
         "if(pp.uno is null,0,pp.uno) as uno," .
         "if(pp.dos is null,0,pp.dos) as dos," .
-        "if(pp.tres is null,0,pp.tres) as tres " .
-        "FROM adm_producto p " .
-        "LEFT JOIN precio_producto pp ON p.idproducto = pp.idproducto " .
-        "WHERE p.estado = 1 " .
-        "and p.idempresa = 1 " .      
-        "UNION " .
-        "SELECT " .        
-        "p.codigormym," .
-        "p.nombre," .
-        "if(pp.venta is null,0,pp.venta) as venta," .
-        "if(pp.uno is null,0,pp.uno) as uno," .
-        "if(pp.dos is null,0,pp.dos) as dos," .
-        "if(pp.tres is null,0,pp.tres) as tres " .
+        "if(pp.tres is null,0,pp.tres) as tres," .
+        "if(pp.oferta is null,0,pp.oferta) as oferta " .
         "FROM `db_mymsapt`.`adm_producto` p " .
         "LEFT JOIN `db_mymsapt`.`precio_producto` pp ON p.idproducto = pp.idproducto " .
         "WHERE p.estado = 1 " .
-        "and p.idempresa = 2 " .
+        //"and p.idempresa = 2 " .
         "group by codigormym " .
         "order by nombre;";
     }

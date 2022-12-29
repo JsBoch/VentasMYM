@@ -26,24 +26,12 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
     $stmt = '';
     if (intval($_SESSION['sucursal']) == 1) {
         $stmt = "select if(e.cantidad is null,0,e.cantidad) as existencia " .
-            "from adm_producto p  " .
-            "join existencia e on p.idproducto = e.idproducto and p.idbodega = e.idbodega and e.estado = 1 " .
-            "where p.codigormym = '$codigo' " .
-            "and p.estado = 1 " .
-            "union all " .
-            "select if(e.cantidad is null,0,e.cantidad) as existencia " .
             "from `db_mymsa`.`adm_producto` p " .
             "join `db_mymsa`.`existencia` e on p.idproducto = e.idproducto and p.idbodega = e.idbodega and e.estado = 1 " .
             "where p.codigormym = '$codigo' " .
             "and p.estado = 1;";
     } else if (intval($_SESSION['sucursal']) == 2) {
         $stmt = "select if(e.cantidad is null,0,e.cantidad) as existencia " .
-            "from adm_producto p  " .
-            "join existencia e on p.idproducto = e.idproducto and p.idbodega = e.idbodega and e.estado = 1 " .
-            "where p.codigormym = '$codigo' " .
-            "and p.estado = 1 " .
-            "union all " .
-            "select if(e.cantidad is null,0,e.cantidad) as existencia " .
             "from `db_mymsapt`.`adm_producto` p " .
             "join `db_mymsapt`.`existencia` e on p.idproducto = e.idproducto and p.idbodega = e.idbodega and e.estado = 1 " .
             "where p.codigormym = '$codigo' " .

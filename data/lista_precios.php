@@ -15,38 +15,20 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
         "if(pp.venta is null,0,pp.venta) as venta," .
         "if(pp.uno is null,0,pp.uno) as uno," .
         "if(pp.dos is null,0,pp.dos) as dos," .
-        "if(pp.tres is null,0,pp.tres) as tres " .
-        "FROM adm_producto p " .
-        "JOIN precio_producto pp ON p.idproducto = pp.idproducto " .    
-        "WHERE p.estado = 1 " .
-         "AND p.codigormym = '$codigo' or p.nombre = '$codigo' " .
-         "union " .
-         "SELECT " .        
-        "if(pp.venta is null,0,pp.venta) as venta," .
-        "if(pp.uno is null,0,pp.uno) as uno," .
-        "if(pp.dos is null,0,pp.dos) as dos," .
-        "if(pp.tres is null,0,pp.tres) as tres " .
+        "if(pp.tres is null,0,pp.tres) as tres," .
+        "if(pp.oferta is null,0,pp.oferta) as oferta " .
         "FROM `db_mymsa`.`adm_producto` p " .
         "JOIN `db_mymsa`.`precio_producto` pp ON p.idproducto = pp.idproducto " .    
         "WHERE p.estado = 1 " .
          "AND p.codigormym = '$codigo' or p.nombre = '$codigo';";  
     }else if(intval($_SESSION["sucursal"]) == 2)
     {
-        $stmt = "SELECT " .
+        $stmt = "SELECT " .        
         "if(pp.venta is null,0,pp.venta) as venta," .
         "if(pp.uno is null,0,pp.uno) as uno," .
         "if(pp.dos is null,0,pp.dos) as dos," .
-        "if(pp.tres is null,0,pp.tres) as tres " .
-        "FROM adm_producto p " .
-        "JOIN precio_producto pp ON p.idproducto = pp.idproducto " .    
-        "WHERE p.estado = 1 " .
-         "AND p.codigormym = '$codigo' or p.nombre = '$codigo' " .
-         "union " .
-         "SELECT " .        
-        "if(pp.venta is null,0,pp.venta) as venta," .
-        "if(pp.uno is null,0,pp.uno) as uno," .
-        "if(pp.dos is null,0,pp.dos) as dos," .
-        "if(pp.tres is null,0,pp.tres) as tres " .
+        "if(pp.tres is null,0,pp.tres) as tres," .
+        "if(pp.oferta is null,0,pp.oferta) as oferta " .
         "FROM `db_mymsapt`.`adm_producto` p " .
         "JOIN `db_mymsapt`.`precio_producto` pp ON p.idproducto = pp.idproducto " .    
         "WHERE p.estado = 1 " .
