@@ -75,7 +75,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 <!--Agrego un hidden para almacenar el precio mas bajo de la lista-->
                 <input type="hidden" name="precioMasBajo" id="precioMasBajo" autocomplete="off">
                 <label for="cantidad" class="subtitle_input">CANTIDAD</label>
-                <input type="number" name="cantidad" class="info_boxes" id="cantidad" placeholder="CANTIDAD" onchange="CalculoSubtotal()" autocomplete="off">
+                <input type="number" name="cantidad" class="info_boxes" id="cantidad" placeholder="CANTIDAD" onblur="validarPrecioConCantidad()" onchange="CalculoSubtotal()" autocomplete="off">
                 <label for="tipo_precio" class="subtitle_input">TIPO PRECIO</label>
                 <select name="tipo_precio" class="selector" id="tipo_precio" onchange="colocarPrecio(),CalculoSubtotal()"></select>
                 <label for="precio" class="subtitle_input">PRECIO</label>
@@ -86,7 +86,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 <div class="comentario">
                     <textarea name="observaciones_producto" class="comments" id="observaciones_producto" cols="30" rows="5"></textarea>
                 </div>
-                <button class="add" onclick="cargarDetalle()" type="button">Agregar al Pedido</button>
+                <button class="add" onclick="ValidarCampos()" type="button">Agregar al Pedido</button>
                 <button class="see" onclick="seeOrder('subContainerDates')" type="button">Ver Pedido</button>
             </div>
         </div>

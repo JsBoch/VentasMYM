@@ -5,6 +5,11 @@ function cargarDetalle() {
   let producto = document.getElementById("producto").value;
   let cantidad = document.getElementById("cantidad").value;
   let objTipoPrecio = document.getElementById("tipo_precio");
+  // console.log(objTipoPrecio.options[objTipoPrecio.selectedIndex].text);
+    // validación de tipo precio
+
+
+
   let selected = objTipoPrecio.options[objTipoPrecio.selectedIndex].text;
   let arrSplit = selected.split("-");
   let tipoPrecio = arrSplit[0];
@@ -98,6 +103,26 @@ function cargarDetalle() {
   document.getElementById("subtotal").value = "";
   document.getElementById("observaciones_producto").value = "";
   document.getElementById("existencia").value = "";
+}
+
+function ValidarCampos(){
+  let cantidad = document.getElementById("cantidad").value;
+  let objTipoPrecio = document.getElementById("tipo_precio");
+  let opcion = objTipoPrecio.options[objTipoPrecio .selectedIndex].id;
+
+  if (opcion == 'precioTresUnidades' && parseInt(cantidad) != 3) {
+    alertify.error('El precio no es acorde a la cantidad');
+    //$("#tipo_precio option[id=2]").attr("selected",true);
+  }else if (opcion == 'precioSeisUnidades' && parseInt(cantidad) != 6) {
+    alertify.error('El precio no es acorde a la cantidad');
+   // $("#tipo_precio option[id=3]").attr("selected",true);
+  }else if (opcion == 'precioDoceUnidades' && parseInt(cantidad) != 12) {
+    alertify.error('El precio no es acorde a la cantidad');
+    //$("#tipo_precio option[id=4]").attr("selected",true);
+  }else{
+    cargarDetalle();
+  }
+
 }
 
 function GuardarRegistro() {

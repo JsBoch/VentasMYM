@@ -69,7 +69,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 <input type='number' name="numero_envio" class="info_boxes" id="numero_envio" placeholder="ingrese número de envio" autocomplete="off">
                 <label for="empresa" class="subtitle_input">EMPRESA</label>
                 <select name="empresa" class="selector" id="empresa">
-                    <option value="mym">MYM</option>
+                    <!-- <option value="mym">MYM</option> -->
                     <option value="sa">SA</option>
                 </select>
                 <label for="tipo_pago" class="subtitle_input">TIPO PAGO</label>

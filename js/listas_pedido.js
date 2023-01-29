@@ -169,15 +169,30 @@ function listaPrecios(codigo) {
             var $selectPrecio = $('#tipo_precio');
             $selectPrecio.empty();
             let precioVenta = object[0].venta;
+            let precioMinorista = object[0].minorista;
+            let precioMayorista = object[0].mayorista;
+            let precioEspecial = object[0].especial;
+            let precioOferta = object[0].oferta;
             let precioUno = object[0].uno;
             let precioDos = object[0].dos;
             let precioTres = object[0].tres;
-            let precioOferta = object[0].oferta;
             let precioMasBajo;
             let inputPrecioMasBajo = document.getElementById("precioMasBajo");
 
             precioMasBajo = precioVenta;
-
+           
+            if (parseFloat(precioMinorista.toString()) > 0 && parseFloat(precioMinorista.toString()) < parseFloat(precioMasBajo.toString())) {
+                precioMasBajo = precioMinorista;
+            }
+            if (parseFloat(precioMayorista.toString()) > 0 && parseFloat(precioMayorista.toString()) < parseFloat(precioMasBajo.toString())) {
+                precioMasBajo = precioMayorista;
+            }
+            if (parseFloat(precioEspecial.toString()) > 0 && parseFloat(precioEspecial.toString()) < parseFloat(precioMasBajo.toString())) {
+                precioMasBajo = precioEspecial;
+            }
+            if (parseFloat(precioOferta.toString()) > 0 && parseFloat(precioOferta.toString()) < parseFloat(precioMasBajo.toString())) {
+                precioMasBajo = precioOferta;
+            }
             if (parseFloat(precioUno.toString()) > 0 && parseFloat(precioUno.toString()) < parseFloat(precioMasBajo.toString())) {
                 precioMasBajo = precioUno;
             }
@@ -187,16 +202,17 @@ function listaPrecios(codigo) {
             if (parseFloat(precioTres.toString()) > 0 && parseFloat(precioTres.toString()) < parseFloat(precioMasBajo.toString())) {
                 precioMasBajo = precioTres;
             }
-            if (parseFloat(precioOferta.toString()) > 0 && parseFloat(precioOferta.toString()) < parseFloat(precioMasBajo.toString())) {
-                precioMasBajo = precioOferta;
-            }
+            
             inputPrecioMasBajo.value = precioMasBajo;            
 
-            $selectPrecio.append('<option value=' + precioVenta + '> VENTA - ' + precioVenta + '</option>');
-            $selectPrecio.append('<option value=' + precioUno + '> UNO - ' + precioUno + '</option>');
-            $selectPrecio.append('<option value=' + precioDos + '> DOS - ' + precioDos + '</option>');
-            $selectPrecio.append('<option value=' + precioTres + '> TRES - ' + precioTres + '</option>');
-            $selectPrecio.append('<option value=' + precioOferta + '> OFERTA - ' + precioOferta + '</option>');
+            $selectPrecio.append('<option id="precioVenta" value=' + precioVenta + '> VENTA - ' + precioVenta + '</option>');
+            $selectPrecio.append('<option id="precioTresUnidades" value=' + precioMinorista + '> 3 UNIDADES - ' + precioMinorista + '</option>');
+            $selectPrecio.append('<option id="precioSeisUnidades" value=' + precioMayorista + '> 6 UNIDADES - ' + precioMayorista + '</option>');
+            $selectPrecio.append('<option id="precioDoceUnidades" value=' + precioEspecial + '> 12 UNIDADES - ' + precioEspecial + '</option>');
+            $selectPrecio.append('<option id="precioUno" value=' + precioUno + '> UNO - ' + precioUno + '</option>');
+            $selectPrecio.append('<option id="precioDos" value=' + precioDos + '> DOS - ' + precioDos + '</option>');
+            $selectPrecio.append('<option id="precioTres" value=' + precioTres + '> TRES - ' + precioTres + '</option>');
+            $selectPrecio.append('<option id="precioCuatro" value=' + precioOferta + '> OFERTA - ' + precioOferta + '</option>');
 
             colocarPrecio();
         }
@@ -447,6 +463,7 @@ function listaPrioridad() {
     var $sltPrioridad = $('#sltPrioridad');
     $sltPrioridad.append('<option value="NORMAL">NORMAL</option>');
     $sltPrioridad.append('<option value="URGENTE">URGENTE</option>');
+    $sltPrioridad.append('<option value="PREVENTA">PREVENTA</option>');
 }
 
 /**

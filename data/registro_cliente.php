@@ -13,6 +13,7 @@ $fechaRegistro = date("Y-m-d");
 $clienteID = $_POST["clienteId"]; //se asigna con la consulta a la db
 $nit = $_POST['nit'];
 $nombre = $_POST['nombre'];
+$nombre = strtoupper($nombre);
 $direccion = $_POST['direccion'];
 $telefono = $_POST['telefono'];
 $email = $_POST['correo'];

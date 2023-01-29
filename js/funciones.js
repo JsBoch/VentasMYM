@@ -3,6 +3,7 @@ function CalculoSubtotal() {
     let cantidad = document.getElementById("cantidad").value;
     let precioMasBajo = document.getElementById("precioMasBajo").value;
 
+
     if (precio.length == 0 || parseFloat(precio) == 0) {
         document.getElementById("subtotal").value = "";
         //alertify.error("Debe ingresar un precio válido");
@@ -30,4 +31,20 @@ function CalculoSubtotal() {
             document.getElementById("subtotal").value = subtotal;
         }
     }
+}
+
+function validarPrecioConCantidad(){
+    let cantidad = document.getElementById("cantidad").value;
+    if(parseInt(cantidad) == 3){
+        $("#tipo_precio option[id='precioTresUnidades']").attr("selected",true);
+      }
+      else if (parseInt(cantidad) == 6){
+        $("#tipo_precio option[id='precioSeisUnidades']").attr("selected",true);
+      }
+      else if (parseInt(cantidad) == 12){
+        $("#tipo_precio option[id='precioDoceUnidades']").attr("selected",true);
+      }
+      else{
+        $("#tipo_precio option[id='precioVenta']").attr("selected",true);
+      }
 }
