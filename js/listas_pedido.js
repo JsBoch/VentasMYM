@@ -339,8 +339,7 @@ function codigoProducto(datos) {
  */
 function nombreProducto(datos) {
 
-    const data = [];
-
+    const data = [];    
     $.each(datos, function (i, producto) {
         data.push(producto.nombre);
     });
@@ -363,10 +362,18 @@ function nombreProducto(datos) {
         resultsHTMLProducto.style.padding = "5px";
     };
 
+    /*
+    - Este método busca dentro del arreglo de productos
+    aquellos registros que contengan las palabras que el usuario
+    vaya ingresando en el control de producto.
+    */
     function getResults(input) {
         const results = [];
         for (i = 0; i < data.length; i++) {
-            if (input === data[i].slice(0, input.length)) {
+            //if (input === data[i].slice(0, input.length)) {
+            if (data[i].toString().includes(input)) {
+                    //console.log(input);
+                    //console.log(data[i]);
                 results.push(data[i]);
             }
         }
