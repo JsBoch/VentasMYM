@@ -33,11 +33,19 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 </a>
             </div>
             <!-- cliente -->
+            <!--Fecha de recibo-->
             <h2 class="main_title">Datos Generales</h2>
+            <div class="query_date">
+                <div class="start_date">
+                    <label for="fechaInicio">Fecha</label>
+                    <input type="date" name="fecha" id="fecha">
+                </div>
+                <!-- end fecha recibo-->
+            </div>
             <div class="sub_container">
                 <div class="first_half">
-                <label for="numero_recibo" class="subtitle_input">NUMERO DE RECIBO</label>
-                <input type='number' name="numero_recibo" class="info_boxes" id="numero_recibo" placeholder="ingrese número de recibo" autocomplete="off">
+                    <label for="numero_recibo" class="subtitle_input">NUMERO DE RECIBO</label>
+                    <input type='number' name="numero_recibo" class="info_boxes" id="numero_recibo" placeholder="ingrese número de recibo" autocomplete="off">
                     <label for="departamento" class="subtitle_input">DEPARTAMENTO</label>
                     <select name="departamento" class="selectors" id="departamento" onchange="listaClientes()"></select>
                     <!--<select name="cliente" class="selectors" id="cliente"></select>-->
@@ -46,10 +54,10 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                     <label for="cliente" class="subtitle_input">CLIENTE</label>
                     <input type="text" name="cliente" id="cliente" class="info_boxes" placeholder="Nombre de cliente" data-id="0" onblur="obtenerIdCliente()" autocomplete="off">
                     <ul id="ulclienteresult" class="autocomplete_listClient"></ul>
-        
+
                 </div>
                 <div class="second_half">
-                <label for="sltSemana" class="subtitle_input">SEMANA</label>
+                    <label for="sltSemana" class="subtitle_input">SEMANA</label>
                     <select name="sltSemana" id="sltSemana" class="selector">
                         <option value="SEMANA 1">SEMANA 1</option>
                         <option value="SEMANA 2">SEMANA 2</option>
@@ -69,7 +77,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 <input type='number' name="numero_envio" class="info_boxes" id="numero_envio" placeholder="ingrese número de envio" autocomplete="off">
                 <label for="empresa" class="subtitle_input">EMPRESA</label>
                 <select name="empresa" class="selector" id="empresa">
-                    <!-- <option value="mym">MYM</option> -->
+                    <option value="mym">MYM</option>
                     <option value="sa">SA</option>
                 </select>
                 <label for="tipo_pago" class="subtitle_input">TIPO PAGO</label>
@@ -77,6 +85,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                     <option value="efectivo">EFECTIVO</option>
                     <option value="cheque">CHEQUE</option>
                     <option value="deposito">DEPOSITO</option>
+                    <option value="transferencia">TRANSFERENCIA</option>
                 </select>
                 <label for="pago" class="subtitle_input">MONTO</label>
                 <input type="number" class="info_boxes" name="pago" id="pago" placeholder="Monto" autocomplete="off">
@@ -97,36 +106,59 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 <input type="text" name="numero_deposito" class="info_boxes" id="numero_deposito" placeholder="Número de deposito" autocomplete="off">
                 <label for="numero_cheque" class="subtitle_input">NUMERO CHEQUE</label>
                 <input type="text" name="numero_cheque" class="info_boxes" id="numero_cheque" placeholder="Número de cheque" autocomplete="off">
-
+                <!--marca si es cheque prefechado-->
                 <div class="checkbox_cajaRural">
                     <div class="text_edit">
-                        <h3 class="edit">Caja rural</h3>
+                        <h3 class="edit">Pre-fechado</h3>
                     </div>
                     <div class="checkbox-JASoft">
-                        <input type="checkbox" id="checkAvanzado" name="checkAvanzado">
-                        <label for="checkAvanzado">TEXTO QUE NO DEBERÍA VERSE</label>
+                        <input type="checkbox" id="chkPrefechado" name="chkPrefechado">
+                        <label for="chkPrefechado">CHEQUE PRE-FECHADO</label>
                     </div>
                 </div>
+                <!--end prefechado-->
+                <!--Fecha de cobro-->
+                <div class="query_date">
+                    <div class="start_date">
+                        <label for="fechaCobroCheque">Fecha</label>
+                        <input type="date" name="fechaCobroCheque" id="fechaCobroCheque">
+                    </div>
+                    <!--end fecha cobro-->
+                    <!--Comentario cheque-->
+                    <label for="comentarioCheque" class="subtitle_input">OBSERVACIONES CHEQUE</label>
+                    <div class="comentario">
+                        <textarea name="comentarioCheque" class="comments" id="comentarioCheque" cols="30" rows="5"></textarea>
+                    </div>
+                    <!--end comentario cheque-->
+                    <div class="checkbox_cajaRural">
+                        <div class="text_edit">
+                            <h3 class="edit">Caja rural</h3>
+                        </div>
+                        <div class="checkbox-JASoft">
+                            <input type="checkbox" id="checkAvanzado" name="checkAvanzado">
+                            <label for="checkAvanzado">TEXTO QUE NO DEBERÍA VERSE</label>
+                        </div>
+                    </div>
 
-                <!-- segundo checkbox -->
-                <div class="checkbox_cajaRural">
-                    <div class="text_edit">
-                        <h3 class="edit">Compra contado</h3>
+                    <!-- segundo checkbox -->
+                    <div class="checkbox_cajaRural">
+                        <div class="text_edit">
+                            <h3 class="edit">Compra contado</h3>
+                        </div>
+                        <div class="checkbox-JASoft">
+                            <input type="checkbox" id="checkAvanzadoDos" name="checkAvanzado">
+                            <label for="checkAvanzadoDos">TEXTO QUE NO DEBERÍA VERSE</label>
+                        </div>
                     </div>
-                    <div class="checkbox-JASoft">
-                        <input type="checkbox" id="checkAvanzadoDos" name="checkAvanzado">
-                        <label for="checkAvanzadoDos">TEXTO QUE NO DEBERÍA VERSE</label>
-                    </div>
-                </div>
 
-                <label for="observaciones_producto" class="subtitle_input">OBSERVACIONES</label>
-                <div class="comentario">
-                    <textarea name="observaciones_producto" class="comments" id="observaciones_producto" cols="30" rows="5"></textarea>
+                    <label for="observaciones_producto" class="subtitle_input">OBSERVACIONES</label>
+                    <div class="comentario">
+                        <textarea name="observaciones_producto" class="comments" id="observaciones_producto" cols="30" rows="5"></textarea>
+                    </div>
+                    <button class="add" onclick="cargarDetalle()" type="button">Agregar</button>
+                    <button class="see" onclick="seeOrder('subContainerDates')" type="button">Ver recibo</button>
                 </div>
-                <button class="add" onclick="cargarDetalle()" type="button">Agregar</button>
-                <button class="see" onclick="seeOrder('subContainerDates')" type="button">Ver recibo</button>
             </div>
-        </div>
     </form>
 
     <div id="main-container">

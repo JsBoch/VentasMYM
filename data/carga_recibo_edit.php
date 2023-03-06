@@ -15,7 +15,8 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
     "r.id_cliente,".
     "c.primer_nombre as cliente,". 
     "r.semana,".
-    "r.observacion ".
+    "r.observacion,".
+    "r.fecha_recibo ".
     "from vnt_registro_recibo r ".
     "join clientes c on r.id_cliente = c.idcliente ".
     "join adm_departamentopais d on c.iddepartamento = d.iddepartamento ".
@@ -35,7 +36,8 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
                     'id_cliente' => $row['id_cliente'],
                     'cliente' => $row['cliente'],
                     'semana' => $row['semana'],
-                    'observacion' => $row['observacion'],           
+                    'observacion' => $row['observacion'],        
+                    'fecha_recibo' => $row['fecha_recibo']    
                 );
                 $indice++;
             }
@@ -81,6 +83,7 @@ if ($codigoRespuesta != 1) {
         'cliente' => '',        
         'semana' => '',
         'observacion' => '',
+        'fecha_recibo' => ''
     );
 
     echo json_encode($return_arr);

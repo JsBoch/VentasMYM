@@ -1,4 +1,17 @@
 var listaDetalle = new Array();
+/**
+ * Esta función establece la fecha actual 
+ * al control de fecha del formulario
+ */
+$(document).ready(function () {
+  var now = new Date();
+
+  var day = ("0" + now.getDate()).slice(-2);
+  var month = ("0" + (now.getMonth() + 1)).slice(-2);
+
+  var today = now.getFullYear() + "-" + month + "-" + day;
+  $("#fecha").val(today);
+});
 
 function cargarDetalle() {
   let numeroEnvio = document.getElementById("numero_envio").value;
@@ -25,12 +38,24 @@ function cargarDetalle() {
   var banco = selectBanco.options[selectBanco.selectedIndex].text;
   let numeroDeposito = document.getElementById("numero_deposito").value;
   let numeroCheque = document.getElementById("numero_cheque").value;
+  let fechaCobroCheque = document.getElementById("fechaCobroCheque").value;
+  let comentarioCheque = documento.getElementById("comentarioCheque").value;
   let checkboxCajaRural = document.getElementById("checkAvanzado");
+  let chkPrefechado = document.getElementById("chkPrfechado");
+
   let checkboxCRValor = "";
   if (checkboxCajaRural.checked == true) {
     checkboxCRValor = "S";
   } else {
     checkboxCRValor = "N";
+  }
+  let prefechado = "";
+  if(chkPrefechado.checked == true)
+  {
+    prefechado = "S";
+  }
+  else{
+    prefechado = "N";
   }
 
   let checkboxCompraContado = document.getElementById("checkAvanzadoDos");
@@ -92,7 +117,10 @@ function cargarDetalle() {
     pago: pago,
     pago_total: valorRadio,
     observaciones: observacionesProducto,
-    banco: banco
+    banco: banco,
+    prefechado: prefechado,
+    fecha_cobro: fechaCobroCheque,
+    comentario_cheque: comentarioCheque
   };
 
   listaDetalle.push(jsonString);
@@ -182,7 +210,7 @@ function GuardarRegistro(consulta) {
   {
     nombreCliente = document.getElementById("cliente").value;
   }
-  
+
   var semanaSelect = document.getElementById("sltSemana");
   var semana = semanaSelect.options[semanaSelect.selectedIndex].text;
   let observaciones = document.getElementById("observaciones").value;
@@ -191,6 +219,8 @@ function GuardarRegistro(consulta) {
   var enviarPedido = document.getElementById("send_order");
   var fechas = document.getElementById("subContainerDates");
   var datosGenerales = document.getElementById("subContainerDatesAll");
+  let fechaRecibo = $("#fecha").val();
+  fechaRecibo = fechaRecibo.toString().replace(/-/gi, "");
 
   let cobro = 0;
   listaDetalle.forEach(element => {
@@ -206,7 +236,8 @@ function GuardarRegistro(consulta) {
     nombre_cliente: nombreCliente,
     cobro: cobro,
     semana: semana,
-    observaciones: observaciones
+    observaciones: observaciones,
+    fecha:fechaRecibo
   });
 
   var data1 = JSON.stringify(principal);

@@ -21,6 +21,7 @@ foreach ($jsonMain as $item) {
     $semana = $item["semana"];
     $observacionesRegistro = $item["observaciones"]; //$jsonMain->observaciones;
     $usuarioID = $_SESSION["usuarioId"];
+    $fechaRecibo = $item["fecha"];
 }
 /**
  * Se almacena en la base de datos
@@ -74,14 +75,15 @@ if ($mysqli !== null) {
             "semana," .
             "observacion," .
             "estado," .
-            "id_usuario)" .
-            " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);")) {
+            "id_usuario,". 
+            "fecha_recibo)" .
+            " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?);")) {
             //echo "fallo No." . $mysqli->errno . " " . $mysqli->error;
             $codigoRespuesta = -1;
 
         } else
-        if (!$stmt->bind_param("ississssii", $reciboId, $noRecibo, $fechaHoraRegistro, $clienteID, $nombreCliente,
-            $cobro, $semana, $observacionesRegistro, $estado, $usuarioID)) {
+        if (!$stmt->bind_param("ississssiis", $reciboId, $noRecibo, $fechaHoraRegistro, $clienteID, $nombreCliente,
+            $cobro, $semana, $observacionesRegistro, $estado, $usuarioID,$fechaRecibo)) {
             //echo "fallo la vinculacion: " . $mysqli->errno . " " . $mysqli->error;
             $codigoRespuesta = -2;
         } else if (
@@ -105,6 +107,10 @@ if ($mysqli !== null) {
                 $banco = "";
                 $ventaID = 0;
                 $compraContado = "";
+                $preFechado = "";
+                $fechaCobro = "";
+                $cobrado = "";
+                $comentarioCheque = "";
 
                 if (!$stmtd = $mysqli->prepare(
                     "INSERT INTO vnt_detalle_recibo (" .
@@ -122,12 +128,16 @@ if ($mysqli !== null) {
                     "observaciones," .
                     "estado," .
                     "banco," . 
-                    "compra_contado) " .
-                    " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);")) {
+                    "compra_contado,". 
+                    "prefechado,".
+                    "fecha_cobro,".  
+                    "cobrado,". 
+                    "comentario_cheque) " .
+                    " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);")) {
                     $codigoRespuesta = -4; //fallo al preparar la consulta de detalle
 
-                } else if (!$stmtd->bind_param("iiiisssssdssiss", $detalleId, $reciboId, $ventaID, $noEnvio,
-                    $noDeposito, $cajaRural, $empresa, $noCheque, $tipoPago, $pago,$pagoTotal,$observaciones,$estado,$banco,$compraContado)) {
+                } else if (!$stmtd->bind_param("iiiisssssdssissssss", $detalleId, $reciboId, $ventaID, $noEnvio,
+                    $noDeposito, $cajaRural, $empresa, $noCheque, $tipoPago, $pago,$pagoTotal,$observaciones,$estado,$banco,$compraContado,$preFechado,$fechaCobro,$cobrado,$comentarioCheque)) {
                     $codigoRespuesta = -5; //no se pudieron vincular los parámetros a la consulta detalle
                 } else {
                     /**
@@ -151,6 +161,10 @@ if ($mysqli !== null) {
                         $observaciones = $arr["observaciones"];
                         $banco = $arr["banco"];
                         $compraContado = $arr["compra_contado"];
+                        $preFechado = $arr["prefechado"];
+                        $fechaCobro = $arr["fecha_cobro"];
+                        $cobrado = "N";
+                        $comentarioCheque = $arr["comentario_cheque"];
 
 
                         if (!$stmtd->execute()) {

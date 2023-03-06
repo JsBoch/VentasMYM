@@ -10,6 +10,8 @@ $(document).ready(function () {
   var today = now.getFullYear() + "-" + month + "-" + day;
   $("#fechaInicio").val(today);
   $("#fechaFinal").val(today);
+  $("#fecha").val(today);
+  $("#fechaCobroCheque").val(today);
 });
 
 function ConsultarRecibos() {
@@ -84,6 +86,7 @@ function CargaPedidoEdit() {
   let noRecibo;
   let cliente;
   let semana;
+  let fechaRecibo;
 
   solicitudId = $("#listaPedidos").val();
   $.ajax({
@@ -99,12 +102,15 @@ function CargaPedidoEdit() {
       cliente = object[0].cliente;
       semana = object[0].semana;
       observaciones = object[0].observacion;
+      fechaRecibo = object[0].fecha_recibo;
 
       $("#numero_recibo").val(noRecibo);
       $("#departamento").val(departamentoId);
       $("#cliente").val(cliente);
       $("#sltSemana").val(semana);
-      $("#observaciones").val(observaciones);
+      $("#observaciones").val(observaciones);      
+      $("#fecha").val(fechaRecibo);
+
       listaClientesConsulta();
       CargaProductosEdit(solicitudId);
     },
@@ -166,7 +172,10 @@ function CargaProductosEdit(idsolicitud) {
           pago: producto.pago,
           pago_total: producto.pago_total,
           observaciones: producto.observaciones,
-          banco: producto.banco
+          banco: producto.banco,
+          prefechado: producto.prefechado,
+          fechaCobro:producto.fecha_cobro,
+          comentarioCheque: producto.comentario_cheque
         };
 
         listaDetalle.push(jsonString);
@@ -174,9 +183,9 @@ function CargaProductosEdit(idsolicitud) {
         let item =
           "Envio " +
           producto.no_envio +
-          "Monto " +
+          " Monto " +
           producto.pago +
-          "Observaciones " +
+          " Observaciones " +
           producto.observaciones;
 
         var $select = $("#listado");
