@@ -177,7 +177,7 @@ background: linear-gradient(40deg, rgba(6,255,139,1) 0%, rgba(33,235,178,1) 26%,
 .comments {
     background-color: var(--balck);
     width: 100%;
-    margin-bottom: 24px;
+    margin-bottom: 10px;
     padding-left: 5px;
     border: 3px var(--celeseTra) solid;
     outline: none;

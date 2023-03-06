@@ -35,28 +35,23 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
             <!-- cliente -->
             <!--Fecha de recibo-->
             <h2 class="main_title">Datos Generales</h2>
-            <div class="query_date">
-                <div class="start_date">
-                    <label for="fechaInicio">Fecha</label>
-                    <input type="date" name="fecha" id="fecha">
-                </div>
-                <!-- end fecha recibo-->
-            </div>
             <div class="sub_container">
                 <div class="first_half">
+                    <label for="fechaInicio" class="subtitle_input">FECHA RECIBO</label>
+                    <input type="date" name="fecha" id="fecha" class="info_boxes">
                     <label for="numero_recibo" class="subtitle_input">NUMERO DE RECIBO</label>
                     <input type='number' name="numero_recibo" class="info_boxes" id="numero_recibo" placeholder="ingrese número de recibo" autocomplete="off">
                     <label for="departamento" class="subtitle_input">DEPARTAMENTO</label>
                     <select name="departamento" class="selectors" id="departamento" onchange="listaClientes()"></select>
                     <!--<select name="cliente" class="selectors" id="cliente"></select>-->
+                </div>
+                <div class="second_half">
 
                     <!-- ASIGNAR FORMATO RESPONSIVE a cliente y ulclienteresult-->
                     <label for="cliente" class="subtitle_input">CLIENTE</label>
                     <input type="text" name="cliente" id="cliente" class="info_boxes" placeholder="Nombre de cliente" data-id="0" onblur="obtenerIdCliente()" autocomplete="off">
                     <ul id="ulclienteresult" class="autocomplete_listClient"></ul>
 
-                </div>
-                <div class="second_half">
                     <label for="sltSemana" class="subtitle_input">SEMANA</label>
                     <select name="sltSemana" id="sltSemana" class="selector">
                         <option value="SEMANA 1">SEMANA 1</option>
@@ -118,11 +113,9 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 </div>
                 <!--end prefechado-->
                 <!--Fecha de cobro-->
-                <div class="query_date">
-                    <div class="start_date">
-                        <label for="fechaCobroCheque">Fecha</label>
-                        <input type="date" name="fechaCobroCheque" id="fechaCobroCheque">
-                    </div>
+                        <label for="fechaCobroCheque"  class="subtitle_input">FECHA COBRO</label>
+                        <input type="date" name="fechaCobroCheque" id="fechaCobroCheque"  class="info_boxes">
+
                     <!--end fecha cobro-->
                     <!--Comentario cheque-->
                     <label for="comentarioCheque" class="subtitle_input">OBSERVACIONES CHEQUE</label>

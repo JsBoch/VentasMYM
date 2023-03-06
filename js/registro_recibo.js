@@ -11,6 +11,7 @@ $(document).ready(function () {
 
   var today = now.getFullYear() + "-" + month + "-" + day;
   $("#fecha").val(today);
+  $("#fechaCobroCheque").val(today);
 });
 
 function cargarDetalle() {
