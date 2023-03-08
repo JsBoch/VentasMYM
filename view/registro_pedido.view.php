@@ -62,7 +62,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
             <div class="second_sub_container">
                 <label for="codigo" class="subtitle_input">CODIGO</label>
                 <input type='text' name="codigo" class="info_boxes" id="codigo" placeholder="ingrese código" onchange="limpiarNombre()" autocomplete="off">
-                <label for="producto" class="subtitle_input">PRODUTO</label>
+                <label for="producto" class="subtitle_input">PRODUCTO</label>
                 <input type="text" name="producto" class="info_boxes" id="producto" placeholder="ingreso nombre" size="100" onchange="limpiarCodigo()" autocomplete="off">
 
                 <ul class="autocomplete_list" id="results"></ul>

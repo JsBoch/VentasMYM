@@ -368,16 +368,19 @@ function nombreProducto(datos) {
     vaya ingresando en el control de producto.
     */
     function getResults(input) {
+        if(input.length > 2)
+        {
         const results = [];
         for (i = 0; i < data.length; i++) {
             //if (input === data[i].slice(0, input.length)) {
-            if (data[i].toString().includes(input)) {
+            if (data[i].includes(input)) {
                     //console.log(input);
                     //console.log(data[i]);
                 results.push(data[i]);
             }
         }
         return results;
+        }
     }
 
     resultsHTMLProducto.onclick = function (event) {
@@ -531,7 +534,10 @@ function obtenerDireccionCliente(idCliente) {
             $.each(object, function (i, resultado) {
                 direccion += resultado.direccion;
             });
+            if(direccionClienteInput !== null)
+            {
             direccionClienteInput.value = direccion;
+            }
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log("Otro: " + jqXHR);

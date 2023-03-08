@@ -40,9 +40,9 @@ function cargarDetalle() {
   let numeroDeposito = document.getElementById("numero_deposito").value;
   let numeroCheque = document.getElementById("numero_cheque").value;
   let fechaCobroCheque = document.getElementById("fechaCobroCheque").value;
-  let comentarioCheque = documento.getElementById("comentarioCheque").value;
+  let comentarioCheque = document.getElementById("comentarioCheque").value;
   let checkboxCajaRural = document.getElementById("checkAvanzado");
-  let chkPrefechado = document.getElementById("chkPrfechado");
+  let chkPrefechado = document.getElementById("chkPrefechado");
 
   let checkboxCRValor = "";
   if (checkboxCajaRural.checked == true) {
@@ -128,11 +128,11 @@ function cargarDetalle() {
   // console.log(item);
 
   let item =
-  "Envio " +
+  "Envio: " +
     numeroEnvio +
-  "Monto " +
+  " Monto: " +
     pago +
-    "Observaciones " +
+    "Observaciones: " +
     observacionesProducto;
 
   var $select = $("#listado");
@@ -167,8 +167,15 @@ function cargarDetalle() {
   document.getElementById("numero_deposito").value = "";
   document.getElementById("numero_cheque").value = "";
   document.getElementById("observaciones_producto").value = "";
+  chkPrefechado.checked = false;
   checkboxCajaRural.checked = false;
   checkboxCompraContado.checked == false;
+  var now = new Date();
+  var day = ("0" + now.getDate()).slice(-2);
+  var month = ("0" + (now.getMonth() + 1)).slice(-2);
+  var today = now.getFullYear() + "-" + month + "-" + day;
+  document.getElementById("fechaCobroCheque").value = today;
+  document.getElementById("comentarioCheque").value = "";
 }
 
 function GuardarRegistro(consulta) {
@@ -281,7 +288,12 @@ function GuardarRegistro(consulta) {
   document.getElementById("checkAvanzado").checked = false;
   document.getElementById("checkAvanzadoDos").checked = false;
  
-
+  var now = new Date();
+  var day = ("0" + now.getDate()).slice(-2);
+  var month = ("0" + (now.getMonth() + 1)).slice(-2);
+  var today = now.getFullYear() + "-" + month + "-" + day;
+  document.getElementById("fechaCobroCheque").value = today;
+  document.getElementById("comentarioCheque").value = "";
 
   let $selectListado = $("#listado");
   $selectListado.empty();
@@ -291,7 +303,10 @@ function GuardarRegistro(consulta) {
     agregarAlPedido.style.display = "none";
     enviarPedido.style.display = "none";
     fechas.style.display = "block";
+    if(datosGenerales !== null)
+    {
     datosGenerales.style.display = "block";
+    }
   }
 }
 

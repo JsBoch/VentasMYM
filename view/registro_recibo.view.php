@@ -58,6 +58,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                         <option value="SEMANA 2">SEMANA 2</option>
                         <option value="SEMANA 3">SEMANA 3</option>
                         <option value="SEMANA 4">SEMANA 4</option>
+                        <option value="SEMANA 5">SEMANA 5</option>
                     </select>
                     <label for="observaciones_producto" class="subtitle_input">OBSERVACIONES</label>
                     <textarea name="observaciones" class="comments" id="observaciones" cols="119" rows="5"></textarea>
