@@ -33,12 +33,14 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
          </div>
          <ul>
             <li>
-               <a href="#" class="feat-btn">Registro de clientes
+               <a href="#" class="feat-btn">Clientes
                <span class="fas fa-caret-down first"></span>
                </a>
                <ul class="feat-show">
                   <li><a href="view/registro_cliente.view.php">Registrar</a></li>                  
                   <li><a href="view/mostrar_ubicacion_cliente.view.php">Consultar</a></li>
+                  <li><a href="view/consulta_estadocuenta.view.php">Estado de Cuenta</a></li>
+                  <li><a href="view/consulta_ventasmes.view.php">Venta por mes</a></li>
                </ul>
             </li>
             <li>

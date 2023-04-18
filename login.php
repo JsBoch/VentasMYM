@@ -14,7 +14,8 @@ if (isset($_POST["user_name"]) && isset($_POST["user_password"])) {
         if (!$stmt = $mysqli->prepare("SELECT " .
             "u.idadm_usuario as id," .
             "concat(u.nombres,' ',u.apellidos) as nombre," .
-            "u.id_sucursal " .
+            "u.id_sucursal," .
+            "u.id_empleado " .
             "FROM adm_usuario u " .
             "WHERE " .
             "u.usuario = ? " .
@@ -41,6 +42,7 @@ if (isset($_POST["user_name"]) && isset($_POST["user_password"])) {
                 $_SESSION['usuarioNombre'] = $fila['nombre'];
                 $_SESSION['sucursal'] = $sucursal;
                 $_SESSION['estado'] = 'conectado';
+                $_SESSION['empleadoId'] = $fila['id_empleado'];
 
                 header("Location: index.php");
             } else {
