@@ -24,11 +24,12 @@ function ConsultarVentaMes() {
 function GenerarTablaVenta(object)
 {
     // Obtener la referencia del elemento body
-  var body = document.getElementsByTagName("body")[0];
+    var body = document.getElementById("contenedorTabla");
 
   // Crea un elemento <table> y un elemento <tbody>
   var tabla   = document.createElement("table");
   var tblBody = document.createElement("tbody");
+  var thead = document.createElement("thead");
 
   var encabezado = document.createElement("tr");
 
@@ -45,7 +46,7 @@ function GenerarTablaVenta(object)
   celM.appendChild(textCelM);
   encabezado.appendChild(celM);
 
-  tblBody.appendChild(encabezado);
+  thead.appendChild(encabezado);
     
     $.each(object, function (i, resultado) {
         // Crea las hileras de la tabla
@@ -78,13 +79,13 @@ function GenerarTablaVenta(object)
     });  
     
     
-
+    tabla.appendChild(thead);
   // posiciona el <tbody> debajo del elemento <table>
   tabla.appendChild(tblBody);
   // appends <table> into <body>
   body.appendChild(tabla);
   // modifica el atributo "border" de la tabla y lo fija a "2";
-  tabla.setAttribute("border", "1");
+  tabla.setAttribute("id", "tablaDatos");
 }
 
 function ConsultarVentaTotalMes() {
@@ -103,7 +104,7 @@ function ConsultarVentaTotalMes() {
                 currency: "GTQ",
                 minimumFractionDigits: 2,
               });
-            txtTotal.value = monto.format(object[0].venta);
+            txtTotal.innerHTML = monto.format(object[0].venta).toString();
                     
         },
         error: function (jqXHR, textStatus, errorThrown) {

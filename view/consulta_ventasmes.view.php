@@ -16,13 +16,22 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../css/alertify.min.css">
-    <link rel="stylesheet" href="../css/ordersStyles.css">
+    <link rel="stylesheet" href="../css/ventas_mes.css">
     <link rel="icon" href="../imgs/logo.png">
     <title>Ventas</title>
 </head>
 
 <body >
-    <label for="sltMesCV" class="subtitle_input">MES</label>
+<div class="contenedorTodo">
+                <!-- Boton para regresar al menu -->
+                <div class="above_all">
+        <a href="../index.php">
+            <h3>Ir al menu</h3>
+            <i class='bx bx-log-out'></i>
+         </a>
+        </div>     
+
+        <label for="sltMesCV" class="subtitle_input">MES</label>
     <select name="sltMesCV" class="selectors" id="sltMesCV">
         <option value="1">ENERO</option>
         <option value="2">FEBRERO</option>
@@ -38,9 +47,19 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
         <option value="12">DICIEMBRE</option>
     </select>
     <!-- ASIGNAR FORMATO RESPONSIVE a cliente y ulclienteresult-->
-    <input type="button" value="Consultar" id="btnConsultarEC" onclick="ConsultarVentaTotalMes(),ConsultarVentaMes()">
-    <label for="txtTotalVenta" class="subtitle_input">TOTAL VENTA</label>
-    <input type="text" name="txtTotalVenta" id="txtTotalVenta" class="info_boxes" placeholder="Venta Total" data-id="0" autocomplete="off">    
+    <input type="button" value="Consultar" class="btnConsultar" id="btnConsultarEC" onclick="ConsultarVentaTotalMes(),ConsultarVentaMes()">
+</div>
+<div class="contenedorTabla">
+<div  class="mitad_1">
+<label for="txtTotalVenta" class="subtitle_parrafo">TOTAL VENTA</label>
+    <p id="txtTotalVenta"></p> 
+</div>
+<div id="contenedorTabla" class="mitad_2">
+
+</div>
+
+</div>
+  
     <script src="../js/jquery-3.6.0.min.js"></script>
     <script src="../js/alertify.min.js"></script>
     <script src="../js/venta_mensual.js"></script>

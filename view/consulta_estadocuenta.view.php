@@ -16,21 +16,41 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../css/alertify.min.css">
-    <link rel="stylesheet" href="../css/ordersStyles.css">
+    <link rel="stylesheet" href="../css/estadoCuenta.css">
     <link rel="icon" href="../imgs/logo.png">
     <title>Estado de cuenta</title>
 </head>
 
 <body onload="listaDepartamentosEstadoCuenta()">
+   
+    <div class="contenedorTodo">
+                <!-- Boton para regresar al menu -->
+                <div class="above_all">
+        <a href="../index.php">
+            <h3>Ir al menu</h3>
+            <i class='bx bx-log-out'></i>
+         </a>
+        </div>     
     <label for="sltDepartamentoEC" class="subtitle_input">DEPARTAMENTO</label>
     <select name="sltDepartamentoEC" class="selectors" id="sltDepartamentoEC" onchange="listaClientesEC()"></select>
-    <!-- ASIGNAR FORMATO RESPONSIVE a cliente y ulclienteresult-->
+  
+
     <label for="clienteEC" class="subtitle_input">CLIENTE</label>
     <input type="text" name="clienteEC" id="clienteEC" class="info_boxes" placeholder="Nombre de cliente" data-id="0" autocomplete="off">
     <ul id="ulClienteECResult" class="autocomplete_listClient"></ul>
+  
+
     <label for="direccion_clienteEC" class="subtitle_input">DIRECCION DE CLIENTE</label>
     <input type="text" name="direccion_clienteEC" id="direccion_clienteEC" class="info_boxes" placeholder="Dirección de cliente" autocomplete="off">
-    <input type="button" value="Consultar" id="btnConsultarEC" onclick="ConsultarEstadoCuenta()">
+
+   
+    <!-- ASIGNAR FORMATO RESPONSIVE a cliente y ulclienteresult-->
+    <input type="button" value="Consultar" class="btnConsultar" id="btnConsultarEC" onclick="ConsultarEstadoCuenta()">
+    </div>
+
+    <div id="contenedorTabla" class="contenedorTabla">
+
+    </div>
     <script src="../js/jquery-3.6.0.min.js"></script>
     <script src="../js/alertify.min.js"></script>
     <script src="../js/estado_cuenta.js"></script>

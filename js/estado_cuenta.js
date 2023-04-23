@@ -146,11 +146,12 @@ function ConsultarEstadoCuenta() {
 function GenerarTabla(object)
 {
     // Obtener la referencia del elemento body
-  var body = document.getElementsByTagName("body")[0];
+  var body = document.getElementById("contenedorTabla");
 
   // Crea un elemento <table> y un elemento <tbody>
   var tabla   = document.createElement("table");
   var tblBody = document.createElement("tbody");
+  var thead = document.createElement("thead");
 
   var encabezado = document.createElement("tr");
 
@@ -175,7 +176,7 @@ function GenerarTabla(object)
   celDV.appendChild(textCelDV);
   encabezado.appendChild(celDV);
 
-  tblBody.appendChild(encabezado);
+  thead.appendChild(encabezado);
     
     $.each(object, function (i, resultado) {
         // Crea las hileras de la tabla
@@ -225,11 +226,11 @@ function GenerarTabla(object)
     });  
     
     
-
+    tabla.appendChild(thead);
   // posiciona el <tbody> debajo del elemento <table>
   tabla.appendChild(tblBody);
   // appends <table> into <body>
   body.appendChild(tabla);
   // modifica el atributo "border" de la tabla y lo fija a "2";
-  tabla.setAttribute("border", "1");
+  tabla.setAttribute("id", "tablaDatos");
 }
