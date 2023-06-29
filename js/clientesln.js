@@ -137,4 +137,5 @@ function listaRegiones()
     $sltRegion.append('<option value="REGION 2">REGION 2</option>');
     $sltRegion.append('<option value="REGION 3">REGION 3</option>');
     $sltRegion.append('<option value="REGION 4">REGION 4</option>');
+    $sltRegion.append('<option value="REGION 5">REGION 5</option>');
 }

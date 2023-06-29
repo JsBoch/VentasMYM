@@ -1,12 +1,12 @@
 var listaDetalle = new Array();
 
-function cargarDetalle() {  
+function cargarDetalle() {
   let codigo = document.getElementById("codigo").value;
   let producto = document.getElementById("producto").value;
   let cantidad = document.getElementById("cantidad").value;
   let objTipoPrecio = document.getElementById("tipo_precio");
   // console.log(objTipoPrecio.options[objTipoPrecio.selectedIndex].text);
-    // validación de tipo precio
+  // validación de tipo precio
 
 
 
@@ -45,7 +45,7 @@ function cargarDetalle() {
       let item = JSON.parse(JSON.stringify(row));
 
       if (item.codigo_producto === codigo) {
-        existe = true;        
+        existe = true;
       }
     });
 
@@ -105,21 +105,21 @@ function cargarDetalle() {
   document.getElementById("existencia").value = "";
 }
 
-function ValidarCampos(){
+function ValidarCampos() {
   let cantidad = document.getElementById("cantidad").value;
   let objTipoPrecio = document.getElementById("tipo_precio");
-  let opcion = objTipoPrecio.options[objTipoPrecio .selectedIndex].id;
+  let opcion = objTipoPrecio.options[objTipoPrecio.selectedIndex].id;
 
   if (opcion == 'precioTresUnidades' && parseInt(cantidad) != 3) {
     alertify.error('El precio no es acorde a la cantidad');
     //$("#tipo_precio option[id=2]").attr("selected",true);
-  }else if (opcion == 'precioSeisUnidades' && parseInt(cantidad) != 6) {
+  } else if (opcion == 'precioSeisUnidades' && parseInt(cantidad) != 6) {
     alertify.error('El precio no es acorde a la cantidad');
-   // $("#tipo_precio option[id=3]").attr("selected",true);
-  }else if (opcion == 'precioDoceUnidades' && parseInt(cantidad) != 12) {
+    // $("#tipo_precio option[id=3]").attr("selected",true);
+  } else if (opcion == 'precioDoceUnidades' && parseInt(cantidad) != 12) {
     alertify.error('El precio no es acorde a la cantidad');
     //$("#tipo_precio option[id=4]").attr("selected",true);
-  }else{
+  } else {
     cargarDetalle();
   }
 
@@ -164,26 +164,40 @@ function GuardarRegistro() {
   var data1 = JSON.stringify(principal);
   var data2 = JSON.stringify(listaDetalle);
 
+  let solicitudId = 0;
+  let codigoRespuesta = 0;
 
   $.ajax({
     url: "../data/registro_pedido.php",
-    // dataType: 'json',
+    dataType: 'json',
     type: "post",
     data: {
       registro_principal: data1,
       detalle_registro: data2,
       id_solicitud: 0,
     },
-    success: function (object) {
-      //console.log(object);
-      alertify.success("Registro almacenado con exito");
+    success: function (object) {      
+      $.each(object, function (i, respuesta) {
+        codigoRespuesta = respuesta.codigo;
+        solicitudId = respuesta.id_solicitud;
+      });
+      if(codigoRespuesta == 1)
+      {
+        //alertify.success("Registro almacenado con exito");
+        Validar_RegistroPedidoEnServidor(solicitudId, clienteId);
+      }
+      else
+      {
+        alertify.error("No se pudo almacenar el registro");
+      }          
     },
     error: function (jqXHR, textStatus, errorThrown) {
       console.log("Status: " + textStatus);
       console.log("Error: " + errorThrown);
-      alertify.error("No se pudo almacenar el registro");
+      alertify.error("Ocurrió un error al guardar el registro");
     },
   });
+
   let clienteRegistro = document.getElementById("cliente");
   clienteRegistro.value = "";
   clienteRegistro.dataset.id = 0;
@@ -205,7 +219,7 @@ function GuardarRegistro() {
     agregarAlPedido.style.display = "none";
     enviarPedido.style.display = "none";
     fechas.style.display = "block";
-  }  
+  }
 }
 
 function QuitarItemDeLista() {
@@ -216,4 +230,46 @@ function QuitarItemDeLista() {
   listaDetalle.splice(selected, 1);
   objTipoPrecio.remove(selected);
   //console.log(listaDetalle);
+}
+
+/**
+ * Esta función envía información a la capa de datos 
+ * para ejecutar una consulta que valide el registro
+ * de pedido, recién ingresado por un vendedor.
+ * El objetivo es asegurar que el registro si se haya guardardo.
+ */
+function Validar_RegistroPedidoEnServidor(idSolicitud, idCliente) {
+  const principal = new Array();
+
+  principal.push({
+    "id_pedido": idSolicitud,
+    "id_cliente": idCliente
+  });
+
+  var data1 = JSON.stringify(principal);
+  let codigoRespuesta;
+
+  $.ajax({
+    url: "../data/validar_pedido.php",
+    dataType: 'json',
+    type: "post",
+    data: {
+      "registroPedido": data1
+    },
+    success: function (object) {
+      codigoRespuesta = object[0].cantidad;
+      
+      if (codigoRespuesta == 0) {
+        alertify.error("Registro NO confirmado!");
+      }
+      else if (codigoRespuesta == 1) {
+        alertify.success("Registro almacenado!");
+      }
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      console.log("Status: " + textStatus);
+      console.log("Error: " + errorThrown);
+      alertify.error("Ocurrió un error en la validación!");
+    },
+  });
 }

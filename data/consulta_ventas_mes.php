@@ -11,27 +11,31 @@ $codigoRespuesta = 1;
 if ($mysqli !== null && $mysqli->connect_errno === 0) {
     $sucursal = $_SESSION['sucursal'];
     $empleadoId = $_SESSION['empleadoId'];
+    $usuarioId = $_SESSION['usuarioId'];
     $Anio = date("Y");
     $from = "";
     $join = "";
 
-    //sucursal 1 es central 2 es petén
+    //sucursal 1 es central 2 es petén 3 es xela
     if (intval($sucursal) == 1) {
         $from = "from `db_mymsa`.`adm_venta` v ";
         $join = "join `db_mymsa`.`pedido_producto` p on v.idpedido = p.idpedido ";
-    } else {
+    } else if (intval($sucursal) == 2) {
         $from = "from `db_mymsapt`.`adm_venta` v ";
         $join = "join `db_mymsapt`.`pedido_producto` p on v.idpedido = p.idpedido ";
+    } else if (intval($sucursal) == 3) {
+        $from = "from `db_mymsaxela`.`adm_venta` v ";
+        $join = "join `db_mymsaxela`.`pedido_producto` p on v.idpedido = p.idpedido ";
     }
 
     $stmt = "select v.idventa,v.fecha_registro,v.seriefactura,v.nofactura,v.montooriginal " .
         $from .
         $join .
         "where v.tipo = 'E' " .
-"and v.estado > 0 " .
-"and p.id_empleado = $empleadoId " .
-"and year(v.fecha_registro) = $Anio " .
-"and month(v.fecha_registro) = $mesSelect;";
+        "and v.estado > 0 " .
+        "and p.id_empleado = $empleadoId " .
+        "and year(v.fecha_registro) = $Anio " .
+        "and month(v.fecha_registro) = $mesSelect;";
 
     $result = $mysqli->query($stmt);
 
@@ -45,7 +49,7 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
                     'fecha_registro' => $row['fecha_registro'],
                     'seriefactura' => $row['seriefactura'],
                     'nofactura' => $row['nofactura'],
-                    'monto' => $row['montooriginal']                    
+                    'monto' => $row['montooriginal'],
                 );
                 $indice++;
             }
@@ -88,7 +92,7 @@ if ($codigoRespuesta != 1) {
         'fecha_registro' => "",
         'seriefactura' => $codigoRespuesta,
         'nofactura' => 0,
-        'monto' => 0
+        'monto' => 0,
     );
 
     echo json_encode($return_arr);

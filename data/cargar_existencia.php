@@ -36,6 +36,12 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
             "join `db_mymsapt`.`existencia` e on p.idproducto = e.idproducto and p.idbodega = e.idbodega and e.estado = 1 " .
             "where p.codigormym = '$codigo' " .
             "and p.estado = 1;";
+    }else if (intval($_SESSION['sucursal']) == 3) {
+        $stmt = "select if(e.cantidad is null,0,e.cantidad) as existencia " .
+            "from `db_mymsaxela`.`adm_producto` p " .
+            "join `db_mymsaxela`.`existencia` e on p.idproducto = e.idproducto and p.idbodega = e.idbodega and e.estado = 1 " .
+            "where p.codigormym = '$codigo' " .
+            "and p.estado = 1;";
     }
 
     $result = $mysqli->query($stmt);

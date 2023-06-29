@@ -41,6 +41,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                   <li><a href="view/mostrar_ubicacion_cliente.view.php">Consultar</a></li>
                   <li><a href="view/consulta_estadocuenta.view.php">Estado de Cuenta</a></li>
                   <li><a href="view/consulta_ventasmes.view.php">Venta por mes</a></li>
+                  <li><a href="view/consulta_cobro_mes.view.php">Cobro por mes</a></li>
                </ul>
             </li>
             <li>
@@ -89,8 +90,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
            $('nav ul li').click(function(){
              $(this).addClass("active").siblings().removeClass("active");
            });
-      </script>
-      
+      </script>      
 </body>
 
 </html>

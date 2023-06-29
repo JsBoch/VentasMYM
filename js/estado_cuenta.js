@@ -147,7 +147,7 @@ function GenerarTabla(object)
 {
     // Obtener la referencia del elemento body
   var body = document.getElementById("contenedorTabla");
-
+    body.innerHTML = '';
   // Crea un elemento <table> y un elemento <tbody>
   var tabla   = document.createElement("table");
   var tblBody = document.createElement("tbody");
@@ -233,4 +233,32 @@ function GenerarTabla(object)
   body.appendChild(tabla);
   // modifica el atributo "border" de la tabla y lo fija a "2";
   tabla.setAttribute("id", "tablaDatos");
+}
+
+function ConsultarSaldoTotalCliente() {
+    const autocompleteCliente = document.getElementById("clienteEC");
+    let idCliente = autocompleteCliente.dataset.id;
+    
+    let datos = { "idcliente": idCliente }
+    $.ajax({
+        url: '../data/consulta_estadocuenta_total.php',
+        dataType: 'json',
+        type: 'post',
+        data: datos,
+        success: function (object) {               
+            var txtTotal = document.getElementById("txtTotalSaldo");
+            const monto = new Intl.NumberFormat("es-GT", {
+                style: "currency",
+                currency: "GTQ",
+                minimumFractionDigits: 2,
+              });
+            txtTotal.innerHTML = monto.format(object[0].saldo).toString();
+                    
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log("Otro: " + jqXHR);
+            console.log("Status: " + textStatus);
+            console.log("Error: " + errorThrown);
+        }
+    });
 }

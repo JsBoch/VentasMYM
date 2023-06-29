@@ -32,6 +32,7 @@ function ConsultarRecibos() {
       $selectPedidos.empty();
       $.each(object, function (i, pedido) {
         registro =
+        "Serie: " + pedido.serie_recibo +
           " No. " +
           pedido.no_recibo +
           " Cliente: " +
@@ -81,12 +82,13 @@ function ConsultaProductos() {
 
 function CargaPedidoEdit() {
   let observaciones;
-  var departamentoId;
+  let departamentoId;
   let idRecibo;
   let noRecibo;
   let cliente;
   let semana;
   let fechaRecibo;
+  let serieRecibo;
 
   solicitudId = $("#listaPedidos").val();
   $.ajax({
@@ -96,6 +98,7 @@ function CargaPedidoEdit() {
     data: { id_solicitud: solicitudId },
     success: function (object) {
       idRecibo = object[0].id_recibo;
+      serieRecibo = object[0].serie_recibo;
       noRecibo = object[0].no_recibo;
       departamentoId = object[0].iddepartamento;
       clienteIdSeleccion = object[0].id_cliente;  
@@ -104,6 +107,7 @@ function CargaPedidoEdit() {
       observaciones = object[0].observacion;
       fechaRecibo = object[0].fecha_recibo;
 
+      $("#serie_recibo").val(serieRecibo);
       $("#numero_recibo").val(noRecibo);
       $("#departamento").val(departamentoId);
       $("#cliente").val(cliente);
@@ -171,11 +175,11 @@ function CargaProductosEdit(idsolicitud) {
           tipo_pago: producto.tipo_pago,
           pago: producto.pago,
           pago_total: producto.pago_total,
-          observaciones: producto.observaciones,
+          observaciones: producto.observaciones,  
           banco: producto.banco,
           prefechado: producto.prefechado,
-          fechaCobro:producto.fecha_cobro,
-          comentarioCheque: producto.comentario_cheque
+          fecha_cobro:producto.fecha_cobro,
+          comentario_cheque: producto.comentario_cheque
         };
 
         listaDetalle.push(jsonString);

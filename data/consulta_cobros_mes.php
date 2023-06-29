@@ -11,30 +11,22 @@ $codigoRespuesta = 1;
 if ($mysqli !== null && $mysqli->connect_errno === 0) {
     $sucursal = $_SESSION['sucursal'];
     $empleadoId = $_SESSION['empleadoId'];
+    $usuarioId = $_SESSION['usuarioId'];
     $Anio = date("Y");
     $from = "";
     $join = "";
 
-    //sucursal 1 es central 2 es petén
-    if (intval($sucursal) == 1) {
-        $from = "from `db_mymsa`.`adm_venta` v ";
-        $join = "join `db_mymsa`.`pedido_producto` p on v.idpedido = p.idpedido ";
-    } else if (intval($sucursal) == 2) {
-        $from = "from `db_mymsapt`.`adm_venta` v ";
-        $join = "join `db_mymsapt`.`pedido_producto` p on v.idpedido = p.idpedido ";
-    } else if (intval($sucursal) == 3) {
-        $from = "from `db_mymsaxela`.`adm_venta` v ";
-        $join = "join `db_mymsaxela`.`pedido_producto` p on v.idpedido = p.idpedido ";
-    }
-
-    $stmt = "select sum(v.montooriginal) as venta " .
-        $from .
-        $join .
-        "where v.tipo = 'E' " .
-        "and v.estado > 0 " .
-        "and p.id_empleado = $empleadoId " .
-        "and year(v.fecha_registro) = $Anio " .
-        "and month(v.fecha_registro) = $mesSelect;";
+    $stmt = "select ".  
+    "r.no_recibo,".
+    "group_concat(d.no_envio) as envio,".
+    "r.cobro ".
+    "from vnt_registro_recibo r ". 
+    "join vnt_detalle_recibo d on r.id_recibo = d.id_recibo ".
+    "where r.estado > 0 ".
+    "and d.estado = 1 ".
+    "and r.id_usuario = $usuarioId ".
+    "and month(fecha_registro) = $mesSelect ".
+    "group by r.no_recibo;";
 
     $result = $mysqli->query($stmt);
 
@@ -43,8 +35,10 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
             $return_arr = array();
             $indice = 0;
             while ($row = $result->fetch_array()) {
-                $return_arr[$indice] = array(
-                    'venta' => $row['venta'],
+                $return_arr[$indice] = array(                    
+                    'no_recibo' => $row['no_recibo'],
+                    'envio' => $row['envio'],
+                    'cobro' => $row['cobro']                    
                 );
                 $indice++;
             }
@@ -82,8 +76,11 @@ if ($codigoRespuesta != 1) {
 
     $return_arr = array();
     $Indice = 0;
-    $return_arr[$Indice] = array(
-        'venta' => 0,
+    $return_arr[$Indice] = array(        
+        'no_recibo' => "",
+        'envio' => $codigoRespuesta,
+        'cobro' => 0
+
     );
 
     echo json_encode($return_arr);

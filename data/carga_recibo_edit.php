@@ -10,6 +10,7 @@ $codigoRespuesta = 1;
 if ($mysqli !== null && $mysqli->connect_errno === 0) {
     $stmt = "select ".
     "r.id_recibo,". 
+    "r.serie_recibo,".
     "r.no_recibo,".
     "d.iddepartamento,".
     "r.id_cliente,".
@@ -31,6 +32,7 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
             while ($row = $result->fetch_array()) {
                 $return_arr[$indice] = array(
                     'id_recibo' => $row['id_recibo'],
+                    'serie_recibo' => $row['serie_recibo'],
                     'no_recibo' => $row['no_recibo'],
                     'iddepartamento' => $row['iddepartamento'],
                     'id_cliente' => $row['id_cliente'],
@@ -77,6 +79,7 @@ if ($codigoRespuesta != 1) {
     $Indice = 0;
     $return_arr[$Indice] = array(
         'id_recibo' => 0,
+        "serie_recibo" => 0,
         "no_recibo" => 0,
         'iddepartamento' => 0,
         'id_cliente' => 0,   

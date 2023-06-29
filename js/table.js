@@ -55,7 +55,7 @@ function seeOrder(formulario) {
     var agregarAlPedido = document.getElementById("shopping_cart");
     var enviarPedido = document.getElementById("send_order");
     var fechas = document.getElementById("subContainerDates");
-    console.log(formulario);
+    
     formulario.style.display = "none";
     contenderoTabal.style.display = "block";
     agregarAlPedido.style.display = "block";

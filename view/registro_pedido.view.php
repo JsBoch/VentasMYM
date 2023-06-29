@@ -100,8 +100,8 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     <a class="link_guardar" href="#subContainerDates">
         <button class="save" type="button" id="send_order" onclick="GuardarRegistro()">Enviar Pedido</button>
     </a>
-    <script src="../js/table.js"></script>
     <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/table.js"></script>
     <script src="../js/listas_pedido.js"></script>
     <script src="../js/registro_pedido.js"></script>
     <script src="../js/funciones.js"></script>

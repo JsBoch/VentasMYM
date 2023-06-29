@@ -1,6 +1,6 @@
 <?php
 
-$mesSelect = $_POST['mes'];
+$clienteId = $_POST['idcliente'];
 require_once 'connection.php';
 
 $codigoRespuesta = 1;
@@ -17,24 +17,20 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
 
     //sucursal 1 es central 2 es petén
     if (intval($sucursal) == 1) {
-        $from = "from `db_mymsa`.`adm_venta` v ";
-        $join = "join `db_mymsa`.`pedido_producto` p on v.idpedido = p.idpedido ";
+        $from = "from `db_mymsa`.`saldoxcobrar` v ";
+        //$join = "join `db_mymsa`.`pedido_producto` p on v.idpedido = p.idpedido ";
     } else if (intval($sucursal) == 2) {
-        $from = "from `db_mymsapt`.`adm_venta` v ";
-        $join = "join `db_mymsapt`.`pedido_producto` p on v.idpedido = p.idpedido ";
+        $from = "from `db_mymsapt`.`saldoxcobrar` v ";
+        //$join = "join `db_mymsapt`.`pedido_producto` p on v.idpedido = p.idpedido ";
     } else if (intval($sucursal) == 3) {
-        $from = "from `db_mymsaxela`.`adm_venta` v ";
-        $join = "join `db_mymsaxela`.`pedido_producto` p on v.idpedido = p.idpedido ";
+        $from = "from `db_mymsaxela`.`saldoxcobrar` v ";
+        //$join = "join `db_mymsaxela`.`pedido_producto` p on v.idpedido = p.idpedido ";
     }
 
-    $stmt = "select sum(v.montooriginal) as venta " .
-        $from .
-        $join .
-        "where v.tipo = 'E' " .
-        "and v.estado > 0 " .
-        "and p.id_empleado = $empleadoId " .
-        "and year(v.fecha_registro) = $Anio " .
-        "and month(v.fecha_registro) = $mesSelect;";
+    $stmt = "select sum(saldo) as saldo " .
+    $from .
+    "where idcliente = $clienteId " .
+    "and estado = 1;";
 
     $result = $mysqli->query($stmt);
 
@@ -44,7 +40,7 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
             $indice = 0;
             while ($row = $result->fetch_array()) {
                 $return_arr[$indice] = array(
-                    'venta' => $row['venta'],
+                    'saldo' => $row['saldo'],
                 );
                 $indice++;
             }
@@ -83,7 +79,7 @@ if ($codigoRespuesta != 1) {
     $return_arr = array();
     $Indice = 0;
     $return_arr[$Indice] = array(
-        'venta' => 0,
+        'saldo' => 0,
     );
 
     echo json_encode($return_arr);

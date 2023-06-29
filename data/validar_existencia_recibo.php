@@ -1,40 +1,18 @@
 <?php
 
-$mesSelect = $_POST['mes'];
+$noRecibo = $_POST['no_recibo'];
+$serieRecibo = $_POST['serie_recibo'];
 require_once 'connection.php';
 
 $codigoRespuesta = 1;
 
-/**
- * se obtiene el listado de clientes filtrado por departamento y vendedor
- */
 if ($mysqli !== null && $mysqli->connect_errno === 0) {
-    $sucursal = $_SESSION['sucursal'];
-    $empleadoId = $_SESSION['empleadoId'];
-    $Anio = date("Y");
-    $from = "";
-    $join = "";
-
-    //sucursal 1 es central 2 es petén
-    if (intval($sucursal) == 1) {
-        $from = "from `db_mymsa`.`adm_venta` v ";
-        $join = "join `db_mymsa`.`pedido_producto` p on v.idpedido = p.idpedido ";
-    } else if (intval($sucursal) == 2) {
-        $from = "from `db_mymsapt`.`adm_venta` v ";
-        $join = "join `db_mymsapt`.`pedido_producto` p on v.idpedido = p.idpedido ";
-    } else if (intval($sucursal) == 3) {
-        $from = "from `db_mymsaxela`.`adm_venta` v ";
-        $join = "join `db_mymsaxela`.`pedido_producto` p on v.idpedido = p.idpedido ";
-    }
-
-    $stmt = "select sum(v.montooriginal) as venta " .
-        $from .
-        $join .
-        "where v.tipo = 'E' " .
-        "and v.estado > 0 " .
-        "and p.id_empleado = $empleadoId " .
-        "and year(v.fecha_registro) = $Anio " .
-        "and month(v.fecha_registro) = $mesSelect;";
+    $stmt = "select " .
+    "count(no_recibo) as cantidad " .
+    "from vnt_registro_recibo " . 
+    "where no_recibo = '$noRecibo' " . 
+    " and serie_recibo = '$serieRecibo' " .
+    " and estado > 0;";
 
     $result = $mysqli->query($stmt);
 
@@ -44,7 +22,7 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
             $indice = 0;
             while ($row = $result->fetch_array()) {
                 $return_arr[$indice] = array(
-                    'venta' => $row['venta'],
+                    'cantidad' => $row['cantidad']
                 );
                 $indice++;
             }
@@ -83,7 +61,7 @@ if ($codigoRespuesta != 1) {
     $return_arr = array();
     $Indice = 0;
     $return_arr[$Indice] = array(
-        'venta' => 0,
+        'cantidad' => -8
     );
 
     echo json_encode($return_arr);

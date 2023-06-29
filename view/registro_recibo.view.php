@@ -39,14 +39,26 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 <div class="first_half">
                     <label for="fechaInicio" class="subtitle_input">FECHA RECIBO</label>
                     <input type="date" name="fecha" id="fecha" class="info_boxes">
+                    <label for="serie_recibo" class="subtitle_input">SERIE RECIBO</label>
+                    <input type="text" class="info_boxes" id="serie_recibo" style="text-transform: uppercase;">
                     <label for="numero_recibo" class="subtitle_input">NUMERO DE RECIBO</label>
-                    <input type='number' name="numero_recibo" class="info_boxes" id="numero_recibo" placeholder="ingrese número de recibo" autocomplete="off">
+                    <input type='number' name="numero_recibo" class="info_boxes" id="numero_recibo" placeholder="ingrese número de recibo" autocomplete="off" onblur="ExisteRecibo()">
+                    <!--MARCA para saber que un recibo está anulado-->
+                    <div class="checkbox_cajaRural">
+                        <div class="text_edit">
+                            <h3 class="edit">ANULADO</h3>
+                        </div>
+                        <div class="checkbox-JASoft">
+                            <input type="checkbox" id="checkAnulado" name="checkAvanzado">
+                            <label for="checkAnulado">TEXTO QUE NO DEBERÍA VERSE</label>
+                        </div>
+                    </div>
+                    <!--*******************************************-->
                     <label for="departamento" class="subtitle_input">DEPARTAMENTO</label>
                     <select name="departamento" class="selectors" id="departamento" onchange="listaClientes()"></select>
                     <!--<select name="cliente" class="selectors" id="cliente"></select>-->
                 </div>
                 <div class="second_half">
-
                     <!-- ASIGNAR FORMATO RESPONSIVE a cliente y ulclienteresult-->
                     <label for="cliente" class="subtitle_input">CLIENTE</label>
                     <input type="text" name="cliente" id="cliente" class="info_boxes" placeholder="Nombre de cliente" data-id="0" onblur="obtenerIdCliente()" autocomplete="off">
@@ -65,12 +77,12 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 </div>
             </div>
         </div>
-        <!-- Pedido -->
+        <!-- Envios -->
         <div class="box_products">
             <h2 class="main_title">Detalle de Recibo</h2>
             <div class="second_sub_container">
                 <label for="numero_envio" class="subtitle_input">NUMERO DE ENVIO</label>
-                <input type='number' name="numero_envio" class="info_boxes" id="numero_envio" placeholder="ingrese número de envio" autocomplete="off">
+                <input type='number' name="numero_envio" class="info_boxes" id="numero_envio" placeholder="ingrese número de envio" autocomplete="off" onblur="ExisteEnvio()">
                 <label for="empresa" class="subtitle_input">EMPRESA</label>
                 <select name="empresa" class="selector" id="empresa">
                     <option value="mym">MYM</option>
@@ -99,7 +111,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 <label for="banco" class="subtitle_input">BANCO</label>
                 <select name="banco" class="selector" id="banco"></select>
                 <label for="numero_deposito" class="subtitle_input">NUMERO DEPOSITO</label>
-                <input type="text" name="numero_deposito" class="info_boxes" id="numero_deposito" placeholder="Número de deposito" autocomplete="off">
+                <input type="text" name="numero_deposito" class="info_boxes" id="numero_deposito" placeholder="Número de deposito" autocomplete="off" onblur="ExisteNoDeposito()">
                 <label for="numero_cheque" class="subtitle_input">NUMERO CHEQUE</label>
                 <input type="text" name="numero_cheque" class="info_boxes" id="numero_cheque" placeholder="Número de cheque" autocomplete="off">
                 <!--marca si es cheque prefechado-->

@@ -68,8 +68,21 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 <div class="first_half">
                     <label for="fecha" class="subtitle_input">FECHA RECIBO</label>
                     <input type="date" name="fecha" id="fecha" class="info_boxes">
+                    <label for="serie_recibo" class="subtitle_input">SERIE RECIBO</label>
+                    <input type="text" class="info_boxes" id="serie_recibo" style="text-transform: uppercase;">
                     <label for="numero_recibo" class="subtitle_input">NUMERO DE RECIBO</label>
                     <input type='number' name="numero_recibo" class="info_boxes" id="numero_recibo" placeholder="ingrese número de recibo" autocomplete="off">
+                    <!--MARCA para saber que un recibo está anulado-->
+                    <div class="checkbox_cajaRural">
+                        <div class="text_edit">
+                            <h3 class="edit">ANULADO</h3>
+                        </div>
+                        <div class="checkbox-JASoft">
+                            <input type="checkbox" id="checkAnulado" name="checkAvanzado">
+                            <label for="checkAnulado">TEXTO QUE NO DEBERÍA VERSE</label>
+                        </div>
+                    </div>
+                    <!--*******************************************-->
                     <label for="departamento" class="subtitle_input">DEPARTAMENTO</label>
                     <select name="departamento" class="selectors" id="departamento" onchange="listaClientes()"></select>
                     <!--<select name="cliente" class="selectors" id="cliente"></select>-->

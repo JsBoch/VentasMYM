@@ -54,6 +54,23 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
         "group by codigormym " .
         "order by nombre;";
     }
+    else if(intval($numeroSucursal == 3)) //XELA
+    {
+        $stmt = "SELECT " .        
+        "p.codigormym," .
+        "p.nombre," .
+        "if(pp.venta is null,0,pp.venta) as venta," .
+        "if(pp.uno is null,0,pp.uno) as uno," .
+        "if(pp.dos is null,0,pp.dos) as dos," .
+        "if(pp.tres is null,0,pp.tres) as tres," .
+        "if(pp.oferta is null,0,pp.oferta) as oferta " .
+        "FROM `db_mymsaxela`.`adm_producto` p " .
+        "LEFT JOIN `db_mymsaxela`.`precio_producto` pp ON p.idproducto = pp.idproducto " .
+        "WHERE p.estado = 1 " .
+        //"and p.idempresa = 2 " .
+        "group by codigormym " .
+        "order by nombre;";
+    }
     $result = $mysqli->query($stmt);
 
     $indice = 0;

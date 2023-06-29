@@ -1,9 +1,9 @@
-function ConsultarVentaMes() {
+function ConsultarCobroMes() {
     let mesSelect = $('#sltMesCV').val();
     
     let datos = { "mes": mesSelect }
     $.ajax({
-        url: '../data/consulta_ventas_mes.php',
+        url: '../data/consulta_cobros_mes.php',
         dataType: 'json',
         type: 'post',
         data: datos,
@@ -11,7 +11,7 @@ function ConsultarVentaMes() {
             /*$.each(object, function (i, resultado) {
                 console.log(resultado.nofactura);
             });*/
-            GenerarTablaVenta(object);         
+            GenerarTablaCobro(object);         
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log("Otro: " + jqXHR);
@@ -21,7 +21,7 @@ function ConsultarVentaMes() {
     });
 }
 
-function GenerarTablaVenta(object)
+function GenerarTablaCobro(object)
 {
     // Obtener la referencia del elemento body
     var body = document.getElementById("contenedorTabla");
@@ -35,16 +35,16 @@ function GenerarTablaVenta(object)
 
   var encabezado = document.createElement("tr");
 
-  var celF = document.createElement("th");
-  var textCelF = document.createTextNode("FECHA");
-  celF.appendChild(textCelF);
-  encabezado.appendChild(celF);
+  var celR = document.createElement("th");
+  var textCelR = document.createTextNode("RECIBO");
+  celR.appendChild(textCelR);
+  encabezado.appendChild(celR);
   var celNF = document.createElement("th");
-  var textCelNF = document.createTextNode("ENV.");
+  var textCelNF = document.createTextNode("ENVIO.");
   celNF.appendChild(textCelNF);
   encabezado.appendChild(celNF);
   var celM = document.createElement("th");
-  var textCelM = document.createTextNode("MONTO");
+  var textCelM = document.createTextNode("COBRO");
   celM.appendChild(textCelM);
   encabezado.appendChild(celM);
 
@@ -56,12 +56,12 @@ function GenerarTablaVenta(object)
         // Crea un elemento <td> y un nodo de texto, haz que el nodo de
       // texto sea el contenido de <td>, ubica el elemento <td> al final
       // de la hilera de la tabla
-      var celdaF = document.createElement("td");
-      var textoCeldaF = document.createTextNode(resultado.fecha_registro);
-      celdaF.appendChild(textoCeldaF);
+      var celdaR = document.createElement("td");
+      var textoCeldaR = document.createTextNode(resultado.no_recibo);
+      celdaR.appendChild(textoCeldaR);
 
       var celdaNF = document.createElement("td");
-      var textoCeldaNF = document.createTextNode(resultado.nofactura);
+      var textoCeldaNF = document.createTextNode(resultado.envio);
       celdaNF.appendChild(textoCeldaNF);
       var celdaM = document.createElement("td");
       const monto = new Intl.NumberFormat("es-GT", {
@@ -69,10 +69,10 @@ function GenerarTablaVenta(object)
         currency: "GTQ",
         minimumFractionDigits: 2,
       });
-      var textoCeldaM = document.createTextNode(monto.format(resultado.monto));
+      var textoCeldaM = document.createTextNode(monto.format(resultado.cobro));
       celdaM.appendChild(textoCeldaM);
       
-      hilera.appendChild(celdaF);
+      hilera.appendChild(celdaR);
       hilera.appendChild(celdaNF);       
       hilera.appendChild(celdaM);  
 
@@ -90,23 +90,23 @@ function GenerarTablaVenta(object)
   tabla.setAttribute("id", "tablaDatos");
 }
 
-function ConsultarVentaTotalMes() {
+function ConsultarCobroTotalMes() {
     let mesSelect = $('#sltMesCV').val();
     
     let datos = { "mes": mesSelect }
     $.ajax({
-        url: '../data/consulta_ventatotal_mes.php',
+        url: '../data/consulta_cobrototal_mes.php',
         dataType: 'json',
         type: 'post',
         data: datos,
         success: function (object) {               
-            var txtTotal = document.getElementById("txtTotalVenta");
+            var txtTotal = document.getElementById("txtTotalCobro");
             const monto = new Intl.NumberFormat("es-GT", {
                 style: "currency",
                 currency: "GTQ",
                 minimumFractionDigits: 2,
               });
-            txtTotal.innerHTML = monto.format(object[0].venta).toString();
+            txtTotal.innerHTML = monto.format(object[0].cobro).toString();
                     
         },
         error: function (jqXHR, textStatus, errorThrown) {

@@ -22,6 +22,14 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
             "AND p.codigormym = '$codigo' " .
             "GROUP BY nombre;";
     }
+    else if (intval($_SESSION['sucursal']) == 3) {
+        $stmt = "SELECT " .
+            "p.nombre " .
+            "FROM `db_mymsaxela`.`adm_producto` p " .
+            "WHERE p.estado = 1 " .
+            "AND p.codigormym = '$codigo' " .
+            "GROUP BY nombre;";
+    }
 
     $result = $mysqli->query($stmt);
 

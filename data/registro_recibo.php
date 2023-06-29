@@ -1,9 +1,9 @@
 <?php
-session_start();
+//session_start();
 $reciboId = $_POST["id_recibo"];
 $registroMain = $_POST["registro_principal"];
 $detalleRegistro = $_POST["detalle_registro"];
-
+require_once 'connection.php';
 //fecha registro
 date_default_timezone_set('America/Guatemala');
 $fechaHoraRegistro = date("Y-m-d H:i:s");
@@ -16,6 +16,7 @@ $jsonMain = json_decode($registroMain, true);
 foreach ($jsonMain as $item) {
     $clienteID = $item["id_cliente"]; //$jsonMain->id_cliente;
     $nombreCliente = $item["nombre_cliente"];
+    $serieRecibo = strtoupper($item["serie_recibo"]);
     $noRecibo = $item["no_recibo"]; //$jsonMain->id_departamento;
     $cobro = $item["cobro"];
     $semana = $item["semana"];
@@ -26,7 +27,7 @@ foreach ($jsonMain as $item) {
 /**
  * Se almacena en la base de datos
  */
-require_once 'connection.php';
+
 
 if ($mysqli !== null) {
     //inicio de transacciones
@@ -67,6 +68,7 @@ if ($mysqli !== null) {
         if (!$stmt = $mysqli->prepare(
             "INSERT INTO vnt_registro_recibo(" .
             "id_recibo," .
+            "serie_recibo,".
             "no_recibo," .
             "fecha_registro," .
             "id_cliente," .
@@ -77,12 +79,12 @@ if ($mysqli !== null) {
             "estado," .
             "id_usuario,". 
             "fecha_recibo)" .
-            " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?);")) {
+            " VALUES (?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?,?);")) {
             //echo "fallo No." . $mysqli->errno . " " . $mysqli->error;
             $codigoRespuesta = -1;
 
         } else
-        if (!$stmt->bind_param("ississssiis", $reciboId, $noRecibo, $fechaHoraRegistro, $clienteID, $nombreCliente,
+        if (!$stmt->bind_param("isssissssiis", $reciboId, $serieRecibo,$noRecibo, $fechaHoraRegistro, $clienteID, $nombreCliente,
             $cobro, $semana, $observacionesRegistro, $estado, $usuarioID,$fechaRecibo)) {
             //echo "fallo la vinculacion: " . $mysqli->errno . " " . $mysqli->error;
             $codigoRespuesta = -2;
@@ -215,6 +217,17 @@ if ($mysqli !== null) {
     $codigoRespuesta = 0; //La conexión es null
 }
 
+$return_arr = array();
+$indice = 0;
+$return_arr[$indice] = array(
+    "codigo" => $codigoRespuesta,
+    "id_recibo" => $reciboId    
+);
+
+
+//header('Content-Type: application/json');
+echo json_encode($return_arr);
+
 //respuesta del WS hacia Android
-$jsonFinal = array("codigo" => $codigoRespuesta);
-echo json_encode($jsonFinal);
+// $jsonFinal = array("codigo" => $codigoRespuesta);
+// echo json_encode($jsonFinal);

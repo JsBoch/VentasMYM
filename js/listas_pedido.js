@@ -5,13 +5,17 @@ function listaDepartamentos() {
     $.ajax({
         url: '../data/departamentos.php',
         dataType: 'json',
-        success: function (object) {
+        success: function (object) {            
             var $select = $('#departamento');
             $.each(object, function (i, departamento) {
                 $select.append('<option value=' + departamento.iddepartamento + '>' + departamento.nombre + '</option>');
             });
 
             listaClientes();
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log("Status: " + textStatus);
+            console.log("Error: " + errorThrown);
         }
     });
 }
@@ -145,7 +149,7 @@ function listaProductos() {
     $.ajax({
         url: '../data/lista_productos.php',
         dataType: 'json',
-        success: function (object) {
+        success: function (object) {            
             codigoProducto(object);
             nombreProducto(object);
         }
@@ -173,6 +177,7 @@ function listaPrecios(codigo) {
             let precioMayorista = object[0].mayorista;
             let precioEspecial = object[0].especial;
             let precioOferta = object[0].oferta;
+            let precioDistribuidor = object[0].distribuidor;
             let precioUno = object[0].uno;
             let precioDos = object[0].dos;
             let precioTres = object[0].tres;
@@ -193,6 +198,9 @@ function listaPrecios(codigo) {
             if (parseFloat(precioOferta.toString()) > 0 && parseFloat(precioOferta.toString()) < parseFloat(precioMasBajo.toString())) {
                 precioMasBajo = precioOferta;
             }
+            if (parseFloat(precioDistribuidor.toString()) > 0 && parseFloat(precioDistribuidor.toString()) < parseFloat(precioMasBajo.toString())) {
+                precioMasBajo = precioDistribuidor;
+            }
             if (parseFloat(precioUno.toString()) > 0 && parseFloat(precioUno.toString()) < parseFloat(precioMasBajo.toString())) {
                 precioMasBajo = precioUno;
             }
@@ -209,10 +217,12 @@ function listaPrecios(codigo) {
             $selectPrecio.append('<option id="precioTresUnidades" value=' + precioMinorista + '> 3 UNIDADES - ' + precioMinorista + '</option>');
             $selectPrecio.append('<option id="precioSeisUnidades" value=' + precioMayorista + '> 6 UNIDADES - ' + precioMayorista + '</option>');
             $selectPrecio.append('<option id="precioDoceUnidades" value=' + precioEspecial + '> 12 UNIDADES - ' + precioEspecial + '</option>');
+            $selectPrecio.append('<option id="precioOferta" value=' + precioOferta + '> OFERTA - ' + precioOferta + '</option>');
+            $selectPrecio.append('<option id="precioDistribuidor" value=' + precioDistribuidor + '> DISTRIBUIDOR - ' + precioDistribuidor + '</option>');
             $selectPrecio.append('<option id="precioUno" value=' + precioUno + '> UNO - ' + precioUno + '</option>');
             $selectPrecio.append('<option id="precioDos" value=' + precioDos + '> DOS - ' + precioDos + '</option>');
             $selectPrecio.append('<option id="precioTres" value=' + precioTres + '> TRES - ' + precioTres + '</option>');
-            $selectPrecio.append('<option id="precioCuatro" value=' + precioOferta + '> OFERTA - ' + precioOferta + '</option>');
+            
 
             colocarPrecio();
         }
@@ -224,7 +234,7 @@ function listaPrecios(codigo) {
  */
 function getCodigo(producto) {
     //let producto = document.getElementById('codigo').selectedOptions[0].getAttribute("data-valuep")  
-
+    console.log("producto" +    producto);
     let codigoIngresado = document.getElementById("codigo");
     //let producto = document.getElementById("producto").value.trim(); //$('#producto').val();                
     
@@ -235,7 +245,8 @@ function getCodigo(producto) {
             dataType: 'json',
             type: 'post',
             data: datos,
-            success: function (object) {                
+            success: function (object) {  
+                console.log(object);              
                 codigoIngresado.value = object[0].codigo;     
                 listaPrecios(object[0].codigo);    
                 CargarExistencia(object[0].codigo);                   
@@ -338,7 +349,6 @@ function codigoProducto(datos) {
  * @param {Json} datos con el listado de códigos a cargar 
  */
 function nombreProducto(datos) {
-
     const data = [];    
     $.each(datos, function (i, producto) {
         data.push(producto.nombre);
@@ -403,6 +413,9 @@ function colocarPrecio() {
     let precio = document.getElementById('tipo_precio').value;    
     if (parseFloat(precio) > 0) {
         document.getElementById('precio').value = precio;
+    }
+    else {
+        alertify.error('El precio seleccionado es cero');
     }
 }
 

@@ -15,7 +15,8 @@ if (isset($_POST["user_name"]) && isset($_POST["user_password"])) {
             "u.idadm_usuario as id," .
             "concat(u.nombres,' ',u.apellidos) as nombre," .
             "u.id_sucursal," .
-            "u.id_empleado " .
+            "u.id_empleado," .
+            "u.clientes " .
             "FROM adm_usuario u " .
             "WHERE " .
             "u.usuario = ? " .
@@ -43,6 +44,7 @@ if (isset($_POST["user_name"]) && isset($_POST["user_password"])) {
                 $_SESSION['sucursal'] = $sucursal;
                 $_SESSION['estado'] = 'conectado';
                 $_SESSION['empleadoId'] = $fila['id_empleado'];
+                $_SESSION['operacion'] = $fila['clientes'];
 
                 header("Location: index.php");
             } else {

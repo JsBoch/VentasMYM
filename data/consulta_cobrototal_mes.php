@@ -11,30 +11,17 @@ $codigoRespuesta = 1;
 if ($mysqli !== null && $mysqli->connect_errno === 0) {
     $sucursal = $_SESSION['sucursal'];
     $empleadoId = $_SESSION['empleadoId'];
+    $usuarioId = $_SESSION['usuarioId'];
     $Anio = date("Y");
     $from = "";
     $join = "";
 
-    //sucursal 1 es central 2 es petén
-    if (intval($sucursal) == 1) {
-        $from = "from `db_mymsa`.`adm_venta` v ";
-        $join = "join `db_mymsa`.`pedido_producto` p on v.idpedido = p.idpedido ";
-    } else if (intval($sucursal) == 2) {
-        $from = "from `db_mymsapt`.`adm_venta` v ";
-        $join = "join `db_mymsapt`.`pedido_producto` p on v.idpedido = p.idpedido ";
-    } else if (intval($sucursal) == 3) {
-        $from = "from `db_mymsaxela`.`adm_venta` v ";
-        $join = "join `db_mymsaxela`.`pedido_producto` p on v.idpedido = p.idpedido ";
-    }
-
-    $stmt = "select sum(v.montooriginal) as venta " .
-        $from .
-        $join .
-        "where v.tipo = 'E' " .
-        "and v.estado > 0 " .
-        "and p.id_empleado = $empleadoId " .
-        "and year(v.fecha_registro) = $Anio " .
-        "and month(v.fecha_registro) = $mesSelect;";
+    $stmt = "select ".
+    "sum(r.cobro) as cobro ".
+    "from vnt_registro_recibo r ". 
+    "where r.estado > 0 ". 
+    "and r.id_usuario = $usuarioId " .
+    "and month(fecha_registro) = $mesSelect;";
 
     $result = $mysqli->query($stmt);
 
@@ -44,7 +31,7 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
             $indice = 0;
             while ($row = $result->fetch_array()) {
                 $return_arr[$indice] = array(
-                    'venta' => $row['venta'],
+                    'cobro' => $row['cobro'],
                 );
                 $indice++;
             }
@@ -83,7 +70,7 @@ if ($codigoRespuesta != 1) {
     $return_arr = array();
     $Indice = 0;
     $return_arr[$Indice] = array(
-        'venta' => 0,
+        'cobro' => 0,
     );
 
     echo json_encode($return_arr);

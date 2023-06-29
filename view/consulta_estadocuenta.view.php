@@ -17,6 +17,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../css/alertify.min.css">
     <link rel="stylesheet" href="../css/estadoCuenta.css">
+    <link rel="stylesheet" href="../css/ventas_mes.css">
     <link rel="icon" href="../imgs/logo.png">
     <title>Estado de cuenta</title>
 </head>
@@ -45,9 +46,11 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
 
    
     <!-- ASIGNAR FORMATO RESPONSIVE a cliente y ulclienteresult-->
-    <input type="button" value="Consultar" class="btnConsultar" id="btnConsultarEC" onclick="ConsultarEstadoCuenta()">
+    <input type="button" value="Consultar" class="btnConsultar" id="btnConsultarEC" onclick="ConsultarSaldoTotalCliente(),ConsultarEstadoCuenta()">
     </div>
-
+    <label for="txtTotalSaldo" class="subtitle_parrafo">TOTAL SALDO</label>
+    <p id="txtTotalSaldo"></p> 
+</div>
     <div id="contenedorTabla" class="contenedorTabla">
 
     </div>

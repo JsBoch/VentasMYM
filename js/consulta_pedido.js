@@ -2,6 +2,10 @@ var clienteIdSeleccion = 0;
 var solicitudId = 0;
 var listaDetalle = new Array();
 
+/**
+ * Se utiliza para asignar la fecha del día
+ * a los input de fecha
+ */
 function GetDate() {
   let now = new Date();
 
@@ -14,6 +18,11 @@ function GetDate() {
   $("#fechaFinal").val(today);
 }
 
+/**
+ * Obtiene el listado de pedidos registrados 
+ * en la base de datos correspondiente a la sucursal
+ * asociada al usuario que ingreso al sistema.
+ */
 function ConsultarPedidos() {
   let fechaInicio = $("#fechaInicio").val();
   let fechaFinal = $("#fechaFinal").val();
@@ -54,6 +63,10 @@ function ConsultarPedidos() {
   //console.log('Date in GT: ' + fechaInicio + ' - ' + fechaFinal);
 }
 
+/**
+ * Obtiene el listado de productos asociados a un pedido
+ * registrado en la base de datos rmym
+ */
 function ConsultaProductos() {
   let solicitudId = $("#listaPedidos").val();
   $.ajax({
@@ -93,7 +106,8 @@ function ConsultaProductos() {
 }
 
 /**
- * Carga el registro del pedido que se requiere editar
+ * Carga el registro del pedido seleccionado
+ * para editar.
  */
 function CargaPedidoEdit() {
   let departamento;
@@ -122,6 +136,7 @@ function CargaPedidoEdit() {
       $("#sltPrioridad").val(prioridad);
       $("#hdnNoSolicitud").val(noSolicitud);
       $("#transporte").val(transporte);
+      
       listaClientesConsulta();      
       CargaProductosEdit(solicitudId);      
     },
@@ -130,6 +145,10 @@ function CargaPedidoEdit() {
   document.getElementById("departamento").focus();
 }
 
+/**
+ * Se selecciona el cliente en el select 
+ * automáticamente.
+ */
 function AsignarCliente() {
   $("#cliente").val(clienteIdSeleccion);
 }

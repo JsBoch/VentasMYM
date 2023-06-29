@@ -14,7 +14,8 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
         "r.id_recibo," .
         "r.no_recibo," .
         "r.nombre_cliente," .
-        "r.cobro " .
+        "r.cobro," .
+        "r.serie_recibo " .
         "from vnt_registro_recibo r " .
         "where r.estado = 1 " .
         "and date(r.fecha_registro) >= ? " .
@@ -45,6 +46,7 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
                         'no_recibo' => $row['no_recibo'],
                         'nombre_cliente' => $row['nombre_cliente'],
                         'cobro' => $row['cobro'],
+                        'serie_recibo' => $row['serie_recibo']
                     );
                     $indice++;
                 }
@@ -92,6 +94,7 @@ if ($codigoRespuesta != 1) {
         'no_recibo' => $codigoRespuesta,
         'nombre_cliente' => $mensajeRespuesta,
         'cobro' => 0,
+        'serie_recibo' => 0,
     );
 
     echo json_encode($return_arr);

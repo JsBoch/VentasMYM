@@ -17,9 +17,12 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
     if (intval($sucursal) == 1) {
         $from = "from `db_mymsa`.`adm_venta` v ";
         $join = "join `db_mymsa`.`saldoxcobrar` s on v.idventa = s.idventa ";
-    } else {
+    } else if(intval("sucursal") == 2) {
         $from = "from `db_mymsapt`.`adm_venta` v ";
         $join = "join `db_mymsapt`.`saldoxcobrar` s on v.idventa = s.idventa ";
+    } else if(intval("sucursal") == 3){
+        $from = "from `db_mymsaxela`.`adm_venta` v ";
+        $join = "join `db_mymsaxela`.`saldoxcobrar` s on v.idventa = s.idventa ";
     }
 
     $stmt = "select " .

@@ -21,16 +21,16 @@ function cargarDetalle() {
   var selectTipoPago = document.getElementById("tipo_pago");
   var tiopPago = selectTipoPago.options[selectTipoPago.selectedIndex].text;
   let pago = document.getElementById("pago").value;
-  var radios = document.getElementsByName("forma_pago"); 
+  var radios = document.getElementsByName("forma_pago");
   var valorRadio = "";
   let radioValor = "";
   for (var radio of radios) {
     if (radio.checked) {
-      radioValor = radio.value; 
+      radioValor = radio.value;
     }
-  } if(radioValor == "total"){
+  } if (radioValor == "total") {
     valorRadio = "S";
-  }else{
+  } else {
     valorRadio = "N";
   }
 
@@ -43,6 +43,7 @@ function cargarDetalle() {
   let comentarioCheque = document.getElementById("comentarioCheque").value;
   let checkboxCajaRural = document.getElementById("checkAvanzado");
   let chkPrefechado = document.getElementById("chkPrefechado");
+  let chkAnulado = document.getElementById("checkAnulado");
 
   let checkboxCRValor = "";
   if (checkboxCajaRural.checked == true) {
@@ -51,11 +52,10 @@ function cargarDetalle() {
     checkboxCRValor = "N";
   }
   let prefechado = "";
-  if(chkPrefechado.checked == true)
-  {
+  if (chkPrefechado.checked == true) {
     prefechado = "S";
   }
-  else{
+  else {
     prefechado = "N";
   }
 
@@ -71,42 +71,43 @@ function cargarDetalle() {
   let observacionesProducto = document.getElementById("observaciones_producto").value;
 
 
-//   VALIDACIONES
+  if (chkAnulado.checked != true) {
+    //   VALIDACIONES
 
-// ---
+    // ---
 
-//   if (producto.toString().length == 0) {
-//     alertify.error("Debe ingresar un nombre de producto válido");
-//     return;
-//   }
-  if (numeroEnvio.toString().length == 0 || parseFloat(numeroEnvio) == 0) {
-    alertify.error("Debe ingresar el número de envio.");
-    return;
-  }
-
-  if (pago.toString().length == 0 || parseFloat(pago) == 0) {
-    alertify.error("Debe ingresar el monto.");
-    return;
-  }
-
-// ---
-
-  let existe = false;
-  if (listaDetalle.length > 0) {
-    listaDetalle.forEach(function (row) {
-      let item = JSON.parse(JSON.stringify(row));
-
-      if (item.numeroEnvio === numeroEnvio) {
-        existe = true;
-      }
-    });
-
-    if (existe) {
-      alertify.error("El número de envio ya está agregado a la lista.");
+    //   if (producto.toString().length == 0) {
+    //     alertify.error("Debe ingresar un nombre de producto válido");
+    //     return;
+    //   }
+    if (numeroEnvio.toString().length == 0 || parseFloat(numeroEnvio) == 0) {
+      alertify.error("Debe ingresar el número de envio.");
       return;
     }
-  }
 
+    if (pago.toString().length == 0 || parseFloat(pago) == 0) {
+      alertify.error("Debe ingresar el monto.");
+      return;
+    }
+
+    // ---
+
+    let existe = false;
+    if (listaDetalle.length > 0) {
+      listaDetalle.forEach(function (row) {
+        let item = JSON.parse(JSON.stringify(row));
+
+        if (item.numeroEnvio === numeroEnvio) {
+          existe = true;
+        }
+      });
+
+      if (existe) {
+        alertify.error("El número de envio ya está agregado a la lista.");
+        return;
+      }
+    }
+  }
   var jsonString = {
     no_envio: numeroEnvio,
     no_deposito: numeroDeposito,
@@ -128,9 +129,9 @@ function cargarDetalle() {
   // console.log(item);
 
   let item =
-  "Envio: " +
+    "Envio: " +
     numeroEnvio +
-  " Monto: " +
+    " Monto: " +
     pago +
     "Observaciones: " +
     observacionesProducto;
@@ -180,43 +181,58 @@ function cargarDetalle() {
 
 function GuardarRegistro(consulta) {
   let idRecibo = 0;
-  if(consulta == "S")
-  {
+  if (consulta == "S") {
     idRecibo = $("#listaPedidos").val();
   }
-  
+
   let clienteSelect = document.getElementById("cliente");
   let clienteId = 0;
-  if(idRecibo > 0)
-  {
+  if (idRecibo > 0) {
     clienteId = clienteSelect.value;
   }
-  else 
-  {
+  else {
     clienteId = clienteSelect.dataset.id;
   }
+  
+  /**
+   * validación para guardar un recibo anulado si la casilla correspondiente
+   * esta marcada.
+   */
+  let chkAnulado = document.getElementById("checkAnulado");
+  let serieRecibo = document.getElementById("serie_recibo").value;
 
-  if (clienteId == 0) {
-    alertify.error("Debe ingresar cliente.");
-    clienteSelect.focus();
-    return;
+  if (chkAnulado.checked != true) {
+    if (clienteId == 0) {
+      alertify.error("Debe ingresar cliente.");
+      clienteSelect.focus();
+      return;
+    }
+
+    if (serieRecibo.length == 0) {
+      alertify.error("Debe ingresar serie del recibo.");
+      serieRecibo.focus();
+      return;
+    }
+
+    if (listaDetalle.length == 0) {
+      alertify.error("Debe asignar productos a la lista.");
+      return;
+    }
   }
 
-  if (listaDetalle.length == 0) {
-    alertify.error("Debe asignar productos a la lista.");
-    return;
-  }
-
-
+  
   let numeroRecibo = document.getElementById("numero_recibo").value;
   let nombreCliente = "";
-  if(idRecibo > 0)
-  {
+  if (idRecibo > 0) {
     nombreCliente = clienteSelect.options[clienteSelect.selectedIndex].text;
   }
-  else 
-  {
+  else {
     nombreCliente = document.getElementById("cliente").value;
+  }
+
+  if(chkAnulado.checked == true)
+  {
+    nombreCliente = "ANULADO";
   }
 
   var semanaSelect = document.getElementById("sltSemana");
@@ -233,27 +249,31 @@ function GuardarRegistro(consulta) {
   let cobro = 0;
   listaDetalle.forEach(element => {
     // let jsonItem = JSON.parse(element);
-   cobro = parseFloat(cobro) + parseFloat(element.pago);
+    cobro = parseFloat(cobro) + parseFloat(element.pago);
   });
   var principal = new Array();
   //var detalle = [];
-  console.log(clienteId);
+
   principal.push({
+    serie_recibo: serieRecibo,
     no_recibo: numeroRecibo,
     id_cliente: clienteId,
     nombre_cliente: nombreCliente,
     cobro: cobro,
     semana: semana,
     observaciones: observaciones,
-    fecha:fechaRecibo
+    fecha: fechaRecibo
   });
 
   var data1 = JSON.stringify(principal);
   var data2 = JSON.stringify(listaDetalle);
 
+  let codigoRespuesta;
+  let reciboId;
+  
   $.ajax({
     url: "../data/registro_recibo.php",
-    // dataType: 'json',
+    dataType: 'json',
     type: "post",
     data: {
       registro_principal: data1,
@@ -261,15 +281,25 @@ function GuardarRegistro(consulta) {
       id_recibo: idRecibo,
     },
     success: function (object) {
-      //console.log(object);
-      alertify.success("Registro almacenado con exito");
+      $.each(object, function (i, respuesta) {        
+        codigoRespuesta = respuesta.codigo;
+        reciboId = respuesta.id_recibo;
+      });
+      if (codigoRespuesta == 1) {
+        //alertify.success("Registro almacenado con exito");
+        Validar_RegistroDeRecibo(reciboId, clienteId);
+      }
+      else {
+        alertify.error("No se pudo almacenar el registro");
+      }
     },
     error: function (jqXHR, textStatus, errorThrown) {
       console.log("Status: " + textStatus);
       console.log("Error: " + errorThrown);
-      alertify.error("No se pudo almacenar el registro");
+      alertify.error("Ocurrió un error al almacenar el registro");
     },
   });
+
   let clienteRegistro = document.getElementById("cliente");
   clienteRegistro.value = "";
   clienteRegistro.dataset.id = 0;
@@ -278,7 +308,7 @@ function GuardarRegistro(consulta) {
   document.getElementById("cliente").value = "";
   document.getElementById("observaciones").value = "";
   let select = document.getElementById("sltSemana");
-  select.value = "SEMANA 1";  
+  select.value = "SEMANA 1";
   document.getElementById("numero_envio").value = "";
   document.getElementById("pago").value = "";
   document.getElementById("numero_deposito").value = "";
@@ -287,7 +317,8 @@ function GuardarRegistro(consulta) {
   document.getElementById("total_seleccionado").checked;
   document.getElementById("checkAvanzado").checked = false;
   document.getElementById("checkAvanzadoDos").checked = false;
- 
+  document.getElementById("checkAnulado").checked = false;
+
   var now = new Date();
   var day = ("0" + now.getDate()).slice(-2);
   var month = ("0" + (now.getMonth() + 1)).slice(-2);
@@ -303,9 +334,8 @@ function GuardarRegistro(consulta) {
     agregarAlPedido.style.display = "none";
     enviarPedido.style.display = "none";
     fechas.style.display = "block";
-    if(datosGenerales !== null)
-    {
-    datosGenerales.style.display = "block";
+    if (datosGenerales !== null) {
+      datosGenerales.style.display = "block";
     }
   }
 }
@@ -318,4 +348,156 @@ function QuitarItemDeLista() {
   listaDetalle.splice(selected, 1);
   objTipoPrecio.remove(selected);
   //console.log(listaDetalle);
+}
+
+/**
+ * Esta función envía información a la capa de datos 
+ * para ejecutar una consulta que valide el registro
+ * de pedido, recién ingresado por un vendedor.
+ * El objetivo es asegurar que el registro si se haya guardardo.
+ */
+function Validar_RegistroDeRecibo(idRecibo, idCliente) {
+  const principal = new Array();
+
+  principal.push({
+    "id_recibo": idRecibo,
+    "id_cliente": idCliente
+  });
+
+  var data1 = JSON.stringify(principal);
+  let codigoRespuesta;
+
+  $.ajax({
+    url: "../data/validar_recibo.php",
+    dataType: 'json',
+    type: "post",
+    data: {
+      "recibo": data1
+    },
+    success: function (object) {
+      codigoRespuesta = object[0].cantidad;
+
+      if (codigoRespuesta == 0) {
+        alertify.error("Registro NO confirmado!");
+      }
+      else if (codigoRespuesta == 1) {
+        alertify.success("Registro almacenado!");
+      }
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      console.log("Status: " + textStatus);
+      console.log("Error: " + errorThrown);
+      alertify.error("Ocurrió un error en la validación!");
+    },
+  });
+}
+
+/**
+ * Verifica en la base de datos si existe un registro
+ * con el número de recibo que el usuario ha ingresado.
+ */
+function ExisteRecibo() {
+  const noRecibo = document.getElementById('numero_recibo').value;
+  const serieRecibo = document.getElementById('serie_recibo').value;
+
+  if (noRecibo.length > 0) {
+    let cantidad = 0;
+    //let datos = { "no_recibo": noRecibo }
+    $.ajax({
+      url: '../data/validar_existencia_recibo.php',
+      dataType: 'json',
+      type: 'post',
+      data: {"no_recibo":noRecibo,"serie_recibo":serieRecibo},
+      success: function (object) {
+        $.each(object, function (i, resultado) {
+          cantidad = resultado.cantidad;
+        });
+        if (cantidad > 0) {
+          alertify.error("Existe un registro con el mismo número de recibo");
+          inputRecibo.value = '';
+        }
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.log("Status: " + textStatus);
+        console.log("Error: " + errorThrown);
+        cantidad = -1;
+        alertify.error("Ocurrió un error en la validación!");
+
+      },
+    });
+  }
+}
+/**
+ * Verifica en la base de datos si existe un registro
+ * con el número de depósito ingresado.
+ */
+function ExisteNoDeposito() {
+  const inputDeposito = document.getElementById('numero_deposito');
+  let noDeposito = inputDeposito.value;
+  var selectBanco = document.getElementById("banco");
+  var banco = selectBanco.options[selectBanco.selectedIndex].text;
+  if (noDeposito.length > 0) {
+    let cantidad = 0;
+    let numeroRecibo;
+    let datos = { "no_deposito": noDeposito,"banco":banco }
+    $.ajax({
+      url: '../data/validar_existencia_deposito.php',
+      dataType: 'json',
+      type: 'post',
+      data: datos,
+      success: function (object) {
+        $.each(object, function (i, resultado) {
+          cantidad = resultado.cantidad;
+          numeroRecibo = resultado.no_recibo;
+        });
+        if (cantidad > 0) {
+          alertify.error("Existe un registro con el mismo número de depósito para el recibo " + numeroRecibo);
+          inputDeposito.value = '';
+        }
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.log("Status: " + textStatus);
+        console.log("Error: " + errorThrown);
+        cantidad = -1;
+        alertify.error("Ocurrió un error en la validación!");
+
+      },
+    });
+  }
+}
+
+/**
+ * Verifica en la base de datos si existe un registro
+ * con el número de envío que el usuario ha ingresado.
+ */
+function ExisteEnvio() {
+  const noRecibo = document.getElementById('numero_recibo').value;  
+  const noEnvio = document.getElementById('numero_envio').value;
+  
+  if (noEnvio.length > 0 && parseInt(noEnvio) > 0) {
+    let cantidad = 0;
+    let datos = { "no_envio": noEnvio,"no_recibo":noRecibo }
+    $.ajax({
+      url: '../data/validar_existencia_envio.php',
+      dataType: 'json',
+      type: 'post',
+      data: datos,
+      success: function (object) {
+        $.each(object, function (i, resultado) {
+          cantidad = resultado.cantidad;
+        });
+        if (cantidad > 0) {
+          alertify.error("Existe un registro con el mismo número de envío");
+          inputEnvio.value = '';
+        }
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.log("Status: " + textStatus);
+        console.log("Error: " + errorThrown);
+        cantidad = -1;
+        alertify.error("Ocurrió un error en la validación!");
+
+      },
+    });
+  }
 }

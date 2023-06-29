@@ -6,8 +6,16 @@ require_once 'connection.php';
 //$cliente = $_GET["cliente"];
 
 $codigoRespuesta = 1;
+$empleadoId = $_SESSION['empleadoId'];
+$clientOperation = $_SESSION["operacion"];
 
 if ($mysqli !== null && $mysqli->connect_errno === 0) {
+    $clientFilter = "";
+    if ($clientOperation == 1) {
+        $clientFilter = "and c.id_empleado = $empleadoId ";
+    } else if ($clientOperation == 5) {
+        $clientFilter = "";
+    }
     $stmt = "SELECT c.idcliente,c.codigo," .
         "c.primer_nombre as nombre," .
         "c.iddepartamento," .
@@ -15,7 +23,8 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
         "c.direccion " .
         "FROM clientes c " .
         "WHERE c.estado = 1 " .
-        "AND c.iddepartamento = $departamentoId ".
+        "AND c.iddepartamento = $departamentoId " .
+        $clientFilter .
         " ORDER BY c.primer_nombre;";
 
     $result = $mysqli->query($stmt);
@@ -31,7 +40,7 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
                     'nombre' => $row['nombre'],
                     'direccion' => $row['direccion'],
                     'iddepartamento' => $row['iddepartamento'],
-                    'idmunicipio' => $row['id_municipio']
+                    'idmunicipio' => $row['id_municipio'],
                 );
                 $indice++;
             }
@@ -75,7 +84,7 @@ if ($codigoRespuesta != 1) {
         'nombre' => $mensajeRespuesta,
         'direccion' => "",
         'iddepartamento' => 0,
-        'idmunicipio' => 0
+        'idmunicipio' => 0,
     );
 
     echo json_encode($return_arr);

@@ -87,12 +87,14 @@ session_start();
         Enviar
      </a> -->
         </div>
+        
     </form>
   
     <script src="../js/jquery-3.6.0.min.js"></script>
     <script src="../js/departamentos.js"></script>
     <script src="../js/clientesln.js"></script>
-    <script src="../js/alertify.min.js"></script>
+    <script src="../js/alertify.min.js" ></script>
+   
     <!-- <script src="../js/validations.js"></script> -->
     <!--<script src="http://    ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>-->
 </body>

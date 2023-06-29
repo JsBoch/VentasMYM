@@ -1,5 +1,10 @@
 <?php
-session_start();
+//session_start();
+/**
+ * Se almacena en la base de datos
+ */
+require_once 'connection.php';
+
 $solicitudId = $_POST["id_solicitud"];
 $registroMain = $_POST["registro_principal"];
 $detalleRegistro = $_POST["detalle_registro"];
@@ -26,10 +31,6 @@ foreach ($jsonMain as $item) {
     $noSolicitud = $item["nosolicitud"];
     $transporte = $item["transporte"];
 }
-/**
- * Se almacena en la base de datos
- */
-require_once 'connection.php';
 
 if ($mysqli !== null) {
     //inicio de transacciones
@@ -203,5 +204,19 @@ if ($mysqli !== null) {
 }
 
 //respuesta del WS hacia Android
-$jsonFinal = array("codigo" => $codigoRespuesta);
-echo json_encode($jsonFinal);
+/*$jsonFinal = array("codigo" => $codigoRespuesta,
+"id_solicitud"=>$envioID);
+echo json_encode($jsonFinal);*/
+
+$return_arr = array();
+$indice = 0;
+$return_arr[$indice] = array(
+    "codigo" => $codigoRespuesta,
+    "id_solicitud" => $envioID    
+);
+
+
+//header('Content-Type: application/json');
+echo json_encode($return_arr);
+
+?>
