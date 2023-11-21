@@ -9,23 +9,31 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
     
     if (intval($_SESSION['sucursal']) == 1) {
         $stmt = "SELECT " .
-            "p.nombre " .
+            //"p.nombre " .
+            "if(i.linea is null,p.nombre,".
+            "concat(p.nombre,' [',".
+            "group_concat(i.linea,' - ',".
+            "i.anio,' ',".
+            "i.especificaciones),']')) as nombre ".
             "FROM `db_mymsa`.`adm_producto` p " .
+            "left join `db_mymsa`.`adm_informacion_producto` i on p.idproducto = i.id_producto and i.estado = 1 ".
             "WHERE p.estado = 1 " .
             "AND p.codigormym = '$codigo' ";
             "GROUP BY nombre;";
     } else if (intval($_SESSION['sucursal']) == 2) {
         $stmt = "SELECT " .
-            "p.nombre " .
+            "if(i.marca is null,p.nombre,concat(p.nombre,' ',group_concat(i.marca,' ',i.linea,' ',i.anio,' ',i.especificaciones))) as nombre " .
             "FROM `db_mymsapt`.`adm_producto` p " .
+            "left join `db_mymsapt`.`adm_informacion_producto` i on p.idproducto = i.id_producto and i.estado = 1 ".
             "WHERE p.estado = 1 " .
             "AND p.codigormym = '$codigo' " .
             "GROUP BY nombre;";
     }
     else if (intval($_SESSION['sucursal']) == 3) {
         $stmt = "SELECT " .
-            "p.nombre " .
+        "if(i.marca is null,p.nombre,concat(p.nombre,' ',group_concat(i.marca,' ',i.linea,' ',i.anio,' ',i.especificaciones))) as nombre " .
             "FROM `db_mymsaxela`.`adm_producto` p " .
+            "left join `db_mymsaxela`.`adm_informacion_producto` i on p.idproducto = i.id_producto and i.estado = 1 ".
             "WHERE p.estado = 1 " .
             "AND p.codigormym = '$codigo' " .
             "GROUP BY nombre;";

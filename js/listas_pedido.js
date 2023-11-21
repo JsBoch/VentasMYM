@@ -149,7 +149,7 @@ function listaProductos() {
     $.ajax({
         url: '../data/lista_productos.php',
         dataType: 'json',
-        success: function (object) {            
+        success: function (object) {                   
             codigoProducto(object);
             nombreProducto(object);
         }
@@ -234,7 +234,7 @@ function listaPrecios(codigo) {
  */
 function getCodigo(producto) {
     //let producto = document.getElementById('codigo').selectedOptions[0].getAttribute("data-valuep")  
-    console.log("producto" +    producto);
+    //console.log("producto" +    producto);
     let codigoIngresado = document.getElementById("codigo");
     //let producto = document.getElementById("producto").value.trim(); //$('#producto').val();                
     
@@ -245,8 +245,7 @@ function getCodigo(producto) {
             dataType: 'json',
             type: 'post',
             data: datos,
-            success: function (object) {  
-                console.log(object);              
+            success: function (object) {                             
                 codigoIngresado.value = object[0].codigo;     
                 listaPrecios(object[0].codigo);    
                 CargarExistencia(object[0].codigo);                   
@@ -276,13 +275,12 @@ function getNombreProducto(codigo) {
             dataType: 'json',
             type: 'post',
             data: datos,
-            success: function (object) {
-                
+            success: function (object) {                
                 var $inputProducto = $('#producto');
                 //$inputProducto.value = object[0].nombre;
                 document.getElementById("producto").value = object[0].nombre;
             },
-            error: function (jqXHR, textStatus, errorThrown) {
+            error: function (jqXHR, textStatus, errorThrown) {                
                 console.log("Status: " + textStatus);
                 console.log("Error: " + errorThrown);
             }
@@ -354,7 +352,7 @@ function nombreProducto(datos) {
         data.push(producto.nombre);
     });
 
-    //console.log(data);
+    
     const autocompleteProducto = document.getElementById("producto");
     const resultsHTMLProducto = document.getElementById("resultsProducto");
 
@@ -363,11 +361,15 @@ function nombreProducto(datos) {
         const userInput = this.value.toUpperCase();
         resultsHTMLProducto.innerHTML = "";
         if (userInput.length > 0) {
+            //console.log(userInput);
             results = getResults(userInput);
+            if(results !== undefined)
+            {
             resultsHTMLProducto.style.display = "block";
             for (i = 0; i < results.length; i++) {
                 resultsHTMLProducto.innerHTML += "<li>" + results[i] + "</li>";
             }
+        }
         }
         resultsHTMLProducto.style.padding = "5px";
     };
@@ -400,6 +402,7 @@ function nombreProducto(datos) {
         resultsHTMLProducto.style.padding = "0";
         //document.getElementById('codigo').value = '';
         //autocompleteProducto.focus();
+        //console.log(autocompleteProducto.value);
         getCodigo(autocompleteProducto.value);
     };
 }

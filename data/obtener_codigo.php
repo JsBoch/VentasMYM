@@ -9,11 +9,17 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
 
     $stmt = "";
     if (intval($_SESSION["sucursal"]) == 1) {
+        $caracter = "#";
+        $posicion = strpos($producto, $caracter);
+        $longitud = strlen($producto) - $posicion -1;
+        $idProducto = substr($producto,$posicion+1,$longitud);
+
         $stmt = "SELECT " .
             "p.codigormym " .
             "FROM `db_mymsa`.`adm_producto` p " .
             "WHERE p.estado = 1 " .
-            "AND trim(p.nombre) = '$producto' " .
+            //"AND trim(p.nombre) = '$producto' " .
+            " and p.idproducto = $idProducto ".
             "group by codigormym;";
     } else if (intval($_SESSION["sucursal"]) == 2) {
         $stmt = "SELECT " .

@@ -22,9 +22,15 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
 
     if(intval($numeroSucursal) == 0 || intval($numeroSucursal == 1))
     {
-        $stmt = "SELECT " .        
+        $stmt = "SELECT " .  
+        "p.idproducto,".      
         "p.codigormym," .
-        "p.nombre," .
+        "if(i.linea is null,concat(p.nombre,' #',p.idproducto),".
+        "concat(p.nombre,' [',".
+        "group_concat(i.marca,' ',".
+        "i.linea,' - ',".
+        "i.anio,' ',".
+        "i.especificaciones),']','#',i.id_producto)) as nombre,".
         "if(pp.venta is null,0,pp.venta) as venta," .
         "if(pp.uno is null,0,pp.uno) as uno," .
         "if(pp.dos is null,0,pp.dos) as dos," .
@@ -32,6 +38,7 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
         "if(pp.oferta is null,0,pp.oferta) as oferta " .
         "FROM `db_mymsa`.`adm_producto` p " .
         "LEFT JOIN `db_mymsa`.`precio_producto` pp ON p.idproducto = pp.idproducto " .
+        "left join `db_mymsa`.`adm_informacion_producto` i on p.idproducto = i.id_producto and i.estado = 1 " . 
         "WHERE p.estado = 1 " .
         //"and p.idempresa = 2 " .
         "group by codigormym " .
@@ -41,7 +48,7 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
     {
         $stmt = "SELECT " .        
         "p.codigormym," .
-        "p.nombre," .
+        "if(i.marca is null,p.nombre,concat(group_concat(i.marca,' ',i.linea,' ',i.anio,' ',i.especificaciones))) as nombre," .
         "if(pp.venta is null,0,pp.venta) as venta," .
         "if(pp.uno is null,0,pp.uno) as uno," .
         "if(pp.dos is null,0,pp.dos) as dos," .
@@ -49,6 +56,7 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
         "if(pp.oferta is null,0,pp.oferta) as oferta " .
         "FROM `db_mymsapt`.`adm_producto` p " .
         "LEFT JOIN `db_mymsapt`.`precio_producto` pp ON p.idproducto = pp.idproducto " .
+        "left join `db_mymsapt`.`adm_informacion_producto` i on p.idproducto = i.id_producto and i.estado = 1 " . 
         "WHERE p.estado = 1 " .
         //"and p.idempresa = 2 " .
         "group by codigormym " .
@@ -58,7 +66,7 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
     {
         $stmt = "SELECT " .        
         "p.codigormym," .
-        "p.nombre," .
+        "if(i.marca is null,p.nombre,concat(group_concat(i.marca,' ',i.linea,' ',i.anio,' ',i.especificaciones))) as nombre," .
         "if(pp.venta is null,0,pp.venta) as venta," .
         "if(pp.uno is null,0,pp.uno) as uno," .
         "if(pp.dos is null,0,pp.dos) as dos," .
@@ -66,6 +74,7 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
         "if(pp.oferta is null,0,pp.oferta) as oferta " .
         "FROM `db_mymsaxela`.`adm_producto` p " .
         "LEFT JOIN `db_mymsaxela`.`precio_producto` pp ON p.idproducto = pp.idproducto " .
+        "left join `db_mymsapt`.`adm_informacion_producto` i on p.idproducto = i.id_producto and i.estado = 1 " . 
         "WHERE p.estado = 1 " .
         //"and p.idempresa = 2 " .
         "group by codigormym " .
