@@ -30,6 +30,7 @@ foreach ($jsonMain as $item) {
     $prioridad = $item["prioridad"];
     $noSolicitud = $item["nosolicitud"];
     $transporte = $item["transporte"];
+    $tipoPago = $item["tipoPago"];
 }
 
 if ($mysqli !== null) {
@@ -90,14 +91,14 @@ if ($mysqli !== null) {
             "estado," .
             "id_cliente," .
             "prioridad," .
-            "transporte) " .
-            " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?);")) {
+            "transporte,tipo_pago) " .
+            " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?);")) {
             //echo "fallo No." . $mysqli->errno . " " . $mysqli->error;
             $codigoRespuesta = -1;
 
         } else
-        if (!$stmt->bind_param("iiiiissssiiss", $envioID, $solicitudID, $departamentoID, $municipioID, $empleadoID,
-            $codigoCliente, $nombreCliente, $fechaHoraRegistro, $observacionesRegistro, $estadoRegistro, $clienteID,$prioridad,$transporte)) {
+        if (!$stmt->bind_param("iiiiissssiisss", $envioID, $solicitudID, $departamentoID, $municipioID, $empleadoID,
+            $codigoCliente, $nombreCliente, $fechaHoraRegistro, $observacionesRegistro, $estadoRegistro, $clienteID,$prioridad,$transporte,$tipoPago)) {
             //echo "fallo la vinculacion: " . $mysqli->errno . " " . $mysqli->error;
             $codigoRespuesta = -2;
         } else if (
@@ -130,12 +131,12 @@ if ($mysqli !== null) {
                     "subtotal," .
                     "observaciones," .
                     "estado," .
-                    "id_empresa) " .
-                    " VALUES (?,?,?,?,?,?,?,?,?,?);")) {
+                    "id_empresa,porcentaje_descuento,monto_descuento) " .
+                    " VALUES (?,?,?,?,?,?,?,?,?,?,?,?);")) {
                     $codigoRespuesta = -4; //fallo al preparar la consulta de detalle
 
-                } else if (!$stmtd->bind_param("issisddsii", $envioID, $codigoProducto, $nombreProducto, $cantidad,
-                    $tipoPrecio, $precio, $subtotal, $observacionesProducto, $estadoProducto, $empresaID)) {
+                } else if (!$stmtd->bind_param("issisddsiiid", $envioID, $codigoProducto, $nombreProducto, $cantidad,
+                    $tipoPrecio, $precio, $subtotal, $observacionesProducto, $estadoProducto, $empresaID, $porcentaje, $descuento)) {
                     $codigoRespuesta = -5; //no se pudieron vincular los parámetros a la consulta detalle
                 } else {
                     /**
@@ -155,6 +156,8 @@ if ($mysqli !== null) {
                         $precio = $arr["precio"];
                         $subtotal = $arr["subtotal"];
                         $observacionesProducto = $arr["observaciones"];
+                        $porcentaje = $arr["porcentaje"];
+                        $descuento = $arr["descuento"];
 
                         if (!$stmtd->execute()) {
                             $codigoRespuesta = -6; //fallo al ejecutar la consulta detalle

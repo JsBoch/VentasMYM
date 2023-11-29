@@ -20,8 +20,14 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     <link rel="icon" href="../imgs/logo.png">
     <title>Registro de pedidos</title>
 </head>
-
-<body onload="listaDepartamentos(),listaProductos(),listaClientes(),listaPrioridad()">
+<!--
+    listaDepartamentos(): carga el listado de departamentos para mostrarlos al usuario en un select
+    listaProductos(): Carga un listado de códigos y otro de nombres de productos para realizar la función
+                      de autocompletar.
+    listaClientes(): carga el listado de clientes según el departamento seleccionado.
+    listaPrioridad(): carga un arreglo quemado, con las opciones predefinidas para dar prioridad a un pedido.
+-->
+<body onload="listaDepartamentos(),listaProductos(),listaClientes(),listaPrioridad(),listaTipoPago()">
     <form id="subContainerDates" action="" method="post">
         <div class="customer_frame">
             <!-- Boton para regresar al menu -->
@@ -53,6 +59,9 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                     <textarea name="observaciones" class="comments" id="observaciones" cols="119" rows="5"></textarea>
                     <label for="transporte" class="subtitle_input">TRANSPORTE</label>
                     <input type="text" name="transporte" id="transporte" class="info_boxes" placeholder="Ingrese transporte">
+
+                    <label for="sltTipoPago" class="subtitle_input">TIPO PAGO</label>
+                    <select name="sltTipoPago" id="sltTipoPago" class="selector"></select>
                 </div>
             </div>
         </div>
@@ -67,9 +76,14 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
 
                 <ul class="autocomplete_list" id="results"></ul>
                 <ul id="resultsProducto" class="autocomplete_listPro"></ul>
-
+                <!--Este hidden se utiliza para almacenar el resultado de la validación de un producto
+            al verificar si existe o no en el listado de descuentos-->
+                <input type="hidden" name="porcentajeDescuento" id="porcentajeDescuento" autocomplete="off">
                 <!--<ul class="autocomplete_listCod" id="results"></ul>
                 <ul class="autocomplete_list" id="resultsProducto"></ul>-->
+                <div id="ctntMensaje" class="mensaje">
+                    <p id="mensajeDescuento"></p>
+                </div>
                 <label for="existencia" class="subtitle_input">EXISTENCIA</label>
                 <input type="text" class="info_boxes" name="existencia" id="existencia" placeholder="EXISTENCIA" readonly autocomplete="off">
                 <!--Agrego un hidden para almacenar el precio mas bajo de la lista-->
@@ -80,14 +94,22 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 <select name="tipo_precio" class="selector" id="tipo_precio" onchange="colocarPrecio(),CalculoSubtotal()"></select>
                 <label for="precio" class="subtitle_input">PRECIO</label>
                 <input type="text" name="precio" class="info_boxes" id="precio" placeholder="PRECIO" onchange="CalculoSubtotal()" autocomplete="off">
-                <label for="subtotal" class="subtitle_input">SUBTOTAL</label>
-                <input type="text" name="subtotal" class="info_boxes" id="subtotal" placeholder="SUBTOTAL" autocomplete="off">
+                <label for="descuento" class="subtitle_input">SUBTOTAL</label>
+                <input type="text" name="descuento" class="info_boxes" id="total" placeholder="SUBTOTAL">
+                <label for="descuento" class="subtitle_input">DESCUENTO</label>
+                <input type="text" name="descuento" class="info_boxes" id="descuento" placeholder="DESCUENTO">
+                <label for="subtotal" class="subtitle_input">TOTAL</label>
+                <input type="text" name="subtotal" class="info_boxes" id="subtotal" placeholder="TOTAL" autocomplete="off">
                 <label for="observaciones_producto" class="subtitle_input">OBSERVACIONES</label>
                 <div class="comentario">
                     <textarea name="observaciones_producto" class="comments" id="observaciones_producto" cols="30" rows="5"></textarea>
                 </div>
+                
+                <label for="sumaTotal" class="subtitle_input">TOTAL GENERAL</label>
+                <input type="text" name="sumaTotal" class="info_boxes" id="sumaTotal" autocomplete="off">                
+
                 <button class="add" onclick="ValidarCampos()" type="button">Agregar al Pedido</button>
-                <button class="see" onclick="seeOrder('subContainerDates')" type="button">Ver Pedido</button>
+                <button class="see" onclick="seeOrder('subContainerDates')" type="button">Ver Pedido</button>                            
             </div>
         </div>
     </form>
@@ -106,6 +128,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     <script src="../js/registro_pedido.js"></script>
     <script src="../js/funciones.js"></script>
     <script src="../js/alertify.min.js"></script>
+    <script src="../js/GestionDescuentos.js"></script>
 </body>
 
 </html>

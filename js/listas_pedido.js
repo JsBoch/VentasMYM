@@ -143,7 +143,9 @@ function listaClientesConsultaPedido() {
     });
 }
 /**
- * Cargar el código de los productos
+ * Cargar el id, codigo, nombre y precios de productos según la sucursal a la que pertenece el vendedor.
+ * El resultado se envía a las funciones codigoProducto: para establecer los códigos en una lista de autocompletar
+ * y nombreProducto para establecer una lista de nombres para autocompletar.
  */
 function listaProductos() {
     $.ajax({
@@ -295,20 +297,31 @@ function getNombreProducto(codigo) {
  * Carga el listado de productos como una lista de autocompletar
  * @param {Json} datos con el listado de códigos a cargar 
  */
-function codigoProducto(datos) {
-
+function codigoProducto(datos) {    
     const data = [];
 
+    /**
+     * Se crea un arreglo que contiene solo los códigos de los productos de inventario
+     * para crear la lista de autocompletar.
+     */
     $.each(datos, function (i, producto) {
         data.push(producto.codigo);
     });
 
-    //console.log(data);
+    /**
+     * codigo: es el inputtext donde se colocará el código de producto seleccionado por el usuario.
+     * results: es una lista desordenada ul que contendrá los códigos sugeridos que coicidan con el patrón
+     * de búsqueda que vaya ingresando el usuario.
+     */
     const autocomplete = document.getElementById("codigo");
     const resultsHTML = document.getElementById("results");
 
+    /**
+     * oninput, es cuando el usuario comience a escribir en el inputtext código
+     */
     autocomplete.oninput = function () {
         let results = [];
+        //this representa el inputtext codigo
         const userInput = this.value.toUpperCase();
         resultsHTML.innerHTML = "";
         if (userInput.length > 0) {
@@ -321,6 +334,10 @@ function codigoProducto(datos) {
         resultsHTML.style.padding = "5px";
     };
 
+    /**
+     * Devuelve los resultados (codigos) que vayan coincidiendo con el patrón de búsqueda ingresado 
+     * por el usuario, el cuál se recibe en el parámetro input.
+     */
     function getResults(input) {
         const results = [];
         for (i = 0; i < data.length; i++) {
@@ -331,6 +348,14 @@ function codigoProducto(datos) {
         return results;
     }
 
+    /**
+     * Se asocia el evento onclick a la lista de resultados sugeridos,
+     * cuando el usuario lo selecciona, el valor se establece en el inputtext codigo
+     * y se ejecutan las funciones:
+     * getNombreProducto(): para obtener el nombre del producto según el código seleccionado.
+     * listaPrecios(): para establecer el listado de precios del producto según el código seleccionado.
+     * CargarExistencia(): para obtener la existencia del producto según el código seleccionado. 
+     */
     resultsHTML.onclick = function (event) {
         const setValue = event.target.innerText;
         autocomplete.value = setValue;
@@ -339,6 +364,7 @@ function codigoProducto(datos) {
         getNombreProducto(autocomplete.value);
         listaPrecios(autocomplete.value);
         CargarExistencia(autocomplete.value);        
+        ExisteDescuento(autocomplete.value);
     };
 }
 
@@ -492,6 +518,11 @@ function listaPrioridad() {
     $sltPrioridad.append('<option value="PREVENTA">PREVENTA</option>');
 }
 
+function listaTipoPago() {
+    var $stlTipoPago = $('#sltTipoPago');
+    $stlTipoPago.append('<option value="CREDITO">CREDITO</option>');
+    $stlTipoPago.append('<option value="CONTADO">CONTADO</option>');    
+}
 /**
  * Buscar la existencia para un producto indicado
  * tanto en sa como en mym

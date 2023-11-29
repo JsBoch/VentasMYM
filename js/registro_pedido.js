@@ -5,6 +5,16 @@ function cargarDetalle() {
   let producto = document.getElementById("producto").value;
   let cantidad = document.getElementById("cantidad").value;
   let objTipoPrecio = document.getElementById("tipo_precio");
+  let porcentajeDescuento = document.getElementById("porcentajeDescuento").value;
+  let descuento = document.getElementById("descuento").value;
+
+let porcentajeItem =0, descuentoItem = 0;
+  if (porcentajeDescuento.length > 0) {
+    porcentajeItem = porcentajeDescuento;
+  }
+  if (descuento.length > 0) {
+    descuentoItem = descuento;
+  }
   // console.log(objTipoPrecio.options[objTipoPrecio.selectedIndex].text);
   // validación de tipo precio
 
@@ -63,6 +73,8 @@ function cargarDetalle() {
     precio: precio,
     subtotal: subtotal,
     observaciones: observacionesProducto,
+    porcentaje: porcentajeItem,
+    descuento: descuentoItem
   };
 
   listaDetalle.push(jsonString);
@@ -103,6 +115,8 @@ function cargarDetalle() {
   document.getElementById("subtotal").value = "";
   document.getElementById("observaciones_producto").value = "";
   document.getElementById("existencia").value = "";
+  document.getElementById("porcentajeDescuento").value = "";
+  document.getElementById("ctntMensaje").style.display = "none";
 }
 
 function ValidarCampos() {
@@ -148,6 +162,7 @@ function GuardarRegistro() {
   var agregarAlPedido = document.getElementById("shopping_cart");
   var enviarPedido = document.getElementById("send_order");
   var fechas = document.getElementById("subContainerDates");
+  let tipoPago = document.getElementById("sltTipoPago").value;
 
   var principal = new Array();
   //var detalle = [];
@@ -158,7 +173,8 @@ function GuardarRegistro() {
     observaciones: observaciones,
     prioridad: prioridad,
     nosolicitud: 0,
-    transporte: transporte
+    transporte: transporte,
+    tipoPago: tipoPago
   });
 
   var data1 = JSON.stringify(principal);
@@ -211,6 +227,11 @@ function GuardarRegistro() {
   document.getElementById("precio").value = "";
   document.getElementById("subtotal").value = "";
   document.getElementById("observaciones_producto").value = "";
+  document.getElementById("porcentajeDescuento").value = "";
+  document.getElementById("descuento").value = "";
+  document.getElementById("total").value = "";
+  document.getElementById("sumaTotal").value = "";
+  
   let $selectListado = $("#listado");
   $selectListado.empty();
   listaDetalle = new Array();
