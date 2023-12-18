@@ -19,7 +19,7 @@ function GetDate() {
 }
 
 /**
- * Obtiene el listado de pedidos registrados 
+ * Obtiene el listado de pedidos registrados
  * en la base de datos correspondiente a la sucursal
  * asociada al usuario que ingreso al sistema.
  */
@@ -76,29 +76,41 @@ function ConsultaProductos() {
     data: { id_solicitud: solicitudId },
     success: function (object) {
       let registro = "";
-      var $selectProductos = $("#listaProductos");
-      $selectProductos.empty();
+      // agregar a tabla
+      const table1 = new DataTable("#example1");
+      table1.clear().draw();
       $.each(object, function (i, producto) {
-        registro =
-          "Cdg." +
-          producto.codigo_producto +
-          " Nom. " +
-          producto.nombre_producto +
-          " Cnt. " +
-          producto.cantidad +
-          " Prc. " +
-          producto.precio +
-          " Subtotal: " +
-          producto.subtotal +
-          " Obs." +
-          producto.observaciones;
-        $selectProductos.append(
-          "<option value=" +
-          producto.codigo_producto +
-          ">" +
-          registro +
-          "</option>"
-        );
+        table1.row
+          .add([
+            producto.codigo_producto,
+            producto.nombre_producto,
+            producto.cantidad,
+            producto.precio,
+            producto.subtotal,
+            producto.observaciones,
+          ])
+          .draw(false);
+        // ---------------
+        // registro =
+        //   "Cdg." +
+        //   producto.codigo_producto +
+        //   " Nom. " +
+        //   producto.nombre_producto +
+        //   " Cnt. " +
+        //   producto.cantidad +
+        //   " Prc. " +
+        //   producto.precio +
+        //   " Subtotal: " +
+        //   producto.subtotal +
+        //   " Obs." +
+        //   producto.observaciones;
+        // $selectProductos.append(
+        //   "<option value=" +
+        //   producto.codigo_producto +
+        //   ">" +
+        //   registro +
+        //   "</option>"
+        // );
       });
     },
   });
@@ -110,6 +122,7 @@ function ConsultaProductos() {
  * para editar.
  */
 function CargaPedidoEdit() {
+  // agregar a tabla
   let departamento;
   let observaciones;
   var departamentoId;
@@ -124,8 +137,8 @@ function CargaPedidoEdit() {
     type: "post",
     data: { id_solicitud: solicitudId },
     success: function (object) {
-      departamentoId = object[0].id_departamento;      
-      clienteIdSeleccion = object[0].id_cliente;      
+      departamentoId = object[0].id_departamento;
+      clienteIdSeleccion = object[0].id_cliente;
       observaciones = object[0].observaciones;
       prioridad = object[0].prioridad;
       noSolicitud = object[0].nosolicitud;
@@ -136,17 +149,22 @@ function CargaPedidoEdit() {
       $("#sltPrioridad").val(prioridad);
       $("#hdnNoSolicitud").val(noSolicitud);
       $("#transporte").val(transporte);
-      
-      listaClientesConsulta();      
-      CargaProductosEdit(solicitudId);      
+
+      listaClientesConsulta();
+      CargaProductosEdit(solicitudId);
     },
   });
 
+  document.getElementById("subContainerDates").classList.toggle("subir");
   document.getElementById("departamento").focus();
 }
+const button = document.querySelector("#btn");
+button.addEventListener("click", function () {
+  document.getElementById("subContainerDates").classList.toggle("subir");
+});
 
 /**
- * Se selecciona el cliente en el select 
+ * Se selecciona el cliente en el select
  * automáticamente.
  */
 function AsignarCliente() {
@@ -158,16 +176,14 @@ function AsignarCliente() {
  * @param {int} idsolicitud es el id del pedido consultado
  */
 function CargaProductosEdit(idsolicitud) {
+  const table1 = new DataTable("#example1");
   $.ajax({
     url: "../data/carga_productos_edit.php",
     dataType: "json",
     type: "post",
     data: { id_solicitud: idsolicitud },
     success: function (object) {
-      var $select = $("#listado");
-
-      $select.empty();
-
+      table.clear().draw();
       $.each(object, function (i, producto) {
         var jsonString = {
           codigo_producto: producto.codigo_producto,
@@ -180,17 +196,28 @@ function CargaProductosEdit(idsolicitud) {
         };
 
         listaDetalle.push(jsonString);
-        let item =
-          producto.codigo_producto +
-          " - Cnt. " +
-          producto.cantidad +
-          " - Prc." +
-          producto.precio +
-          " - Sbt." +
-          producto.subtotal +
-          " - " +
-          producto.nombre_producto;
-        $select.append("<option value=" + codigo + ">" + item + "</option>");
+        // Añadir
+        const table = new DataTable("#example");
+        table.row
+          .add([
+            producto.codigo_producto,
+            producto.cantidad,
+            producto.precio,
+            producto.subtotal,
+            producto.nombre_producto,
+          ])
+          .draw(false);
+        // let item =
+        //   producto.codigo_producto +
+        //   " - Cnt. " +
+        //   producto.cantidad +
+        //   " - Prc." +
+        //   producto.precio +
+        //   " - Sbt." +
+        //   producto.subtotal +
+        //   " - " +
+        //   producto.nombre_producto;
+        // $select.append("<option value=" + codigo + ">" + item + "</option>");
       });
     },
   });
@@ -219,7 +246,7 @@ function GuardarNuevoRegistro() {
     observaciones: observaciones,
     prioridad: prioridad,
     nosolicitud: noSolicitud,
-    transporte: transporte
+    transporte: transporte,
   });
 
   var data1 = JSON.stringify(principal);
@@ -269,7 +296,7 @@ function GuardarNuevoRegistro() {
     agregarAlPedido.style.display = "none";
     enviarPedido.style.display = "none";
     fechas.style.display = "block";
-  }  
+  }
 }
 
 function QuitarItemDeListaEdit() {

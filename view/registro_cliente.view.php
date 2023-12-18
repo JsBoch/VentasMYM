@@ -17,7 +17,7 @@ session_start();
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../css/alertify.min.css">
-    <link rel="icon" href="../imgs/logo.png">
+    <link rel="icon" href="../imgs/icono.png">
     <title>Registro de clientes</title>
 </head>
 <body onload="listaDepartamentos(),limpiarFormulario(),listaRegiones()">
@@ -25,12 +25,13 @@ session_start();
         <!-- Boton para regresar al menu -->
         <div class="above_all">
         <a href="../index.php">
-            <h3>Ir al menu</h3>
+            <h3>Volver</h3>
             <i class='bx bx-log-out'></i>
-         </a>
+        </a>
         </div>     
-         <!-- formulario -->
+        <!-- formulario -->
         <h2 class="main_title">Registro De Clientes</h2>
+        <div class="container">
         <div class="sub_container">
         <label for="nit" class="subtitle_input">NIT</label>
         <input class="info_boxes" placeholder="Ingrese NIT" onblur="findValue()" name="nit" id="nit"  type="text">
@@ -40,62 +41,42 @@ session_start();
         <input class="info_boxes" placeholder="Ingrese Nombre" name="nombre" id="nombre" type="text" onblur="EstablecerRazonSocial()">
         <label for="razonsocial" class="subtitle_input">RAZÓN SOCIAL</label>
         <input class="info_boxes" placeholder="Ingrese Razón Social" name="razonsocial" id="razonsocial" type="text">
-        <!-- <div class="label_depa">
-        <label for="depa">DEPARTAMENTO</label>
-        </div>    -->
         <label for="depa" class="subtitle_input">DEPARTAMENTO</label>
         <select class="selectors" name="SD" id="depa" onchange="findValue()"></select>
-        <!-- <div class="label_muni">
-        <label for="municipio">MUNICIPIO</label>
-        </div>    -->
         <label for="municipio" class="subtitle_input">MUNICIPIO</label>
-        <select class="selectors" name="SM" id="municipio" form="customer_registration">
-        </select>
+        <select class="selectors" name="SM" id="municipio" form="customer_registration"></select>
         <label for="direccion" class="subtitle_input">DIRECCIÓN</label>
         <input class="info_boxes" placeholder="Ingrese Dirección" name="direccion" id="direccion" type="text">
+</div>
+<div class="sub_container">
         <label for="telefono" class="subtitle_input">TELEFONO</label>
         <input class="info_boxes" placeholder="Ingrese Teléfono" name="telefono" id="telefono" type="number">
         <label for="correo" class="subtitle_input">CORREO</label>
         <input class="info_boxes" placeholder="Ingrese@email.com" name="correo" id="correo" type="email">
-        <!--<input class="info_boxes" placeholder="Ingrese Region" name="region" id="region" type="text">-->
         <label for="region" class="subtitle_input">REGIÓN</label>
         <select name="region" id="region" class="selectors"></select>
-        <!-- <div class="label_com">
-        <label for="comentario">OBSERVACIONES</label>
-        </div>    -->
         <label for="comentario" class="subtitle_input">OBSERVACIÓN</label>
-        <textarea class="comments" rows="10" cols="8" name="comentario" id="comentario"></textarea>
+        <textarea class="comentario" rows="5" cols="30" name="comentario" id="comentario"></textarea>
         <label for="transporte" class="subtitle_input">TRANSPORTE</label>
-        <input style="width: auto;" class="info_boxes" placeholder="Ingrese Transporte" name="transporte" id="transporte" type="text">
-        <div class="map">
-    <button type="button" name="bttnUbicacion" id="bttnUbicacion" class="button_location" onclick="ObtenerUbicacion()">UBICACIÓN</button>
-        <h3 class="titles_location">Latitud</h3>
-        <input type="text" name="txtLatitud" id="txtLatitud" placeholder="latitud" class="spaces_location">
-        <h3 class="titles_location">Longitud</h3>
-        <input type="text" name="txtLongitud" id="txtLongitud" placeholder="longitud" class="spaces_location">
-    </div>
-   
+        <input class="info_boxes" placeholder="Ingrese Transporte" name="transporte" id="transporte" type="text">
         <input type="hidden" value="1" name="empleado">
         <input type="hidden" name="clienteId" id="clienteId">
         <input type="hidden" name="txtCodigo" id="txtCodigo">
         <button class="send" type="submit">Enviar</button>
-        <!-- <a href="#" class="send btn-neon">
-        <span id="span1"></span>
-        <span id="span2"></span>
-        <span id="span3"></span>
-        <span id="span4"></span>
-        Enviar
-     </a> -->
         </div>
-        
+        </div>
     </form>
-  
     <script src="../js/jquery-3.6.0.min.js"></script>
     <script src="../js/departamentos.js"></script>
     <script src="../js/clientesln.js"></script>
     <script src="../js/alertify.min.js" ></script>
-   
-    <!-- <script src="../js/validations.js"></script> -->
-    <!--<script src="http://    ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>-->
+
+    <!-- <div class="map">
+        <button type="button" name="bttnUbicacion" id="bttnUbicacion" class="button_location" onclick="ObtenerUbicacion()">UBICACIÓN</button>
+        <h3 class="titles_location">Latitud</h3>
+        <input type="text" name="txtLatitud" id="txtLatitud" placeholder="latitud" class="spaces_location">
+        <h3 class="titles_location">Longitud</h3>
+        <input type="text" name="txtLongitud" id="txtLongitud" placeholder="longitud" class="spaces_location">
+        </div> -->
 </body>
 </html>

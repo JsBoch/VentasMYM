@@ -79,10 +79,19 @@ let porcentajeItem =0, descuentoItem = 0;
 
   listaDetalle.push(jsonString);
   // console.log(item);
-
-  let item = codigo + " - Cnt. " + cantidad + ' - Prc.' + precio + ' - Sbt.' + subtotal + ' - ' + producto;
-  var $select = $('#listado');
-  $select.append('<option value=' + codigo + '>' + item + '</option>');
+// Añadir
+  table.row
+      .add([
+          codigo,
+          cantidad,
+          precio,
+          subtotal,
+          producto
+      ])
+      .draw(false);
+  // let item = codigo + " - Cnt. " + cantidad + ' - Prc.' + precio + ' - Sbt.' + subtotal + ' - ' + producto;
+  // var $select = $('#listado');
+  // $select.append('<option value=' + codigo + '>' + item + '</option>');
   //console.log(listaDetalle);
 
   /*var detalle = [{
@@ -158,10 +167,6 @@ function GuardarRegistro() {
   let observaciones = document.getElementById("observaciones").value;
   let prioridad = document.getElementById("sltPrioridad").value;
   let transporte = document.getElementById("transporte").value;
-  var contenderoTabal = document.getElementById("main-container");
-  var agregarAlPedido = document.getElementById("shopping_cart");
-  var enviarPedido = document.getElementById("send_order");
-  var fechas = document.getElementById("subContainerDates");
   let tipoPago = document.getElementById("sltTipoPago").value;
 
   var principal = new Array();
@@ -232,25 +237,14 @@ function GuardarRegistro() {
   document.getElementById("total").value = "";
   document.getElementById("sumaTotal").value = "";
   
-  let $selectListado = $("#listado");
-  $selectListado.empty();
   listaDetalle = new Array();
-  if (agregarAlPedido.style.display == "block") {
-    contenderoTabal.style.display = "none";
-    agregarAlPedido.style.display = "none";
-    enviarPedido.style.display = "none";
-    fechas.style.display = "block";
-  }
 }
 
 function QuitarItemDeLista() {
-  let objTipoPrecio = document.getElementById("listado");
-  //let selected = objTipoPrecio.options[objTipoPrecio.selectedIndex].value;
-  let selected = objTipoPrecio.selectedIndex;
-  //console.log(selected);
+  selected = table.row(".selected").index();
   listaDetalle.splice(selected, 1);
-  objTipoPrecio.remove(selected);
-  //console.log(listaDetalle);
+  table.row(".selected").remove().draw(false);
+  totalizarPedido();
 }
 
 /**
