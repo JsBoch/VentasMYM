@@ -8,16 +8,16 @@ function CalculoSubtotal() {
     let arrSplit = selected.split("-");
     let tipoPrecio = arrSplit[0];
 
-    let sumaTotalInput = document.getElementById("sumaTotal");
+    // let sumaTotalInput = document.getElementById("totalGeneral");
     let sumaTotal = 0;
 
     let subtotalItem = 0;
     let totalItem = 0;
     let descuentoItem = 0;
 
-    if (sumaTotalInput.value.trim().length > 0) {
-        sumaTotal = parseFloat(sumaTotalInput.value);
-    }    
+    // if (sumaTotalInput.innerText.trim().length > 0) {
+    //     sumaTotal = parseFloat(sumaTotalInput.innerText);
+    // }    
 
     if (precio.length == 0 || parseFloat(precio) == 0) {
         document.getElementById("subtotal").value = "";
@@ -74,8 +74,25 @@ function CalculoSubtotal() {
             document.getElementById("subtotal").value = totalItem;
         }
         
+<<<<<<< HEAD
         sumaTotal += parseFloat(totalItem);        
         sumaTotalInput.value = sumaTotal;
+=======
+        // sumaTotal += parseFloat(totalItem);        
+        
+        // sumaTotalInput.innerHTML = sumaTotal;
+    }
+}
+
+function totalizarPedido(){
+    let sumaTotalInput = document.getElementById("totalGeneral")
+    if (listaDetalle != null) {
+        let total = 0;
+        listaDetalle.forEach(element => {
+           total += parseFloat(element.subtotal);
+        });
+        sumaTotalInput.innerHTML = total;
+>>>>>>> 93eb0c7e9ece7c76899409a1cb989e92b4825765
     }
 }
 

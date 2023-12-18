@@ -19,7 +19,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
   <link rel="stylesheet" href="css/menuStyles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
   <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-  <link rel="icon" href="imgs/logo.png">
+  <link rel="icon" href="imgs/icono.png">
     <title>Menu</title>
 </head>
 
@@ -28,9 +28,9 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
          <span class="fas fa-bars"></span>
       </div> -->
       <nav class="sidebar">
-         <div class="text">
-           Menu
-         </div>
+      <div class="logo">
+          <img src="imgs/icono.PNG" alt="">
+        </div>
          <ul>
             <li>
                <a href="#" class="feat-btn">Clientes

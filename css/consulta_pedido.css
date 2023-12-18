@@ -13,100 +13,11 @@
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
 }
-
-/* Contenedor */
-
-.contenedorPrincipal{
-    background-color: #fff;
-    width: 100%;
-    height: 100%;
+.none{
+    display: none;
 }
 
-/* Primer cuadro */
-.encabezado{
-    background-color: var(--azulOscuro);
-    width: 100%;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.main_title {
-    color: #fff;
-    font-size: 20px;
-    font-weight: 500;
-}
-
-.link_guardar{
-    text-decoration: none;
-}
-
-.customer_frame {
-    background-color: #fff;
-    width: 30%;
-    height: 100%;
-    float: left;
-    border-right: 1px solid var(--azulOscuro);
-}
-
-.sub_container {
-    width: 100%;
-    height: 100%;
-    margin: auto;
-    padding-top: 10px;
-    padding-left: 8%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    float: left; 
-}
-
-
-.sub_container_pd {
-    width: 50%;
-    height: 90%;
-    margin: auto;
-    padding-left: 5%;
-    margin-top: 2%;
-    display: flex;
-    flex-direction: column;
-    float: left; 
-}
-
-.subtitle_input{
-    color: var(--Negro);
-    text-align: left;
-    font-size: 11px;
-    margin-bottom: 10px;
-}
-
-
-.selectors {
-    background-color: #fff;
-    color: var(--Negro);
-    width: 90%;
-    height: 40px;
-    padding-left: 8px;
-    margin-bottom: 20px;
-    font-size: 12px;
-    border: 1px var(--azulOscuro) solid;
-    outline: none;
-}
-
-.info_boxes {
-    background-color: #fff;
-    color: var(--Negro);
-    width: 90%;
-    height: 40px;
-    padding-left: 8px;
-    margin-bottom: 20px;
-    font-size: 12px;
-    border: 1px var(--azulOscuro) solid;
-    outline: none;
-}
-
-/* Unilinea */
+/*  Unilinea */
 .pareja{
     width: 90%;
     height: 80px;
@@ -163,11 +74,274 @@
     font-size: 20px;
     cursor: pointer;
 }
-.contenedor_producto{
+.contenedor_producto_dos{
     width: 80%;
     height: 100%;
     float: left;
+} 
+
+/* fechas */
+.subir{
+    transform: translateY(-520px);
 }
+
+.sub_container_dates{
+    background-color: var(--azulOscuro);
+    width: 95%;
+    height: 520px;
+    margin: auto;
+    padding-top: 20px;
+    position: relative;
+    z-index: 100;
+    transition: all .3s;
+}
+
+.flecha{
+    background-color: var(--azulOscuro);
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 100;
+    width: 30px;
+    height: 26px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-left: 2px solid var(--azul);
+    border-right: 2px solid var(--azul);
+    border-bottom: 2px solid var(--azul);
+    cursor: pointer;
+}
+
+.flecha i{
+    font-size: 25px;
+    color: var(--azul);
+}
+
+.query_date {
+    width: 100%;
+    height: 20%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedor_fechas label,
+.last_date label {
+    color: #fff;
+    text-align: left;
+    font-size: 12px;
+}
+
+.contenedor_fechas {
+    width: 40%;
+    height: 100%;
+    float: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fechas {
+    background-color: var(--fondo);
+    color: white;
+    width: 50%;
+    height: 40px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 5%;
+    border: 1px var(--azulOscuro) solid;
+    outline: none;
+    padding-left: 2%;
+}
+
+.btn_consultar{
+    background-color: rgb(0, 105, 0);
+    color: #fff;
+    width: 80px;
+    height: 40px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid rgb(7, 255, 7);
+}
+
+/* consulta */
+
+.orders-product {
+    width: 100%;
+    height: 50%;
+}
+
+.contenedor_pedido{
+    width: 80%;
+    height: 20%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedor_producto{
+    width: 80%;
+    height: 80%;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.modal_pedido div.dataTables_wrapper {
+    color: var(--Negro);
+  }
+
+div.dataTables_wrapper {
+    color: #fff;
+  }
+
+.subtitulo{
+    color: #fff;
+    font-size: 12px;
+    margin-right: 10px;
+}
+
+.selectors_consulta {
+    background-color: var(--fondo);
+    color: #fff;
+    width: 90%;
+    height: 40px;
+    padding-left: 10px;
+    font-size: 12px;
+    border: 1px var(--azulOscuro) solid;
+    outline: none;
+}
+
+/* Botones consulta */
+
+.buttons_forDate {
+    width: 50%;
+    height: 25%;
+    margin: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.editar{
+    background-color: rgb(0, 143, 129);
+    color: #fff;
+    width: 40%;
+    height: 40px;   
+    border: 1px solid turquoise;
+    cursor: pointer;
+}
+
+.eliminar{
+    background-color: var(--rojoOscuro);
+    color: #fff;
+    width: 40%;
+    height: 40px;
+    margin-left: 20px;
+    border: 1px solid var(--rojo);
+    cursor: pointer;
+}
+
+
+/* Contenedor */
+
+.contenedorPrincipal{
+    background-color: #fff;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+}
+
+/* Primer cuadro */
+.encabezado{
+    background-color: var(--azulOscuro);
+    width: 100%;
+    min-height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main_title {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.link_guardar{
+    text-decoration: none;
+}
+
+.customer_frame {
+    background-color: #fff;
+    width: 30%;
+    height: 100%;
+    float: left;
+    border-right: 1px solid var(--azulOscuro);
+}
+
+.sub_container {
+    width: 100%;
+    margin: auto;
+    padding-top: 10px;
+    padding-left: 8%;
+    display: flex;
+    flex-direction: column;
+    float: left; 
+}
+
+
+.sub_container_pd {
+    width: 50%;
+    height: 90%;
+    margin: auto;
+    padding-left: 5%;
+    margin-top: 2%;
+    display: flex;
+    flex-direction: column;
+    float: left; 
+}
+
+.subtitle_input{
+    color: var(--Negro);
+    text-align: left;
+    font-size: 11px;
+    margin-bottom: 10px;
+}
+
+
+.selectors {
+    background-color: #fff;
+    color: var(--Negro);
+    width: 90%;
+    height: 40px;
+    padding-left: 8px;
+    margin-bottom: 20px;
+    font-size: 12px;
+    border: 1px var(--azulOscuro) solid;
+    outline: none;
+}
+
+.info_boxes {
+    background-color: #fff;
+    color: var(--Negro);
+    width: 90%;
+    height: 40px;
+    padding-left: 8px;
+    margin-bottom: 20px;
+    font-size: 12px;
+    border: 1px var(--azulOscuro) solid;
+    outline: none;
+}
+
+
 /* lista de autocompletado */
 .input_autocomplete{
     background-color: #fff;
@@ -258,8 +432,6 @@
 .autocomplete_list li:hover {
     color: var(--rojoOscuro);
 }
-
-
 .above_all {
     position: absolute;
     width: 10%;
@@ -282,6 +454,7 @@ i {
 .above_all a i {
     padding-left: 5px;
 }
+
 
 /* ********* */
 
@@ -385,9 +558,6 @@ i {
     text-align: justify;
     border: 2px solid var(--azul);
 }
-/* .contenedor_nombre p{
-
-} */
 
 .fondo{
     background-color: rgba(0, 0, 0, 0.5);
@@ -407,7 +577,6 @@ i {
     border: 2px solid var(--azul);
     position: relative;
 }
-
 .btn_cerrar{
     font-size: 30px;
     color: var(--Negro);
@@ -416,7 +585,7 @@ i {
     right: 10px;
     cursor: pointer;
  }
- 
+
 .titulo_pedido{
     font-size: 25px;
     font-weight: 600;
@@ -457,7 +626,7 @@ i {
     width: 100%;
     height: 5%;
     margin-top: 10px;
-    padding-left: 10px;
+    padding-right: 10px;
     display: flex;
     justify-content: left;
     align-items: center;
@@ -487,7 +656,6 @@ i {
     height: 50%;
     margin: auto;
 }
-
 .ctntFinal{
     width: 100%;
     height: 10%;
@@ -515,6 +683,34 @@ i {
     .contenedor_select_pedidos {
         width: 95%;
     }    
+    .subir{
+        transform: translateY(-80vh);
+    }
+    .sub_container_dates{
+        height: 80vh;
+    }
+    .query_date{
+        width: 80%;
+        height: 28%;
+        flex-direction: column;
+    }
+    .contenedor_fechas{
+        width: 100%;
+        height: 30%;
+    }
+    .fechas{
+        width: 80%;
+        margin-left: 0;
+    }
+    .contenedor_fechas label{
+        margin-right: 10px;
+    }
+    .btn_consultar{
+        margin-top: 10px;
+    }
+    .buttons_forDate{
+        width: 100%;
+    }
     .contenedorPrincipal{
         display: flex;
         flex-direction: column;
