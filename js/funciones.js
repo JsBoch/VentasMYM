@@ -31,7 +31,7 @@ function CalculoSubtotal() {
             
             if (precio.length > 0 && cantidad.length > 0) {
                 subtotalItem = precio * cantidad;
-                if (document.getElementById("sltTipoPago").value == "CREDITO") {
+                if (document.getElementById("sltTipoPago").value.toString().trim() == "CREDITO") {
                     if (porcentajeDescuento.length > 0 && parseFloat(porcentajeDescuento) > 0) {
                         descuentoItem = subtotalItem * porcentajeDescuento / 100;
                     }
@@ -55,13 +55,13 @@ function CalculoSubtotal() {
             document.getElementById("precio").value = precioMasBajo;            
             if (precioMasBajo.length > 0 && cantidad.length > 0) {
                 subtotalItem = precioMasBajo * cantidad;
-                if (document.getElementById("sltTipoPago").value == "CREDITO") {
+                if (document.getElementById("sltTipoPago").value.toString().trim() == "CREDITO") {
                     if (porcentajeDescuento.length > 0 && parseFloat(porcentajeDescuento) > 0) {
                         descuentoItem = subtotalItem * porcentajeDescuento / 100;
                     }
 
                 } else {
-                    if (tipoPrecio === "VENTA") {
+                    if (tipoPrecio.trim() === "VENTA") {
                         if (porcentajeDescuento.length > 0 && parseFloat(porcentajeDescuento) > 0) {
                             descuentoItem = subtotalItem * porcentajeDescuento / 100;
                         }
@@ -75,7 +75,6 @@ function CalculoSubtotal() {
         }
         
         sumaTotal += parseFloat(totalItem);        
-        
         sumaTotalInput.value = sumaTotal;
     }
 }
