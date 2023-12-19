@@ -62,6 +62,14 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                   <li><a href="view/consulta_recibo.view.php">Consultar</a></li>            
                </ul>
             </li>
+            <li>
+               <a href="#" class="four-btn">Inventario
+               <span class="fas fa-caret-down four"></span>
+               </a>
+               <ul class="four-show">
+                  <li><a href="view/conteo_inventario.view.php">Conteo</a></li>               
+               </ul>
+            </li>
          </ul>
       <div class="return">
         <a href="login.php">
@@ -86,6 +94,10 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
            $('.third-btn').click(function(){
              $('nav ul .third-show').toggleClass("show2");
              $('nav ul .third').toggleClass("rotate");
+           });
+           $('.four-btn').click(function(){
+             $('nav ul .four-show').toggleClass("show3");
+             $('nav ul .four').toggleClass("rotate");
            });
            $('nav ul li').click(function(){
              $(this).addClass("active").siblings().removeClass("active");
