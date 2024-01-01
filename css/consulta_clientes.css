@@ -1,0 +1,237 @@
+:root {
+    --rojoOscuro: #A62E44;
+    --rojo: #F20505;
+    --azulOscuro: #1B2440;
+    --azul: #323cff;
+    --Negro: #0D0D0D;
+    --fondo: rgb(0, 0, 21);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+.none{
+    display: none;
+}
+
+.container_consulta{
+    width: 90%;
+    height: 30vh;
+    margin: auto;
+    margin-top: 5vh;
+}
+.contenedor_datos{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.botones{
+    width: 100%;
+    height: 30%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+}
+.button{
+    background-color: rgb(11, 149, 149);
+    color: white;
+    width: 200px;
+    height: 30px;
+    font-size: 16px;
+    float: left;
+    border: none;
+    cursor: pointer;
+}
+/* autcompletado */
+.autoC{
+    position: relative;
+    width: 100%;
+    height: 40px;
+}
+.autocomplete_listClient{
+    background-color: var(--azulOscuro);
+    width: 100%;
+    max-height: 300px;
+    position: absolute;
+    left: 0;
+    top: 40px;
+    list-style: none;
+    overflow:scroll;
+    overflow-x:hidden;
+    z-index: 100;
+}
+
+.autocomplete_listClient li {
+    color: white;
+    padding: 14px;
+    font-size: 12px;
+    font-weight: 600;
+    border-bottom: 1px solid var(--azul);
+    cursor: pointer;
+    z-index: 2000;
+}
+
+.autocomplete_listClient li:hover {
+    color: var(--rojoOscuro);
+}
+
+/* Primer cuadro */
+.encabezado{
+    background-color: var(--azulOscuro);
+    width: 100%;
+    min-height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main_title {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+/* regresar */
+
+.above_all {
+    position: absolute;
+    width: 10%;
+    margin-top: 10px;
+    margin-left: 2%;
+}
+
+.above_all a {
+    text-decoration: none;
+    color: var(--azul);
+    outline: none;
+}
+
+.above_all a h3,
+i { 
+    font-size: 15px;
+    float: left;
+}
+
+.above_all a i {
+    padding-left: 5px;
+}
+
+/* Contenedor */
+.form_box{
+    width: 100%;
+    height: 100%;
+}
+.contenedor{
+    width: 100%;
+    height: 90%;
+    margin: auto;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+/* Sub Contenedor */
+.sub_container{
+    width: 40%;
+    height: 100%;
+    padding-left: 5%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    float: left; 
+}
+
+/* Controles */
+
+.subtitle_input{
+    color: var(--Negro);
+    text-align: left;
+    font-size: 11px;
+    margin-bottom: 10px;
+}
+
+
+.selectors {
+    background-color: #fff;
+    color: var(--Negro);
+    width: 90%;
+    height: 40px;
+    padding-left: 8px;
+    margin-bottom: 20px;
+    font-size: 12px;
+    border: 1px var(--azulOscuro) solid;
+    outline: none;
+}
+.consulta_boxes {
+    background-color: #fff;
+    color: var(--Negro);
+    width: 100%;
+    height: 40px;
+    padding-left: 8px;
+    font-size: 12px;
+    border: 1px var(--azulOscuro) solid;
+    outline: none;
+}
+
+.info_boxes {
+    background-color: #fff;
+    color: var(--Negro);
+    width: 90%;
+    height: 40px;
+    padding-left: 8px;
+    margin-bottom: 20px;
+    font-size: 12px;
+    border: 1px var(--azulOscuro) solid;
+    outline: none;
+}
+.comentario{
+    background-color: #fff;
+    color: var(--Negro);
+    width: 90%;
+    padding-top: 5px;
+    padding-left: 8px;
+    margin-bottom: 20px;
+    font-size: 12px;
+    border: 1px var(--azulOscuro) solid;
+    outline: none;
+}
+
+.send{
+    display: none;
+    background-color: var(--fondo);
+    color: #fff;
+    width: 90%;
+    height: 50px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    font-size: 15px;
+    border: 1px var(--rojoOscuro) solid;
+    outline: none;
+    cursor: pointer;
+}
+
+/* Responsive */
+
+@media (max-width: 1165px) {
+    .above_all h3{
+        display: none;
+    }
+}
+@media (max-width: 1214px) {
+    .form_box{
+        height: auto;
+    }
+    .contenedor{
+        height: auto;
+        display: flex;
+        flex-direction: column;
+    }
+    .sub_container{
+        width: 100%;
+        padding-left: 10%;
+    }
+}

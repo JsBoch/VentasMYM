@@ -30,7 +30,12 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
             <i class='bx bx-log-out'></i>
          </a>
         </div>     
-
+        <div class="encabezado">
+            <h2 class="main_title">
+              Ventas por mes
+            </h2>
+        </div>     
+        <div class="sub_container">
         <label for="sltMesCV" class="subtitle_input">MES</label>
     <select name="sltMesCV" class="selectors" id="sltMesCV">
         <option value="1">ENERO</option>
@@ -48,16 +53,13 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     </select>
     <!-- ASIGNAR FORMATO RESPONSIVE a cliente y ulclienteresult-->
     <input type="button" value="Consultar" class="btnConsultar" id="btnConsultarEC" onclick="ConsultarVentaTotalMes(),ConsultarVentaMes()">
-</div>
-<div class="contenedorTabla">
-<div  class="mitad_1">
+    </div>
+    <div class="total">
 <label for="txtTotalVenta" class="subtitle_parrafo">TOTAL VENTA</label>
     <p id="txtTotalVenta"></p> 
+    </div>
+<div id="contenedorTabla" class="contenedorTabla">
 </div>
-<div id="contenedorTabla" class="mitad_2">
-
-</div>
-
 </div>
   
     <script src="../js/jquery-3.6.0.min.js"></script>

@@ -338,6 +338,7 @@ function GuardarRegistro(consulta) {
       datosGenerales.style.display = "block";
     }
   }
+  GetNumeroRecibo();
 }
 
 function QuitarItemDeLista() {

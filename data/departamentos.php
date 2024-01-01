@@ -37,7 +37,7 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
                 $indice++;
             }
 
-            header('Content-Type: application/json');
+            header('Content-Type: application/json');            
             echo json_encode($return_arr);
             $result->close();
         } else {
@@ -83,6 +83,6 @@ if ($codigoRespuesta !== 1) {
         'codigo_postal' => '0'        
     );
 
-    header('Content-Type: application/json');
+    header('Content-Type: application/json');    
     echo json_encode($return_arr);
 }
