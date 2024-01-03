@@ -23,14 +23,19 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
 
 <body >
 <div class="contenedorTodo">
-                <!-- Boton para regresar al menu -->
-                <div class="above_all">
+    <!-- Boton para regresar al menu -->
+        <div class="above_all">
         <a href="../index.php">
             <h3>Ir al menu</h3>
             <i class='bx bx-log-out'></i>
          </a>
         </div>     
-
+        <div class="encabezado">
+            <h2 class="main_title">
+              Cobro por mes
+            </h2>
+        </div>   
+        <div class="sub_container">
         <label for="sltMesCV" class="subtitle_input">MES</label>
     <select name="sltMesCV" class="selectors" id="sltMesCV">
         <option value="1">ENERO</option>
@@ -48,18 +53,15 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     </select>
     <!-- ASIGNAR FORMATO RESPONSIVE a cliente y ulclienteresult-->
     <input type="button" value="Consultar" class="btnConsultar" id="btnConsultarEC" onclick="ConsultarCobroTotalMes(),ConsultarCobroMes()">
-</div>
-<div class="contenedorTabla">
-<div  class="mitad_1">
-<label for="txtTotalCobro" class="subtitle_parrafo">TOTAL COBRO</label>
+    </div>  
+    <div class="total">
+    <label for="txtTotalCobro" class="subtitle_parrafo">TOTAL COBRO</label>
     <p id="txtTotalCobro"></p> 
-</div>
-<div id="contenedorTabla" class="mitad_2">
+    </div>
 
+<div id="contenedorTabla" class="contenedorTabla">
 </div>
-
 </div>
-  
     <script src="../js/jquery-3.6.0.min.js"></script>
     <script src="../js/alertify.min.js"></script>
     <script src="../js/cobro_mensual.js"></script>

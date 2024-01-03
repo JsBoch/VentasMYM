@@ -23,6 +23,7 @@ foreach ($jsonMain as $item) {
     $observacionesRegistro = $item["observaciones"]; //$jsonMain->observaciones;
     $usuarioID = $_SESSION["usuarioId"];
     $fechaRecibo = $item["fecha"];
+    $empleadoId = $_SESSION["empleadoId"];
 }
 /**
  * Se almacena en la base de datos
@@ -177,6 +178,8 @@ if ($mysqli !== null) {
                         $detalleId++;
                     }
                     //}
+                    $query = "update adm_numeracion_recibos set norecibo = $noRecibo where idvendedor = $empleadoId and estado = 1;";
+                    $mysqli->query($query);
 
                     if ($almacenado) {
                         //se confirma la transacción

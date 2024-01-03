@@ -66,7 +66,7 @@ function CargarDatosCliente()
 function HabilitarEdicionFichaCliente()
 {
     let chkEditar = document.getElementById("checkAvanzado");
-    let bttnModificar = document.getElementById("bttnModificar");
+    let bttnModificar = document.getElementById("btnModificar");
     if (chkEditar.checked) {
         bttnModificar.style.display = 'block';
     }else {

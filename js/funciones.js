@@ -74,25 +74,8 @@ function CalculoSubtotal() {
             document.getElementById("subtotal").value = totalItem;
         }
         
-<<<<<<< HEAD
         sumaTotal += parseFloat(totalItem);        
         sumaTotalInput.value = sumaTotal;
-=======
-        // sumaTotal += parseFloat(totalItem);        
-        
-        // sumaTotalInput.innerHTML = sumaTotal;
-    }
-}
-
-function totalizarPedido(){
-    let sumaTotalInput = document.getElementById("totalGeneral")
-    if (listaDetalle != null) {
-        let total = 0;
-        listaDetalle.forEach(element => {
-           total += parseFloat(element.subtotal);
-        });
-        sumaTotalInput.innerHTML = total;
->>>>>>> 93eb0c7e9ece7c76899409a1cb989e92b4825765
     }
 }
 

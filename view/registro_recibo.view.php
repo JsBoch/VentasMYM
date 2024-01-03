@@ -17,12 +17,21 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../css/alertify.min.css">
+    <link rel="stylesheet" href="../css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="../css/receiptStyles.css">
+    <link rel="stylesheet" href="../css/fixedColumns.dataTables.min.css">
     <link rel="icon" href="../imgs/icono.png">
     <title>Recibo</title>
 </head>
-
-<body onload="listaDepartamentos(),listaBancos()">
+<style>
+    /* Ensure that the demo table scrolls */
+    th, td { white-space: nowrap; }
+    div.dataTables_wrapper {
+        margin: 0 auto;
+    }
+ 
+</style>
+<body onload="listaDepartamentos(),listaBancos(),GetNumeroRecibo()">
     <form id="subContainerDates" class="contenedorPrincipal" action="" method="post">
         <div class="customer_frame">
             <!-- Boton para regresar al menu -->
@@ -33,7 +42,9 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 </a>
             </div>
             <!-- cliente -->
+            <div class="encabezado">
             <h2 class="main_title">Datos Generales</h2>
+            </div>
         <div class="sub_container">
             <label for="fechaInicio" class="subtitle_input">FECHA RECIBO</label>
             <input type="date" name="fecha" id="fecha" class="info_boxes">
@@ -68,15 +79,28 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
         </div>
         <!-- Envios -->
         <div class="box_products">
+            <div class="encabezado">
             <h2 class="main_title">Detalle de Recibo</h2>
+            </div>
             <div class="second_sub_container">
                 <label for="numero_envio" class="subtitle_input">NUMERO DE ENVIO</label>
-                <input type='number' name="numero_envio" class="info_boxes" id="numero_envio" placeholder="ingrese número de envio" autocomplete="off" onblur="ExisteEnvio()">
-                <label for="empresa" class="subtitle_input">EMPRESA</label>
-                <select name="empresa" class="selectors" id="empresa">
-                    <option value="mym">MYM</option>
-                    <option value="sa">SA</option>
-                </select>
+                <!-- tabla -->
+                <div class="contenedor_tabla">
+                <table id="example" class="display stripe row-border order-column">
+                   <thead>
+                       <tr>
+                           <th>No.Envío</th>
+                           <th>Monto</th>
+                           <th>Abono</th>
+                           <th>Saldo</th>
+                           <th>Pago</th>
+                       </tr>
+                    </thead>
+                  <tbody id="cuerpo">
+                   </tbody>
+                </table>
+                </div>
+                <!-- ---------- -->
                 <label for="tipo_pago" class="subtitle_input">TIPO PAGO</label>
                 <select name="tipo_pago" class="selectors" id="tipo_pago">
                     <option value="efectivo">EFECTIVO</option>
@@ -142,6 +166,11 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     <script src="../js/registro_recibo.js"></script>
     <script src="../js/table.js"></script>
     <script src="../js/alertify.min.js"></script>
+    <script src="../js/recibo_numeracion.js"></script>
+    <script src="../js/jquery-3.7.0.js"></script>
+    <script src="..//js/jquery.dataTables.min.js"></script>
+    <script src="../js/dataTables.fixedColumns.min.js"></script>
+    <script src="../js/tablaRecibos.js"></script>
 </body>
 
 </html>
