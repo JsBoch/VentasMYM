@@ -10,7 +10,7 @@ function listaDepartamentos() {
         dataType: 'json',
         success: function (object) {
             // datos = object;
-            // console.log(datos);
+            //console.log(object);
             funcionCualquiera(object);
         }
     });
