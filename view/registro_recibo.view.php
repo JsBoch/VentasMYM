@@ -155,6 +155,21 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 </div>
             </div>
     </form>
+    <div id="modalPago" class="fondo_pagos">
+    <div class="modal_pagos">
+    <i id="modal_x" class='bx bx-x'></i>
+    <h2 class="titulo_pedido">Pago</h2>
+    <div class="cuadros">
+    <label for="saldoModal" class="subtitle_input">SALDO</label>
+        <input type="text" name="saldoModal" class="info_boxes_modal" id="saldoModal" autocomplete="off" readonly>
+    </div>
+    <div class="cuadros">
+    <label for="pagoModal" class="subtitle_input">PAGO</label>
+        <input type="text" name="pagoModal" class="info_boxes_modal" id="pagoModal" autocomplete="off">
+    </div>
+    <button class="btn_confirmar" type="button" onclick="asignarPago()">Confirmar</button>
+  </div>
+    </div>
 
     
     <div class="fondo" id="modal">

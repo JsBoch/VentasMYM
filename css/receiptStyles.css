@@ -33,6 +33,7 @@
     height: 40px;
     margin-bottom: 20px;
 }
+
 /* Primer cuadro */
 .encabezado{
     background-color: var(--azulOscuro);
@@ -102,6 +103,16 @@
     border: 1px var(--azulOscuro) solid;
     outline: none;
 }
+.info_boxes_modal {
+    background-color: #fff;
+    color: var(--Negro);
+    width: 100%;
+    height: 40px;
+    padding-left: 8px;
+    font-size: 12px;
+    border: 1px var(--azulOscuro) solid;
+    outline: none;
+}
 .info_boxes_pareja{
     background-color: #fff;
     color: var(--Negro);
@@ -147,6 +158,14 @@
 .saldo_total h2{
     font-size: 16px;
     font-weight: 200;
+}
+
+.bx-x{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 30px;
+    cursor: pointer;
 }
 /* lista de autocompletado */
 .input_autocomplete{
@@ -258,6 +277,47 @@ i {
     border: 1px var(--rojoOscuro) solid;
     outline: none;
     cursor: pointer;
+}
+.btn_confirmar{
+    background-color: #1B2440;
+    color: white;
+    width: 80%;
+    height: 40px;
+    margin-top: 20px;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 20px;
+    font-size: 18px;
+    text-align: center;
+    border: 1px solid #323cff;
+    cursor: pointer;
+}
+
+.fondo_pagos{
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal_pagos{
+    background-color: white;
+    width: 90%;
+    height: 80%;
+    position: relative;
+}
+
+.cuadros{
+    width: 80%;
+    margin: auto;
+    margin-top: 20px;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 20px;
 }
 
 .fondo{

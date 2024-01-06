@@ -1,5 +1,6 @@
 let table = new DataTable('#example');
 let arrayEnvio = [];
+var filaEnvio;
 
 function GetSaldoCliente(idcliente) {
   let clienteSelect = document.getElementById("cliente");
@@ -94,4 +95,56 @@ function MostrarTable() {
     })
     textoSaldo.innerHTML = formatoMoneda.format(saldoTotal);
   }
+}
+
+
+// Distinción de la fila seleccionada
+
+table.on("click", "tbody tr", (e) => {
+  let classList = e.currentTarget.classList;
+  if (classList.contains("selected")) { 
+    classList.remove("selected");
+  } else {
+    table
+      .rows(".selected")
+      .nodes()
+      .each((row) => row.classList.remove("selected"));
+    classList.add("selected");
+  }
+});
+
+// Abrir modal con la inforamción.
+$('#example tbody').on('click', 'tr', function () {
+  let campoSaldo = document.getElementById("saldoModal");
+  let data = table.row( this ).data();
+  filaEnvio = data[8];
+  document.getElementById("modalPago").style.display = "flex";
+  campoSaldo.value =  data[1];
+} );
+
+document.getElementById("modal_x").addEventListener("click", cerrarModalPago);
+
+function cerrarModalPago() {
+  document.getElementById("modalPago").style.display = "none";
+}
+
+function asignarPago(){
+   let campoPago = document.getElementById("pagoModal").value;
+   let campoSaldo = document.getElementById("saldoModal").value;
+   campoSaldo = campoSaldo.replace("Q","");
+   campoSaldo = campoSaldo.replace(",","");
+   if (campoPago.length == 0 || parseFloat(campoPago) == 0) {
+    alertify.error("Debe ingresar el pago.");
+   }else if(parseFloat(campoPago) > parseFloat(campoSaldo)){
+     alertify.error("El pago no puede ser mayor al saldo");
+   }else{
+    arrayEnvio.forEach(function (item) {
+     if (item.idventa === filaEnvio) {
+      item.pago = campoPago;
+      return;
+     }
+    })
+    MostrarTable();
+   }
+   document.getElementById("modalPago").style.display = "none";
 }
