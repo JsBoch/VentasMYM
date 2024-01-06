@@ -23,10 +23,16 @@
 
 .contenedor_tabla{
     width: 90%;
+    max-height: 185px;
     overflow-y: scroll;
     margin-bottom: 20px;
 }
-
+.input_con_boton{
+    background-color: #323cff;
+    width: 90%;
+    height: 40px;
+    margin-bottom: 20px;
+}
 /* Primer cuadro */
 .encabezado{
     background-color: var(--azulOscuro);
@@ -96,6 +102,26 @@
     border: 1px var(--azulOscuro) solid;
     outline: none;
 }
+.info_boxes_pareja{
+    background-color: #fff;
+    color: var(--Negro);
+    width: 60%;
+    height: 100%;
+    padding-left: 8px;
+    font-size: 12px;
+    border: 1px var(--azulOscuro) solid;
+    outline: none;
+    float: left;
+}
+.boton_pareja{
+    background-color: #1B2440;
+    color: white;
+    width: 40%;
+    height: 100%;
+    font-size: 12px;
+    outline: none;
+    float: left;
+}
 
 .comentario{
     background-color: #fff;
@@ -107,6 +133,20 @@
     font-size: 12px;
     border: 1px var(--azulOscuro) solid;
     outline: none;
+}
+.saldo_total{
+    background-color: #A62E44;
+    color: white;
+    width: 90%;
+    height: 40px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.saldo_total h2{
+    font-size: 16px;
+    font-weight: 200;
 }
 /* lista de autocompletado */
 .input_autocomplete{
@@ -300,12 +340,12 @@ i {
     width: 10%;
     height: 100%;
     margin-left: 10px;
-    font-size: 15px;
     border: 1px var(--Negro) solid;
     outline: none;
     cursor: pointer;
     float: left;
 }
+
 /* fechas */
 
 .query_date {
@@ -392,7 +432,7 @@ i {
 }
 
 .abono_total label{
-   color: white;
+   color: #000;
    margin-top: 10%;
    margin-left: 2%;
 }

@@ -9,27 +9,27 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
 
     $stmt = "";
     if (intval($_SESSION["sucursal"]) == 1) {
-        $stmt = "SELECT " .-+
-            "v.idventa,v.nofactura,s.monto,s.abono,s.saldo,s.fecha,s.fecha_vencimiento,datediff(now(),s.fecha_vencimiento) as dias" . 
+        $stmt = "SELECT " .
+            "v.idventa,v.nofactura,s.monto,s.abono,s.saldo,0 as pago,s.fecha,s.fecha_vencimiento,datediff(now(),s.fecha_vencimiento) as dias " . 
             "from `db_mymsa`.`adm_venta` v " . 
             "join `db_mymsa`.`saldoxcobrar` s on v.idventa = s.idventa " .
-            "where v.estado = 1 and s.estado = 1 and v.id_cliente = 1680 " .
+            "where v.estado = 1 and s.estado = 1 and v.id_cliente = $idCliente " .
             "and s.saldo > 0;";
-    } else if (intval($_SESSION["sucursal"]) == 2) {
+    } else if (intval($_SESSION["sucursal"]) == 2) { //Petén
         $stmt = "SELECT " .
-            "p.codigormym " .
-            "FROM `db_mymsapt`.`adm_producto` p " .
-            "WHERE p.estado = 1 " .
-            "AND trim(p.nombre) = '$producto' " .
-            "group by codigormym;";
+            "v.idventa,v.nofactura,s.monto,s.abono,s.saldo,0 as pago,s.fecha,s.fecha_vencimiento,datediff(now(),s.fecha_vencimiento) as dias " . 
+            "from `db_mymsapt`.`adm_venta` v " . 
+            "join `db_mymsapt`.`saldoxcobrar` s on v.idventa = s.idventa " .
+            "where v.estado = 1 and s.estado = 1 and v.id_cliente = $idCliente " .
+            "and s.saldo > 0;";
     }
-    else if (intval($_SESSION["sucursal"]) == 3) {
+    else if (intval($_SESSION["sucursal"]) == 3) { //Xela
         $stmt = "SELECT " .
-            "p.codigormym " .
-            "FROM `db_mymsaxela`.`adm_producto` p " .
-            "WHERE p.estado = 1 " .
-            "AND trim(p.nombre) = '$producto' " .
-            "group by codigormym;";
+            "v.idventa,v.nofactura,s.monto,s.abono,s.saldo,0 as pago,s.fecha,s.fecha_vencimiento,datediff(now(),s.fecha_vencimiento) as dias " . 
+            "from `db_mymsaxela`.`adm_venta` v " . 
+            "join `db_mymsaxela`.`saldoxcobrar` s on v.idventa = s.idventa " .
+            "where v.estado = 1 and s.estado = 1 and v.id_cliente = $idCliente " .
+            "and s.saldo > 0;";
     }
 
     $result = $mysqli->query($stmt);
@@ -40,7 +40,15 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
             $return_arr = array();
             while ($row = $result->fetch_array()) {
                 $return_arr[$indice] = array(
-                    'codigo' => $row['codigormym'],
+                    'idventa' => $row['idventa'],
+                    'nofactura' => $row['nofactura'],
+                    'monto' => $row['monto'],
+                    'abono' => $row['abono'],
+                    'saldo' => $row['saldo'],
+                    'pago' => $row['pago'],
+                    'fecha' => $row['fecha'],
+                    'fecha_vencimiento' => $row['fecha_vencimiento'],
+                    'dias' => $row['dias'],
                 );
 
                 $indice++;
@@ -80,7 +88,15 @@ if ($codigoRespuesta !== 1) {
     $return_arr = array();
     $indice = 0;
     $return_arr[$indice] = array(
-        'codigo' => $codigoRespuesta,
+        'idventa' => 0,
+                    'nofactura' => $codigoRespuesta,
+                    'monto' => 0,
+                    'abono' => 0,
+                    'saldo' => 0,
+                    'pago' => 0,
+                    'fecha' => '',
+                    'fecha_vencimiento' => '',
+                    'dias' => 0,
     );
 
     echo json_encode($return_arr);

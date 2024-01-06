@@ -90,15 +90,22 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                    <thead>
                        <tr>
                            <th>No.Envío</th>
-                           <th>Monto</th>
-                           <th>Abono</th>
                            <th>Saldo</th>
                            <th>Pago</th>
+                           <th>Monto</th>
+                           <th>Abono</th>
+                           <th>Fecha</th>
+                           <th>Fecha vencimiento</th>
+                           <th>Dias</th>       
+                           <th>Id</th>                    
                        </tr>
                     </thead>
                   <tbody id="cuerpo">
                    </tbody>
                 </table>
+                </div>
+                <div class="saldo_total">
+                    <h2>Saldo total:&nbsp;</h2><h2 id="saldoTotal"></h2>
                 </div>
                 <!-- ---------- -->
                 <label for="tipo_pago" class="subtitle_input">TIPO PAGO</label>
@@ -109,7 +116,10 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                     <option value="transferencia">TRANSFERENCIA</option>
                 </select>
                 <label for="pago" class="subtitle_input">MONTO</label>
-                <input type="number" class="info_boxes" name="pago" id="pago" placeholder="Monto" autocomplete="off">
+                <div class="input_con_boton">
+                <input type="number" class="info_boxes_pareja" name="pago" id="pago" placeholder="Monto" autocomplete="off">
+                <button class="boton_pareja" onclick="desgloceMonto()" type="button">Desglosar</button>
+                </div>
                 <!--Agrego un hidden para almacenar el precio mas bajo de la lista-->
                 <input type="hidden" name="precioMasBajo" id="precioMasBajo" autocomplete="off">
                 <!-- elegir pago  -->
@@ -171,6 +181,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     <script src="..//js/jquery.dataTables.min.js"></script>
     <script src="../js/dataTables.fixedColumns.min.js"></script>
     <script src="../js/tablaRecibos.js"></script>
+    <script src="../js/recibo_cobro_envio.js"></script>
 </body>
 
 </html>
