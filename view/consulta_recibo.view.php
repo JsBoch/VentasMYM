@@ -16,200 +16,87 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="../css/fixedColumns.dataTables.min.css">
     <link rel="stylesheet" href="../css/alertify.min.css">
-    <link rel="stylesheet" href="../css/consultationReceipt.css">
-    <link rel="icon" href="../imgs/logo.png">
+    <link rel="stylesheet" href="../css/consulta_recibo.css">
+    <link rel="icon" href="../imgs/icono.png">
     <title>Recibo</title>
 </head>
 
-<body onload="listaDepartamentosRecibo(),listaBancos()">
-    <div id="subContainerDates" class="sub_container-dates">
-        <!-- Boton para regresar al menu -->
-        <div class="above_all">
-            <a href="../index.php">
-                <h3>Ir al menu</h3>
-                <i class='bx bx-log-out'></i>
-            </a>
-        </div>
-        <div class="query_date">
-            <div class="start_date">
-                <label for="fechaInicio">Fecha Inicio</label>
-                <input type="date" name="fechaInicio" id="fechaInicio">
+<body>
+   <form class="contenedorPrincipal" action="">
+            <!-- Boton para regresar al menu -->
+            <div class="above_all">
+                <a href="../index.php">
+                    <h3>Volver</h3>
+                    <i class='bx bx-log-out'></i>
+                </a>
             </div>
-            <div class="last_date">
-                <label for="fechaFinal">Fecha Final</label>
-                <input type="date" name="fechaFinal" id="fechaFinal">
-            </div>
-            <button type="button" id="bttnConsultar" name="bttnConsultar" onclick="ConsultarRecibos()">Consultar</button>
+            <!-- Datos consulta -->
+       
+        <div class="sub_container">
+
+        <div class="encabezado">
+        <h2 class="main_title">Fecha</h2>
         </div>
-        <div class="orders-product">
-            <div class="orders">
-                <label for="listaPedidos">Recibos</label>
-                <select name="listaPedidos" id="listaPedidos" class="selectors" onchange="ConsultaProductos()"></select>
-            </div>
-            <div class="products">
-                <label for="listaProductos">Envios</label>
-                <select name="listaProductos" id="listaProductos" class="selectors"></select>
-            </div>
+        <div class="contenedor_controles">
+        <label for="anio" class="subtitle_input">AÑO</label>
+            <input type="text" class="info_boxes" id="anio">
+        <label for="sltMes" class="subtitle_input">MES</label>
+            <select name="sltMes" id="sltMes" class="selectors">
+                <option value="enero">Enero</option>
+                <option value="febrero">Febrero</option>
+                <option value="marzo">Marzo</option>
+                <option value="abril">Abril</option>
+                <option value="mayo">Mayo</option>
+                <option value="junio">Junio</option>
+                <option value="julio">Julio</option>
+                <option value="agosto">Agosto</option>
+                <option value="septiembre">Septiembre</option>
+                <option value="octubre">Octubre</option>
+                <option value="noviembre">Noviembre</option>
+                <option value="diciembre">Diciembre</option>
+            </select>
+            <button type="button" class="btn_consulta">Consultar</button>
         </div>
-        <div class="buttons_forDate">
-            <button type="button" id="bttnEditar" name="bttnEditar" onclick="CargaPedidoEdit()">Editar</button>
-            <button type="button" id="bttnEliminar" name="bttnEliminar" onclick="EliminarPedidoEdit()">Eliminar</button>
         </div>
+        
+            <!-- Datos edición -->
+        <div class="second_sub_container">
+        <div class="encabezado">
+        <h2 class="main_title">Detalle de Recibo</h2>
+        </div>
+
+        <div class="contenedor_controles">
+        <div class="contenedor_tabla">
+        <table id="datosRecibos" class="display stripe row-border order-column">
+                   <thead>
+                       <tr>
+                           <th>Serie</th>
+                           <th>No.Recibo</th>
+                           <th>Fecha</th>
+                           <th>Observacion</th>
+                           <th>Estado</th>   
+                           <th>Id</th>                    
+                       </tr>
+                    </thead>
+                  <tbody id="cuerpo">
+                   </tbody>
+                </table>
+        </div>
+        
+        </div>    
     </div>
-    <form id="subContainerDatesAll" action="" method="post">
-
-        <div class="customer_frame">
-            <!-- cliente -->
-            <h2 class="main_title">Datos Generales</h2>
-            <!--Fecha de recibo     -->
-            <!--end fecha recibo-->
-            <div class="sub_container">
-                <div class="first_half">
-                    <label for="fecha" class="subtitle_input">FECHA RECIBO</label>
-                    <input type="date" name="fecha" id="fecha" class="info_boxes">
-                    <label for="serie_recibo" class="subtitle_input">SERIE RECIBO</label>
-                    <input type="text" class="info_boxes" id="serie_recibo" style="text-transform: uppercase;">
-                    <label for="numero_recibo" class="subtitle_input">NUMERO DE RECIBO</label>
-                    <input type='number' name="numero_recibo" class="info_boxes" id="numero_recibo" placeholder="ingrese número de recibo" autocomplete="off">
-                    <!--MARCA para saber que un recibo está anulado-->
-                    <div class="checkbox_cajaRural">
-                        <div class="text_edit">
-                            <h3 class="edit">ANULADO</h3>
-                        </div>
-                        <div class="checkbox-JASoft">
-                            <input type="checkbox" id="checkAnulado" name="checkAvanzado">
-                            <label for="checkAnulado">TEXTO QUE NO DEBERÍA VERSE</label>
-                        </div>
-                    </div>
-                    <!--*******************************************-->
-                    <label for="departamento" class="subtitle_input">DEPARTAMENTO</label>
-                    <select name="departamento" class="selectors" id="departamento" onchange="listaClientes()"></select>
-                    <!--<select name="cliente" class="selectors" id="cliente"></select>-->
-                </div>
-                <div class="second_half">
-                    <!-- ASIGNAR FORMATO RESPONSIVE a cliente y ulclienteresult-->
-                    <label for="cliente" class="subtitle_input">CLIENTE</label>
-                    <select name="cliente" class="selectors" id="cliente"></select>
-                    <ul id="ulclienteresult" class="autocomplete_listClient"></ul>
-                    <label for="sltSemana" class="subtitle_input">SEMANA</label>
-                    <select name="sltSemana" id="sltSemana" class="selector">
-                        <option value="SEMANA 1">SEMANA 1</option>
-                        <option value="SEMANA 2">SEMANA 2</option>
-                        <option value="SEMANA 3">SEMANA 3</option>
-                        <option value="SEMANA 4">SEMANA 4</option>
-                        <option value="SEMANA 5">SEMANA 5</option>
-                    </select>
-                    <label for="observaciones_producto" class="subtitle_input">OBSERVACIONES</label>
-                    <textarea name="observaciones" class="comments" id="observaciones" cols="119" rows="5"></textarea>
-                </div>
-            </div>
-        </div>
-        <!-- envíos -->
-        <div class="box_products">
-            <h2 class="main_title">Detalle de Recibo</h2>
-            <d class="second_sub_container">
-                <label for="numero_envio" class="subtitle_input">NUMERO DE ENVIO</label>
-                <input type='number' name="numero_envio" class="info_boxes" id="numero_envio" placeholder="ingrese número de envio" autocomplete="off">
-                <label for="empresa" class="subtitle_input">EMPRESA</label>
-                <select name="empresa" class="selector" id="empresa">
-                    <option value="mym">MYM</option>
-                    <option value="sa">SA</option>
-                </select>
-                <label for="tipo_pago" class="subtitle_input">TIPO PAGO</label>
-                <select name="tipo_pago" class="selector" id="tipo_pago">
-                    <option value="efectivo">EFECTIVO</option>
-                    <option value="cheque">CHEQUE</option>
-                    <option value="deposito">DEPOSITO</option>
-                    <option value="transferencia">TRANSFERENCIA</option>
-                </select>
-                <label for="pago" class="subtitle_input">MONTO</label>
-                <input type="number" class="info_boxes" name="pago" id="pago" placeholder="Monto" autocomplete="off">
-                <!--Agrego un hidden para almacenar el precio mas bajo de la lista-->
-                <input type="hidden" name="precioMasBajo" id="precioMasBajo" autocomplete="off">
-                <!-- elegir pago  -->
-                <label for="forma-de-pago" class="subtitle_input">MONTO FACTURA</label>
-                <div class="abono_total" id="forma-de-pago">
-                    <input type="radio" id="abono_seleccionado" name="forma_pago" value="abono">
-                    <label for="abono_seleccionado" class="abono_texto">Abono</label>
-                    <input type="radio" id="total_seleccionado" name="forma_pago" value="total" checked>
-                    <label for="total_seleccionado">Total</label>
-                </div>
-
-                <label for="banco" class="subtitle_input">BANCO</label>
-                <select name="banco" class="selector" id="banco"></select>
-                <label for="numero_deposito" class="subtitle_input">NUMERO DEPOSITO</label>
-                <input type="text" name="numero_deposito" class="info_boxes" id="numero_deposito" placeholder="Número de deposito" autocomplete="off">
-                <label for="numero_cheque" class="subtitle_input">NUMERO CHEQUE</label>
-                <input type="text" name="numero_cheque" class="info_boxes" id="numero_cheque" placeholder="Número de cheque" autocomplete="off">
-                <!--marca si es cheque prefechado-->
-                <div class="checkbox_cajaRural">
-                    <div class="text_edit">
-                        <h3 class="edit">Pre-fechado</h3>
-                    </div>
-                    <div class="checkbox-JASoft">
-                        <input type="checkbox" id="chkPrefechado" name="chkPrefechado">
-                        <label for="chkPrefechado">CHEQUE PRE-FECHADO</label>
-                    </div>
-                </div>
-                <!--end prefechado-->
-                <!--Fecha de cobro-->
-                <label for="fechaCobroCheque" class="subtitle_input">FECHA COBRO</label>
-                <input type="date" name="fechaCobroCheque" id="fechaCobroCheque" class="info_boxes">
-                <!--end fecha cobro-->
-                <!--Comentario cheque-->
-                <label for="comentarioCheque" class="subtitle_input">OBSERVACIONES CHEQUE</label>
-                <div class="comentario">
-                    <textarea name="comentarioCheque" class="comments" id="comentarioCheque" cols="30" rows="5"></textarea>
-                </div>
-                <!--end comentario cheque-->
-
-                <div class="checkbox_cajaRural">
-                    <div class="text_edit">
-                        <h3 class="edit">Caja rural</h3>
-                    </div>
-                    <div class="checkbox-JASoft">
-                        <input type="checkbox" id="checkAvanzado" name="checkAvanzado">
-                        <label for="checkAvanzado">TEXTO QUE NO DEBERÍA VERSE</label>
-                    </div>
-                </div>
-                <!-- segundo checkbox -->
-                <div class="checkbox_cajaRural">
-                    <div class="text_edit">
-                        <h3 class="edit">Compra contado</h3>
-                    </div>
-                    <div class="checkbox-JASoft">
-                        <input type="checkbox" id="checkAvanzadoDos" name="checkAvanzado">
-                        <label for="checkAvanzadoDos">TEXTO QUE NO DEBERÍA VERSE</label>
-                    </div>
-                </div>
-
-                <label for="observaciones_producto" class="subtitle_input" style="margin-top: -50px;">OBSERVACIONES</label>
-                <div class="comentario">
-                    <textarea name="observaciones_producto" class="comments" id="observaciones_producto" cols="30" rows="5"></textarea>
-                </div>
-                <button class="add" onclick="cargarDetalle()" type="button">Agregar</button>
-                <button class="see" onclick="seeOrder('subContainerDatesAll')" type="button">Ver recibo</button>
-        </div>
-        </div>
-    </form>
-
-    <div id="main-container">
-        <select name="listado" id="listado" class="product_selector"></select>
-        <button type="button" id="quitarRegistro" class="button_removeRegistry" name="quitarRegistro" onclick="QuitarItemDeLista()">Quitar recibo</button>
-    </div>
-    <button class="add_more" onclick="backToOrders('subContainerDatesAll')" type="button" id="shopping_cart">Agregar más</button>
-    <a class="link_guardar" href="#subContainerDatesAll">
-        <button class="save" type="button" id="send_order" onclick="GuardarRegistro('S')">Guardar</button>
-    </a>
-
-    <script src="../js/jquery-3.6.0.min.js"></script>
-    <script src="../js/listas_pedido.js"></script>
-    <script src="../js/lista_bancos.js"></script>
-    <script src="../js/registro_recibo.js"></script>
-    <script src="../js/table.js"></script>
-    <script src="../js/alertify.min.js"></script>
-    <script src="../js/consulta_recibo.js"></script>
+   </form>
+    <!--Una versión reciente-->
+   <script src="../js/jquery-3.7.0.js"></script>
+    <!--Habilita el uso de tablas (grids) con funciones específicas (externo)-->
+    <script src="..//js/jquery.dataTables.min.js"></script>
+    <!--Complemento del anterior-->
+    <script src="../js/dataTables.fixedColumns.min.js"></script>
+    <!--Datos para las tablas de este archivo en especifico-->
+    <script src="../js/tablaRecibosConsulta.js"></script>
 </body>
 
 </html>
