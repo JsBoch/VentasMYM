@@ -14,170 +14,170 @@ $(document).ready(function () {
   $("#fechaCobroCheque").val(today);
 });
 
-function cargarDetalle() {
-  let numeroEnvio = document.getElementById("numero_envio").value;
-  var selectEmpresa = document.getElementById("empresa");
-  var empresa = selectEmpresa.options[selectEmpresa.selectedIndex].text;
-  var selectTipoPago = document.getElementById("tipo_pago");
-  var tiopPago = selectTipoPago.options[selectTipoPago.selectedIndex].text;
-  let pago = document.getElementById("pago").value;
-  var radios = document.getElementsByName("forma_pago");
-  var valorRadio = "";
-  let radioValor = "";
-  for (var radio of radios) {
-    if (radio.checked) {
-      radioValor = radio.value;
-    }
-  } if (radioValor == "total") {
-    valorRadio = "S";
-  } else {
-    valorRadio = "N";
-  }
+// function cargarDetalle() {
+//   let numeroEnvio = document.getElementById("numero_envio").value;
+//   var selectEmpresa = "SA"; //document.getElementById("empresa");
+//   var empresa = selectEmpresa.options[selectEmpresa.selectedIndex].text;
+//   var selectTipoPago = document.getElementById("tipo_pago");
+//   var tiopPago = selectTipoPago.options[selectTipoPago.selectedIndex].text;
+//   let pago = document.getElementById("pago").value;
+//   var radios = document.getElementsByName("forma_pago");
+//   var valorRadio = "";
+//   let radioValor = "";
+//   for (var radio of radios) {
+//     if (radio.checked) {
+//       radioValor = radio.value;
+//     }
+//   } if (radioValor == "total") {
+//     valorRadio = "S";
+//   } else {
+//     valorRadio = "N";
+//   }
 
-  let radioSeleccionado = radioValor;
-  var selectBanco = document.getElementById("banco");
-  var banco = selectBanco.options[selectBanco.selectedIndex].text;
-  let numeroDeposito = document.getElementById("numero_deposito").value;
-  let numeroCheque = document.getElementById("numero_cheque").value;
-  let fechaCobroCheque = document.getElementById("fechaCobroCheque").value;
-  let comentarioCheque = document.getElementById("comentarioCheque").value;
-  let checkboxCajaRural = document.getElementById("checkAvanzado");
-  let chkPrefechado = document.getElementById("chkPrefechado");
-  let chkAnulado = document.getElementById("checkAnulado");
+//   let radioSeleccionado = radioValor;
+//   var selectBanco = document.getElementById("banco");
+//   var banco = selectBanco.options[selectBanco.selectedIndex].text;
+//   let numeroDeposito = document.getElementById("numero_deposito").value;
+//   let numeroCheque = document.getElementById("numero_cheque").value;
+//   let fechaCobroCheque = document.getElementById("fechaCobroCheque").value;
+//   let comentarioCheque = document.getElementById("comentarioCheque").value;
+//   let checkboxCajaRural = document.getElementById("checkAvanzado");
+//   let chkPrefechado = document.getElementById("chkPrefechado");
+//   let chkAnulado = document.getElementById("checkAnulado");
 
-  let checkboxCRValor = "";
-  if (checkboxCajaRural.checked == true) {
-    checkboxCRValor = "S";
-  } else {
-    checkboxCRValor = "N";
-  }
-  let prefechado = "";
-  if (chkPrefechado.checked == true) {
-    prefechado = "S";
-  }
-  else {
-    prefechado = "N";
-  }
+//   let checkboxCRValor = "";
+//   if (checkboxCajaRural.checked == true) {
+//     checkboxCRValor = "S";
+//   } else {
+//     checkboxCRValor = "N";
+//   }
+//   let prefechado = "";
+//   if (chkPrefechado.checked == true) {
+//     prefechado = "S";
+//   }
+//   else {
+//     prefechado = "N";
+//   }
 
-  let checkboxCompraContado = document.getElementById("checkAvanzadoDos");
-  let checkboxCCValor = "";
-  if (checkboxCompraContado.checked == true) {
-    checkboxCCValor = "S";
-  } else {
-    checkboxCCValor = "N";
-  }
-
-
-  let observacionesProducto = document.getElementById("observaciones_producto").value;
+//   let checkboxCompraContado = document.getElementById("checkAvanzadoDos");
+//   let checkboxCCValor = "";
+//   if (checkboxCompraContado.checked == true) {
+//     checkboxCCValor = "S";
+//   } else {
+//     checkboxCCValor = "N";
+//   }
 
 
-  if (chkAnulado.checked != true) {
-    //   VALIDACIONES
+//   let observacionesProducto = document.getElementById("observaciones_producto").value;
 
-    // ---
 
-    //   if (producto.toString().length == 0) {
-    //     alertify.error("Debe ingresar un nombre de producto válido");
-    //     return;
-    //   }
-    if (numeroEnvio.toString().length == 0 || parseFloat(numeroEnvio) == 0) {
-      alertify.error("Debe ingresar el número de envio.");
-      return;
-    }
+//   if (chkAnulado.checked != true) {
+//     //   VALIDACIONES
 
-    if (pago.toString().length == 0 || parseFloat(pago) == 0) {
-      alertify.error("Debe ingresar el monto.");
-      return;
-    }
+//     // ---
 
-    // ---
+//     //   if (producto.toString().length == 0) {
+//     //     alertify.error("Debe ingresar un nombre de producto válido");
+//     //     return;
+//     //   }
+//     if (numeroEnvio.toString().length == 0 || parseFloat(numeroEnvio) == 0) {
+//       alertify.error("Debe ingresar el número de envio.");
+//       return;
+//     }
 
-    let existe = false;
-    if (listaDetalle.length > 0) {
-      listaDetalle.forEach(function (row) {
-        let item = JSON.parse(JSON.stringify(row));
+//     if (pago.toString().length == 0 || parseFloat(pago) == 0) {
+//       alertify.error("Debe ingresar el monto.");
+//       return;
+//     }
 
-        if (item.numeroEnvio === numeroEnvio) {
-          existe = true;
-        }
-      });
+//     // ---
 
-      if (existe) {
-        alertify.error("El número de envio ya está agregado a la lista.");
-        return;
-      }
-    }
-  }
-  var jsonString = {
-    no_envio: numeroEnvio,
-    no_deposito: numeroDeposito,
-    caja_rural: checkboxCRValor,
-    compra_contado: checkboxCCValor,
-    empresa: empresa,
-    no_cheque: numeroCheque,
-    tipo_pago: tiopPago,
-    pago: pago,
-    pago_total: valorRadio,
-    observaciones: observacionesProducto,
-    banco: banco,
-    prefechado: prefechado,
-    fecha_cobro: fechaCobroCheque,
-    comentario_cheque: comentarioCheque
-  };
+//     let existe = false;
+//     if (listaDetalle.length > 0) {
+//       listaDetalle.forEach(function (row) {
+//         let item = JSON.parse(JSON.stringify(row));
 
-  listaDetalle.push(jsonString);
-  // console.log(item);
+//         if (item.numeroEnvio === numeroEnvio) {
+//           existe = true;
+//         }
+//       });
 
-  let item =
-    "Envio: " +
-    numeroEnvio +
-    " Monto: " +
-    pago +
-    "Observaciones: " +
-    observacionesProducto;
+//       if (existe) {
+//         alertify.error("El número de envio ya está agregado a la lista.");
+//         return;
+//       }
+//     }
+//   }
+//   var jsonString = {
+//     no_envio: numeroEnvio,
+//     no_deposito: numeroDeposito,
+//     caja_rural: checkboxCRValor,
+//     compra_contado: checkboxCCValor,
+//     empresa: empresa,
+//     no_cheque: numeroCheque,
+//     tipo_pago: tiopPago,
+//     pago: pago,
+//     pago_total: valorRadio,
+//     observaciones: observacionesProducto,
+//     banco: banco,
+//     prefechado: prefechado,
+//     fecha_cobro: fechaCobroCheque,
+//     comentario_cheque: comentarioCheque
+//   };
 
-  var $select = $("#listado");
-  $select.append("<option value=" + numeroEnvio + ">" + item + "</option>");
-  //console.log(listaDetalle);
+//   listaDetalle.push(jsonString);
+//   // console.log(item);
 
-  /*var detalle = [{
-       "codigo_producto": "MF-315-K",
-       "nombre_producto": "PRODUCTO DE PRUEBA MF",
-       "cantidad": 2,
-       "tipoprecio": "venta",
-       "precio": 23.30,
-       "subtotal": 46.60,
-       "observaciones": "primer registro de prueba"
-   },
-   {
-       "codigo_producto": "MF-135-K",
-       "nombre_producto": "PRODUCTO DOS MF",
-       "cantidad": 3,
-       "tipoprecio": "venta",
-       "precio": 50.00,
-       "subtotal": 150.00,
-       "observaciones": "segundo registro de prueba"
-   }];*/
+//   let item =
+//     "Envio: " +
+//     numeroEnvio +
+//     " Monto: " +
+//     pago +
+//     "Observaciones: " +
+//     observacionesProducto;
 
-  /**
-   * Se carga el listado de clientes
-   */
+//   var $select = $("#listado");
+//   $select.append("<option value=" + numeroEnvio + ">" + item + "</option>");
+//   //console.log(listaDetalle);
 
-  document.getElementById("numero_envio").value = "";
-  document.getElementById("pago").value = "";
-  document.getElementById("numero_deposito").value = "";
-  document.getElementById("numero_cheque").value = "";
-  document.getElementById("observaciones_producto").value = "";
-  chkPrefechado.checked = false;
-  checkboxCajaRural.checked = false;
-  checkboxCompraContado.checked == false;
-  var now = new Date();
-  var day = ("0" + now.getDate()).slice(-2);
-  var month = ("0" + (now.getMonth() + 1)).slice(-2);
-  var today = now.getFullYear() + "-" + month + "-" + day;
-  document.getElementById("fechaCobroCheque").value = today;
-  document.getElementById("comentarioCheque").value = "";
-}
+//   /*var detalle = [{
+//        "codigo_producto": "MF-315-K",
+//        "nombre_producto": "PRODUCTO DE PRUEBA MF",
+//        "cantidad": 2,
+//        "tipoprecio": "venta",
+//        "precio": 23.30,
+//        "subtotal": 46.60,
+//        "observaciones": "primer registro de prueba"
+//    },
+//    {
+//        "codigo_producto": "MF-135-K",
+//        "nombre_producto": "PRODUCTO DOS MF",
+//        "cantidad": 3,
+//        "tipoprecio": "venta",
+//        "precio": 50.00,
+//        "subtotal": 150.00,
+//        "observaciones": "segundo registro de prueba"
+//    }];*/
+
+//   /**
+//    * Se carga el listado de clientes
+//    */
+
+//   document.getElementById("numero_envio").value = "";
+//   document.getElementById("pago").value = "";
+//   document.getElementById("numero_deposito").value = "";
+//   document.getElementById("numero_cheque").value = "";
+//   document.getElementById("observaciones_producto").value = "";
+//   chkPrefechado.checked = false;
+//   checkboxCajaRural.checked = false;
+//   checkboxCompraContado.checked == false;
+//   var now = new Date();
+//   var day = ("0" + now.getDate()).slice(-2);
+//   var month = ("0" + (now.getMonth() + 1)).slice(-2);
+//   var today = now.getFullYear() + "-" + month + "-" + day;
+//   document.getElementById("fechaCobroCheque").value = today;
+//   document.getElementById("comentarioCheque").value = "";
+// }
 
 function GuardarRegistro(consulta) {
   let idRecibo = 0;
@@ -193,7 +193,7 @@ function GuardarRegistro(consulta) {
   else {
     clienteId = clienteSelect.dataset.id;
   }
-  
+
   /**
    * validación para guardar un recibo anulado si la casilla correspondiente
    * esta marcada.
@@ -213,14 +213,10 @@ function GuardarRegistro(consulta) {
       serieRecibo.focus();
       return;
     }
-
-    if (listaDetalle.length == 0) {
-      alertify.error("Debe asignar productos a la lista.");
-      return;
-    }
+   
   }
 
-  
+
   let numeroRecibo = document.getElementById("numero_recibo").value;
   let nombreCliente = "";
   if (idRecibo > 0) {
@@ -230,8 +226,7 @@ function GuardarRegistro(consulta) {
     nombreCliente = document.getElementById("cliente").value;
   }
 
-  if(chkAnulado.checked == true)
-  {
+  if (chkAnulado.checked == true) {
     nombreCliente = "ANULADO";
   }
 
@@ -247,30 +242,113 @@ function GuardarRegistro(consulta) {
   fechaRecibo = fechaRecibo.toString().replace(/-/gi, "");
 
   let cobro = 0;
-  listaDetalle.forEach(element => {
-    // let jsonItem = JSON.parse(element);
-    cobro = parseFloat(cobro) + parseFloat(element.pago);
-  });
-  var principal = new Array();
+  // listaDetalle.forEach(element => {
+  //   // let jsonItem = JSON.parse(element);
+  //   cobro = parseFloat(cobro) + parseFloat(element.pago);
+  // });
+   var principal = new Array();
   //var detalle = [];
 
-  principal.push({
-    serie_recibo: serieRecibo,
-    no_recibo: numeroRecibo,
-    id_cliente: clienteId,
-    nombre_cliente: nombreCliente,
-    cobro: cobro,
-    semana: semana,
-    observaciones: observaciones,
-    fecha: fechaRecibo
-  });
+ 
+
+/**
+ * Registro del detalle nueva versión
+ */
+if (arrayEnvio.length > 0) {
+
+  let checkboxCajaRural = document.getElementById("checkAvanzado");
+  let chkPrefechado = document.getElementById("chkPrefechado");
+  let chkAnulado = document.getElementById("checkAnulado");
+  let checkboxCompraContado = document.getElementById("checkAvanzadoDos");
+  let selectBanco = document.getElementById("banco");
+  let banco = selectBanco.options[selectBanco.selectedIndex].text;
+  let selectTipoPago = document.getElementById("tipo_pago");
+  let tiopPago = selectTipoPago.options[selectTipoPago.selectedIndex].text;
+  let numeroDeposito = document.getElementById("numero_deposito").value;
+  let numeroCheque = document.getElementById("numero_cheque").value;
+  let fechaCobroCheque = document.getElementById("fechaCobroCheque").value;
+  let comentarioCheque = document.getElementById("comentarioCheque").value;
+  let observacionesProducto = document.getElementById("observaciones_producto").value;
+
+  //Caja rural
+  let checkboxCRValor = "";
+  if (checkboxCajaRural.checked == true) {
+    checkboxCRValor = "S";
+  } else {
+    checkboxCRValor = "N";
+  }
+  let prefechado = "";
+  if (chkPrefechado.checked == true) {
+    prefechado = "S";
+  }
+  else {
+    prefechado = "N";
+  }
+
+  //compra contado
+  // let checkboxCCValor = "";
+  // if (checkboxCompraContado.checked == true) {
+  //   checkboxCCValor = "S";
+  // } else {
+  //   checkboxCCValor = "N";
+  // }
+
+  arrayEnvio.forEach(function (item) {
+
+    //se crea un registro json solo con los registros que tiene pago asignado
+    if (parseFloat(item.pago) > 0) {
+      let pagoTotal = "N";
+      if(parseFloat(item.saldo) == parseFloat(item.pago)){
+          pagoTotal = "S";
+      }
+      cobro = parseFloat(cobro) + parseFloat(item.pago);
+      var jsonString = {
+        no_envio: item.nofactura,
+        no_deposito: numeroDeposito,
+        caja_rural: checkboxCRValor,
+        compra_contado: "N",
+        empresa: "SA",
+        no_cheque: numeroCheque,
+        tipo_pago: tiopPago,
+        pago: item.pago,          
+        pago_total: pagoTotal,
+        observaciones: observacionesProducto,
+        banco: banco,
+        prefechado: prefechado,
+        fecha_cobro: fechaCobroCheque,
+        comentario_cheque: comentarioCheque,
+        monto: item.monto,
+        abono: item.abono,
+        saldo: item.saldo
+      };
+
+      listaDetalle.push(jsonString);        
+    }
+  })
+}
+else {  
+    alertify.error("Debe asignar productos a la lista.");
+    return;  
+}
+//***************************************** */
+
+principal.push({
+  serie_recibo: serieRecibo,
+  no_recibo: numeroRecibo,
+  id_cliente: clienteId,
+  nombre_cliente: nombreCliente,
+  cobro: cobro,
+  semana: semana,
+  observaciones: observaciones,
+  fecha: fechaRecibo
+});
 
   var data1 = JSON.stringify(principal);
   var data2 = JSON.stringify(listaDetalle);
 
   let codigoRespuesta;
   let reciboId;
-  
+
   $.ajax({
     url: "../data/registro_recibo.php",
     dataType: 'json',
@@ -281,7 +359,7 @@ function GuardarRegistro(consulta) {
       id_recibo: idRecibo,
     },
     success: function (object) {
-      $.each(object, function (i, respuesta) {        
+      $.each(object, function (i, respuesta) {
         codigoRespuesta = respuesta.codigo;
         reciboId = respuesta.id_recibo;
       });
@@ -329,6 +407,7 @@ function GuardarRegistro(consulta) {
   let $selectListado = $("#listado");
   $selectListado.empty();
   listaDetalle = new Array();
+  table.clear().draw();
   if (agregarAlPedido.style.display == "block") {
     contenderoTabal.style.display = "none";
     agregarAlPedido.style.display = "none";
@@ -338,6 +417,7 @@ function GuardarRegistro(consulta) {
       datosGenerales.style.display = "block";
     }
   }
+
   GetNumeroRecibo();
 }
 
@@ -408,7 +488,7 @@ function ExisteRecibo() {
       url: '../data/validar_existencia_recibo.php',
       dataType: 'json',
       type: 'post',
-      data: {"no_recibo":noRecibo,"serie_recibo":serieRecibo},
+      data: { "no_recibo": noRecibo, "serie_recibo": serieRecibo },
       success: function (object) {
         $.each(object, function (i, resultado) {
           cantidad = resultado.cantidad;
@@ -440,7 +520,7 @@ function ExisteNoDeposito() {
   if (noDeposito.length > 0) {
     let cantidad = 0;
     let numeroRecibo;
-    let datos = { "no_deposito": noDeposito,"banco":banco }
+    let datos = { "no_deposito": noDeposito, "banco": banco }
     $.ajax({
       url: '../data/validar_existencia_deposito.php',
       dataType: 'json',
@@ -472,12 +552,12 @@ function ExisteNoDeposito() {
  * con el número de envío que el usuario ha ingresado.
  */
 function ExisteEnvio() {
-  const noRecibo = document.getElementById('numero_recibo').value;  
+  const noRecibo = document.getElementById('numero_recibo').value;
   const noEnvio = document.getElementById('numero_envio').value;
-  
+
   if (noEnvio.length > 0 && parseInt(noEnvio) > 0) {
     let cantidad = 0;
-    let datos = { "no_envio": noEnvio,"no_recibo":noRecibo }
+    let datos = { "no_envio": noEnvio, "no_recibo": noRecibo }
     $.ajax({
       url: '../data/validar_existencia_envio.php',
       dataType: 'json',
@@ -502,3 +582,78 @@ function ExisteEnvio() {
     });
   }
 }
+
+/**
+ * Esta función toma los registros de la tabla de envíos y genera el array
+ * que se guardará con los datos de las filas que tienen pago asignado
+ */
+// function RegistroDetalleRecibo() {
+//   if (arrayEnvio.length > 0) {
+
+//     let checkboxCajaRural = document.getElementById("checkAvanzado");
+//     let chkPrefechado = document.getElementById("chkPrefechado");
+//     let chkAnulado = document.getElementById("checkAnulado");
+//     let checkboxCompraContado = document.getElementById("checkAvanzadoDos");
+//     let selectBanco = document.getElementById("banco");
+//     let banco = selectBanco.options[selectBanco.selectedIndex].text;
+//     let selectTipoPago = document.getElementById("tipo_pago");
+//     let tiopPago = selectTipoPago.options[selectTipoPago.selectedIndex].text;
+//     let numeroDeposito = document.getElementById("numero_deposito").value;
+//     let numeroCheque = document.getElementById("numero_cheque").value;
+//     let fechaCobroCheque = document.getElementById("fechaCobroCheque").value;
+//     let comentarioCheque = document.getElementById("comentarioCheque").value;
+//     let observacionesProducto = document.getElementById("observaciones_producto").value;
+
+//     //Caja rural
+//     let checkboxCRValor = "";
+//     if (checkboxCajaRural.checked == true) {
+//       checkboxCRValor = "S";
+//     } else {
+//       checkboxCRValor = "N";
+//     }
+//     let prefechado = "";
+//     if (chkPrefechado.checked == true) {
+//       prefechado = "S";
+//     }
+//     else {
+//       prefechado = "N";
+//     }
+
+//     //compra contado
+//     let checkboxCCValor = "";
+//     if (checkboxCompraContado.checked == true) {
+//       checkboxCCValor = "S";
+//     } else {
+//       checkboxCCValor = "N";
+//     }
+
+//     arrayEnvio.forEach(function (item) {
+
+//       //se crea un registro json solo con los registros que tiene pago asignado
+//       if (parseFloat(item.pago) > 0) {
+//         let pagoTotal = "N";
+//         if(parseFloat(item.saldo) == parseFloat(item.pago)){
+//             pagoTotal = "S";
+//         }
+//         var jsonString = {
+//           no_envio: item.nofactura,
+//           no_deposito: numeroDeposito,
+//           caja_rural: checkboxCRValor,
+//           compra_contado: checkboxCCValor,
+//           empresa: "SA",
+//           no_cheque: numeroCheque,
+//           tipo_pago: tiopPago,
+//           pago: item.pago,          
+//           pago_total: pagoTotal,
+//           observaciones: observacionesProducto,
+//           banco: banco,
+//           prefechado: prefechado,
+//           fecha_cobro: fechaCobroCheque,
+//           comentario_cheque: comentarioCheque
+//         };
+
+//         listaDetalle.push(jsonString);        
+//       }
+//     })
+//   }
+// }

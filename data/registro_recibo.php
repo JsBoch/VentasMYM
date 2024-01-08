@@ -135,12 +135,12 @@ if ($mysqli !== null) {
                     "prefechado,".
                     "fecha_cobro,".  
                     "cobrado,". 
-                    "comentario_cheque) " .
-                    " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);")) {
+                    "comentario_cheque,monto,abono,saldo) " .
+                    " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);")) {
                     $codigoRespuesta = -4; //fallo al preparar la consulta de detalle
 
-                } else if (!$stmtd->bind_param("iiiisssssdssissssss", $detalleId, $reciboId, $ventaID, $noEnvio,
-                    $noDeposito, $cajaRural, $empresa, $noCheque, $tipoPago, $pago,$pagoTotal,$observaciones,$estado,$banco,$compraContado,$preFechado,$fechaCobro,$cobrado,$comentarioCheque)) {
+                } else if (!$stmtd->bind_param("iiiisssssdssissssssddd", $detalleId, $reciboId, $ventaID, $noEnvio,
+                    $noDeposito, $cajaRural, $empresa, $noCheque, $tipoPago, $pago,$pagoTotal,$observaciones,$estado,$banco,$compraContado,$preFechado,$fechaCobro,$cobrado,$comentarioCheque,$montoEnvio,$abonoEnvio,$saldoEnvio)) {
                     $codigoRespuesta = -5; //no se pudieron vincular los parámetros a la consulta detalle
                 } else {
                     /**
@@ -168,6 +168,9 @@ if ($mysqli !== null) {
                         $fechaCobro = $arr["fecha_cobro"];
                         $cobrado = "N";
                         $comentarioCheque = $arr["comentario_cheque"];
+                        $montoEnvio = $arr['monto'];
+                        $abonoEnvio = $arr['abono'];
+                        $saldoEnvio = $arr['saldo'];
 
 
                         if (!$stmtd->execute()) {

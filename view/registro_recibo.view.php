@@ -123,13 +123,13 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 <!--Agrego un hidden para almacenar el precio mas bajo de la lista-->
                 <input type="hidden" name="precioMasBajo" id="precioMasBajo" autocomplete="off">
                 <!-- elegir pago  -->
-                <label for="forma-de-pago" class="subtitle_input">MONTO FACTURA</label>
+                <!--<label for="forma-de-pago" class="subtitle_input">MONTO FACTURA</label>
                 <div class="abono_total" id="forma-de-pago">
                 <input type="radio" id="abono_seleccionado" name="forma_pago" value="abono">
                 <label for="abono_seleccionado" class="abono_texto">Abono</label>
                 <input type="radio" id="total_seleccionado" name="forma_pago" value="total" checked>
                 <label for="total_seleccionado">Total</label>
-                </div>
+                </div>-->
                 <label for="banco" class="subtitle_input">BANCO</label>
                 <select name="banco" class="selectors" id="banco"></select>
                 <label for="numero_deposito" class="subtitle_input">NUMERO DEPOSITO</label>
@@ -146,12 +146,12 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 <textarea name="comentarioCheque" class="comentario" id="comentarioCheque" cols="30" rows="5"></textarea>
                 <label for="checkAvanzado" class="subtitle_input">CAJA RURAL</label>
                 <input type="checkbox" id="checkAvanzado" name="checkAvanzado">
-                <label for="checkAvanzadoDos" class="subtitle_input">COMPRA CONTADO</label>
-                <input type="checkbox" id="checkAvanzadoDos" name="checkAvanzado">
+                <!--<label for="checkAvanzadoDos" class="subtitle_input">COMPRA CONTADO</label>
+                <input type="checkbox" id="checkAvanzadoDos" name="checkAvanzado">-->
                 <label for="observaciones_producto" class="subtitle_input">OBSERVACIONES</label>
                 <textarea name="observaciones_producto" class="comentario" id="observaciones_producto" cols="30" rows="5"></textarea>
-                <button class="add" onclick="cargarDetalle()" type="button">Agregar</button>
-                <button class="see" onclick="seeOrder('subContainerDates')" type="button">Ver recibo</button>
+                <button class="add" onclick="GuardarRegistro('N')" type="button">GUARDAR</button>
+                <!-- <button class="see" onclick="seeOrder('subContainerDates')" type="button">Ver recibo</button> -->
                 </div>
             </div>
     </form>
@@ -185,17 +185,29 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     </a>
     </div>
     </div>
+    <!--Habilita funciones como autocompletar y alertify, entre otras-->
     <script src="../js/jquery-3.6.0.min.js"></script>
+    <!--Habilita la carga de códigos y nombres de clientes-->
     <script src="../js/listas_pedido.js"></script>
+    <!--Habilita el listado de bancos-->
     <script src="../js/lista_bancos.js"></script>
+    <!--Habilita las funciones para realizar las operaciones con los recibos-->
     <script src="../js/registro_recibo.js"></script>
+    <!--Funciones para modales-->
     <script src="../js/table.js"></script>
+    <!--Mensajes al usuario-->
     <script src="../js/alertify.min.js"></script>
+    <!--Expone las funciones para cargar la serie y número de recibo por vendedor-->
     <script src="../js/recibo_numeracion.js"></script>
+    <!--Una versión reciente-->
     <script src="../js/jquery-3.7.0.js"></script>
+    <!--Habilita el uso de tablas (grids) con funciones específicas (externo)-->
     <script src="..//js/jquery.dataTables.min.js"></script>
+    <!--Complemento del anterior-->
     <script src="../js/dataTables.fixedColumns.min.js"></script>
+    <!--Expone la tabla a nivel global para interacciones (no está en uso)-->
     <script src="../js/tablaRecibos.js"></script>
+    <!--Funciones para obtener saldo, desglosar montos, asignar pagos-->
     <script src="../js/recibo_cobro_envio.js"></script>
 </body>
 
