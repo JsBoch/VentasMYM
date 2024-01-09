@@ -42,7 +42,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
         </div>
         <div class="contenedor_controles">
         <label for="anio" class="subtitle_input">AÑO</label>
-            <input type="text" class="info_boxes" id="anio">
+            <input type="number" class="info_boxes" id="anio">
         <label for="sltMes" class="subtitle_input">MES</label>
             <select name="sltMes" id="sltMes" class="selectors">
                 <option value="enero">Enero</option>
@@ -58,7 +58,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 <option value="noviembre">Noviembre</option>
                 <option value="diciembre">Diciembre</option>
             </select>
-            <button type="button" class="btn_consulta">Consultar</button>
+            <button type="button" class="btn_consulta" onclick="GetRecibosConsulta()">Consultar</button>
         </div>
         </div>
         
@@ -75,6 +75,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                        <tr>
                            <th>Serie</th>
                            <th>No.Recibo</th>
+                           <th>Cobro</th>
                            <th>Fecha</th>
                            <th>Observacion</th>
                            <th>Estado</th>   
@@ -97,6 +98,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     <script src="../js/dataTables.fixedColumns.min.js"></script>
     <!--Datos para las tablas de este archivo en especifico-->
     <script src="../js/tablaRecibosConsulta.js"></script>
+    <script src="../js/alertify.min.js"></script>
 </body>
 
 </html>
