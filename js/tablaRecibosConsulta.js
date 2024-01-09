@@ -60,6 +60,27 @@ function GetRecibosConsulta() {
       })      
     }
   }
+  // Seleccionr
+tablaRecibo.on("click", "tbody tr", (e) => {
+  let classList = e.currentTarget.classList;
+
+  if (classList.contains("selected")) {
+    classList.remove("selected");
+  } else {
+    tablaRecibo
+      .rows(".selected")
+      .nodes()
+      .each((row) => row.classList.remove("selected"));
+    classList.add("selected");
+  }
+});
+
+// Enviar Id a Función
+$('#datosRecibos tbody').on('click', 'tr', function () {
+  let data = tablaRecibo.row( this ).data();
+  GetConsultaDetalleRecibo(data[6]);
+} );
+
 
 //detalle recibo
   function GetConsultaDetalleRecibo(idRecibo) {       
@@ -107,21 +128,77 @@ function GetRecibosConsulta() {
             formatoMoneda.format(item.saldo),
             formatoMoneda.format(item.pago),            
             item.tipo_pago,
-            item.pago_total,
             item.no_deposito,
             item.no_cheque,
             item.banco,
-            item.observaciones,
             item.prefechado,
             item.fecha_cobro,
+            item.pago_total,
             item.cobrado,
-            item.comentario_cheque,
             item.mensaje_seguimiento_cheque,
             item.mensaje_deposito,
-            item.mensaje_cheque,
-            item.id_detalle_recibo            
+            item.mensaje_cheque,      
+            item.observaciones,
+            item.comentario_cheque,   
+            item.id_detalle_recibo
           ])
           .draw(false);        
       })      
     }
   }
+
+// Funciones modal de edicion
+  // Seleccionr
+  tablaDetalleRecibo.on("click", "tbody tr", (e) => {
+    let classList = e.currentTarget.classList;
+  
+    if (classList.contains("selected")) {
+      classList.remove("selected");
+    } else {
+      tablaDetalleRecibo
+        .rows(".selected")
+        .nodes()
+        .each((row) => row.classList.remove("selected"));
+      classList.add("selected");
+    }
+  });
+  
+// Recibo
+  // Abrir modal y llenar campos
+    $('#datosRecibos tbody').on('click', 'tr', function () {  
+      // Conseguir la data
+      let data = tablaDetalleRecibo.row( this ).data();
+      // Para sacar info data[0];
+      document.getElementById("btnEditar").addEventListener("click", abrirModalRecibo);
+      function abrirModalRecibo(){
+        document.getElementById("modalRecibo").style.display = "flex";
+      }
+
+    } );
+
+  
+
+document.getElementById("btn_cerrar").addEventListener("click", cerrarModalRecibo);
+
+function cerrarModalRecibo() {
+  document.getElementById("modalRecibo").style.display = "none";
+}
+
+
+// Detalle Recibo
+  // Abrir modal y llenar campos
+  $('#datosDetalleRecibos tbody').on('click', 'tr', function () {
+    document.getElementById("modalDetalleRecibo").style.display = "flex";
+
+    // Conseguir la data
+    let data = tablaDetalleRecibo.row( this ).data();
+    // Para sacar info data[0];
+
+  } );
+  
+
+document.getElementById("btnCerrarDetalleRecibo").addEventListener("click", cerrarModalDetalleRecibo);
+
+function cerrarModalDetalleRecibo() {
+  document.getElementById("modalDetalleRecibo").style.display = "none";
+}

@@ -99,7 +99,7 @@
         border-radius: 0;
     }
     .logo img{
-        width: 65%;
+        width: 28%;
     }
     .login_form{
         border-radius: 0;
@@ -107,5 +107,11 @@
     }
     .log_in{
         position: static;
+    }
+}
+
+@media(max-width: 664px){
+    .logo img{
+        width: 65%;
     }
 }

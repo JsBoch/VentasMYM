@@ -23,7 +23,14 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     <link rel="icon" href="../imgs/icono.png">
     <title>Recibo</title>
 </head>
-
+<style>
+    /* Ensure that the demo table scrolls */
+    th, td { white-space: nowrap; }
+    div.dataTables_wrapper {
+        margin: 0 auto;
+    }
+ 
+</style>
 <body>
    <form class="contenedorPrincipal" action="">
             <!-- Boton para regresar al menu -->
@@ -65,10 +72,11 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
             <!-- Datos edición -->
         <div class="second_sub_container">
         <div class="encabezado">
-        <h2 class="main_title">Detalle de Recibo</h2>
+        <h2 class="main_title">Datos Recibos</h2>
         </div>
 
         <div class="contenedor_controles">
+        <label for="datosRecibos" class="subtitle_input">RECIBOS</label>
         <div class="contenedor_tabla">
         <table id="datosRecibos" class="display stripe row-border order-column">
                    <thead>
@@ -86,10 +94,89 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                    </tbody>
                 </table>
         </div>
+        <button type="button" class="btn_editar" id="btnEditar">Editar</button>
+        <label for="datosDetalleRecibos" class="subtitle_input">DETALLE RECIBOS</label>
+        <div class="contenedor_tabla">
+        <table id="datosDetalleRecibos" class="display stripe row-border order-column">
+                   <thead>
+                       <tr>
+                           <th>No.Envío</th>
+                           <th>Monto</th>
+                           <th>Abono</th>
+                           <th>Saldo</th>
+                           <th>Pago</th>
+                           <th>Tipo Pago</th>   
+                           <th>No.Deposito</th> 
+                           <th>No.Cheque</th>      
+                           <th>Banco</th>      
+                           <th>Pre Fechado</th>  
+                           <th>Fecha Cobro</th>         
+                           <th>Cobrado</th>         
+                           <th>Mensaje Seguimiento Cheque</th>         
+                           <th>Mensaje Deposito</th>    
+                           <th>Mensaje Cheque</th>    
+                           <th>Observaciones</th>    
+                           <th>Comentario Cheque</th>    
+                           <th>Id Detalle Recibo</th>    
+                       </tr>
+                    </thead>
+                  <tbody id="cuerpo">
+                   </tbody>
+                </table>
+        </div>
         
         </div>    
     </div>
    </form>
+
+   <div id="modalRecibo" class="fondo_recibo">
+    <div class="modal">
+    <i id="btn_cerrar" class='bx bx-x cerrar_modal'></i> 
+        <h2 class="titulo_modal">Edición Recibo</h2>
+        <div class="centrado">
+        <div class="sub_container_recibo">
+        <label for="fechaRecibo" class="subtitle_input">FECHA RECIBO</label>
+        <input type="date" name="fechaRecibo" id="fechaRecibo" class="info_boxes">
+        <label for="observaciones_producto" class="subtitle_input">OBSERVACIONES</label>
+        <textarea name="observaciones" class="comentario" id="observaciones" cols="34" rows="7"></textarea>
+
+        <button type="button" class="save">Guardar</button>
+        </div>
+        </div>
+    </div>
+   </div>
+
+   <div id="modalDetalleRecibo" class="fondo_detalle_recibo">
+    <div class="modal">
+    <i id="btnCerrarDetalleRecibo" class='bx bx-x cerrar_modal'></i> 
+        <h2 class="titulo_modal">Edición Detalle Recibo</h2>
+        <div class="centrado_detalle">
+        <div class="sub_container_detalle_recibo">
+        <label for="pago" class="subtitle_input">PAGO</label>
+        <input type="number" name="pago" id="pago" class="info_boxes">
+        <label for="tipoPago" class="subtitle_input">TIPO PAGO</label>
+        <input type="text" name="tipoPago" id="tipoPago" class="info_boxes">
+        <label for="numeroDeposito" class="subtitle_input">NUMERO DEPOSITO</label>
+        <input type="number" name="numeroDeposito" id="numeroDeposito" class="info_boxes">
+        <label for="numeroCheque" class="subtitle_input">NUMERO CHEQUE</label>
+        <input type="number" name="numeroCheque" id="numeroCheque" class="info_boxes">
+        <label for="banco" class="subtitle_input">BANCO</label>
+        <input type="text" name="banco" id="banco" class="info_boxes">
+        </div>
+        <div class="sub_container_detalle_recibo">
+        <label for="preFechado" class="subtitle_input">PRE FECHADO</label>
+        <input type="text" name="preFechado" id="preFechado" class="info_boxes">
+        <label for="fechaCobro" class="subtitle_input">FECHA COBRO</label>
+        <input type="date" name="fechaCobro" id="fechaCobro" class="info_boxes">
+        <label for="mensajeCheque" class="subtitle_input">MENSAJE CHEQUE</label>
+        <textarea name="mensajeCheque" class="comentario" id="mensajeCheque" cols="34" rows="7"></textarea>
+        <button type="button" class="save">Guardar</button>
+        </div>
+        </div>
+    </div>
+   </div>
+
+
     <!--Una versión reciente-->
    <script src="../js/jquery-3.7.0.js"></script>
     <!--Habilita el uso de tablas (grids) con funciones específicas (externo)-->
