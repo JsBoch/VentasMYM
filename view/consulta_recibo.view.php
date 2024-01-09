@@ -124,7 +124,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                    </tbody>
                 </table>
         </div>
-        
+        <button type="button" class="btn_editar" id="btnEditarDetalle">Editar</button>
         </div>    
     </div>
    </form>
@@ -149,7 +149,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
    <div id="modalDetalleRecibo" class="fondo_detalle_recibo">
     <div class="modal">
     <i id="btnCerrarDetalleRecibo" class='bx bx-x cerrar_modal'></i> 
-        <h2 class="titulo_modal">Edición Detalle Recibo</h2>
+        <h2 class="titulo_modal">Detalle Recibo</h2>
         <div class="centrado_detalle">
         <div class="sub_container_detalle_recibo">
         <label for="pago" class="subtitle_input">PAGO</label>

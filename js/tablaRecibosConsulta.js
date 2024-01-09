@@ -188,12 +188,14 @@ function cerrarModalRecibo() {
 // Detalle Recibo
   // Abrir modal y llenar campos
   $('#datosDetalleRecibos tbody').on('click', 'tr', function () {
-    document.getElementById("modalDetalleRecibo").style.display = "flex";
-
     // Conseguir la data
     let data = tablaDetalleRecibo.row( this ).data();
     // Para sacar info data[0];
 
+    document.getElementById("btnEditarDetalle").addEventListener("click", abrirModalDetalleRecibo);
+    function abrirModalDetalleRecibo(){
+      document.getElementById("modalDetalleRecibo").style.display = "flex";
+    }
   } );
   
 
