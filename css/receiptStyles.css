@@ -259,11 +259,15 @@ i {
     color: #fff;
     width: 90%;
     height: 50px;
-    margin-top: 5%;
+    margin-bottom: 20px;
     font-size: 15px;
     border: 1px var(--azul) solid;
     outline: none;
     cursor: pointer;
+}
+.chekbox{
+    width: 90%;
+    margin-bottom: 10px;
 }
 
 .see {
@@ -271,8 +275,7 @@ i {
     color: #fff;
     width: 90%;
     height: 50px;
-    margin-top: 20px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     font-size: 15px;
     border: 1px var(--rojoOscuro) solid;
     outline: none;
