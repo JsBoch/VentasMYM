@@ -1,17 +1,23 @@
 document.addEventListener("DOMContentLoaded", async () => {
     const URLPlugin = "http://localhost:8000"; // Si el plugin no está en local, coloca la IP. Por ejemplo 192.168.1.76:8000
 
-    const $btnImprimir = document.querySelector("#btnImprimir"),
-        $impresora = "86:67:7A:00:6D:33",
-        $mensaje = document.querySelector("#mensaje");
+    const $btnImprimir = document.querySelector("#btnImprimir")
+        // $licencia = document.querySelector("#licencia"),
+        // $impresora = document.querySelector("#impresora"),
+        // $mensaje = document.querySelector("#mensaje");
     $btnImprimir.addEventListener("click", () => {
-        const direccionMacDeLaImpresora = $impresora;
-        const mensaje = $mensaje.value;
-        demostrarCapacidades(direccionMacDeLaImpresora, mensaje);
+        alert("Hola mundo");
+        const direccionMacDeLaImpresora = "86:67:7A:00:6D:33";
+        const licencia = "";
+        const mensaje = "";
+        if (!direccionMacDeLaImpresora) {
+            return alert("Por favor escribe la MAC de la impresora")
+        }
+        demostrarCapacidades(direccionMacDeLaImpresora, licencia, mensaje);
     });
 
-    const demostrarCapacidades = async (macImpresora, mensaje) => {
-        const conector = new ConectorEscposAndroid(URLPlugin);
+    const demostrarCapacidades = async (macImpresora, licencia, mensaje) => {
+        const conector = new ConectorEscposAndroid(licencia, URLPlugin);
         conector
         .Iniciar()
         .EstablecerAlineacion(ConectorEscposAndroid.ALINEACION_CENTRO)
