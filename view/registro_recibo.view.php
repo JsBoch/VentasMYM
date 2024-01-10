@@ -53,7 +53,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
             <label for="numero_recibo" class="subtitle_input">NUMERO DE RECIBO</label>
             <input type='number' name="numero_recibo" class="info_boxes" id="numero_recibo" placeholder="ingrese número de recibo" autocomplete="off" onblur="ExisteRecibo()">
             <label for="checkAnulado" class="subtitle_input">ANULADO</label>
-            <input type="checkbox" id="checkAnulado" name="checkAvanzado">
+            <input type="checkbox" id="checkAnulado" name="checkAvanzado" class="chekbox">
             <!--*******************************************-->
             <label for="departamento" class="subtitle_input">DEPARTAMENTO</label>
             <select name="departamento" class="selectors" id="departamento" onchange="listaClientes()"></select>
@@ -139,17 +139,18 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 <label for="numero_cheque" class="subtitle_input">NUMERO CHEQUE</label>
                 <input type="text" name="numero_cheque" class="info_boxes" id="numero_cheque" placeholder="Número de cheque" autocomplete="off">
                 <label for="chkPrefechado" class="subtitle_input">CHEQUE PRE-FECHADO</label>
-                <input type="checkbox" id="chkPrefechado" name="chkPrefechado">
+                <input type="checkbox" id="chkPrefechado" name="chkPrefechado" class="chekbox">
                 <label for="fechaCobroCheque"  class="subtitle_input">FECHA COBRO</label>
                 <input type="date" name="fechaCobroCheque" id="fechaCobroCheque"  class="info_boxes">
                 <label for="comentarioCheque" class="subtitle_input">OBSERVACIONES CHEQUE</label>
                 <textarea name="comentarioCheque" class="comentario" id="comentarioCheque" cols="30" rows="5"></textarea>
                 <label for="checkAvanzado" class="subtitle_input">CAJA RURAL</label>
-                <input type="checkbox" id="checkAvanzado" name="checkAvanzado">
+                <input type="checkbox" id="checkAvanzado" name="checkAvanzado" class="chekbox">
                 <!--<label for="checkAvanzadoDos" class="subtitle_input">COMPRA CONTADO</label>
                 <input type="checkbox" id="checkAvanzadoDos" name="checkAvanzado">-->
-                <label for="observaciones_producto" class="subtitle_input">OBSERVACIONES</label>
-                <textarea name="observaciones_producto" class="comentario" id="observaciones_producto" cols="30" rows="5"></textarea>
+                <!-- <label for="observaciones_producto" class="subtitle_input">OBSERVACIONES</label>
+                <textarea name="observaciones_producto" class="comentario" id="observaciones_producto" cols="30" rows="5"></textarea> -->
+                <button class="see" id="btnImprimir" type="button">IMPRIMIR</button>
                 <button class="add" onclick="GuardarRegistro('N')" type="button">GUARDAR</button>
                 <!-- <button class="see" onclick="seeOrder('subContainerDates')" type="button">Ver recibo</button> -->
                 </div>
@@ -209,6 +210,10 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     <script src="../js/tablaRecibos.js"></script>
     <!--Funciones para obtener saldo, desglosar montos, asignar pagos-->
     <script src="../js/recibo_cobro_envio.js"></script>
+    <!-- Conector para impresión -->
+    <script src="../js/conectorImpresora.js"></script>
+    <!-- Enviar los datos a imprimir -->
+    <script src="../js/impresion.js"></script>
 </body>
 
 </html>
