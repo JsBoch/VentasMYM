@@ -4,6 +4,7 @@ var tablaRecibo = new DataTable('#datosRecibos');
 var tablaDetalleRecibo = new DataTable('#datosDetalleRecibos');
 let arrayRecibo = [];
 let arrayDetalleRecibo = [];
+let arrayImpresion = [];
 var reciboIdConsulta = 0;
 var reciboDetalleIdConsulta = 0;
 
@@ -375,4 +376,47 @@ function ActualizarDatosDetalleRecibo() {
       alertify.error("Ocurrió un error al almacenar el registro");
     },
   });
+}
+
+
+function GetDatosImpresion() {
+  let datos = { id_recibo: reciboIdConsulta };
+  arrayImpresion.length = 0;
+  $.ajax({
+    url: "../data/recibo_datos_impresion.php",
+    dataType: "json",
+    type: "post",
+    data: datos,
+    success: function (object) {
+      if (object[0].id_recibo != -3) {
+        $.each(object, function (i, recibo) {
+          arrayImpresion.push(recibo);
+        });
+        ImprimirRecibo();
+      }
+      else {
+        alertify.error('No se localizaron registros');
+      }
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      console.log("Status: " + textStatus);
+      console.log("Error: " + errorThrown);
+      alertify.error("Ocurrió un error al consultar los recibos");
+    },
+  });
+}
+
+function ImprimirRecibo()
+{
+  let formatoMoneda = new Intl.NumberFormat('es-GT', {
+    style: 'currency',
+    currency: 'GTQ',
+  });
+
+  if (arrayImpresion.length > 0) {
+    arrayImpresion.forEach(function (item) {
+      //codigo para impresion
+      
+    })
+  }
 }
