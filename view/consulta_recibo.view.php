@@ -29,9 +29,9 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     div.dataTables_wrapper {
         margin: 0 auto;
     }
- 
+
 </style>
-<body>
+<body onload="listaBancos()">
    <form class="contenedorPrincipal" action="">
             <!-- Boton para regresar al menu -->
             <div class="above_all">
@@ -41,7 +41,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 </a>
             </div>
             <!-- Datos consulta -->
-       
+
         <div class="sub_container">
 
         <div class="encabezado">
@@ -68,7 +68,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
             <button type="button" class="btn_consulta" onclick="GetRecibosConsulta()">Consultar</button>
         </div>
         </div>
-        
+
             <!-- Datos edición -->
         <div class="second_sub_container">
         <div class="encabezado">
@@ -86,8 +86,8 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                            <th>Cobro</th>
                            <th>Fecha</th>
                            <th>Observacion</th>
-                           <th>Estado</th>   
-                           <th>Id</th>                    
+                           <th>Estado</th>
+                           <th>Id</th>
                        </tr>
                     </thead>
                   <tbody id="cuerpo">
@@ -105,19 +105,19 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                            <th>Abono</th>
                            <th>Saldo</th>
                            <th>Pago</th>
-                           <th>Tipo Pago</th>   
-                           <th>No.Deposito</th> 
-                           <th>No.Cheque</th>      
-                           <th>Banco</th>      
-                           <th>Pre Fechado</th>  
-                           <th>Fecha Cobro</th>         
-                           <th>Cobrado</th>         
-                           <th>Mensaje Seguimiento Cheque</th>         
-                           <th>Mensaje Deposito</th>    
-                           <th>Mensaje Cheque</th>    
-                           <th>Observaciones</th>    
-                           <th>Comentario Cheque</th>    
-                           <th>Id Detalle Recibo</th>    
+                           <th>Tipo Pago</th>
+                           <th>No.Deposito</th>
+                           <th>No.Cheque</th>
+                           <th>Banco</th>
+                           <th>Pre Fechado</th>
+                           <th>Fecha Cobro</th>
+                           <th>Cobrado</th>
+                           <th>Mensaje Seguimiento Cheque</th>
+                           <th>Mensaje Deposito</th>
+                           <th>Mensaje Cheque</th>
+                           <th>Observaciones</th>
+                           <th>Comentario Cheque</th>
+                           <th>Id Detalle Recibo</th>
                        </tr>
                     </thead>
                   <tbody id="cuerpo">
@@ -125,13 +125,13 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 </table>
         </div>
         <button type="button" class="btn_editar" id="btnEditarDetalle">Editar</button>
-        </div>    
+        </div>
     </div>
    </form>
 
    <div id="modalRecibo" class="fondo_recibo">
     <div class="modal">
-    <i id="btn_cerrar" class='bx bx-x cerrar_modal'></i> 
+    <i id="btn_cerrar" class='bx bx-x cerrar_modal'></i>
         <h2 class="titulo_modal">Edición Recibo</h2>
         <div class="centrado">
         <div class="sub_container_recibo">
@@ -140,7 +140,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
         <label for="observaciones_producto" class="subtitle_input">OBSERVACIONES</label>
         <textarea name="observaciones" class="comentario" id="observaciones" cols="34" rows="7"></textarea>
 
-        <button type="button" class="save">Guardar</button>
+        <button type="button" class="save" onclick="ActualizarDatosRecibo()">Guardar</button>
         </div>
         </div>
     </div>
@@ -148,20 +148,25 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
 
    <div id="modalDetalleRecibo" class="fondo_detalle_recibo">
     <div class="modal">
-    <i id="btnCerrarDetalleRecibo" class='bx bx-x cerrar_modal'></i> 
+    <i id="btnCerrarDetalleRecibo" class='bx bx-x cerrar_modal'></i>
         <h2 class="titulo_modal">Detalle Recibo</h2>
         <div class="centrado_detalle">
         <div class="sub_container_detalle_recibo">
         <label for="pago" class="subtitle_input">PAGO</label>
         <input type="number" name="pago" id="pago" class="info_boxes">
-        <label for="tipoPago" class="subtitle_input">TIPO PAGO</label>
-        <input type="text" name="tipoPago" id="tipoPago" class="info_boxes">
+        <label for="tipo_pago" class="subtitle_input">TIPO PAGO</label>
+                <select name="tipoPago" class="selectors" id="tipoPago">
+                    <option value="efectivo">EFECTIVO</option>
+                    <option value="cheque">CHEQUE</option>
+                    <option value="deposito">DEPOSITO</option>
+                    <option value="transferencia">TRANSFERENCIA</option>
+                </select>
         <label for="numeroDeposito" class="subtitle_input">NUMERO DEPOSITO</label>
         <input type="number" name="numeroDeposito" id="numeroDeposito" class="info_boxes">
         <label for="numeroCheque" class="subtitle_input">NUMERO CHEQUE</label>
         <input type="number" name="numeroCheque" id="numeroCheque" class="info_boxes">
         <label for="banco" class="subtitle_input">BANCO</label>
-        <input type="text" name="banco" id="banco" class="info_boxes">
+                <select name="banco" class="selectors" id="banco"></select>
         </div>
         <div class="sub_container_detalle_recibo">
         <label for="preFechado" class="subtitle_input">PRE FECHADO</label>
@@ -170,7 +175,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
         <input type="date" name="fechaCobro" id="fechaCobro" class="info_boxes">
         <label for="mensajeCheque" class="subtitle_input">MENSAJE CHEQUE</label>
         <textarea name="mensajeCheque" class="comentario" id="mensajeCheque" cols="34" rows="7"></textarea>
-        <button type="button" class="save">Guardar</button>
+        <button type="button" class="save" onclick="ActualizarDatosDetalleRecibo()">Guardar</button>
         </div>
         </div>
     </div>
@@ -186,6 +191,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     <!--Datos para las tablas de este archivo en especifico-->
     <script src="../js/tablaRecibosConsulta.js"></script>
     <script src="../js/alertify.min.js"></script>
+    <script src="../js/lista_bancos.js"></script>
 </body>
 
 </html>
