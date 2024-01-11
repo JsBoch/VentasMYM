@@ -4,7 +4,7 @@ var tablaRecibo = new DataTable('#datosRecibos');
 var tablaDetalleRecibo = new DataTable('#datosDetalleRecibos');
 let arrayRecibo = [];
 let arrayDetalleRecibo = [];
-let arrayImpresion = [];
+var arrayImpresion = [];
 var reciboIdConsulta = 0;
 var reciboDetalleIdConsulta = 0;
 
@@ -177,7 +177,7 @@ $('#datosRecibos tbody').on('click', 'tr', function () {
   inputFechaRecibo.value = data[3];
   inputObservacionesRecibo.value = data[4];
   reciboIdConsulta = data[6];
-
+  GetDatosImpresion();
   // Para sacar info data[0];
   document.getElementById("btnEditar").addEventListener("click", abrirModalRecibo);
   function abrirModalRecibo() {
@@ -413,10 +413,14 @@ function ImprimirRecibo()
     currency: 'GTQ',
   });
 
-  if (arrayImpresion.length > 0) {
-    arrayImpresion.forEach(function (item) {
-      //codigo para impresion
+  return new Promise(resolve => {
+    resolve(arrayImpresion);
+});
+  //console.log(arrayImpresion);
+  // if (arrayImpresion.length > 0) {
+  //   arrayImpresion.forEach(function (item) {
+  //     //codigo para impresion
       
-    })
-  }
+  //   })
+  // }
 }

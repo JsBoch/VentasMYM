@@ -7,7 +7,7 @@ $codigoRespuesta = 1;
 
 if ($mysqli !== null && $mysqli->connect_errno === 0) {
     $vendedorId = $_SESSION['empleadoId']; 
-    $stmt = "select (norecibo + 1) as norecibo,serie,mac_address from adm_numeracion_recibos where estado = 1 and idvendedor = $vendedorId;";
+    $stmt = "select mac_address from adm_numeracion_recibos where estado = 1 and idvendedor = $vendedorId;";
 
     $result = $mysqli->query($stmt);
 
@@ -17,9 +17,7 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
             $return_arr = array();
             $indice = 0;
             while ($row = $result->fetch_array()) {
-                $return_arr[$indice] = array(
-                    'norecibo' => $row['norecibo'],
-                    'serie' => $row['serie'],
+                $return_arr[$indice] = array(                    
                     'mac_address' => $row['mac_address']
                 );
                 $indice++;
@@ -58,9 +56,7 @@ if ($codigoRespuesta != 1) {
 
     $return_arr = array();
     $Indice = 0;
-    $return_arr[$Indice] = array(
-        'norecibo' => 0,
-        'serie' => $codigoRespuesta,
+    $return_arr[$Indice] = array(        
         'mac_address' => ''
     );
     header('Content-Type: application/json');

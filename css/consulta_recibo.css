@@ -188,7 +188,17 @@ i {
     outline: none;
     cursor: pointer;
 }
-
+.imprimir {
+    background-color: var(--fondo);
+    color: #fff;
+    width: 90%;
+    height: 50px;
+    margin-bottom: 10px;
+    font-size: 15px;
+    border: 1px var(--rojoOscuro) solid;
+    outline: none;
+    cursor: pointer;
+}
 /* Modal */
 .fondo_recibo{
     background-color: rgba(0, 0, 0, 0.5);
@@ -244,6 +254,7 @@ i {
     outline: none;
     cursor: pointer;
 }
+
 /* responsive */
 
 @media (max-width: 1165px) {

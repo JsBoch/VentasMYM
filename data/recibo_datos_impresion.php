@@ -14,13 +14,13 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
     "r.serie_recibo,".
     "r.no_recibo,".
     "r.fecha_recibo,".
-    "r.cobro,".
+    "format(r.cobro,2) as cobro,".
     "r.observacion,".
     "e.no_envio,".
-    "e.monto,".
-    "e.abono,".
-    "e.saldo,".
-    "e.pago,".
+    "format(e.monto,2) as monto,".
+    "format(e.abono,2) as abono,".
+    "format(e.saldo,2) as saldo,".
+    "format(e.pago,2) as pago,".
     "e.tipo_pago,".
     "e.no_cheque,".
     "e.banco,".

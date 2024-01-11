@@ -150,7 +150,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 <input type="checkbox" id="checkAvanzadoDos" name="checkAvanzado">-->
                 <!-- <label for="observaciones_producto" class="subtitle_input">OBSERVACIONES</label>
                 <textarea name="observaciones_producto" class="comentario" id="observaciones_producto" cols="30" rows="5"></textarea> -->
-                <button class="see" id="btnImprimir" type="button">IMPRIMIR</button>
+                <!-- <button class="see" id="btnImprimir" type="button">IMPRIMIR</button> -->
                 <button class="add" onclick="GuardarRegistro('N')" type="button">GUARDAR</button>
                 <!-- <button class="see" onclick="seeOrder('subContainerDates')" type="button">Ver recibo</button> -->
                 </div>
@@ -211,9 +211,9 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     <!--Funciones para obtener saldo, desglosar montos, asignar pagos-->
     <script src="../js/recibo_cobro_envio.js"></script>
     <!-- Conector para impresión -->
-    <script src="../js/conectorImpresora.js"></script>
+    <!-- <script src="../js/conectorImpresora.js"></script> -->
     <!-- Enviar los datos a imprimir -->
-    <script src="../js/impresion.js"></script>
+    <!-- <script src="../js/impresion.js"></script> -->
 </body>
 
 </html>

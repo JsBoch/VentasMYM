@@ -31,7 +31,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     }
 
 </style>
-<body onload="listaBancos()">
+<body onload="listaBancos(),GetMacAddress()">
    <form class="contenedorPrincipal" action="">
             <!-- Boton para regresar al menu -->
             <div class="above_all">
@@ -95,6 +95,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 </table>
         </div>
         <button type="button" class="btn_editar" id="btnEditar">Editar</button>
+        <button class="imprimir" id="btnImprimir" type="button">IMPRIMIR</button>
         <label for="datosDetalleRecibos" class="subtitle_input">DETALLE RECIBOS</label>
         <div class="contenedor_tabla">
         <table id="datosDetalleRecibos" class="display stripe row-border order-column">
@@ -192,6 +193,11 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     <script src="../js/tablaRecibosConsulta.js"></script>
     <script src="../js/alertify.min.js"></script>
     <script src="../js/lista_bancos.js"></script>
+    <!-- Conector para impresión -->
+    <script src="../js/conectorImpresora.js"></script>
+    <!-- Enviar los datos a imprimir -->
+    <script src="../js/impresion.js"></script>
+    <script src="../js/recibo_numeracion.js"></script>
 </body>
 
 </html>
