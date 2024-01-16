@@ -89,6 +89,7 @@ let formatoMoneda = new Intl.NumberFormat('es-GT', {
           codigo,
           cantidad,
           formatoMoneda.format(precio),
+          formatoMoneda.format(descuento),
           formatoMoneda.format(subtotal),
           producto
       ])
@@ -244,9 +245,11 @@ function GuardarRegistro() {
   document.getElementById("porcentajeDescuento").value = "";
   document.getElementById("descuento").value = "";
   document.getElementById("total").value = "";
-  document.getElementById("sumaTotal").value = "";
-  table.clear().draw();
+  
   listaDetalle = new Array();
+  table.clear().draw();
+  document.getElementById("totalGeneral").innerHTML = "";
+  backToOrders('subContainerDates');
 }
 
 function QuitarItemDeLista() {

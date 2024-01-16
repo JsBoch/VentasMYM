@@ -177,6 +177,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 <th>Código</th>
                 <th>Cantidad</th>
                 <th>Precio</th>
+                <th>Descuento</th>
                 <th>Subtotal</th>
                 <th>Producto</th>
             </tr>
