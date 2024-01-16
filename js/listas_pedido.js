@@ -503,7 +503,8 @@ function ClientesMatch(datos) {
         resultsClienteHTML.style.padding = "0";
         autocompleteCliente.focus();
         obtenerDireccionCliente(clienteIdDireccion);
-        GetSaldoCliente(valoresCliente[1]);
+        // GetSaldoCliente(valoresCliente[1]);
+        
     };
 }
 

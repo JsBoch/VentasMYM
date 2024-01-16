@@ -193,7 +193,6 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     <script src="../js/funcionesTabla.js"></script>
     <script src="../js/dataTables.fixedColumns.min.js"></script>
     <script src="../js/fondo.js"></script>
-    <script src="../js/verNombre.js"></script>
 </body>
 
 </html>

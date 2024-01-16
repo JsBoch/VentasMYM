@@ -1,7 +1,7 @@
 function seeOrder() {
     var modal = document.getElementById("modal");
     modal.style.display = "flex";
-    totalizarPedido();
+    //TotalizarProductos();
 }
 
 function backToOrders() {

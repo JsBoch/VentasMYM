@@ -75,7 +75,7 @@ function CalculoSubtotal() {
         }
         
         sumaTotal += parseFloat(totalItem);        
-        sumaTotalInput.value = sumaTotal;
+        //sumaTotalInput.value = sumaTotal;
     }
 }
 

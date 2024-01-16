@@ -1,5 +1,6 @@
 <?php 
 $codigoProducto = trim($_POST['codigo']);
+$tipoPago = trim($_POST['tipo_pago']);
 require_once 'connection.php';
 $codigoRespuesta = 1;
 /**
@@ -14,12 +15,12 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
      * de la central
      */
     if (intval($_SESSION["sucursal"]) == 1) {        
-        $stmt = "select descuento from `db_mymsa`.`adm_descuento_ventas` where codigormym = '$codigoProducto' and estado = 1;";
+        $stmt = "select descuento from `db_mymsa`.`adm_descuento_ventas` where codigormym = '$codigoProducto' and estado = 1 and tipo = '$tipoPago';";
     } else if (intval($_SESSION["sucursal"]) == 2) {
-        $stmt = "select descuento from `db_mymsapt`.`adm_descuento_ventas` where codigormym = '$codigoProducto' and estado = 1;";
+        $stmt = "select descuento from `db_mymsapt`.`adm_descuento_ventas` where codigormym = '$codigoProducto' and estado = 1 and tipo = '$tipoPago';";
     }
     else if (intval($_SESSION["sucursal"]) == 3) {
-        $stmt = "select descuento from `db_mymsaxela`.`adm_descuento_ventas` where codigormym = '$codigoProducto' and estado = 1;";
+        $stmt = "select descuento from `db_mymsaxela`.`adm_descuento_ventas` where codigormym = '$codigoProducto' and estado = 1 and tipo = '$tipoPago';";
     }
 
     $result = $mysqli->query($stmt);

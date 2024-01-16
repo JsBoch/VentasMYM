@@ -80,12 +80,16 @@ let porcentajeItem =0, descuentoItem = 0;
   listaDetalle.push(jsonString);
   // console.log(item);
 // Añadir
+let formatoMoneda = new Intl.NumberFormat('es-GT', {
+  style: 'currency',
+  currency: 'GTQ',
+});
   table.row
       .add([
           codigo,
           cantidad,
-          precio,
-          subtotal,
+          formatoMoneda.format(precio),
+          formatoMoneda.format(subtotal),
           producto
       ])
       .draw(false);
@@ -126,6 +130,11 @@ let porcentajeItem =0, descuentoItem = 0;
   document.getElementById("existencia").value = "";
   document.getElementById("porcentajeDescuento").value = "";
   document.getElementById("ctntMensaje").style.display = "none";
+
+  /**
+   * Se llama a la función que totaliza el pedido cuando se agregar un nuevo producto
+   */
+  TotalizarProductos();
 }
 
 function ValidarCampos() {
@@ -236,7 +245,7 @@ function GuardarRegistro() {
   document.getElementById("descuento").value = "";
   document.getElementById("total").value = "";
   document.getElementById("sumaTotal").value = "";
-  
+  table.clear().draw();
   listaDetalle = new Array();
 }
 
@@ -244,7 +253,7 @@ function QuitarItemDeLista() {
   selected = table.row(".selected").index();
   listaDetalle.splice(selected, 1);
   table.row(".selected").remove().draw(false);
-  totalizarPedido();
+  TotalizarProductos();
 }
 
 /**
@@ -287,4 +296,25 @@ function Validar_RegistroPedidoEnServidor(idSolicitud, idCliente) {
       alertify.error("Ocurrió un error en la validación!");
     },
   });
+}
+
+/**
+ * Se encarga de sumarizar los productos agregados al pedido para 
+ * mostrar el total general al final de la tabla de detalle.
+ */
+function TotalizarProductos(){  
+  if(listaDetalle.length > 0){
+    let totalPedido = 0;
+      listaDetalle.forEach(function(item){
+         totalPedido = parseFloat(totalPedido) + parseFloat(item.subtotal); 
+      });
+
+      let inputTotal = document.getElementById("totalGeneral");
+      let formatoMoneda = new Intl.NumberFormat('es-GT', {
+        style: 'currency',
+        currency: 'GTQ',
+      });
+      
+      inputTotal.innerHTML = formatoMoneda.format(totalPedido);
+  }
 }
