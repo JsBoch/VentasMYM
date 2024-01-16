@@ -30,7 +30,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     }
  
 </style>
-<body onload="listaDepartamentosConsultaPedido(),listaProductos(),GetDate(),listaPrioridad()">
+<body onload="listaDepartamentos(),listaClientes(),listaProductos(),GetDate(),listaPrioridad(),listaTipoPago()">
     <!-- Datos para consulta    -->
     <div id="subContainerDates" class="sub_container_dates">
         <div class="query_date">
@@ -96,19 +96,38 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
             <h2 class="main_title">Cliente</h2>
             </div>
             <div class="sub_container">
-                <label for="departamento" class="subtitle_input">DEPARTAMENTO</label>
-                <select name="departamento" class="selectors" id="departamento"></select>
-                <label for="cliente" class="subtitle_input">CLIENTE</label>
-                <select name="cliente" class="selectors" id="cliente"></select>
+                    <label for="departamento" class="subtitle_input">DEPARTAMENTO</label>
+                    <select name="departamento" class="selectors" id="departamento"></select>
+                    <!-- Autocompletado -->
+                    <label for="cliente" class="subtitle_input">CLIENTE</label>
+                    <div class="autoC">
+                    <input type="text" name="cliente" id="cliente" class="input_autocomplete" placeholder="Nombre de cliente" data-id="0" onblur="obtenerIdCliente()" autocomplete="off">
+                    <ul id="ulclienteresult" class="autocomplete_listClient"></ul>
+                    </div>
+
+                    <div class="ctdDireccion">
+                      <div class="contenedor_direccion">
+                      <label for="direccion_cliente" class="subtitle_input">DIRECCION DE CLIENTE</label>
+                          <div class="autoC_direccion">
+                          <input type="text" name="direccion_cliente" id="direccion_cliente" class="direccion" placeholder="Dirección de cliente" autocomplete="off">
+                          </div>
+                      </div>
+                      <div class="ctdIcon" id="btnVerDireccion">
+                      <i class='bx bx-low-vision'></i>
+                      </div>
+                    </div>
+                    
                 <label for="sltPrioridad" class="subtitle_input">PRIORIDAD</label>
                 <select name="sltPrioridad" id="sltPrioridad"  class="selectors"></select>
                 <label for="observaciones_producto" class="subtitle_input">OBSERVACIONES</label>
-                <textarea name="observaciones" class="comentario" id="observaciones" cols="119" rows="5"></textarea>
+                <textarea name="observaciones" class="comentario" id="observaciones" cols="119" rows="4"></textarea>
                 <input type="hidden" name="hdnNoSolicitud" id="hdnNoSolicitud">
                 <input type="hidden" name="hdndepartamentoid" id="hdndepartamentoid">
                 <input type="hidden" name="hdnclienteid" id="hdnclienteid">
                 <label for="transporte" class="subtitle_input">TRANSPORTE</label>
                 <input type="text" name="transporte" id="transporte" class="info_boxes" placeholder="Ingrese transporte">
+                <label for="sltTipoPago" class="subtitle_input">TIPO PAGO</label>
+                    <select name="sltTipoPago" id="sltTipoPago" class="selectors"></select>
             </div>
         </div>
         <!-- Pedido -->
@@ -120,8 +139,10 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 <div class="pareja">
                     <div class="primero">
                     <label for="codigo" class="subtitle_input">CODIGO</label>
-                <input type='text' name="codigo" class="info_boxes" id="codigo" placeholder="ingrese código" onchange="limpiarNombre()"></select>
-                    </div>
+                <div class="autoC">
+                <input type='text' name="codigo" class="input_autocomplete" id="codigo" placeholder="ingrese código" onchange="limpiarNombre()" autocomplete="off">
+                <ul class="autocomplete_list" id="results"></ul>
+                </div>   </div>
                     <div class="segundo">
                     <label for="existencia" class="subtitle_input">EXISTENCIA</label>
                 <input type="text" class="info_boxes" name="existencia" id="existencia" placeholder="EXISTENCIA" readonly autocomplete="off">
@@ -180,7 +201,11 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
             <p id="parrafoParaNombre"></p>
         </div>
     </div>
-
+    <div class="fondoMensaje" id="verDireccion">
+        <div class="contenedor_nombres">
+            <p id="parrafoParaDireccion"></p>
+        </div>
+    </div>
 
     <div class="fondo" id="modal">
         <div class="modal_pedido">
@@ -215,17 +240,17 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     </a>
     </div>
     </div>
-    <script src="../js/table.js"></script>
     <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/table.js"></script>
     <script src="../js/listas_pedido.js"></script>
     <script src="../js/registro_pedido.js"></script>
     <script src="../js/funciones.js"></script>
-    <script src="../js/consulta_pedido.js"></script>
     <script src="../js/alertify.min.js"></script>
+    <script src="../js/consulta_pedido.js"></script>
     <script src="../js/jquery-3.7.0.js"></script>
     <script src="..//js/jquery.dataTables.min.js"></script>
-    <script src="../js/dataTables.fixedColumns.min.js"></script>
     <script src="../js/funcionesTabla.js"></script>
+    <script src="../js/dataTables.fixedColumns.min.js"></script>
     <script src="../js/btncerrar.js"></script>
     <script src="../js/fondo.js"></script>
 </body>

@@ -37,7 +37,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     }
  
 </style>
-<body onload="listaDepartamentos(),listaProductos(),listaClientes(),listaPrioridad(),listaTipoPago()">
+<body onload="listaDepartamentos(),listaClientes(),listaProductos(),listaPrioridad(),listaTipoPago()">
     <form id="subContainerDates" class="contenedorPrincipal"  action="" method="post">
         <div class="customer_frame">
             <!-- Boton para regresar al menu -->

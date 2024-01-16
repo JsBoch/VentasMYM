@@ -138,7 +138,7 @@ function CargaPedidoEdit() {
     data: { id_solicitud: solicitudId },
     success: function (object) {
       departamentoId = object[0].id_departamento;
-      clienteIdSeleccion = object[0].id_cliente;
+      clienteIdSeleccion = object[0].cliente;
       observaciones = object[0].observaciones;
       prioridad = object[0].prioridad;
       noSolicitud = object[0].nosolicitud;
