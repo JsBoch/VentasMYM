@@ -60,8 +60,19 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                     <input type="text" name="cliente" id="cliente" class="input_autocomplete" placeholder="Nombre de cliente" data-id="0" onblur="obtenerIdCliente()" autocomplete="off">
                     <ul id="ulclienteresult" class="autocomplete_listClient"></ul>
                     </div>
-                    <label for="direccion_cliente" class="subtitle_input">DIRECCION DE CLIENTE</label>
-                    <input type="text" name="direccion_cliente" id="direccion_cliente" class="info_boxes" placeholder="Dirección de cliente" autocomplete="off">
+
+                      <div class="ctdDireccion">
+                      <div class="contenedor_direccion">
+                      <label for="direccion_cliente" class="subtitle_input">DIRECCION DE CLIENTE</label>
+                          <div class="autoC_direccion">
+                          <input type="text" name="direccion_cliente" id="direccion_cliente" class="direccion" placeholder="Dirección de cliente" autocomplete="off">
+                          </div>
+                      </div>
+                      <div class="ctdIcon" id="btnVerDireccion">
+                      <i class='bx bx-low-vision'></i>
+                      </div>
+                    </div>
+
                     <label for="sltPrioridad" class="subtitle_input">PRIORIDAD</label>
                     <select name="sltPrioridad" id="sltPrioridad" class="selectors"></select>
                     <label for="observaciones_producto" class="subtitle_input">OBSERVACIONES</label>
@@ -142,15 +153,19 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     </form>
 
     <div class="fondoMensaje" id="verNombreProducto">
-        <div class="contenedor_nombre">
+        <div class="contenedor_nombres">
             <p id="parrafoParaNombre"></p>
         </div>
     </div>
-
+    <div class="fondoMensaje" id="verDireccion">
+        <div class="contenedor_nombres">
+            <p id="parrafoParaDireccion"></p>
+        </div>
+    </div>
 
     <div class="fondo" id="modal">
         <div class="modal_pedido">
-        <i id="cerrar" class='bx bx-x btn_cerrar'></i>
+        <i onclick="backToOrders('subContainerDates')" class='bx bx-x btn_cerrar'></i>
         <h2 class="titulo_pedido">Pedido</h2>
         <div class="cuadro_botones">
     <button id="button" class="button_removeRegistry" onclick="QuitarItemDeLista()"> <i class='bx bx-trash'></i></button>

@@ -23,7 +23,7 @@
 //  );
 
 return (object) array(
-    'host' => 'localhost',
+    'host' => '192.168.1.6',
     'username' => 'root',
     'pass' => 'My$qL2039*#@',
     'database' => 'db_rmym',

@@ -106,6 +106,17 @@
     outline: none;
 }
 
+.direccion{
+    background-color: #fff;
+    color: var(--Negro);
+    width: 100%;
+    height: 40px;
+    padding-left: 8px;
+    font-size: 12px;
+    border: 1px var(--azulOscuro) solid;
+    outline: none;
+}
+
 /* Unilinea */
 .pareja{
     width: 90%;
@@ -143,6 +154,12 @@
     height: 100%;
     float: left;
 }
+.ctdDireccion{
+    width: 100%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+}
 .ctdProducto{
     width: 100%;
     height: 80px;
@@ -168,6 +185,11 @@
     height: 100%;
     float: left;
 }
+.contenedor_direccion{
+    width: 80%;
+    height: 100%;
+    float: left;
+}
 /* lista de autocompletado */
 .input_autocomplete{
     background-color: #fff;
@@ -186,6 +208,12 @@
 }
 
 .autoC_pd{
+    position: relative;
+    width: 100%;
+    height: 40px;
+    margin-bottom: 20px;
+}
+.autoC_direccion{
     position: relative;
     width: 100%;
     height: 40px;
@@ -375,7 +403,7 @@ i {
     align-items: center;
 }
 
-.contenedor_nombre{
+.contenedor_nombres{
     background-color: #ffff;
     width: 90%;
     padding: 10px;
@@ -384,6 +412,7 @@ i {
     align-items: center;
     text-align: justify;
     border: 2px solid var(--azul);
+    z-index: 1000;
 }
 /* .contenedor_nombre p{
 
@@ -489,6 +518,7 @@ i {
 }
 
 .ctntFinal{
+    color: #015;
     width: 100%;
     height: 10%;
     display: flex;
