@@ -90,11 +90,19 @@ i {
     font-size: 11px;
     margin-bottom: 10px;
 }
-
-.subtitle_parrafo{
-    margin-right: 10px;
+.resaltado{
+    background: #1B2440;
+    color: white;
+    padding: 8px;
 }
 
+.subtitle_parrafo{
+    float: left;
+}
+#txtTotalSaldo{
+    margin-left: 10px;
+    float: left;
+}
 .selectors {
     background-color: #fff;
     color: var(--Negro);
@@ -133,6 +141,7 @@ table{
 	text-align: left;
 	border-collapse: collapse;
 	width: 65%;
+    margin-bottom: 20px;
 }
 
 th, td{

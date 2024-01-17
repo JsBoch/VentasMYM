@@ -55,8 +55,11 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     <input type="button" value="Consultar" class="btnConsultar" id="btnConsultarEC" onclick="ConsultarVentaTotalMes(),ConsultarVentaMes()">
     </div>
     <div class="total">
-<label for="txtTotalVenta" class="subtitle_parrafo">TOTAL VENTA</label>
+        <div class="resaltado">
+        <label for="txtTotalVenta" class="subtitle_parrafo">TOTAL VENTA</label>
     <p id="txtTotalVenta"></p> 
+        </div>
+
     </div>
 <div id="contenedorTabla" class="contenedorTabla">
 </div>

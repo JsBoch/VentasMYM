@@ -49,8 +49,10 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     <input type="button" value="Consultar" class="btnConsultar" id="btnConsultarEC" onclick="ConsultarSaldoTotalCliente(),ConsultarEstadoCuenta()"> 
 </div> 
    <div class="total">
-   <label for="txtTotalSaldo" class="subtitle_parrafo">TOTAL SALDO</label>
+    <div class="resaltado">
+    <label for="txtTotalSaldo" class="subtitle_parrafo">TOTAL SALDO</label>
     <p id="txtTotalSaldo"></p> 
+    </div>
    </div>
 
     <div id="contenedorTabla" class="contenedorTabla"></div>
