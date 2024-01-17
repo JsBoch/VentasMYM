@@ -126,6 +126,7 @@ function CargaPedidoEdit() {
   let departamento;
   let observaciones;
   var departamentoId;
+  let nombreCliente;
   let prioridad;
   let noSolicitud;
   let transporte;
@@ -138,20 +139,29 @@ function CargaPedidoEdit() {
     data: { id_solicitud: solicitudId },
     success: function (object) {
       departamentoId = object[0].id_departamento;
-      clienteIdSeleccion = object[0].cliente;
+      clienteIdSeleccion = object[0].id_cliente;
       observaciones = object[0].observaciones;
       prioridad = object[0].prioridad;
       noSolicitud = object[0].nosolicitud;
       transporte = object[0].transporte;
+      nombreCliente = object[0].cliente;
 
       $("#observaciones").val(observaciones);
       $("#departamento").val(departamentoId);
       $("#sltPrioridad").val(prioridad);
       $("#hdnNoSolicitud").val(noSolicitud);
       $("#transporte").val(transporte);
+      $("#cliente").val(nombreCliente);
+      let inputCliente = document.getElementById("cliente");
+      inputCliente.dataset.id = clienteIdSeleccion;
 
       listaClientesConsulta();
       CargaProductosEdit(solicitudId);
+      /**
+       * Se carga la dirección del cliente 
+       */
+      obtenerDireccionCliente(clienteIdSeleccion);
+      
     },
   });
 
@@ -167,9 +177,9 @@ button.addEventListener("click", function () {
  * Se selecciona el cliente en el select
  * automáticamente.
  */
-function AsignarCliente() {
-  $("#cliente").val(clienteIdSeleccion);
-}
+// function AsignarCliente() {
+//   $("#cliente").val(clienteIdSeleccion);
+// }
 
 /**
  * Busca los registros (productos) asociados al pedido que se quiere editar.
@@ -193,17 +203,24 @@ function CargaProductosEdit(idsolicitud) {
           precio: producto.precio,
           subtotal: producto.subtotal,
           observaciones: producto.observaciones,
+          porcentaje: producto.porcentaje_descuento,
+          descuento: producto.monto_descuento
         };
 
         listaDetalle.push(jsonString);
         // Añadir
+        let formatoMoneda = new Intl.NumberFormat('es-GT', {
+          style: 'currency',
+          currency: 'GTQ',
+        });
+
         const table = new DataTable("#example");
         table.row
           .add([
             producto.codigo_producto,
             producto.cantidad,
-            producto.precio,
-            producto.subtotal,
+            formatoMoneda.format(producto.precio),
+            formatoMoneda.format(producto.subtotal),
             producto.nombre_producto,
           ])
           .draw(false);
@@ -219,12 +236,15 @@ function CargaProductosEdit(idsolicitud) {
         //   producto.nombre_producto;
         // $select.append("<option value=" + codigo + ">" + item + "</option>");
       });
+
+      TotalizarProductos();
     },
   });
 }
 
 function GuardarNuevoRegistro() {
-  let clienteId = document.getElementById("cliente").value;
+  let inputCliente = document.getElementById("cliente");  
+  let clienteId = inputCliente.dataset.id;
   let departamentoId = document.getElementById("departamento").value;
   let observaciones = document.getElementById("observaciones").value;
   let prioridad = document.getElementById("sltPrioridad").value;
@@ -236,6 +256,7 @@ function GuardarNuevoRegistro() {
   var agregarAlPedido = document.getElementById("shopping_cart");
   var enviarPedido = document.getElementById("send_order");
   var fechas = document.getElementById("subContainerDates");
+  let tipoPago = document.getElementById("sltTipoPago").value;
 
   var principal = new Array();
   //var detalle = [];
@@ -247,11 +268,16 @@ function GuardarNuevoRegistro() {
     prioridad: prioridad,
     nosolicitud: noSolicitud,
     transporte: transporte,
+    tipoPago: tipoPago
   });
 
   var data1 = JSON.stringify(principal);
   var data2 = JSON.stringify(listaDetalle);
 
+  console.log(solicitudId);
+  console.log(data1);
+  console.log(data2);
+  
   $.ajax({
     url: "../data/registro_pedido.php",
     // dataType: 'json',
@@ -284,19 +310,27 @@ function GuardarNuevoRegistro() {
   document.getElementById("tipo_precio").value = "";
   document.getElementById("precio").value = "";
   document.getElementById("subtotal").value = "";
+  document.getElementById("total").value = "";
+  document.getElementById("descuento").value = "";
   document.getElementById("observaciones_producto").value = "";
   document.getElementById("existencia").value = "";
+  document.getElementById("cliente").value = "";
+  document.getElementById("direccion_cliente").value = "";
+  document.getElementById("transporte").value = "";
+  document.getElementById("totalGeneral").innerHTML = "";
 
+  table.clear().draw();
   let $selectListado = $("#listado");
+
   $selectListado.empty();
   listaDetalle = new Array();
-  if (agregarAlPedido.style.display == "block") {
-    formulario.style.display = "block";
-    contenderoTabal.style.display = "none";
-    agregarAlPedido.style.display = "none";
-    enviarPedido.style.display = "none";
-    fechas.style.display = "block";
-  }
+  // if (agregarAlPedido.style.display == "block") {
+  //   formulario.style.display = "block";
+  //   contenderoTabal.style.display = "none";
+  //   agregarAlPedido.style.display = "none";
+  //   enviarPedido.style.display = "none";
+  //   fechas.style.display = "block";
+  // }
 }
 
 function QuitarItemDeListaEdit() {
@@ -328,6 +362,17 @@ function cargarDetalleEdit() {
     "observaciones_producto"
   ).value;
 
+  let porcentajeDescuento = document.getElementById("porcentajeDescuento").value;
+  let descuento = document.getElementById("descuento").value;
+
+let porcentajeItem =0, descuentoItem = 0;
+  if (porcentajeDescuento.length > 0) {
+    porcentajeItem = porcentajeDescuento;
+  }
+  if (descuento.length > 0) {
+    descuentoItem = descuento;
+  }
+
   var jsonString = {
     codigo_producto: codigo,
     nombre_producto: producto,
@@ -336,6 +381,8 @@ function cargarDetalleEdit() {
     precio: precio,
     subtotal: subtotal,
     observaciones: observacionesProducto,
+    porcentaje: porcentajeItem,
+    descuento: descuentoItem
   };
 
   listaDetalle.push(jsonString);
@@ -359,7 +406,9 @@ function cargarDetalleEdit() {
   document.getElementById("tipo_precio").value = "";
   document.getElementById("precio").value = "";
   document.getElementById("subtotal").value = "";
+  document.getElementById("total").value = "";
   document.getElementById("observaciones_producto").value = "";
+
 }
 
 function EliminarPedidoEdit() {

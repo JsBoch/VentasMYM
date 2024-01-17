@@ -15,7 +15,9 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
     "d.tipo_precio,".
     "d.precio,".
     "d.subtotal,".
-    "d.observaciones ".
+    "d.observaciones,".
+    "d.porcentaje_descuento,".
+    "d.monto_descuento ".
     "from vnt_detalle_solicitud_producto d ". 
     "where d.estado = 1 ".
     "and d.id_solicitud = $solicitudId;";
@@ -35,6 +37,8 @@ if ($mysqli !== null && $mysqli->connect_errno === 0) {
                     'precio' => $row['precio'],
                     'subtotal' => $row['subtotal'],
                     'observaciones' => $row['observaciones'],
+                    'porcentaje_descuento' => $row['porcentaje_descuento'],
+                    'monto_descuento' => $row['monto_descuento'],
                 );
                 $indice++;
             }
@@ -79,7 +83,9 @@ if ($codigoRespuesta != 1) {
         'tipo_precio' => '',
         'precio' => 0,
         'subtotal' => 0,
-        'observaciones' => ''
+        'observaciones' => '',
+        'porcentaje_descuento' => 0,
+        'monto_descuento' => 0
     );
 
     echo json_encode($return_arr);

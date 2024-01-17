@@ -28,7 +28,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     div.dataTables_wrapper {
         margin: 0 auto;
     }
- 
+
 </style>
 <body onload="listaDepartamentos(),listaClientes(),listaProductos(),GetDate(),listaPrioridad(),listaTipoPago()">
     <!-- Datos para consulta    -->
@@ -116,7 +116,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                       <i class='bx bx-low-vision'></i>
                       </div>
                     </div>
-                    
+
                 <label for="sltPrioridad" class="subtitle_input">PRIORIDAD</label>
                 <select name="sltPrioridad" id="sltPrioridad"  class="selectors"></select>
                 <label for="observaciones_producto" class="subtitle_input">OBSERVACIONES</label>
@@ -148,7 +148,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 <input type="text" class="info_boxes" name="existencia" id="existencia" placeholder="EXISTENCIA" readonly autocomplete="off">
                     </div>
                 </div>
-            
+
                 <div class="ctdProducto">
             <div class="contenedor_producto_dos">
             <label for="producto" class="subtitle_input">PRODUCTO</label>
@@ -162,13 +162,13 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
             </div>
           </div>
                 <!--Agrego un hidden para almacenar el precio mas bajo de la lista-->
-                <input type="hidden" name="precioMasBajo" id="precioMasBajo" autocomplete="off">     
+                <input type="hidden" name="precioMasBajo" id="precioMasBajo" autocomplete="off">
                 <ul class="autocomplete_listCod" id="results"></ul>
                 <ul class="autocomplete_list" id="resultsProducto"></ul>
                 <label for="cantidad" class="subtitle_input">CANTIDAD</label>
-                <input type="number" name="cantidad" class="info_boxes" id="cantidad" placeholder="CANTIDAD" onblur="colocarPrecio(),CalculoSubtotal()">
+                <input type="number" name="cantidad" class="info_boxes" id="cantidad" placeholder="CANTIDAD" onblur="colocarPrecio()" onchange="CalculoSubtotal()">
                 <label for="tipo_precio" class="subtitle_input">TIPO PRECIO</label>
-                <select name="tipo_precio" class="selectors" id="tipo_precio" onblur="colocarPrecio()"></select>
+                <select name="tipo_precio" class="selectors" id="tipo_precio" onblur="colocarPrecio(),CalculoSubtotal()"></select>
                 <label for="precio" class="subtitle_input">PRECIO</label>
                 <input type="text" name="precio" class="info_boxes" id="precio" placeholder="PRECIO" onchange="CalculoSubtotal()" autocomplete="off">
                 <input type="hidden" name="precio" class="info_boxes" id="precio" placeholder="PRECIO" onblur="CalculoSubtotal()">
@@ -190,9 +190,16 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
                 <div class="sub_container_pd">
                 <label for="observaciones_producto" class="subtitle_input">OBSERVACIONES</label>
                 <textarea name="observaciones_producto" class="comentario" id="observaciones_producto" cols="30" rows="4"></textarea>
-                <button class="add" onclick="cargarDetalleEdit()" type="button">Agregar</button>
+                <button class="add" onclick="ValidarCampos()" type="button">Agregar al Pedido</button>
                 <button class="see" onclick="seeOrder('order_form')" type="button">Ver Pedido</button>
             </div>
+
+            <!--Este hidden se utiliza para almacenar el resultado de la validación de un producto
+            al verificar si existe o no en el listado de descuentos-->
+            <input type="hidden" name="porcentajeDescuento" id="porcentajeDescuento" autocomplete="off">
+                <div id="ctntMensaje" class="mensaje">
+                    <p id="mensajeDescuento"></p>
+                </div>
         </div>
     </form>
 
@@ -202,7 +209,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
         </div>
     </div>
     <div class="fondoMensaje" id="verDireccion">
-        <div class="contenedor_nombres">
+        <div class="contenedor_nombre">
             <p id="parrafoParaDireccion"></p>
         </div>
     </div>
@@ -236,23 +243,24 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     </div>
     <button class="add_more" onclick="backToOrders('subContainerDates')" type="button" id="shopping_cart">Agregar otro producto</button>
     <a class="link_guardar" href="#subContainerDates">
-        <button class="save" type="button" id="send_order" onclick="GuardarRegistro()">Enviar Pedido</button>
+        <button class="save" type="button" id="send_order" onclick="GuardarNuevoRegistro()">Enviar Pedido</button>
     </a>
     </div>
     </div>
-    <script src="../js/jquery-3.6.0.min.js"></script>
+    <!-- <script src="../js/jquery-3.6.0.min.js"></script> -->
+    <script src="../js/jquery-3.7.0.js"></script>
     <script src="../js/table.js"></script>
     <script src="../js/listas_pedido.js"></script>
     <script src="../js/registro_pedido.js"></script>
     <script src="../js/funciones.js"></script>
     <script src="../js/alertify.min.js"></script>
-    <script src="../js/consulta_pedido.js"></script>
-    <script src="../js/jquery-3.7.0.js"></script>
+    <script src="../js/consulta_pedido.js"></script>    
     <script src="..//js/jquery.dataTables.min.js"></script>
     <script src="../js/funcionesTabla.js"></script>
     <script src="../js/dataTables.fixedColumns.min.js"></script>
     <script src="../js/btncerrar.js"></script>
     <script src="../js/fondo.js"></script>
+    <script src="../js/GestionDescuentos.js"></script>
 </body>
 
 </html>

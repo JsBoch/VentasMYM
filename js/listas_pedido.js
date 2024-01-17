@@ -120,7 +120,7 @@ function listaClientesConsulta() {
             $.each(object, function (i, cliente) {
                 $selectCliente.append('<option value=' + cliente.idcliente + '>' + cliente.nombre + '</option>');
             });
-            AsignarCliente();
+            // AsignarCliente();
         }        
     });
 }
@@ -570,7 +570,7 @@ function limpiarCodigo() {
 }
 
 
-function obtenerDireccionCliente(idCliente) {
+function obtenerDireccionCliente(idCliente) {    
     let datos = { "idcliente": idCliente }
     $.ajax({
         url: '../data/obtener_direccion.php',
@@ -585,7 +585,7 @@ function obtenerDireccionCliente(idCliente) {
             });
             if(direccionClienteInput !== null)
             {
-            direccionClienteInput.value = direccion;
+                direccionClienteInput.value = direccion;
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {

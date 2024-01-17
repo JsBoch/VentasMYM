@@ -195,6 +195,9 @@ function GuardarRegistro() {
   var data1 = JSON.stringify(principal);
   var data2 = JSON.stringify(listaDetalle);
 
+  console.log(data1);
+  console.log(data2);
+  
   let solicitudId = 0;
   let codigoRespuesta = 0;
 
@@ -207,7 +210,7 @@ function GuardarRegistro() {
       detalle_registro: data2,
       id_solicitud: 0,
     },
-    success: function (object) {      
+    success: function (object) {          
       $.each(object, function (i, respuesta) {
         codigoRespuesta = respuesta.codigo;
         solicitudId = respuesta.id_solicitud;
@@ -219,7 +222,7 @@ function GuardarRegistro() {
       }
       else
       {
-        alertify.error("No se pudo almacenar el registro");
+        alertify.error("No se pudo almacenar el registro ");
       }          
     },
     error: function (jqXHR, textStatus, errorThrown) {
@@ -305,7 +308,7 @@ function Validar_RegistroPedidoEnServidor(idSolicitud, idCliente) {
  * Se encarga de sumarizar los productos agregados al pedido para 
  * mostrar el total general al final de la tabla de detalle.
  */
-function TotalizarProductos(){  
+function TotalizarProductos(){    
   if(listaDetalle.length > 0){
     let totalPedido = 0;
       listaDetalle.forEach(function(item){
