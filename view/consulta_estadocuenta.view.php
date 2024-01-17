@@ -17,10 +17,11 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../css/alertify.min.css">
     <link rel="stylesheet" href="../css/estadoCuenta.css">
+    <link rel="stylesheet" href="../css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="../css/fixedColumns.dataTables.min.css">
     <link rel="icon" href="../imgs/logo.png">
     <title>Estado de cuenta</title>
 </head>
-
 <body onload="listaDepartamentosEstadoCuenta()">
    
     <div class="contenedorTodo">
@@ -55,10 +56,28 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != "conectado") {
     </div>
    </div>
 
-    <div id="contenedorTabla" class="contenedorTabla"></div>
+    <div class="contenedorTabla">
+    <table id="estadoCuenta" class="display stripe row-border order-column">
+       <thead>
+       <tr>
+        <th>Envío</th>
+        <th>Monto</th>
+        <th>Abono</th>
+        <th>Saldo</th>
+        <th>Antig.</th>
+        </tr>
+       </thead>
+       <tbody id="cuerpo">
+
+       </tbody>
+    </table>
+    </div>
 </div>
     <script src="../js/jquery-3.6.0.min.js"></script>
     <script src="../js/alertify.min.js"></script>
+    <script src="../js/jquery-3.7.0.js"></script>
+    <script src="..//js/jquery.dataTables.min.js"></script>
+    <script src="../js/dataTables.fixedColumns.min.js"></script>
     <script src="../js/estado_cuenta.js"></script>
 </body>
 

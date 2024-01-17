@@ -99,7 +99,11 @@ i {
 .subtitle_parrafo{
     float: left;
 }
-#txtTotalSaldo{
+#txtTotalVenta{
+    margin-left: 10px;
+    float: left;
+}
+#txtTotalCobro{
     margin-left: 10px;
     float: left;
 }
@@ -124,38 +128,19 @@ i {
     border: none;
     cursor: pointer;
 }
-
-table{
-	background-color: white;
-	text-align: left;
-	border-collapse: collapse;
-	width: 65%;
-    margin-bottom: 20px;
+.contenedorTabla{
+    width: 65%;
+    margin: auto;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-
-th, td{
-	padding: 20px;
-    text-align: center;
+.dataTables_wrapper{
+    width: 100%;
+    max-height: 300px;
+  overflow-y: scroll;
 }
-
-thead{
-	background-color: #246355;
-	border-bottom: solid 5px #0F362D;
-	color: white;
-}
-
-tr:nth-child(even){
-	background-color: #ddd;
-}
-td{
-    cursor: pointer;
-}
-
-tr:hover td{
-	background-color: #369681;
-	color: white;
-}
-
 
 /* responsive */
 
@@ -165,6 +150,9 @@ tr:hover td{
     }
 }
 @media (max-width: 900px) {
+    .contenedorTabla{
+        width: 80%;
+    }
     .sub_container{
         width: 100%;
     }

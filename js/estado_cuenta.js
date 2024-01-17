@@ -1,3 +1,6 @@
+ var tablaEstadoCuenta = new DataTable('#estadoCuenta');
+
+
 function listaDepartamentosEstadoCuenta() {
     $.ajax({
         url: '../data/departamentos.php',
@@ -143,96 +146,24 @@ function ConsultarEstadoCuenta() {
     });
 }
 
-function GenerarTabla(object)
-{
-    // Obtener la referencia del elemento body
-  var body = document.getElementById("contenedorTabla");
-    body.innerHTML = '';
-  // Crea un elemento <table> y un elemento <tbody>
-  var tabla   = document.createElement("table");
-  var tblBody = document.createElement("tbody");
-  var thead = document.createElement("thead");
-
-  var encabezado = document.createElement("tr");
-
-  var celNF = document.createElement("th");
-  var textCelNF = document.createTextNode("ENV.");
-  celNF.appendChild(textCelNF);
-  encabezado.appendChild(celNF);
-  var celM = document.createElement("th");
-  var textCelM = document.createTextNode("MONTO");
-  celM.appendChild(textCelM);
-  encabezado.appendChild(celM);
-  var celA = document.createElement("th");
-  var textCelA = document.createTextNode("ABONO");
-  celA.appendChild(textCelA);
-  encabezado.appendChild(celA);
-  var celS = document.createElement("th");
-  var textCelS = document.createTextNode("SALDO");
-  celS.appendChild(textCelS);
-  encabezado.appendChild(celS);
-  var celDV = document.createElement("th");
-  var textCelDV = document.createTextNode("ANTIG.");
-  celDV.appendChild(textCelDV);
-  encabezado.appendChild(celDV);
-
-  thead.appendChild(encabezado);
-    
+function GenerarTabla(object){    
+    tablaEstadoCuenta.clear().draw();
     $.each(object, function (i, resultado) {
-        // Crea las hileras de la tabla
-    var hilera = document.createElement("tr");
-        // Crea un elemento <td> y un nodo de texto, haz que el nodo de
-      // texto sea el contenido de <td>, ubica el elemento <td> al final
-      // de la hilera de la tabla
-      var celdaNF = document.createElement("td");
-      var textoCeldaNF = document.createTextNode(resultado.nofactura);
-      celdaNF.appendChild(textoCeldaNF);
-      var celdaM = document.createElement("td");
-      const monto = new Intl.NumberFormat("es-GT", {
-        style: "currency",
-        currency: "GTQ",
-        minimumFractionDigits: 2,
-      });
-      var textoCeldaM = document.createTextNode(monto.format(resultado.monto));
-      celdaM.appendChild(textoCeldaM);
-      var celdaA = document.createElement("td");
-      const abono = new Intl.NumberFormat("es-GT", {
-        style: "currency",
-        currency: "GTQ",
-        minimumFractionDigits: 2,
-      });
-      var textoCeldaA = document.createTextNode(abono.format(resultado.abono));
-      celdaA.appendChild(textoCeldaA);
-      var celdaS = document.createElement("td");
-      const saldo = new Intl.NumberFormat("es-GT", {
-        style: "currency",
-        currency: "GTQ",
-        minimumFractionDigits: 2,
-      });
-      var textoCeldaS = document.createTextNode(saldo.format(resultado.saldo));
-      celdaS.appendChild(textoCeldaS);
-      var celdaDV = document.createElement("td");
-      var textoCeldaDV = document.createTextNode(resultado.dias_vencimiento);
-      celdaDV.appendChild(textoCeldaDV);
-
-      hilera.appendChild(celdaNF);       
-      hilera.appendChild(celdaM);
-      hilera.appendChild(celdaA);
-      hilera.appendChild(celdaS);
-      hilera.appendChild(celdaDV);
-
-      // agrega la hilera al final de la tabla (al final del elemento tblbody)
-    tblBody.appendChild(hilera);
+        const formatoMoneda = new Intl.NumberFormat("es-GT", {
+            style: "currency",
+         currency: "GTQ",
+             minimumFractionDigits: 2,
+       });
+        tablaEstadoCuenta.row
+        .add([
+            resultado.nofactura,
+            formatoMoneda.format(resultado.monto),
+            formatoMoneda.format(resultado.abono),
+            formatoMoneda.format(resultado.saldo),
+            resultado.dias_vencimiento
+        ])
+        .draw(false);
     });  
-    
-    
-    tabla.appendChild(thead);
-  // posiciona el <tbody> debajo del elemento <table>
-  tabla.appendChild(tblBody);
-  // appends <table> into <body>
-  body.appendChild(tabla);
-  // modifica el atributo "border" de la tabla y lo fija a "2";
-  tabla.setAttribute("id", "tablaDatos");
 }
 
 function ConsultarSaldoTotalCliente() {
