@@ -503,6 +503,10 @@ function ClientesMatch(datos) {
         resultsClienteHTML.style.padding = "0";
         autocompleteCliente.focus();
         obtenerDireccionCliente(clienteIdDireccion);
+        if(document.getElementById("inputNoDevolucion") != null)
+        {
+            GetEnviosDevolucionCliente(valoresCliente[1]);
+        }
         // GetSaldoCliente(valoresCliente[1]);
         
     };

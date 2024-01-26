@@ -65,7 +65,7 @@ function MostrarTablaRecibo() {
     })
   }
 }
-// Seleccionr
+// Seleccinar
 tablaRecibo.on("click", "tbody tr", (e) => {
   let classList = e.currentTarget.classList;
 
