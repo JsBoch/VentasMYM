@@ -95,7 +95,6 @@ $('#tablaEnviosCliente tbody').on('click', 'tr', function () {
         }
     })
     
-    console.log(envioId);
     GetConsultaDetalleEnvioDevolucion(envioId);
   });
 
@@ -180,6 +179,44 @@ tablaDetalleEnvio.on("click", "tbody tr", (e) => {
     }
   });
 
+
+// ******
+
+// Enviar Id a Función
+$('#tablaDetalleEnvio tbody').on('click', 'tr', function () {
+  let data = tablaDetalleEnvio.row(this).data();
+  GetConsultaDetalleEnvio(data);
+});
+
+
+//detalle recibo
+function GetConsultaDetalleEnvio(tabla) {
+  var cantidadDevuelta = document.getElementById("cantidadDevuelta");
+  var bodegaDestino = document.getElementById("bodegaDestino");
+  cantidadDevuelta.value = tabla[2];
+  bodegaDestino.value = tabla[5];
+
+  document.getElementById("btnEditarDetalle").addEventListener("click", abrirModalDetalleEnvio);
+  function abrirModalDetalleEnvio() {
+    document.getElementById("modalDetalleEnvio").style.display = "flex";
+  }
+};
+
+
+document.getElementById("btnCerrarDetalleEnvio").addEventListener("click", cerrarModalDetalleRecibo);
+
+function cerrarModalDetalleRecibo() {
+  document.getElementById("modalDetalleEnvio").style.display = "none";
+}
+// ***
+
+
+
+
+
+
+
+
   /**
    * Se obtiene los datos de la fila seleccionada en la tabla de 
    * detalle
@@ -195,8 +232,8 @@ tablaDetalleEnvio.on("click", "tbody tr", (e) => {
    * del detalle del envío.
    */
   function asignarDevolucion(){
-    let cantidadDevolucion = document.getElementById("inputCantidadDevolucion").value;
-    let bodegaDestino = document.getElementById("inputBodegaDestino").value;
+    let cantidadDevolucion = document.getElementById("cantidadDevuelta").value;
+    let bodegaDestino = document.getElementById("bodegaDestino").value;
 
     if (cantidadDevolucion.length == 0 || parseFloat(cantidadDevolucion) == 0) {
      alertify.error("Debe ingresar el la cantidad a devolver.");
